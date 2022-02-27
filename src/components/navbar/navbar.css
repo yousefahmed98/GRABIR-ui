@@ -1,0 +1,10 @@
+.navbar {
+background-color: #FAAF40 !important;
+}
+.nav-link {
+    color: #151A1E !important;
+}
+
+.navbar-brand .logo {
+ height: 5vh;
+}

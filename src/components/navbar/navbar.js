@@ -2,12 +2,14 @@ import React from "react";
 import logo from "../../static/navbar/logo-default.png";
 import logodark from "../../static/navbar/logo-dark.png";
 import { Link } from "react-router-dom";
+import './navbar.css'
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          <img src={logo} alt="" width="50px" height="55px" />
+          <img src={logodark} className="logo" alt="" />
         </a>
         <button
           className="navbar-toggler"
@@ -28,7 +30,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <ul className="d-flex">
+          <ul className="navbar-nav d-flex">
               <li>
               <Link className="nav-link active" aria-current="page" href="#">
                 Home1
