@@ -9,7 +9,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="#">
           <img src={logodark} className="logo" alt="" />
         </Link>
         <button
@@ -33,17 +33,17 @@ const Navbar = () => {
           </ul>
           <ul className="navbar-nav navbar-nav-right d-flex">
             <li>
-              <Link className="homelink nav-link active" aria-current="page" href="#">
+              <Link className="homelink nav-link active" to="#">
                 Home
               </Link>
             </li>
             <li>
-              <Link className="nav-link active" aria-current="page" href="#">
+              <Link className="nav-link active" to="#">
               <img className="chat" src={chat} alt="chat"/>
               </Link>
             </li>
             <li>
-              <Link className="nav-link active" aria-current="page" href="#">
+              <Link className="nav-link active"  to="#">
                 <img className="bell" src={bell} alt="bell"/>
               </Link>
             </li>
