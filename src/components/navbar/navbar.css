@@ -1,10 +1,26 @@
+/***************************** NAVABAR**********************************************/
+/* NAVLOGO */
 .navbar {
-background-color: #FAAF40 !important;
+  background-color: #faaf40 !important;
 }
 .nav-link {
-    color: #151A1E !important;
+  color: #151a1e !important;
 }
 
 .navbar-brand .logo {
- height: 5vh;
+  width: 60px;
+}
+
+/* 3 LINKS ON RIGHT */
+.homelink {
+  margin: 10px 0px;
+  font-weight: 500;
+  font-size: x-large;
+}
+
+.bell {
+  width: 50px;
+}
+.chat {
+  width: 50px;
 }

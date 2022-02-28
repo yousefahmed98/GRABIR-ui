@@ -1,16 +1,17 @@
 import React from "react";
-import logo from "../../static/navbar/logo-default.png";
 import logodark from "../../static/navbar/logo-dark.png";
 import { Link } from "react-router-dom";
-import './navbar.css'
+import "./navbar.css";
+import bell from "../../static/navbar/bell.png" 
+import chat from "../../static/navbar/chat.png"
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" href="#">
           <img src={logodark} className="logo" alt="" />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -30,22 +31,22 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <ul className="navbar-nav d-flex">
-              <li>
-              <Link className="nav-link active" aria-current="page" href="#">
-                Home1
+          <ul className="navbar-nav navbar-nav-right d-flex">
+            <li>
+              <Link className="homelink nav-link active" aria-current="page" href="#">
+                Home
               </Link>
-              </li>
-              <li>
+            </li>
+            <li>
               <Link className="nav-link active" aria-current="page" href="#">
-                Home2
+              <img className="chat" src={chat} alt="chat"/>
               </Link>
-              </li>
-              <li>
+            </li>
+            <li>
               <Link className="nav-link active" aria-current="page" href="#">
-                Home3
+                <img className="bell" src={bell} alt="bell"/>
               </Link>
-              </li>
+            </li>
           </ul>
         </div>
       </div>
