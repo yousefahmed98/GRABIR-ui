@@ -1,0 +1,37 @@
+
+.bodylogin {
+    background-color: #151A1E;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+/* Page Body After NavBar */
+.mainPage{
+    margin-top: 15vh;
+}
+/* LOGIN REGISTER */
+.headTitle {
+    font-size: 4rem;
+}
+
+/* description under REGISTER */
+.describtion{
+    font-size: 3rem;
+}
+/* FORM */
+input{
+    height: 4.5vh;
+}
+/* SubmitBTN */
+.submitbtn {
+    background-color: #FAAF40;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 3% 15%;
+}
+/* REGISTER */
+.registerbtn {
+    background-color: #FAAF40;
+    font-size: 1.5rem;
+    padding: 5% 10%;
+    font-weight: 600;
+}
