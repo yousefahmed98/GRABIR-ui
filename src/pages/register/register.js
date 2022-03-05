@@ -256,7 +256,7 @@ export default function Register() {
               {/* ----------------------------------------------------------------------------------------- */}
               <div className="mb-2 mr-5">
                 <label htmlFor="exampleInputPassword1" className="form-label">
-                  Confirm Password
+                  Confirm password
                 </label>
                 <input
                   type="password"
@@ -274,7 +274,7 @@ export default function Register() {
               {/* ----------------------------------------------------------------------------------------- */}
               <div className="mb-2 mr-5">
                 <label htmlFor="exampleInputFirstname1" className="form-label">
-                  First Name
+                  First name
                 </label>
                 <input
                   type="text"
@@ -289,7 +289,7 @@ export default function Register() {
               {/* ----------------------------------------------------------------------------------------- */}
               <div className="mb-2 mr-5">
                 <label htmlFor="exampleInputLastname1" className="form-label">
-                  Last Name
+                  Last name
                 </label>
                 <input
                   type="text"
@@ -304,7 +304,7 @@ export default function Register() {
               {/* ----------------------------------------------------------------------------------------- */}
               <div className="mb-2 mr-5">
                 <label htmlFor="exampleInputPhone1" className="form-label">
-                  Phone Number
+                  Phone number
                 </label>
                 <input
                   type="text"
