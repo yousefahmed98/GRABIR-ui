@@ -15,7 +15,7 @@ const PostCard = ({ post }) => (
           unoptimized
           alt={post.title}
           className="align-middle rounded-full"
-          src={postpicture}
+          src={`http://127.0.0.1:8000/images/{post.postpicture}`}
         /> */}
         <p className="inline align-middle text-gray-700 ml-2 font-medium text-lg">post.author.name</p>
       </div>
