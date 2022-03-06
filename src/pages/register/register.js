@@ -167,7 +167,7 @@ export default function Register() {
         .post("http://127.0.0.1:8000/base/users/", { userForm })
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
-      console.log(userForm);
+      console.log("=============user form:",userForm);
       return history.push("/login");
 
     } else {
