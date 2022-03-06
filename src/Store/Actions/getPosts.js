@@ -10,7 +10,7 @@ export const getPosts = () => (dispatch) => {
         // ha set l data fl store
         dispatch({
             type: "LIST_POSTS",
-            payload: res.data.result,
+            payload: res.data,
 
         })
         dispatch(setLoaderAction(false))
