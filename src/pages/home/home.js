@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import PostCard from '../../components/postCard/postCard'
-import Navbar from '../../components/navbar/navbar'
+// import Navbar from '../../components/navbar/navbar'
 import Loader from '../../components/loader/loader'
 import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'

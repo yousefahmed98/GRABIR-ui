@@ -30,7 +30,7 @@ const PostCard = ({ post }) => (
       {/* {post.description} */}
     </p>
     <div className="text-center">
-      <Link href='#'>
+      <Link to='#'>
         <span className="transition duration-500 ease transform hover:-translate-y-1 inline-block bg-pink-600 text-lg font-medium rounded-full text-black px-8 py-3 cursor-pointer">Continue Reading</span>
       </Link>
     </div>
