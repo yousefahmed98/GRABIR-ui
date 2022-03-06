@@ -104,7 +104,7 @@ export default function Register() {
         ...userForm,
         username: e.target.value,
       });
-      setErrors({
+      setErrors({ 
         ...errors,
         usernameErr:
           e.target.value.length === 0
@@ -164,10 +164,9 @@ export default function Register() {
     ) {
       // SEND API REQUEST
       axios
-        .post("http://127.0.0.1:8000/base/users/", { userForm })
+        .post("http://127.0.0.1:8000/base/users/", userForm)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
-      console.log(userForm);
       return history.push("/login");
 
     } else {
@@ -265,6 +264,7 @@ export default function Register() {
                   }`}
                   id="conpasswordID"
                   name="confirmpassword"
+                  value={userForm.confirmpass}
                   onChange={(e) => changeData(e)}
                 />
                 <div id="conpasswordHelp" className="form-text text-danger">
