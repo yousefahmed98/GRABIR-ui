@@ -41,7 +41,12 @@ export default function PostDetails() {
               </div>
               <div className="col-lg-9 col-sm-9 text-center text-lg-start mb-lg-3  mb-5">
                 <form className=''>
+                  <label>details</label>
                 <input type="text" className='form-control offertxt' />
+                <label>price</label>
+                <input type='text' className='form-control'/>
+                <label>Delivery date</label>
+                <input type='text' className='form-control'/>
                 <button type="submit" className="btn btn-lg  darkcustombtn mt-3 ">send offer</button>
                 </form>
               </div>
@@ -55,3 +60,13 @@ export default function PostDetails() {
     </>
   )
 }
+/**
+ * details = models.CharField(max_length=300)
+    from_region= models.CharField(null=True,max_length=50)
+    to_region   = models.CharField(null=True,max_length=50) 
+    price = models.FloatField()
+    delivery_date = models.DateField(auto_now_add=True,null=True)
+    post = models.ForeignKey(Post,related_name="offer_post", on_delete=models.CASCADE)
+    status = models.ForeignKey(OfferStatus,related_name="offer_status", on_delete=models.CASCADE)
+    offer_owner
+ */
