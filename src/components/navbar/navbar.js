@@ -15,7 +15,7 @@ export default function Navbar() {
   const [visible, setVisible] = useState(false)
 
 return (
-  <CNavbar colorScheme="light" className="bg-light cnavbar" expand="lg xxl">
+  <CNavbar colorScheme="light" className="bg-light cnavbar" expand="lg">
     <CContainer fluid>
       <CNavbarToggler
         aria-controls="offcanvasNavbar2"
