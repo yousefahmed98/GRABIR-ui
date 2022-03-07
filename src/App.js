@@ -5,6 +5,7 @@ import Home from './pages/home/home'
 import Test from './pages/Test';
 import "./components/fonts.css"
 import Register from './pages/register/register';
+import LandingPage from './components/landing_page/LandingPage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <Route path={"/register"} exact component={Register} />
     <Route path={"/test"} exact component={Test} />
     <Route path={"/home"} exact component={Home} />
+    <Route path={"/landing"} exact component={LandingPage} />
     </Switch>
     </BrowserRouter>
   );
