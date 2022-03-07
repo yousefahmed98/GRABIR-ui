@@ -2,6 +2,7 @@ import Navbar from './components/navbar/navbar';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './pages/Login';
 import Home from './pages/home/home'
+import PostDetails from './pages/postDetails/PostDetails'
 import Test from './pages/Test';
 import "./components/fonts.css"
 import Register from './pages/register/register';
@@ -16,6 +17,7 @@ function App() {
     <Route path={"/register"} exact component={Register} />
     <Route path={"/test"} exact component={Test} />
     <Route path={"/home"} exact component={Home} />
+    <Route path={"/PostDetails/:id"} exact component={PostDetails} />
     </Switch>
     </BrowserRouter>
   );

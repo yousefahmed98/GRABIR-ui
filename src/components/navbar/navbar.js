@@ -15,7 +15,7 @@ export default function Navbar() {
   const [visible, setVisible] = useState(false)
 
 return (
-  <CNavbar colorScheme="light" className="bg-light cnavbar" expand="lg">
+  <CNavbar colorScheme="light" className="bg-light fixed-top cnavbar" expand="lg">
     <CContainer fluid>
       <CNavbarToggler
         aria-controls="offcanvasNavbar2"
@@ -33,7 +33,7 @@ return (
           </CNavbarBrand>
         
             <CNavItem>
-              <CNavLink href="#" active>
+              <CNavLink href="/home" active>
                 Home
               </CNavLink>
             </CNavItem>
@@ -45,6 +45,9 @@ return (
             </CNavItem>
             <CNavItem>
               <CNavLink href="#">My Profile</CNavLink>
+            </CNavItem> 
+            <CNavItem>
+              <CNavLink href="#">Favourites</CNavLink>
             </CNavItem> 
             <CNavItem className="notify-icon">
 

@@ -1,10 +1,9 @@
 export default function loader() {
-    return (
-        <>
-        <div className="spinner-border" role="status" >
+  return (
+      <div className="p-5" >
+        <div className="spinner-border p-5" role="status" >
         </div>
         <p>Loading...</p>
-        </>
-    
-      )
+      </div>
+  )
 }
