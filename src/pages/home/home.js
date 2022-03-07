@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import PostCard from '../../components/postCard/postCard'
-// import Navbar from '../../components/navbar/navbar'
+import Navbar from '../../components/navbar/navbar'
 import Loader from '../../components/loader/loader'
 import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
@@ -17,7 +17,7 @@ export default function Home() {
 
     return (
         <>
-            {/* <Navbar /> */}
+            <Navbar />
             <div className="container mx-auto px-10 mb-8">
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
