@@ -19,7 +19,7 @@ export default function LandingPage() {
         </div>
         <div className="row">
           <div className="offset-4 col-4 mt-5 text-dark text-center">
-            <h4>
+            <h4 className="describtionText">
               Grabir is one of the delivery platforms worldwide. In 2022 with
               Grabir, you will save your money when you need anything from
               abroad and don't need to pay a lot of money in this process to get
