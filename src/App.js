@@ -1,11 +1,12 @@
 import Navbar from './components/navbar/navbar';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from './pages/Login';
+import Login from './pages/login/Login';
 import Home from './pages/home/home'
 import Test from './pages/Test';
 import "./components/fonts.css"
 import Register from './pages/register/register';
 import LandingPage from './components/landing_page/LandingPage';
+import NotFound from './pages/NotFound/NotFound';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     <Route path={"/test"} exact component={Test} />
     <Route path={"/home"} exact component={Home} />
     <Route path={"/landing"} exact component={LandingPage} />
+    <Route path="*" exact component={NotFound} />
     </Switch>
     </BrowserRouter>
   );
