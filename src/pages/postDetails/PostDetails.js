@@ -42,7 +42,7 @@ export default function PostDetails() {
               <div className="col-lg-9 col-sm-9 text-center text-lg-start mb-lg-3  mb-5">
                 <form className=''>
                 <input type="text" className='form-control offertxt' />
-                <button type="submit" className="btn btn-lg  darkcustombtn  ">send offer</button>
+                <button type="submit" className="btn btn-lg  darkcustombtn mt-3 ">send offer</button>
                 </form>
               </div>
              
