@@ -1,0 +1,22 @@
+.postcard{
+    background-color: #ffff !important;
+    color: #000 !important;
+}
+.text-link{
+   text-decoration: none; 
+   color: #000 !important;
+   font: bold;
+   font-size: large;
+}
+.darkcustombtn{
+    background-color: #151A1E !important;
+    color: #ffff !important;
+}
+.darkcustombtnActive{
+    background-color: #151A1E !important;
+    color: #FAAF40 !important;
+
+}
+.offertxt{
+    height: 130px !important;
+}
