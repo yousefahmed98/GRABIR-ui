@@ -5,6 +5,7 @@ import item1 from "../../static/item1.png"
 import item2 from "../../static/item2.png"
 import item3 from "../../static/item3.png"
 import "./landing_page.css";
+import Footer from "../footer/Footer";
 
 export default function LandingPage() {
   document.body.style.backgroundColor = "white";
@@ -52,7 +53,7 @@ export default function LandingPage() {
       </div>
 
       <div className="text-center">
-        <h1>footer</h1>
+        <Footer/>
       </div>
     </>
   );
