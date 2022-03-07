@@ -1,6 +1,7 @@
 /***************************** NAVABAR**********************************************/
+/*   old nav style */
 /* NAVLOGO */
-.navbar {
+.navbar{
   background-color: #faaf40 !important;
 }
 .nav-link {
@@ -23,4 +24,18 @@
 }
 .chat {
   width: 50px;
+}
+
+/* Nav bar */
+.cnavbar , .COffcanvas{
+  background-color: #faaf40 ;
+  font-size: large;
+}
+/* right side of navbar */
+.nav-right{
+  margin-left: auto;
+  padding: 0.5%;
+}
+.notify-icon{
+  padding-top: 1.3%;
 }
