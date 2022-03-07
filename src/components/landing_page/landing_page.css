@@ -1,0 +1,28 @@
+.row {
+    --bs-gutter-x: 0rem;
+}
+
+.laptopContainer{
+    background-color: #dcdde2;
+}
+
+.headerText {
+color: #FAAF40   !important;
+font-family: 'Roboto', sans-serif;
+font-weight: 700;
+
+}
+.describtionText {
+    color: #151A1E !important;
+    font-family: 'Roboto', sans-serif;
+}
+.itemdescribtion{
+    font-family: 'Roboto', sans-serif;
+    color: #FAAF40;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.items3 {
+    width: 55%;
+}

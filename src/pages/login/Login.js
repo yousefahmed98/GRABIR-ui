@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import logodark from "../static/navbar/logo-dark.png";
+import logodark from "../../static/navbar/logo-dark.png";
 import { Link } from "react-router-dom";
 import "./login.css";
 
