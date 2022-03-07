@@ -124,7 +124,7 @@ export default function Register() {
         confirmpassErr:
           e.target.value.length === 0
             ? "This field is required"
-            : !samePassword
+            : !userForm.password
             ? "Does not match password!"
             : null,
       });

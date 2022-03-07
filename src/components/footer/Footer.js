@@ -37,13 +37,11 @@ export default function Footer() {
 
         <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
           <h5 className="text-uppercase footerTitle">Follow us</h5>
-          <ul className="list-unstyled mb-0">
-            <li>
-              <Link to="#" className="text-light sitemenuItems">facebook.com/grabir.app</Link>
-            </li>
-            <li>
-            <Link to="#" className="text-light sitemenuItems">instgram.com/grabir.5422</Link>
-            </li>
+          <ul className="list-unstyled mb-0 mt-3">
+            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
           </ul>
         </div>
       </div>
@@ -52,7 +50,7 @@ export default function Footer() {
     © 2022 Copyright: GRABIRAPP
     <Link className="text-primary" to="https://mdbootstrap.com/"></Link>
   </div>
-  </div>
+  </div>      
 </>
   )
 }
