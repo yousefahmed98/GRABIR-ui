@@ -8,6 +8,7 @@ import "./components/fonts.css"
 import Register from './pages/register/register';
 import LandingPage from './components/landing_page/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
+import Offers from './pages/offers/offers';
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
     <Route path={"/test"} exact component={Test} />
     <Route path={"/home"} exact component={Home} />
     <Route path={"/PostDetails/:id"} exact component={PostDetails} />
-
+    <Route path={"/offers"} exact component={Offers} />
     <Route path={"/landing"} exact component={LandingPage} />
     <Route path="*" exact component={NotFound} />
 

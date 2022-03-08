@@ -43,11 +43,11 @@ export default function Register() {
   const hasWhiteSpace = (s) => {
     return s.indexOf(" ") >= 0;
   };
-  const checkConfirmPassword = () => {
-    if (userForm.password === userForm.confirmpass) {
-      return true;
-    } else return false;
-  };
+  // const checkConfirmPassword = () => {
+  //   if (userForm.password === userForm.confirmpass) {
+  //     return true;
+  //   } else return false;
+  // };
   const changeData = (e) => {
     if (e.target.name === "email") {
       const isEmail = validateEmail(e.target.value);
@@ -115,7 +115,7 @@ export default function Register() {
             : null,
       });
     } else if (e.target.name === "confirmpassword") {
-      const samePassword = checkConfirmPassword();
+      // const samePassword = checkConfirmPassword();
       setUserForm({
         ...userForm,
         confirmpass: e.target.value,
