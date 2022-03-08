@@ -5,7 +5,6 @@ import logodark from "../../static/navbar/logo-dark.png";
 import { Link } from "react-router-dom";
 import "./login.css";
 
-document.body.style.backgroundColor = "#151A1E" ;
 
 export default function Login() {
   const history = useHistory();
@@ -70,7 +69,7 @@ export default function Login() {
       }
     });
   };
-  
+  document.body.style.backgroundColor = "#151A1E" ;
   return (
     <>
       <div className="bodylogin">

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import "./register.css";
 
 export default function Register() {
+  document.body.style.backgroundColor = "#151A1E" ;
   const history = useHistory();
   const [userForm, setUserForm] = useState({
     first_name: "",
