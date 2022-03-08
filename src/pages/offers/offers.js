@@ -1,5 +1,5 @@
 import React from "react";
-import Popup from "../../components/popup/popup"
+// import Popup from "../../components/popup/popup"
 
 
 export default function Offers() {

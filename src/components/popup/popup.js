@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
+import { axiosInstance } from "../../network/axiosInstance";
 
 export default function Popup(props) {
   const [offerForm, setOfferForm] = useState({
@@ -7,37 +10,45 @@ export default function Popup(props) {
     from_region: "",
     to_region: "",
     price: "",
-    post: "",
+    // status: 'None',
+    post: props.postID,
+    offer_owner: 1,
   });
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    // SEND API REQUEST
+    axiosInstance
+      .post("/offers/", offerForm)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+    return console.log("send offer successfully");
+  };
   const changeData = (e) => {
     if (e.target.name === "details") {
       setOfferForm({
         ...offerForm,
         details: e.target.value,
       });
-     
     } else if (e.target.name === "from_region") {
       setOfferForm({
         ...offerForm,
         from_region: e.target.value,
       });
-     
     } else if (e.target.name === "to_region") {
       setOfferForm({
         ...offerForm,
         to_region: e.target.value,
       });
-    
     } else if (e.target.name === "price") {
       setOfferForm({
         ...offerForm,
         price: e.target.value,
       });
-     
     }
-  }
-      
-    
+  };
+
   return (
     <>
       <button
@@ -59,7 +70,7 @@ export default function Popup(props) {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Make Your Offer 
+                Make Your Offer
               </h5>
               <button
                 type="button"
@@ -69,7 +80,7 @@ export default function Popup(props) {
               ></button>
             </div>
             <div className="modal-body">
-              <form>
+              <form onSubmit={(e) => submitForm(e)}>
                 <div className="mb-2 mr-5">
                   <label
                     htmlFor="exampleInputFirstname1"
@@ -138,7 +149,7 @@ export default function Popup(props) {
                     aria-describedby="priceHelp"
                     value={offerForm.price}
                     onChange={(e) => changeData(e)}
-                    name="price" 
+                    name="price"
                   />
                 </div>
 
@@ -154,12 +165,12 @@ export default function Popup(props) {
                     className="form-control"
                     id="post_idID"
                     aria-describedby="post_idHelp"
-                    value= {props.postID}
+                    value={props.postID}
                     onChange={(e) => changeData(e)}
                     name="post_id"
                   />
                 </div>
-                
+
                 <button type="submit" className="btn btn-primary">
                   Send Offer
                 </button>
@@ -179,4 +190,4 @@ export default function Popup(props) {
       </div>
     </>
   );
-  }
+}

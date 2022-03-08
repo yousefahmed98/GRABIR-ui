@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 export default function PostDetails() {
   const params = useParams();   // return object for dynamic params  like /:id
   const [details, setDetails] = useState({})  //to store returned data
-  const [owner, setOwner] = useState(false);
+  // const [owner, setOwner] = useState(false);
 
   console.log(params.id)
 

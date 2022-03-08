@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import moment from 'react-moment';
 import "./postCard.css"
 import {useHistory} from "react-router-dom"
 import {useState} from 'react';
+import Popup from '../popup/popup'
 
 
 export default function PostCard({ post }) {
@@ -49,9 +49,12 @@ export default function PostCard({ post }) {
              {/* post content end */}
              <div className="row align-items-center mb-4">
               <div className="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
-              <button type="button" className={`btn px-3 me-1 ${style}`} onClick={(e) => {postDetails(e,post.id)}}>
-                 show details </button>
+              {/* <button type="button" className={`btn px-3 me-1 ${style}`} onClick={(e) => {postDetails(e,post.id)}}>
+                 show details </button> */}
+                  <Popup postID={post.id} post={post}/>
+
               </div>
+
 
               <div className="col-lg-6 text-center text-lg-end pe-5">
                 <button type="button" className="btn px-3 me-1 darkcustombtn">
