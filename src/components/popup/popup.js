@@ -15,6 +15,12 @@ export default function Popup(props) {
     post: props.postID,
     offer_owner: 1,
   });
+  const [errors, setErrors] = useState({
+    detailsErr: null,
+    from_regionErr: null,
+    to_regionErr: null,
+    priceErr: null,
+  });
 
   const [offers, setOffers] = useState([]); //user
   //-------------------------------------------------------
@@ -47,42 +53,53 @@ export default function Popup(props) {
         ...offerForm,
         details: e.target.value,
       });
+      setErrors({
+        ...errors,
+        detailsErr:
+          e.target.value.length === 0 ? "This field is required" : null,
+      });
     } else if (e.target.name === "from_region") {
       setOfferForm({
         ...offerForm,
         from_region: e.target.value,
+      });
+      setErrors({
+        ...errors,
+        from_regionErr:
+          e.target.value.length === 0 ? "This field is required" : null,
       });
     } else if (e.target.name === "to_region") {
       setOfferForm({
         ...offerForm,
         to_region: e.target.value,
       });
+      setErrors({
+        ...errors,
+        to_regionErr:
+          e.target.value.length === 0 ? "This field is required" : null,
+      });
     } else if (e.target.name === "price") {
       setOfferForm({
         ...offerForm,
         price: e.target.value,
+      });
+      setErrors({
+        ...errors,
+        priceErr: e.target.value.length === 0 ? "This field is required" : null,
       });
     }
   };
 
   return (
     <>
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Make Offer
-      </button>
       <div
         className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
+        id="exampleModalToggle"
         aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel"
+        tabIndex="-1"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
@@ -104,6 +121,7 @@ export default function Popup(props) {
                   >
                     Details
                   </label>
+
                   <input
                     type="text"
                     className="form-control"
@@ -112,7 +130,11 @@ export default function Popup(props) {
                     value={offerForm.details}
                     onChange={(e) => changeData(e)}
                     name="details"
+                    required
                   />
+                  <div id="usernameHelp" className="form-text text-danger">
+                    {errors.detailsErr}
+                  </div>
                 </div>
 
                 <div className="mb-2 mr-5">
@@ -130,9 +152,12 @@ export default function Popup(props) {
                     value={offerForm.from_region}
                     onChange={(e) => changeData(e)}
                     name="from_region"
+                    required
                   />
                 </div>
-
+                <div id="usernameHelp" className="form-text text-danger">
+                  {errors.from_regionErr}
+                </div>
                 <div className="mb-2 mr-5">
                   <label
                     htmlFor="exampleInputFirstname1"
@@ -148,9 +173,12 @@ export default function Popup(props) {
                     value={offerForm.to_region}
                     onChange={(e) => changeData(e)}
                     name="to_region"
+                    required
                   />
                 </div>
-
+                <div id="usernameHelp" className="form-text text-danger">
+                  {errors.to_regionErr}
+                </div>
                 <div className="mb-2 mr-5">
                   <label
                     htmlFor="exampleInputFirstname1"
@@ -166,9 +194,12 @@ export default function Popup(props) {
                     value={offerForm.price}
                     onChange={(e) => changeData(e)}
                     name="price"
+                    required
                   />
                 </div>
-
+                <div id="usernameHelp" className="form-text text-danger">
+                  {errors.priceErr}
+                </div>
                 <div className="mb-2 mr-5">
                   <label
                     htmlFor="exampleInputFirstname1"
@@ -187,15 +218,54 @@ export default function Popup(props) {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary" >
-                  Send Offer
-                </button>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal"
+                    disabled = {errors.detailsErr || errors.from_regionErr || errors.to_regionErr || errors.priceErr}
+                  >
+                    Send Offer
+                  </button>
+                </div>
               </form>
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="modal fade"
+        id="exampleModalToggle2"
+        aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel2"
+        tabIndex="-1"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalToggleLabel2">
+                Offer Status
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">Your Offer is successfully sent</div>
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                class="btn btn-primary"
                 data-bs-dismiss="modal"
               >
                 Close
@@ -204,6 +274,14 @@ export default function Popup(props) {
           </div>
         </div>
       </div>
+      <a
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        href="#exampleModalToggle"
+        role="button"
+      >
+        Make Offer
+      </a>
     </>
   );
 }
