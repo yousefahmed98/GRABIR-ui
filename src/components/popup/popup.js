@@ -1,9 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { axiosInstance } from "../../network/axiosInstance";
 import { getOffersAction } from "../../Store/Actions/getOffers";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import "./popup.css";
+import logo from "../../static/navbar/logo-default.png";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DoneIcon from "@mui/icons-material/Done";
 
 export default function Popup(props) {
   const [offerForm, setOfferForm] = useState({
@@ -31,8 +38,7 @@ export default function Popup(props) {
   };
   useEffect(() => {
     axiosInstance
-      .get(`/offers/`, {
-      })
+      .get(`/offers/`, {})
       .then((res) => setOffers(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -44,7 +50,7 @@ export default function Popup(props) {
       .post("/offers/", offerForm)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
-      AddToOffers(offerForm) 
+    AddToOffers(offerForm);
     return console.log("send offer successfully:  ", offerArray);
   };
   const changeData = (e) => {
@@ -100,11 +106,13 @@ export default function Popup(props) {
         tabIndex="-1"
       >
         <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
+          <div className="modal-content ">
+            <div className="modal-header ">
+              <img className="modaaalcss" src={logo}></img>
               <h5 className="modal-title" id="exampleModalLabel">
                 Make Your Offer
               </h5>
+
               <button
                 type="button"
                 className="btn-close"
@@ -113,7 +121,7 @@ export default function Popup(props) {
               ></button>
             </div>
             <div className="modal-body">
-              <form onSubmit={(e) => submitForm(e)}>
+              <form  onSubmit={(e) => submitForm(e)}>
                 <div className="mb-2 mr-5">
                   <label
                     htmlFor="exampleInputFirstname1"
@@ -124,7 +132,7 @@ export default function Popup(props) {
 
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control inputField"
                     id="detailsID"
                     aria-describedby="detailsHelp"
                     value={offerForm.details}
@@ -146,7 +154,7 @@ export default function Popup(props) {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control inputField"
                     id="from_regionID"
                     aria-describedby="from_regionHelp"
                     value={offerForm.from_region}
@@ -167,7 +175,7 @@ export default function Popup(props) {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control inputField"
                     id="to_regionID"
                     aria-describedby="to_regionHelp"
                     value={offerForm.to_region}
@@ -188,7 +196,7 @@ export default function Popup(props) {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control inputField"
                     id="priceID"
                     aria-describedby="priceHelp"
                     value={offerForm.price}
@@ -209,7 +217,7 @@ export default function Popup(props) {
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control inputField"
                     id="post_idID"
                     aria-describedby="post_idHelp"
                     value={props.postID}
@@ -219,22 +227,29 @@ export default function Popup(props) {
                 </div>
 
                 <div className="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-danger"
+                  <Button
+                    style={{ margin: 3 }}
+                    variant="outlined"
                     data-bs-dismiss="modal"
+                    startIcon={<DeleteIcon />}
                   >
-                    Close
-                  </button>
-                  <button
+                    Delete
+                  </Button>
+                  <Button
+                    variant="contained"
+                    endIcon={<SendIcon />}
                     type="submit"
-                    className="btn btn-primary"
                     data-bs-target="#exampleModalToggle2"
                     data-bs-toggle="modal"
-                    disabled = {errors.detailsErr || errors.from_regionErr || errors.to_regionErr || errors.priceErr}
+                    disabled={
+                      errors.detailsErr ||
+                      errors.from_regionErr ||
+                      errors.to_regionErr ||
+                      errors.priceErr
+                    }
                   >
                     Send Offer
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>
@@ -252,36 +267,32 @@ export default function Popup(props) {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalToggleLabel2">
-                Offer Status
+                Your offer has been successfully submitted
+                <DoneIcon data-bs-dismiss="modal" aria-label="Close"></DoneIcon>
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
             </div>
-            <div className="modal-body">Your Offer is successfully sent</div>
+
             <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-outline-success"
                 data-bs-dismiss="modal"
               >
-                Close
+                Done
               </button>
             </div>
           </div>
         </div>
       </div>
-      <a
-        className="btn btn-primary"
+      <Button
+        variant="outlined"
         data-bs-toggle="modal"
         href="#exampleModalToggle"
         role="button"
+        endIcon={<LocalOfferIcon />}
       >
         Make Offer
-      </a>
+      </Button>
     </>
   );
 }

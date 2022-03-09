@@ -9,6 +9,7 @@ import Register from './pages/register/register';
 import LandingPage from './components/landing_page/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Offers from './pages/offers/offers';
+import Deals from './pages/deals/Deals';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
     <Route path={"/PostDetails/:id"} exact component={PostDetails} />
     <Route path={"/offers"} exact component={Offers} />
     <Route path={"/landing"} exact component={LandingPage} />
+    <Route path={"/deals"} exact component={Deals} />
     <Route path="*" exact component={NotFound} />
 
     </Switch>
