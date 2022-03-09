@@ -41,7 +41,7 @@ return (
               <CNavLink href="#">Deals</CNavLink>
             </CNavItem>
             <CNavItem>
-              <CNavLink href="#">Offers</CNavLink>
+              <CNavLink href="/offers">Offers</CNavLink>
             </CNavItem>
             <CNavItem>
               <CNavLink href="#">My Profile</CNavLink>

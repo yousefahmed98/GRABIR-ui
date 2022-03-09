@@ -6,19 +6,19 @@ const INITIAL_VALUE = {
   export default function getOffersReducer(state = INITIAL_VALUE, action) {
     switch (action.type) {
       case "GET_OFFERS":
-        // if (!(action.payload === 0)) { // payload == value
-        //   return {
-        //     ...state,
-        //     fav: [...state.fav, action.payload], // 1
-        //     counter: state.fav.length + 1, 
-        //   };
-        // } else {
-        //   console.log("exist before");
-        //   return {
-        //     ...state,
-        //     counter: state.fav.length,
-        //   };
-        // }
+        if (!(action.payload === 0)) { // payload == value
+          return {
+            ...state,
+            offers: [...state.offers, action.payload], // 1
+            offers_counter: state.offers.length + 1, 
+          };
+        } else {
+          console.log("exist before");
+          return {
+            ...state,
+            offers_counter: state.offers.length,
+          };
+        }
   
       default:
         return state;

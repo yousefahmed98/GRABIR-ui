@@ -7,6 +7,6 @@ export default combineReducers(
     {
         POSTS: postsList,
         LOADER :loader,
-        Offers: offers,
+        OFFERS: offers,
     }
 );

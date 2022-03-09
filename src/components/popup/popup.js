@@ -1,8 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom";
-
 import { axiosInstance } from "../../network/axiosInstance";
+import { getOffersAction } from "../../Store/Actions/getOffers";
 
 export default function Popup(props) {
   const [offerForm, setOfferForm] = useState({
@@ -15,6 +16,20 @@ export default function Popup(props) {
     offer_owner: 1,
   });
 
+  const [offers, setOffers] = useState([]); //user
+  //-------------------------------------------------------
+  const offerArray = useSelector((state) => state.OFFERS.offers); //[]
+  const dispatch = useDispatch();
+  const AddToOffers = (id) => {
+    dispatch(getOffersAction(offerArray.indexOf(id) === -1 ? id : 0));
+  };
+  useEffect(() => {
+    axiosInstance
+      .get(`/offers/`, {
+      })
+      .then((res) => setOffers(res.data))
+      .catch((err) => console.log(err));
+  }, []);
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -23,7 +38,8 @@ export default function Popup(props) {
       .post("/offers/", offerForm)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
-    return console.log("send offer successfully");
+      AddToOffers(offerForm) 
+    return console.log("send offer successfully:  ", offerArray);
   };
   const changeData = (e) => {
     if (e.target.name === "details") {
@@ -171,7 +187,7 @@ export default function Popup(props) {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" >
                   Send Offer
                 </button>
               </form>

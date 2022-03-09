@@ -1,9 +1,12 @@
-import React from "react";
-// import Popup from "../../components/popup/popup"
-
+import React from 'react'
+import Navbar from '../../components/navbar/navbar'
+import OffersCard from '../../components/card/offerCard'
 
 export default function Offers() {
- return (
-     <div>offers</div>
- )
+  return (
+    <>
+    <Navbar/>
+    <OffersCard/>
+    </>
+  )
 }
