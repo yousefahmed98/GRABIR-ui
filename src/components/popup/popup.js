@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { axiosInstance } from "../../network/axiosInstance";
 import { getOffersAction } from "../../Store/Actions/getOffers";
 import Button from "@mui/material/Button";
@@ -11,6 +10,7 @@ import "./popup.css";
 import logo from "../../static/navbar/logo-default.png";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
+import TextField from "@mui/material/TextField";
 
 export default function Popup(props) {
   const [offerForm, setOfferForm] = useState({
@@ -108,7 +108,7 @@ export default function Popup(props) {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content ">
             <div className="modal-header ">
-              <img className="modaaalcss" src={logo}></img>
+              <img className="modaaalcss" src={logo} alt="logo"></img>
               <h5 className="modal-title" id="exampleModalLabel">
                 Make Your Offer
               </h5>
@@ -121,111 +121,76 @@ export default function Popup(props) {
               ></button>
             </div>
             <div className="modal-body">
-              <form  onSubmit={(e) => submitForm(e)}>
+              <form onSubmit={(e) => submitForm(e)}>
                 <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    Details
-                  </label>
-
-                  <input
+                  <TextField
+                    id="outlined-search"
+                    className="form-control"
+                    label="Details"
                     type="text"
-                    className="form-control inputField"
-                    id="detailsID"
-                    aria-describedby="detailsHelp"
+                    style={{ marginBottom: 5 }}
+                    name="details"
                     value={offerForm.details}
                     onChange={(e) => changeData(e)}
-                    name="details"
-                    required
                   />
                   <div id="usernameHelp" className="form-text text-danger">
                     {errors.detailsErr}
                   </div>
                 </div>
-
                 <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    From Country
-                  </label>
-                  <input
+                  <TextField
+                    style={{ marginRight: 3 , marginBottom: 8}}
                     type="text"
-                    className="form-control inputField"
-                    id="from_regionID"
-                    aria-describedby="from_regionHelp"
+                    id="outlined-required"
+                    label="From"
+                    defaultValue="USA"
                     value={offerForm.from_region}
                     onChange={(e) => changeData(e)}
                     name="from_region"
-                    required
                   />
-                </div>
-                <div id="usernameHelp" className="form-text text-danger">
-                  {errors.from_regionErr}
-                </div>
-                <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    To Country
-                  </label>
-                  <input
+                  <TextField
                     type="text"
-                    className="form-control inputField"
-                    id="to_regionID"
-                    aria-describedby="to_regionHelp"
+                    id="outlined-required"
+                    label="To"
+                    defaultValue="EGYPT"
+                    style={{ marginRight: 3 , marginBottom: 8}}
                     value={offerForm.to_region}
                     onChange={(e) => changeData(e)}
                     name="to_region"
-                    required
                   />
+                  <div id="usernameHelp" className="form-text text-danger">
+                    {errors.from_regionErr || errors.to_regionErr}
+                  </div>
                 </div>
-                <div id="usernameHelp" className="form-text text-danger">
-                  {errors.to_regionErr}
-                </div>
+
                 <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    Price
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control inputField"
-                    id="priceID"
-                    aria-describedby="priceHelp"
+                  <TextField
+                    id="outlined-number"
+                    label="Number"
+                    style={{ marginRight: 3 , marginBottom: 8}}
+                    type="number"
                     value={offerForm.price}
                     onChange={(e) => changeData(e)}
                     name="price"
-                    required
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  <TextField
+                    id="outlined-read-only-input"
+                    label="Post id"
+                    style={{ marginRight: 3 , marginBottom: 8}}
+                    defaultValue={props.postID}
+                    onChange={(e) => changeData(e)}
+                    name="post_id"
+                    InputProps={{
+                      readOnly: true,
+                    }}
                   />
                 </div>
                 <div id="usernameHelp" className="form-text text-danger">
                   {errors.priceErr}
                 </div>
-                <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    Post ID
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control inputField"
-                    id="post_idID"
-                    aria-describedby="post_idHelp"
-                    value={props.postID}
-                    onChange={(e) => changeData(e)}
-                    name="post_id"
-                  />
-                </div>
-
                 <div className="modal-footer">
                   <Button
                     style={{ margin: 3 }}
