@@ -1,11 +1,12 @@
 import {useState} from "react";
 import logodark from "../../static/navbar/logo-dark.png";
+import { useHistory } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import bell from "../../static/navbar/bell.png"
 // import chat from "../../static/navbar/chat.png"
 import "./navbar.css";
-import { CNavbar ,CContainer,CNavbarToggler ,COffcanvas,COffcanvasHeader,COffcanvasTitle,COffcanvasBody,CNavbarNav,CNavLink
-, CNavItem,CDropdownToggle,CDropdown,CDropdownItem,CFormInput,CForm,CButton,CCloseButton,CDropdownMenu,CDropdownDivider,CNavbarBrand}from '@coreui/bootstrap-react';
+import { CNavbar ,CContainer,CNavbarToggler ,COffcanvas,COffcanvasHeader,COffcanvasBody,CNavbarNav,CNavLink
+, CNavItem,CFormInput,CForm,CButton,CCloseButton,CNavbarBrand}from '@coreui/bootstrap-react';
 import Noty from './notify'
 
 
@@ -13,6 +14,14 @@ import Noty from './notify'
 export default function Navbar() {
 
   const [visible, setVisible] = useState(false)
+  const history = useHistory();
+
+  function handleHomeClick() {
+    history.push("/home");
+  }
+  function handleOffersClick() {
+    history.push("/offers");
+  }
 
 return (
   <CNavbar colorScheme="light" className="bg-light fixed-top cnavbar" expand="lg">
@@ -33,7 +42,7 @@ return (
           </CNavbarBrand>
         
             <CNavItem>
-              <CNavLink href="/home" active>
+              <CNavLink href="#" onClick={() => handleHomeClick()} active>
                 Home
               </CNavLink>
             </CNavItem>
@@ -41,7 +50,7 @@ return (
               <CNavLink href="#">Deals</CNavLink>
             </CNavItem>
             <CNavItem>
-              <CNavLink href="/offers">Offers</CNavLink>
+              <CNavLink href="#" onClick={() => handleOffersClick()}>Offers</CNavLink>
             </CNavItem>
             <CNavItem>
               <CNavLink href="#">My Profile</CNavLink>

@@ -22,12 +22,14 @@ export default function Popup(props) {
     priceErr: null,
   });
 
-  const [offers, setOffers] = useState([]); //user
+  const [offers, setOffers] = useState([]); 
+  
   //-------------------------------------------------------
   const offerArray = useSelector((state) => state.OFFERS.offers); //[]
+  console.log("ahhhhhhhhhhhhhhh", offerArray)
   const dispatch = useDispatch();
-  const AddToOffers = (id) => {
-    dispatch(getOffersAction(offerArray.indexOf(id) === -1 ? id : 0));
+  const AddToOffers = (array) => {
+    dispatch(getOffersAction(array));
   };
   useEffect(() => {
     axiosInstance
@@ -38,13 +40,13 @@ export default function Popup(props) {
   }, []);
   const submitForm = (e) => {
     e.preventDefault();
-
+    // () => AddToOffers(offerForm)
     // SEND API REQUEST
     axiosInstance
       .post("/offers/", offerForm)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
-      AddToOffers(offerForm) 
+      // AddToOffers(offers) 
     return console.log("send offer successfully:  ", offerArray);
   };
   const changeData = (e) => {
@@ -231,6 +233,7 @@ export default function Popup(props) {
                     className="btn btn-primary"
                     data-bs-target="#exampleModalToggle2"
                     data-bs-toggle="modal"
+                    onClick={() => AddToOffers(offerForm)}
                     disabled = {errors.detailsErr || errors.from_regionErr || errors.to_regionErr || errors.priceErr}
                   >
                     Send Offer
