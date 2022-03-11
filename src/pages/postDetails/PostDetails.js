@@ -13,7 +13,7 @@ export default function PostDetails() {
   const dispatch = useDispatch();
   const params = useParams();   // return object for dynamic params  like /:id
   const [details, setDetails] = useState({})  //to store returned data
-  const [owner, setOwner] = useState(false);
+  // const [owner, setOwner] = useState(false);
 
   useEffect(() => {
     dispatch(getPosts())

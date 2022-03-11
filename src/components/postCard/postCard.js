@@ -12,6 +12,7 @@ import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 //API requests 
 import axios from 'axios'
+import Popup from '../popup/popup'
 
 export default function PostCard({ post }) {
   const [style, setStyle] = useState("darkcustombtn");
@@ -187,8 +188,8 @@ export default function PostCard({ post }) {
         {/* post content end */}
         <div className="row align-items-center mb-4  ">
           <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-            <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={(e) => { postDetails(e, post.id) }}>
-              show offers </button>
+            {/* <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={(e) => { postDetails(e, post.id) }}> */}
+            <Popup postID={post.id} post={post}/>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-3 text-center">
             <button type="button" className="btn px-3 me-1 darkcustombtn">

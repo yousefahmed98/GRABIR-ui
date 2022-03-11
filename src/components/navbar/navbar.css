@@ -26,6 +26,7 @@
 .cnavbar , .COffcanvas{
   background-color: #faaf40 ;
   font-size: large;
+  z-index: 0;
 }
 .cnavbar{ 
   z-index: 100;
