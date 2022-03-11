@@ -1,8 +1,16 @@
 import React from "react";
-import { useState } from "react";
-// import { useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { axiosInstance } from "../../network/axiosInstance";
+import { getOffersAction } from "../../Store/Actions/getOffers";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import "./popup.css";
+import logo from "../../static/navbar/logo-default.png";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DoneIcon from "@mui/icons-material/Done";
+import TextField from "@mui/material/TextField";
 
 export default function Popup(props) {
   const [offerForm, setOfferForm] = useState({
@@ -22,7 +30,18 @@ export default function Popup(props) {
   });
 
   //-------------------------------------------------------
-  // const offerArray = useSelector((state) => state.OFFERS.offers); //[]
+
+  const offerArray = useSelector((state) => state.OFFERS.offers); //[]
+  const dispatch = useDispatch();
+  const AddToOffers = (id) => {
+    dispatch(getOffersAction(offerArray.indexOf(id) === -1 ? id : 0));
+  };
+  useEffect(() => {
+    axiosInstance
+      .get(`/offers/`, {})
+      .then((res) => setOffers(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -31,6 +50,9 @@ export default function Popup(props) {
       .post("/offers/", offerForm)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
+
+    AddToOffers(offerForm);
+    return console.log("send offer successfully:  ", offerArray);
   };
   const changeData = (e) => {
     if (e.target.name === "details") {
@@ -85,11 +107,13 @@ export default function Popup(props) {
         tabIndex="-1"
       >
         <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
+          <div className="modal-content ">
+            <div className="modal-header ">
+              <img className="modaaalcss" src={logo} alt="logo"></img>
               <h5 className="modal-title" id="exampleModalLabel">
                 Make Your Offer
               </h5>
+
               <button
                 type="button"
                 className="btn-close"
@@ -100,123 +124,89 @@ export default function Popup(props) {
             <div className="modal-body">
               <form onSubmit={(e) => submitForm(e)}>
                 <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    Details
-                  </label>
-
-                  <input
-                    type="text"
+                  <TextField
+                    id="outlined-search"
                     className="form-control"
-                    id="detailsID"
-                    aria-describedby="detailsHelp"
+                    label="Details"
+                    type="text"
+                    style={{ marginBottom: 5 }}
+                    name="details"
                     value={offerForm.details}
                     onChange={(e) => changeData(e)}
-                    name="details"
-                    required
                   />
                   <div id="usernameHelp" className="form-text text-danger">
                     {errors.detailsErr}
                   </div>
                 </div>
-
                 <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    From Country
-                  </label>
-                  <input
+                  <TextField
+                    style={{ marginRight: 3 , marginBottom: 8}}
                     type="text"
-                    className="form-control"
-                    id="from_regionID"
-                    aria-describedby="from_regionHelp"
+                    id="outlined-required"
+                    label="From"
+                    defaultValue="USA"
                     value={offerForm.from_region}
                     onChange={(e) => changeData(e)}
                     name="from_region"
-                    required
                   />
-                </div>
-                <div id="usernameHelp" className="form-text text-danger">
-                  {errors.from_regionErr}
-                </div>
-                <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    To Country
-                  </label>
-                  <input
+                  <TextField
                     type="text"
-                    className="form-control"
-                    id="to_regionID"
-                    aria-describedby="to_regionHelp"
+                    id="outlined-required"
+                    label="To"
+                    defaultValue="EGYPT"
+                    style={{ marginRight: 3 , marginBottom: 8}}
                     value={offerForm.to_region}
                     onChange={(e) => changeData(e)}
                     name="to_region"
-                    required
                   />
+                  <div id="usernameHelp" className="form-text text-danger">
+                    {errors.from_regionErr || errors.to_regionErr}
+                  </div>
                 </div>
-                <div id="usernameHelp" className="form-text text-danger">
-                  {errors.to_regionErr}
-                </div>
+
                 <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    Price
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="priceID"
-                    aria-describedby="priceHelp"
+                  <TextField
+                    id="outlined-number"
+                    label="Number"
+                    style={{ marginRight: 3 , marginBottom: 8}}
+                    type="number"
                     value={offerForm.price}
                     onChange={(e) => changeData(e)}
                     name="price"
-                    required
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  <TextField
+                    id="outlined-read-only-input"
+                    label="Post id"
+                    style={{ marginRight: 3 , marginBottom: 8}}
+                    defaultValue={props.postID}
+                    onChange={(e) => changeData(e)}
+                    name="post_id"
+                    InputProps={{
+                      readOnly: true,
+                    }}
                   />
                 </div>
                 <div id="usernameHelp" className="form-text text-danger">
                   {errors.priceErr}
                 </div>
-                <div className="mb-2 mr-5">
-                  <label
-                    htmlFor="exampleInputFirstname1"
-                    className="form-label"
-                  >
-                    Post ID
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="post_idID"
-                    aria-describedby="post_idHelp"
-                    value={props.postID}
-                    onChange={(e) => changeData(e)}
-                    name="post_id"
-                  />
-                </div>
-
                 <div className="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-danger"
+                  <Button
+                    style={{ margin: 3 }}
+                    variant="outlined"
                     data-bs-dismiss="modal"
+                    startIcon={<DeleteIcon />}
                   >
-                    Close
-                  </button>
-                  <button
+                    Delete
+                  </Button>
+                  <Button
+                    variant="contained"
+                    endIcon={<SendIcon />}
                     type="submit"
-                    className="btn btn-primary"
                     data-bs-target="#exampleModalToggle2"
                     data-bs-toggle="modal"
-                    // onClick={() => AddToOffers(offerForm)}
                     disabled={
                       errors.detailsErr ||
                       errors.from_regionErr ||
@@ -225,7 +215,7 @@ export default function Popup(props) {
                     }
                   >
                     Send Offer
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>
@@ -243,36 +233,32 @@ export default function Popup(props) {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalToggleLabel2">
-                Offer Status
+                Your offer has been successfully submitted
+                <DoneIcon data-bs-dismiss="modal" aria-label="Close"></DoneIcon>
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
             </div>
-            <div className="modal-body">Your Offer is successfully sent</div>
+
             <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-outline-success"
                 data-bs-dismiss="modal"
               >
-                Close
+                Done
               </button>
             </div>
           </div>
         </div>
       </div>
-      <a
-        className="btn btn-primary"
+      <Button
+        variant="outlined"
         data-bs-toggle="modal"
         href="#exampleModalToggle"
         role="button"
+        endIcon={<LocalOfferIcon />}
       >
         Make Offer
-      </a>
+      </Button>
     </>
   );
 }

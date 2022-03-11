@@ -39,7 +39,7 @@ return (
               </CNavLink>
             </CNavItem>
             <CNavItem>
-              <CNavLink href="#">Deals</CNavLink>
+              <CNavLink href="/deals">Deals</CNavLink>
             </CNavItem>
             <CNavItem>
               <CNavLink href="/offers">Offers</CNavLink>
