@@ -1,0 +1,15 @@
+.modaaalcss{
+    height: 50px;
+    margin: 0 10px;
+}
+
+.inputField {
+    font-family: 'Roboto', sans-serif;
+    background-color: transparent;
+    border: none;
+    border-bottom:  1px solid;
+}
+
+.modal-footer {
+    border-top: 0 none;
+}

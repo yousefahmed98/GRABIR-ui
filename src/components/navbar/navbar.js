@@ -4,8 +4,8 @@ import logodark from "../../static/navbar/logo-dark.png";
 // import bell from "../../static/navbar/bell.png"
 // import chat from "../../static/navbar/chat.png"
 import "./navbar.css";
-import { CNavbar ,CContainer,CNavbarToggler ,COffcanvas,COffcanvasHeader,COffcanvasTitle,COffcanvasBody,CNavbarNav,CNavLink
-, CNavItem,CDropdownToggle,CDropdown,CDropdownItem,CFormInput,CForm,CButton,CCloseButton,CDropdownMenu,CDropdownDivider,CNavbarBrand}from '@coreui/bootstrap-react';
+import { CNavbar ,CContainer,CNavbarToggler ,COffcanvas,COffcanvasHeader,COffcanvasBody,CNavbarNav,CNavLink
+, CNavItem,CFormInput,CForm,CButton,CCloseButton,CNavbarBrand}from '@coreui/bootstrap-react';
 import Noty from './notify'
 
 
@@ -13,6 +13,7 @@ import Noty from './notify'
 export default function Navbar() {
 
   const [visible, setVisible] = useState(false)
+  
 
 return (
   <CNavbar colorScheme="light" className="bg-light fixed-top cnavbar" expand="lg">
@@ -38,10 +39,10 @@ return (
               </CNavLink>
             </CNavItem>
             <CNavItem>
-              <CNavLink href="#">Deals</CNavLink>
+              <CNavLink href="/deals">Deals</CNavLink>
             </CNavItem>
             <CNavItem>
-              <CNavLink href="#">Offers</CNavLink>
+              <CNavLink href="/offers">Offers</CNavLink>
             </CNavItem>
             <CNavItem>
               <CNavLink href="#">My Profile</CNavLink>
