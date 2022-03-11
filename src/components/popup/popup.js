@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import TextField from "@mui/material/TextField";
 
+
 export default function Popup(props) {
   const [offerForm, setOfferForm] = useState({
     details: "",
@@ -31,18 +32,6 @@ export default function Popup(props) {
 
   //-------------------------------------------------------
 
-  const offerArray = useSelector((state) => state.OFFERS.offers); //[]
-  const dispatch = useDispatch();
-  const AddToOffers = (id) => {
-    dispatch(getOffersAction(offerArray.indexOf(id) === -1 ? id : 0));
-  };
-  useEffect(() => {
-    axiosInstance
-      .get(`/offers/`, {})
-      .then((res) => setOffers(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
   const submitForm = (e) => {
     e.preventDefault();
     // SEND API REQUEST
@@ -51,8 +40,6 @@ export default function Popup(props) {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
-    AddToOffers(offerForm);
-    return console.log("send offer successfully:  ", offerArray);
   };
   const changeData = (e) => {
     if (e.target.name === "details") {
