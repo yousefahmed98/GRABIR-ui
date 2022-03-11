@@ -1,6 +1,5 @@
 import {useState} from "react";
 import logodark from "../../static/navbar/logo-dark.png";
-import { useHistory } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import bell from "../../static/navbar/bell.png"
 // import chat from "../../static/navbar/chat.png"
@@ -14,14 +13,7 @@ import Noty from './notify'
 export default function Navbar() {
 
   const [visible, setVisible] = useState(false)
-  const history = useHistory();
-
-  function handleHomeClick() {
-    history.push("/home");
-  }
-  function handleOffersClick() {
-    history.push("/offers");
-  }
+  
 
 return (
   <CNavbar colorScheme="light" className="bg-light fixed-top cnavbar" expand="lg">
@@ -42,7 +34,7 @@ return (
           </CNavbarBrand>
         
             <CNavItem>
-              <CNavLink href="#" onClick={() => handleHomeClick()} active>
+              <CNavLink href="/home" active>
                 Home
               </CNavLink>
             </CNavItem>
@@ -50,7 +42,7 @@ return (
               <CNavLink href="#">Deals</CNavLink>
             </CNavItem>
             <CNavItem>
-              <CNavLink href="#" onClick={() => handleOffersClick()}>Offers</CNavLink>
+              <CNavLink href="/offers">Offers</CNavLink>
             </CNavItem>
             <CNavItem>
               <CNavLink href="#">My Profile</CNavLink>

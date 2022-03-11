@@ -1,7 +1,7 @@
+
 export const getOffersAction = (payload) => {
-    return {
-      type: "GET_OFFERS",
-      payload,
-    };
+  return {
+    type: "GET_OFFERS",
+    payload,
+  };
 };
-  

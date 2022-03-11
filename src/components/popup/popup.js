@@ -1,9 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux"
-import { useHistory } from "react-router-dom";
+import { useState } from "react";
+// import { useSelector } from "react-redux";
+// import { useHistory } from "react-router-dom";
 import { axiosInstance } from "../../network/axiosInstance";
-import { getOffersAction } from "../../Store/Actions/getOffers";
 
 export default function Popup(props) {
   const [offerForm, setOfferForm] = useState({
@@ -22,32 +21,16 @@ export default function Popup(props) {
     priceErr: null,
   });
 
-  const [offers, setOffers] = useState([]); 
-  
   //-------------------------------------------------------
-  const offerArray = useSelector((state) => state.OFFERS.offers); //[]
-  console.log("ahhhhhhhhhhhhhhh", offerArray)
-  const dispatch = useDispatch();
-  const AddToOffers = (array) => {
-    dispatch(getOffersAction(array));
-  };
-  useEffect(() => {
-    axiosInstance
-      .get(`/offers/`, {
-      })
-      .then((res) => setOffers(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+  // const offerArray = useSelector((state) => state.OFFERS.offers); //[]
+
   const submitForm = (e) => {
     e.preventDefault();
-    // () => AddToOffers(offerForm)
     // SEND API REQUEST
     axiosInstance
       .post("/offers/", offerForm)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
-      // AddToOffers(offers) 
-    return console.log("send offer successfully:  ", offerArray);
   };
   const changeData = (e) => {
     if (e.target.name === "details") {
@@ -233,8 +216,13 @@ export default function Popup(props) {
                     className="btn btn-primary"
                     data-bs-target="#exampleModalToggle2"
                     data-bs-toggle="modal"
-                    onClick={() => AddToOffers(offerForm)}
-                    disabled = {errors.detailsErr || errors.from_regionErr || errors.to_regionErr || errors.priceErr}
+                    // onClick={() => AddToOffers(offerForm)}
+                    disabled={
+                      errors.detailsErr ||
+                      errors.from_regionErr ||
+                      errors.to_regionErr ||
+                      errors.priceErr
+                    }
                   >
                     Send Offer
                   </button>

@@ -8,7 +8,7 @@ import Popup from '../popup/popup'
 export default function PostCard({ post }) {
   const [style, setStyle] = useState("darkcustombtn");
   const history=useHistory();  //hook for props.history
-  const postDetails =(e,post_id) =>{
+  const postDetails = (e,post_id) =>{
     e.preventDefault()
     console.log(post_id)
     setStyle('darkcustombtnActive')
