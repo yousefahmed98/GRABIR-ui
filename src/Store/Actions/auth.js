@@ -25,14 +25,12 @@ export const load_user = () =>  (dispatch) => {
       .get(`http://127.0.0.1:8000/base/users/${userid}/`, config)
       .then((res) => {
         const test = localStorage.getItem('current_user')
-        localStorage.setItem('current_user',res.data.id)
         console.log(test,"777777777777777777777777777777777777777")
         localStorage.setItem("is_staff", res.data.is_staff);
         localStorage.setItem("id", res.data.id);
         localStorage.setItem("email", res.data.email);
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("region", res.data.region);
-        localStorage.setItem("username", res.data.username);
         localStorage.setItem("firstname", res.data.first_name);
         localStorage.setItem("lastname", res.data.last_name);
         localStorage.setItem("dateJoined", res.data.date_joined);
