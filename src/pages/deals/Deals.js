@@ -18,7 +18,7 @@ export default function Deals() {
   return (
     <>
       <Navbar />
-      <DealsCard />
+      <DealsCard deals={deals}/>
     </>
   );
 }
