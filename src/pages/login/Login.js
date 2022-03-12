@@ -8,6 +8,7 @@ import "./login.css";
 import { login } from "../../Store/Actions/auth";
 
 const Login = ({ login }) => {
+  const history=useHistory();  //hook for props.history
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,6 +19,7 @@ const Login = ({ login }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     login (email, password)
+    history.push("/home/")
   };
   // Is the user authenticated
   // Redicrect them to the home page
@@ -50,7 +52,6 @@ const Login = ({ login }) => {
           />
         </div>
         <button className="btn btn-primary" type="submit">
-          {" "}
           Login
         </button>
       </form>

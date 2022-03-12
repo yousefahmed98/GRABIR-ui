@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom'
 export default function Home() {
     const posts = useSelector((state) => state.POSTS.postsList)
     const isloading = useSelector((state) => state.LOADER.isloading);
+    const user = useSelector((state) => state.auth.user)
+    console.log(user,"*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
     const dispatch = useDispatch();
 
     useEffect(() => {
