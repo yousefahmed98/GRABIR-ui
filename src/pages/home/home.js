@@ -119,7 +119,12 @@ export default function Home() {
         form_data.append('price', newPost.price);
         form_data.append('ownerName', newPost.ownerName);
         form_data.append('user', newPost.user);
-        form_data.append('tags', newPost.tags);
+      
+        //form_data.append('tags', newPost.tags);
+        newPost.tags.forEach(item => {
+            form_data.append('tags', item);
+           });
+        console.log("taags " ,form_data)
         axios.post("http://127.0.0.1:8000/posts/posts/", form_data,{
             headers: {
               'content-type': 'multipart/form-data'

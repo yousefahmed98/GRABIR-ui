@@ -179,7 +179,7 @@ export default function PostCard({ post }) {
             <p>Price maximun limit: {post.price} $</p>
             {
               postTags.map((tag, index) => (
-                <span key={index} className="me-3" >{tag}</span>))
+                <span key={index} className="me-3" >#{tag}</span>))
             }
           </div>
           <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
@@ -188,12 +188,11 @@ export default function PostCard({ post }) {
         {/* post content end */}
         <div className="row align-items-center mb-4  ">
           <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-            {/* <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={(e) => { postDetails(e, post.id) }}> */}
             <Popup postID={post.id} post={post}/>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-            <button type="button" className="btn px-3 me-1 darkcustombtn">
-              add offer</button>
+            <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {history.push("/offers")}}>
+              show offers</button>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-3 text-center">
             <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
