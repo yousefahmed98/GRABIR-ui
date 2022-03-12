@@ -2,6 +2,7 @@ import Navbar from './components/navbar/navbar';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from './pages/login/Login';
 import Home from './pages/home/home'
+import PaymentTest from './pages/PaymentTest'
 import PostDetails from './pages/postDetails/PostDetails'
 import Test from './pages/Test';
 import "./components/fonts.css"
@@ -25,6 +26,8 @@ function App() {
     <Route path={"/offers"} exact component={Offers} />
     <Route path={"/landing"} exact component={LandingPage} />
     <Route path={"/deals"} exact component={Deals} />
+    <Route path={"/PaymentTest"} exact component={PaymentTest} />
+
     <Route path="*" exact component={NotFound} />
 
     </Switch>
