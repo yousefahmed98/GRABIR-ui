@@ -38,7 +38,7 @@ export default function Home() {
                                 <div className="col-lg-3 col-sm-3 text-center text-lg-start mb-lg-3 ">
                                     <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
                                         height="80" alt="" loading="lazy" />
-                                    <Link href="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
+                                    <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
                                 </div>
                                 <div className="col-lg-9 col-sm-9 text-center text-lg-start mb-lg-3  mb-5">
                                <button type="submit" className="btn btn-lg  darkcustombtn  ms-5">Add new post</button> 
