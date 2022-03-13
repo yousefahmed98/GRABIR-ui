@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import logodark from "../../static/navbar/logo-dark.png";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./login.css";
 import { login } from "../../Store/Actions/auth";
+import Navbar from "../../components/navbar/navbar";
 
 const Login = ({ login }) => {
-  const history=useHistory();  //hook for props.history
+  const history = useHistory(); //hook for props.history
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,50 +17,110 @@ const Login = ({ login }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = (e) => {
     e.preventDefault();
-    login (email, password)
-    history.push("/home/")
+    login(email, password);
+    history.push("/home/");
   };
   // Is the user authenticated
   // Redicrect them to the home page
+  document.body.style.backgroundColor = "#151A1E";
   return (
-    <div className="container mt-5">
-      <h1>Sign In</h1>
-      <p>Signin with your account</p>
-      <form onSubmit={(e) => onSubmit(e)}>
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={(e) => onChange(e)}
-            required
-          />
+    <>
+      <div className="bodylogin">
+        <Navbar />
+        <div className="container text-light mainPage">
+          <div className="row">
+            {/* LEFT */}
+            <div className="col-lg-5 me-5 col-sm-12">
+              <h3 className="mb-5 mt-5 headTitle">LOGIN</h3>
+              {/* START OF FORM  */}
+              <form onSubmit={(e) => onSubmit(e)}>
+                <div className="mb-3 mr-5">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="EmailID"
+                    aria-describedby="emailHelp"
+                    name="email"
+                    value={email}
+                    onChange={(e) => onChange(e)}
+                    required
+                  />
+                  {/* <div id="emailHelp" className="form-text text-danger">
+                    {error.emailError}
+                  </div> */}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="exampleInputPassword1" className="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="PasswordID"
+                    name="password"
+                    value={password}
+                    onChange={(e) => onChange(e)}
+                    minLength="6"
+                    required
+                  />
+                  {/* <div id="passwordHelp" className="form-text text-danger">
+                    {error.passwordError}
+                  </div> */}
+                </div>
+                <div className="mb-3 form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label className="form-check-label" htmlFor="exampleCheck1">
+                    Remember Me
+                  </label>
+                </div>
+                {/* <div className="text-danger">{error.loginError}</div> */}
+                <button
+                  // disabled={error.emailError || error.passwordError}
+                  type="submit"
+                  className="btn btn-lg submitbtn"
+                >
+                  Login
+                </button>
+                <p className="mt-2">
+                  forgot your password?
+                  <Link to="home" className="text-primary">
+                    Reset password
+                  </Link>
+                </p>
+              </form>
+            </div>
+            {/* RIGHT */}
+            <div className="col-lg-6 col-sm-12">
+              <h4 className="col-lg-8 col-sm-10 mb-5 ms-5 describtion">
+                We deliver on time{" "}
+                <span style={{ color: "#FAAF40" }}>Without </span> any taxes
+              </h4>
+              <div className="row">
+                <div className="col-lg-6 col-sm-12  text-center">
+                  <Link to="/register" className="btn registerbtn">
+                    Join us
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            className="form-control"
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => onChange(e)}
-            minLength="6"
-            required
-          />
-        </div>
-        <button className="btn btn-primary" type="submit">
-          Login
-        </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
+
 // const mapStateToProps = (state) => ({
 //   // is authenticated?
 // });
-export default connect(null , { login })(Login);
+export default connect(null, { login })(Login);
 
 // export default function Login() {
 //   const history = useHistory();
@@ -145,7 +204,7 @@ export default connect(null , { login })(Login);
 //             <div className="col-lg-6 col-sm-12">
 //               <h3 className="mb-5 mt-5 headTitle">LOGIN</h3>
 //               {/* START OF FORM  */}
-//               <form onSubmit={(e) => submitForm(e)} className="col-6">
+//               <form onSubmit={(e) => onSubmit(e)}>
 //                 <div className="mb-3 mr-5">
 //                   <label htmlFor="exampleInputEmail1" className="form-label">
 //                     Email
@@ -157,15 +216,17 @@ export default connect(null , { login })(Login);
 //                     }`}
 //                     id="EmailID"
 //                     aria-describedby="emailHelp"
-//                     value={users.email}
-//                     onChange={(e) => changeData(e)}
 //                     name="email"
+// value={email}
+// onChange={(e) => onChange(e)}
+// required
 //                   />
 //                   <div id="emailHelp" className="form-text text-danger">
 //                     {error.emailError}
 //                   </div>
 //                 </div>
 //                 <div className="mb-3">
+
 //                   <label htmlFor="exampleInputPassword1" className="form-label">
 //                     Password
 //                   </label>
@@ -176,8 +237,10 @@ export default connect(null , { login })(Login);
 //                     }`}
 //                     id="PasswordID"
 //                     name="password"
-//                     value={users.password}
-//                     onChange={(e) => changeData(e)}
+//                      value={password}
+// onChange={(e) => onChange(e)}
+// minLength="6"
+// required
 //                   />
 //                   <div id="passwordHelp" className="form-text text-danger">
 //                     {error.passwordError}
