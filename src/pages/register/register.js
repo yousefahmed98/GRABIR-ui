@@ -165,7 +165,7 @@ export default function Register() {
     ) {
       // SEND API REQUEST
       axios
-        .post("http://127.0.0.1:8000/base/users/", userForm)
+        .post("http://127.0.0.1:8000/base/register/", userForm)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
 

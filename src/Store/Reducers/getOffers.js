@@ -2,6 +2,7 @@ import { axiosInstance } from "../../network/axiosInstance";
 
 const INITIAL_VALUE = {
   offers: [],
+  deals:[],
   offers_counter: 0,
 };
 
@@ -20,14 +21,24 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
         el.id === action.payload.id ? action.payload : el
       );
       let newOffers = [...updatedOffers];
+
+      let deal = {
+        offer: action.payload.id,
+      };
+
       return (
         axiosInstance
           .put(`/offers/${action.payload.id}/`, action.payload)
           .then((res) => console.log(res))
           .catch((err) => console.log(err)),
+        axiosInstance
+          .post("deals/", deal)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err)),
         {
           ...state,
           offers: [...newOffers], // 1
+          deals: [...newOffers],
           offers_counter: newOffers.length,
         }
       );

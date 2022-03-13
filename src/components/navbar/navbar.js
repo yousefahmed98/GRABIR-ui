@@ -1,6 +1,5 @@
 import {useState} from "react";
 import logodark from "../../static/navbar/logo-dark.png";
-// import { Link } from "react-router-dom";
 // import bell from "../../static/navbar/bell.png"
 // import chat from "../../static/navbar/chat.png"
 import "./navbar.css";
@@ -13,7 +12,22 @@ import Noty from './notify'
 export default function Navbar() {
 
   const [visible, setVisible] = useState(false)
-  
+  const logout = () => {
+    localStorage.removeItem("is_staff")
+        localStorage.removeItem("id")
+        localStorage.removeItem("email")
+        localStorage.removeItem("username")
+        localStorage.removeItem("region")
+        localStorage.removeItem("firstname")
+        localStorage.removeItem("lastname")
+        localStorage.removeItem("dateJoined")
+        localStorage.removeItem("isVerfied")
+        localStorage.removeItem("passportImg")
+        localStorage.removeItem("groups")
+        localStorage.removeItem("userPermissions")
+        localStorage.removeItem("superUser")
+        localStorage.removeItem("lastLogin")
+  }
 
 return (
   <CNavbar colorScheme="light" className="bg-light fixed-top cnavbar" expand="lg">
@@ -50,6 +64,11 @@ return (
             <CNavItem>
               <CNavLink href="#">Favourites</CNavLink>
             </CNavItem> 
+            { localStorage.getItem("id") ? 
+             <CNavItem>   
+              <CNavLink onClick={ () => logout() } href="/login">Logout</CNavLink>
+            </CNavItem> :
+             null} 
             <CNavItem className="notify-icon">
 
             {visible?null:<Noty width={"30px"}  count={4} /> }

@@ -14,7 +14,13 @@ import makeAnimated from 'react-select/animated'
 export default function Home() {
     //get all posts
     const posts = useSelector((state) => state.POSTS.postsList)
-    const isloading = useSelector((state) => state.LOADER.isloading)
+    const isloading = useSelector((state) => state.LOADER.isloading);
+    const user = useSelector((state) => state.auth.user)
+    console.log(user,"*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+    console.log(localStorage.getItem("region"),"this is region");
+    console.log(localStorage.getItem("username"),"this is username of current user")
+    console.log(localStorage.getItem("isVerfied"),"verfieeeeeeeeeeeed or not");
+    // console.log(user.email,"this is current user email email");
     const dispatch = useDispatch();
     // get all tags 
     const tags = useSelector((state) => state.TAGS.allTags)
@@ -234,6 +240,9 @@ export default function Home() {
                 </div>
 
             </div>
+            <div > 
+            </div>
+         {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */}
         </>
 
     )
