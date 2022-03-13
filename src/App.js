@@ -10,12 +10,10 @@ import LandingPage from "./components/landing_page/LandingPage";
 import NotFound from "./pages/NotFound/NotFound";
 import Offers from "./pages/offers/offers";
 import Deals from "./pages/deals/Deals";
-import Layout from "./hocs/Layout";
 
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
         <Switch>
           <Route path={"/"} exact component={Navbar} />
           <Route path={"/login"} exact component={Login} />
@@ -28,7 +26,6 @@ function App() {
           <Route path={"/deals"} exact component={Deals} />
           <Route path="*" exact component={NotFound} />
         </Switch>
-      </Layout>
     </BrowserRouter>
   );
 }
