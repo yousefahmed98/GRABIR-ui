@@ -1,112 +1,262 @@
-import { Link } from 'react-router-dom'
+//style
 import "./postCard.css"
-import {useHistory} from "react-router-dom"
-import {useState} from 'react';
+import moment from 'react-moment';
+//hooks
+import { Link, useHistory } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+//actions
+import { getTags } from '../../Store/Actions/getTags'
+//animated select react
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
+//API requests 
+import axios from 'axios'
 import Popup from '../popup/popup'
-
 
 export default function PostCard({ post }) {
   const [style, setStyle] = useState("darkcustombtn");
-  const history=useHistory();  //hook for props.history
-  const postDetails = (e,post_id) =>{
+  const history = useHistory()
+
+  // ------------------------------update post if owner---------------------------------
+  // get all tags 
+  const dispatch = useDispatch();
+  const tags = useSelector((state) => state.TAGS.allTags)
+  useEffect(() => {
+    dispatch(getTags())
+  }, []);
+  // for tags select component
+  const animatedComponents = makeAnimated();
+  const tagsoptions = []
+  tags.map((tag) => (
+    tagsoptions.push({ value: tag.id, label: `${tag.name}` })
+  )
+  )
+  // -----updated post ---------------------------------------------
+  //intial values are values of original post
+  const [newPost, setNewPost] = useState({
+    title: post.title,
+    description: post.description,
+    postpicture: post.postpicture,
+    from_region: post.from_region,
+    to: post.to,
+    price: post.price,
+    ownerName: post.ownerName,
+    user: post.user,
+    tags: post.tags,
+  })
+  // selected tags------------
+  const changeSelectedTags = (e) => {
+    let list_of_tagsobjects = Object.values(e)
+    let chosen = []
+    for (let t of list_of_tagsobjects) {
+      chosen.push(parseInt(t.value))
+    }
+    console.log(chosen)
+    setNewPost({
+      ...newPost,
+      tags: chosen,
+    })
+  }
+  // store values in newPost state
+  const changeData = (e) => {
+    if (e.target.name === "title") {
+      console.log(e.target.value)
+      setNewPost({
+        ...newPost,
+        title: e.target.value,
+      })
+    }
+
+    else if (e.target.name === "details") {
+      setNewPost({
+        ...newPost,
+        description: e.target.value,
+      })
+    }
+    else if (e.target.name === "photo") {
+      setNewPost({
+        ...newPost,
+        postpicture: e.target.files[0],
+      })
+    }
+    else if (e.target.name === "price") {
+      setNewPost({
+        ...newPost,
+        price: e.target.value,
+      })
+    }
+    else if (e.target.name === "from") {
+      setNewPost({
+        ...newPost,
+        from_region: e.target.value,
+      })
+    }
+    else if (e.target.name === "to") {
+      setNewPost({
+        ...newPost,
+        to: e.target.value,
+      })
+    }
+  }
+  const submitForm = (e) => {
+    e.preventDefault();
+    // SEND API REQUEST
+    let form_data = new FormData();
+    form_data.append('title', newPost.title);
+    form_data.append('description', newPost.description);
+    form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+    form_data.append('from_region', newPost.from_region);
+    form_data.append('to', newPost.to);
+    form_data.append('price', newPost.price);
+    form_data.append('ownerName', newPost.ownerName);
+    form_data.append('user', newPost.user);
+    form_data.append('tags', newPost.tags);
+    axios.put(`http://127.0.0.1:8000/posts/posts/${post.id}/`, form_data, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+      .then(history.push(`/home`))
+      .catch((err) => console.log(err))
+  }
+
+
+
+  //----------------------go to post details page------------------------------
+  const postDetails = (e, post_id) => {
+    e.preventDefault()
+    console.log(post_id)
+    history.push(`/PostDetails/${post_id}`)
+  }
+  // --------------------delete post if owner-----------------------------------
+  const postDelete = (e, post_id) => {
     e.preventDefault()
     console.log(post_id)
     setStyle('darkcustombtnActive')
-    history.push(`/PostDetails/${post_id}`)
+    axios.delete(`http://127.0.0.1:8000/posts/posts/${post_id}/`)
+      .then(history.push(`/home`))
+      .catch((err) => console.log(err))
   }
+
+  //-----getpostTags-------
+  const postTags = []
+  const getpostTags = () => {
+    for (let tag of post.tags) {
+      for (let t of tags) {
+        if (t.id == tag) {
+          postTags.push(t.name)
+        }
+      }
+    }
+  }
+  getpostTags()
+  //--------------------
   return (
-    // <div className="container postcard pt-5">
-    //    <div className="row pt-5 align-items-center">
-    //    {/* Grid column */}
-    //    <div className="col-md-12 mb-4">
-        <div className="pt-5">
-        {/* post section  start*/}
-        <section className="border rounded shadow-1-strong p-5 postcard mt-5 mb-5" >
-          {/* profile + date  */}
-            <div className="row align-items-center mb-4">
-              <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
-                  height="80" alt="" loading="lazy" />
-                <Link href="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
-              </div>
-              <span className='pt-2'> Published on<u>15.07.2020</u></span>
-            </div>
-              {/* profile + date end  */}
-              {/* post content start */}
-            <div className="row align-items-center mb-4">
-            <div class="col-md-6 inline">
-              <h1>{post.title}</h1>
-              <p>
-                {post.description}
-              </p>
-              <p>want it from : {post.from_region}</p>
-              <p>Delivery will be in: {post.to}</p>
-              <p>Price maximun limit: {post.price} $</p>
-            </div>
-            <img src={post.postpicture} className="col-md-6 img-fluid shadow-2-strong rounded-5 mb-4" 
-            alt="post image" width= '60%' length = '180px' />
-            </div>
-             {/* post content end */}
-             <div className="row align-items-center mb-4">
-              <div className="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
-              {/* <button type="button" className={`btn px-3 me-1 ${style}`} onClick={(e) => {postDetails(e,post.id)}}>
-                 show details </button> */}
-                  <Popup postID={post.id} post={post}/>
 
-              </div>
-
-
-              <div className="col-lg-6 text-center text-lg-end pe-5">
-                <button type="button" className="btn px-3 me-1 darkcustombtn">
-                 add to favourite
-                </button>
-              
-              </div>
-            </div>
-          </section>
-          
+    <div className="pt-5">
+      {/* post section  start*/}
+      <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
+        {/* profile + date  */}
+        <div className="row align-items-center mb-4">
+          <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
+              height="80" alt="" loading="lazy" />
+            <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
           </div>
-    
-         
+          <span className='pt-2 me-2'> Published on<u>{post.created_at}</u></span>
+        </div>
+        {/* profile + date end  */}
+        {/* post content start */}
+        <div className="row align-items-center mb-4">
+          <div class="col-lg-6 col-md-12 inline">
+            <h1>{post.title}</h1>
+            <p>
+              {post.description}
+            </p>
+            <p>want it from : {post.from_region}</p>
+            <p>Delivery will be in: {post.to}</p>
+            <p>Price maximun limit: {post.price} $</p>
+            {
+              postTags.map((tag, index) => (
+                <span key={index} className="me-3" >#{tag}</span>))
+            }
+          </div>
+          <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
+            alt="post image" width='60%' length='180px' />
+        </div>
+        {/* post content end */}
+        <div className="row align-items-center mb-4  ">
+          <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
+            <Popup postID={post.id} post={post}/>
+          </div>
+          <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+            <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {history.push("/offers")}}>
+              show offers</button>
+          </div>
+          <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+            <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
+              delete</button>
+          </div>
+          <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+            <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" className="btn px-3 me-1 darkcustombtn">
+              update</button>
+          </div>
+          {/* modal */}
+          <div className="modal" id="staticBackdropupdate" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header ">
+                  <h5 className="modal-title" id="staticBackdropLabel">Update post</h5>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div className="modal-body">
+                  <form method="post" onSubmit={(e) => submitForm(e)} >
+                    <label>TiTle</label>
+                    <input type='text' className='form-control' name='title' onChange={(e) => changeData(e)} />
+                    <label>details</label>
+                    <input type="text" className='form-control offertxt' name='details' onChange={(e) => changeData(e)} />
+                    <label>Post photo</label>
+                    <input type="file" className='form-control' name='photo' onChange={(e) => changeData(e)} />
+                    <label>price</label>
+                    <input type='text' className='form-control' name='price' onChange={(e) => changeData(e)} />
+                    <label>From </label>
+                    <input type='text' className='form-control' name='from' onChange={(e) => changeData(e)} />
+                    <label>Delivery location </label>
+                    <input type='text' className='form-control' name='to' onChange={(e) => changeData(e)} />
+                    <label>Choose relevant tags</label>
+                    <Select
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      isMulti
+                      options={tagsoptions}
+                      onChange={(e) => changeSelectedTags(e)}
+                      name="tags"
+                      setValue
+                    />
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" className="btn btn-lg  darkcustombtn mt-3">Update</button>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          {/* modal end */}
+        </div>
+
+      </section>
+
+    </div>
+
+
 
   )
 
 }
-        
-//src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg"
-  // <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
-
-  //   <h1 className="transition duration-700 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">
-  //     {/* <Link href='#'>{post.title}</Link> */}
-  //     {post.title}
-  //   </h1>
-  //   <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
-  //     <div className="flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8 items-center">
-  //       <img
-  //         unoptimized
-  //         alt={post.title}
-  //         className="align-middle rounded-full"
-  //         src={post.postpicture}
-  //         width= '318px'
-  //         length = '180px'
-  //       />
-  //       <p className="inline align-middle text-gray-700 ml-2 font-medium text-lg">post.author.name</p>
-  //     </div>
-  //     <div className="font-medium text-gray-700">
-  //       {/* <svg xmlns="http://www.w3.org/2000/svg" className="inline " fill="none"  stroke="currentColor">
-  //         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-  //       </svg> */}
-  //       {/* <span>{moment(post.created_at).format('MMM DD, YYYY')}</span> */}
-  //     </div>
-  //   </div>
-  //   <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8">
-  //     {/* {post.description} */}
-  //   </p>
-  //   <div className="text-center">
-  //     <Link to='#'>
-  //       <span className="transition duration-500 ease transform hover:-translate-y-1 inline-block bg-pink-600 text-lg font-medium rounded-full text-black px-8 py-3 cursor-pointer">Continue Reading</span>
-  //     </Link>
-  //   </div>
-  // </div>
 
 
