@@ -14,7 +14,7 @@ import makeAnimated from 'react-select/animated'
 import axios from 'axios'
 import Popup from '../popup/popup'
 
-export default function PostCard({ post }) {
+export default function PostCard({ post ,socket, user}) {
   const [style, setStyle] = useState("darkcustombtn");
   const history = useHistory()
 
@@ -188,7 +188,7 @@ export default function PostCard({ post }) {
         {/* post content end */}
         <div className="row align-items-center mb-4  ">
           <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-            <Popup postID={post.id} post={post}/>
+            <Popup postID={post.id} post={post} socket={socket} user={user}/>
           </div>
           <div className="col-lg-3 col-md-3 col-sm-3 text-center">
             <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {history.push("/offers")}}>

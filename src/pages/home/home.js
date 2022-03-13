@@ -10,8 +10,32 @@ import axios from 'axios'
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+//socket for notifications
+import { io } from "socket.io-client";
+
 
 export default function Home() {
+  // notifications
+  const[userName ,setUserName] = useState("")
+  const[user,setUser] = useState(null)
+  const[socket,setSocket] = useState(null)
+  useEffect(() => {
+    const socket =io("http://localhost:5000") 
+    setSocket(socket)
+  },[])
+
+  console.log("userName",userName)
+  useEffect(() => {
+    if(user !== null){
+        console.log(socket.on("welcomeMessage", (msg) => {
+            console.log(msg,user)
+        }))
+    }
+    //send event to server
+    socket?.emit("newUser",user)
+  }, [socket,user])
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //get all posts
     const posts = useSelector((state) => state.POSTS.postsList)
     const isloading = useSelector((state) => state.LOADER.isloading)
@@ -21,8 +45,6 @@ export default function Home() {
     useEffect(() => {
         dispatch(getPosts())
         dispatch(getTags())
-        console.log("tagssss", tags)
-        console.log("postsss", posts)
     }, []);
 
     const animatedComponents = makeAnimated();
@@ -141,15 +163,19 @@ export default function Home() {
     return (
         <>
             {/* navbar */}
-            <Navbar />
+            <Navbar socket={socket} />
 
             {/* body */}
             <div className="container mx-auto px-10 mb-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     <div className="lg:col-span-8 col-span-1">
                         {/* add post */}
+                     
                         <div className="pt-5">
                             <section className="border rounded shadow-lg p-5 postcard  mt-5 " >
+                                   {/* /////////////////////////////////////////////////////// */}
+                      <input type="text"  placeholder="userid" onChange={(e)=> setUserName(e.target.value)}/>
+                      <button onClick={()=> setUser(parseInt(userName))}></button>
                                 {/* profile + date  */}
                                 <div className="row align-items-center mb-4">
                                     <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
@@ -225,7 +251,7 @@ export default function Home() {
                             )
                             : (
                                 posts.map((post, index) => (
-                                    <PostCard key={index} post={post} />
+                                    <PostCard key={index} post={post} socket={socket} user={user}/>
                                 ))
                             )
                         }

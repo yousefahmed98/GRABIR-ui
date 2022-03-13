@@ -29,6 +29,15 @@ export default function Popup(props) {
     to_regionErr: null,
     priceErr: null,
   });
+/////////////////////////////////////////////////////////////////////////////
+const handleNotification =(type)=>{
+  props.socket.emit("sendNotification",{
+    senderId:props.user,
+    reciverId:props.post.user,
+    type,
+  })
+}
+/////////////////////////////////////////////////////////////////////////////
 
   //-------------------------------------------------------
 
@@ -200,6 +209,8 @@ export default function Popup(props) {
                       errors.to_regionErr ||
                       errors.priceErr
                     }
+                    onClick={()=>handleNotification("send you offer")} /////////////////
+
                   >
                     Send Offer
                   </Button>

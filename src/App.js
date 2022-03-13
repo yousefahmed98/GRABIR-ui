@@ -11,7 +11,6 @@ import NotFound from './pages/NotFound/NotFound';
 import Offers from './pages/offers/offers';
 import Deals from './pages/deals/Deals';
 
-
 function App() {
   return (
     <BrowserRouter>

@@ -14,7 +14,7 @@ const notyNumStyle = {
   padding: "3px 5px",
   borderRadius: "20px"
 };
-export default function Noty({ width, color, count }) {
+export default function Notify({ width, color, count }) {
   return (
     <div>
       <div style={notyIconStyle}>
