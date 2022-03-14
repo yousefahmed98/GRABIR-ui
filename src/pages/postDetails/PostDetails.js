@@ -7,8 +7,10 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
 import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
+import { useHistory } from 'react-router-dom';
 
 export default function PostDetails() {
+  const history = useHistory();
   const posts = useSelector((state) => state.POSTS.postsList)
   const dispatch = useDispatch();
   const params = useParams();   // return object for dynamic params  like /:id
@@ -82,7 +84,7 @@ export default function PostDetails() {
         </div>
       </div>
       </>
-    ) : <NotLoggedIn/>}
+    ) : history.push("/login")}
     </>
   )
 }

@@ -5,8 +5,10 @@ import DealsCard from "../../components/dealsCard/DealsCard";
 import { axiosInstance } from "../../network/axiosInstance";
 import FormControl from '@mui/material/FormControl';
 import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
+import { useHistory } from "react-router-dom";
 export default function Deals() {
   const [deals, setDeals] = useState();
+  const history = useHistory();
   useEffect(() => {
     axiosInstance
       .get("/deals")
@@ -22,7 +24,7 @@ export default function Deals() {
    <Navbar />
    <DealsCard deals={deals}/>
    </>
-    ) : <NotLoggedIn/>}
+    ) : history.push("/login")}
    
     </>
   );

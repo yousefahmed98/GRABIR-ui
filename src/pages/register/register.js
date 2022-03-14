@@ -182,7 +182,7 @@ export default function Register() {
 
   return (
     <>
-    { localStorage.getItem("email") ? <AlreadyLogged/> : (
+    { localStorage.getItem("email") ? history.push("landing") : (
       <>
 {/* NAVBAR SECTION */}
 <nav className="navbar navbar-light bg-light">

@@ -246,7 +246,7 @@ export default function Home() {
                <div > 
                </div>
             {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */} </>
-           ) : <NotLoggedIn/>}
+           ) : history.push("/login")}
         </>
 
     )

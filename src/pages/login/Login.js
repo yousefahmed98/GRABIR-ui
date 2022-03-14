@@ -57,7 +57,7 @@ const Login = ({ login }) => {
   return (
     <>
     {localStorage.getItem("email") ? 
-      <AlreadyLogged/> : (
+      history.push("/landing"): (
         <>
 <div className="bodylogin">
         <Navbar />
