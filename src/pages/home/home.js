@@ -176,6 +176,7 @@ export default function Home() {
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
+
                                                 <div className="modal-body">
                                                     <form method="post" onSubmit={(e) => submitForm(e)} >
                                                         <label>TiTle</label>
