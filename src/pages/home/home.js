@@ -10,6 +10,7 @@ import axios from 'axios'
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 
 export default function Home() {
     //get all posts
@@ -146,104 +147,106 @@ export default function Home() {
 
     return (
         <>
-            {/* navbar */}
-            <Navbar />
-
-            {/* body */}
-            <div className="container mx-auto px-10 mb-8">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div className="lg:col-span-8 col-span-1">
-                        {/* add post */}
-                        <div className="pt-5">
-                            <section className="border rounded shadow-lg p-5 postcard  mt-5 " >
-                                {/* profile + date  */}
-                                <div className="row align-items-center mb-4">
-                                    <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
-                                            height="80" alt="" loading="lazy" />
-                                        <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
-                                    </div>
-                                    <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
-                                        <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-lg  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0">Add new post</button>
-                                    </div>
-                                    {/* <!-- Modal --> */}
-                                    <div className="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div className="modal-dialog modal-dialog-centered">
-                                            <div className="modal-content">
-                                                <div className="modal-header ">
-                                                    <h5 className="modal-title" id="staticBackdropLabel">add post</h5>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-
-
-                                                <div className="modal-body">
-                                                    <form method="post" onSubmit={(e) => submitForm(e)} >
-                                                        <label>TiTle</label>
-                                                        <input type='text' className='form-control' name='title' required onChange={(e) => changeData(e)} />
-                                                        <label>details</label>
-                                                        <input type="text" className='form-control offertxt' name='details' onChange={(e) => changeData(e)} />
-                                                        <label>Post photo</label>
-                                                        <input type="file" className='form-control' name='photo' required onChange={(e) => changeData(e)} />
-                                                        <label>price</label>
-                                                        <input type='text' className='form-control' name='price' required onChange={(e) => changeData(e)} />
-                                                        <label>From </label>
-                                                        <input type='text' className='form-control' name='from' required onChange={(e) => changeData(e)} />
-                                                        <label>Delivery location </label>
-                                                        <input type='text' className='form-control' name='to' required onChange={(e) => changeData(e)} />
-                                                        <label>Choose relevant tags</label>
-                                                        <Select
-                                                            closeMenuOnSelect={true}
-                                                            components={animatedComponents}
-                                                            isMulti
-                                                            options={tagsoptions}
-                                                            onChange={(e) => changeSelectedTags(e)}
-                                                            name="tags"
-                                                            setValue
-                                                        />
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" className="btn btn-lg  darkcustombtn mt-3" onClick={gotohome()}>Post</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* end Modal  */}
-
-                                </div>
-                            </section>
-                        </div>
-
-                        {/* add post end */}
-                        {/* posts */}
-                        {isloading
-                            ? (
-                                <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
-                                    <div className="flex items-center justify-center mb-8 lg:mb-4 w-full lg:w-auto mr-8 items-center">
-                                        <h1 className="align-middle mt-8">
-                                            < Loader />
-                                        </h1>
-
-                                    </div>
-                                </div>
-                            )
-                            : (
-                                posts.map((post, index) => (
-                                    <PostCard key={index} post={post} />
-                                ))
-                            )
-                        }
-                    </div>
-
-                </div>
-
-            </div>
-            <div > 
-            </div>
-         {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */}
+           { localStorage.getItem("email") ? (
+               <> {/* navbar */}
+               <Navbar />
+   
+               {/* body */}
+               <div className="container mx-auto px-10 mb-8">
+                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                       <div className="lg:col-span-8 col-span-1">
+                           {/* add post */}
+                           <div className="pt-5">
+                               <section className="border rounded shadow-lg p-5 postcard  mt-5 " >
+                                   {/* profile + date  */}
+                                   <div className="row align-items-center mb-4">
+                                       <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
+                                           <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
+                                               height="80" alt="" loading="lazy" />
+                                           <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
+                                       </div>
+                                       <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
+                                           <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-lg  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0">Add new post</button>
+                                       </div>
+                                       {/* <!-- Modal --> */}
+                                       <div className="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
+                                           aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                           <div className="modal-dialog modal-dialog-centered">
+                                               <div className="modal-content">
+                                                   <div className="modal-header ">
+                                                       <h5 className="modal-title" id="staticBackdropLabel">add post</h5>
+                                                       <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                   </div>
+   
+   
+                                                   <div className="modal-body">
+                                                       <form method="post" onSubmit={(e) => submitForm(e)} >
+                                                           <label>TiTle</label>
+                                                           <input type='text' className='form-control' name='title' required onChange={(e) => changeData(e)} />
+                                                           <label>details</label>
+                                                           <input type="text" className='form-control offertxt' name='details' onChange={(e) => changeData(e)} />
+                                                           <label>Post photo</label>
+                                                           <input type="file" className='form-control' name='photo' required onChange={(e) => changeData(e)} />
+                                                           <label>price</label>
+                                                           <input type='text' className='form-control' name='price' required onChange={(e) => changeData(e)} />
+                                                           <label>From </label>
+                                                           <input type='text' className='form-control' name='from' required onChange={(e) => changeData(e)} />
+                                                           <label>Delivery location </label>
+                                                           <input type='text' className='form-control' name='to' required onChange={(e) => changeData(e)} />
+                                                           <label>Choose relevant tags</label>
+                                                           <Select
+                                                               closeMenuOnSelect={true}
+                                                               components={animatedComponents}
+                                                               isMulti
+                                                               options={tagsoptions}
+                                                               onChange={(e) => changeSelectedTags(e)}
+                                                               name="tags"
+                                                               setValue
+                                                           />
+                                                           <div className="modal-footer">
+                                                               <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
+                                                               <button type="submit" className="btn btn-lg  darkcustombtn mt-3" onClick={gotohome()}>Post</button>
+                                                           </div>
+                                                       </form>
+                                                   </div>
+   
+                                               </div>
+                                           </div>
+                                       </div>
+                                       {/* end Modal  */}
+   
+                                   </div>
+                               </section>
+                           </div>
+   
+                           {/* add post end */}
+                           {/* posts */}
+                           {isloading
+                               ? (
+                                   <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
+                                       <div className="flex items-center justify-center mb-8 lg:mb-4 w-full lg:w-auto mr-8 items-center">
+                                           <h1 className="align-middle mt-8">
+                                               < Loader />
+                                           </h1>
+   
+                                       </div>
+                                   </div>
+                               )
+                               : (
+                                   posts.map((post, index) => (
+                                       <PostCard key={index} post={post} />
+                                   ))
+                               )
+                           }
+                       </div>
+   
+                   </div>
+   
+               </div>
+               <div > 
+               </div>
+            {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */} </>
+           ) : <NotLoggedIn/>}
         </>
 
     )

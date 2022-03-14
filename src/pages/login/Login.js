@@ -6,6 +6,7 @@ import "./login.css";
 import { login } from "../../Store/Actions/auth";
 import Navbar from "../../components/navbar/navbar";
 import { useSelector } from "react-redux";
+import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
 const Login = ({ login }) => {
   // const user = useSelector((state) => state.auth.user)
   // const loggedin = useSelector((state) => state.auth.isAuthenticated)
@@ -55,7 +56,10 @@ const Login = ({ login }) => {
   document.body.style.backgroundColor = "#151A1E";
   return (
     <>
-      <div className="bodylogin">
+    {localStorage.getItem("email") ? 
+      <AlreadyLogged/> : (
+        <>
+<div className="bodylogin">
         <Navbar />
         <div className="container text-light mainPage">
           <div className="row">
@@ -144,6 +148,9 @@ const Login = ({ login }) => {
           </div>
         </div>
       </div>
+        </>
+      )}
+      
     </>
   );
 };
