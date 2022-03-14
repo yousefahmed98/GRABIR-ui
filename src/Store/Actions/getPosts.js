@@ -3,7 +3,7 @@ import { setLoaderAction } from "./setLoader"
 
 export const getPosts = () => (dispatch) => {
 
-    return axios.get('http://127.0.0.1:8000/posts/posts/')
+    return axios.get('http://127.0.0.1:8000/posts/posts')
     .then((res) => 
     {
         //second dispatch de mesh bt fire 8er lma l data trga3 
