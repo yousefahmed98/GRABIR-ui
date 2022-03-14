@@ -6,7 +6,7 @@ import Navbar from '../../components/navbar/navbar'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
-
+import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
 
 export default function PostDetails() {
   const posts = useSelector((state) => state.POSTS.postsList)
@@ -27,7 +27,9 @@ export default function PostDetails() {
 
   return (
     <>
-      <Navbar />
+    { localStorage.getItem("email") ? (
+      <>
+ <Navbar />
       <div className="container mx-auto px-10 mb-8 ">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -79,6 +81,8 @@ export default function PostDetails() {
           </div>
         </div>
       </div>
+      </>
+    ) : <NotLoggedIn/>}
     </>
   )
 }
