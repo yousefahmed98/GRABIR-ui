@@ -53,8 +53,8 @@ export default function Home() {
         from_region: "",
         to: "",
         price: 0.0,
-        ownerName: "shrouk hussein",
-        user: 1,
+        ownerName: localStorage.getItem("username"),
+        user:localStorage.getItem("id"),
         tags: [],
     })
     // select tags------------
@@ -119,7 +119,10 @@ export default function Home() {
         let form_data = new FormData();
         form_data.append('title', newPost.title);
         form_data.append('description', newPost.description);
-        form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+        if(newPost.postpicture !== null){
+            form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+        }
+        
         form_data.append('from_region', newPost.from_region);
         form_data.append('to', newPost.to);
         form_data.append('price', newPost.price);
@@ -133,7 +136,8 @@ export default function Home() {
         console.log("taags " ,form_data)
         axios.post("http://127.0.0.1:8000/posts/posts/", form_data,{
             headers: {
-              'content-type': 'multipart/form-data'
+              'content-type': 'multipart/form-data',
+              Authorization:`Bearer ${localStorage.getItem("access")}`,
             }
           })
             .then((res) => {
@@ -159,9 +163,9 @@ export default function Home() {
                                 {/* profile + date  */}
                                 <div className="row align-items-center mb-4">
                                     <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
-                                            height="80" alt="" loading="lazy" />
-                                        <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
+                                        <img src={localStorage.getItem("ProfilePic")} className="me-2 userImage"
+                                            height="80" alt="ProfilePic" loading="lazy" />
+                                        <Link to="#" className="ps-2 text-link"> <span>{localStorage.getItem("username")}</span> </Link>
                                     </div>
                                     <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
                                         <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-lg  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0">Add new post</button>
@@ -181,9 +185,9 @@ export default function Home() {
                                                         <label>TiTle</label>
                                                         <input type='text' className='form-control' name='title' required onChange={(e) => changeData(e)} />
                                                         <label>details</label>
-                                                        <input type="text" className='form-control offertxt' name='details' onChange={(e) => changeData(e)} />
+                                                        <input type="text" className='form-control offertxt' name='details' required onChange={(e) => changeData(e)} />
                                                         <label>Post photo</label>
-                                                        <input type="file" className='form-control' name='photo' required onChange={(e) => changeData(e)} />
+                                                        <input type="file" className='form-control' name='photo'  onChange={(e) => changeData(e)} />
                                                         <label>price</label>
                                                         <input type='text' className='form-control' name='price' required onChange={(e) => changeData(e)} />
                                                         <label>From </label>
