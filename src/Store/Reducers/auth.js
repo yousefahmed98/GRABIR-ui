@@ -27,6 +27,7 @@ const initialState = {
   lastLogin: localStorage.getItem("lastLogin"),
   isAuthenticated: null,
   user: null,
+  loginErr:localStorage.getItem("loginErr"),
 };
 
 export default function (state = initialState, action) {

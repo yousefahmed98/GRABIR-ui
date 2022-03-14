@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwt from 'jwt-decode'
+import Login from "../../pages/login/Login";
 
 import {
   LOGIN_SUCCESS,
@@ -93,13 +94,25 @@ export const login = (email, password) => (dispatch) => {
         type: LOGIN_SUCCESS,
         payload: res.data.tokens,
       });
-      console.log(res.data.username);
+      localStorage.setItem("loginErr", "success")
       dispatch(load_user());
     })
-    .catch((err) =>
+    
+    .catch((err) => {
       dispatch({
         type: LOGIN_FAIL,
       })
+      localStorage.setItem("loginErr",err.response.data.detail)
+      return (
+        <div>
+          <Login>
+          <h1>test test</h1>
+          </Login>
+          
+        </div>
+      )
+    }
+            
     );
 };
 

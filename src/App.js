@@ -15,14 +15,13 @@ function App() {
   return (
     <BrowserRouter>
         <Switch>
-          <Route path={"/"} exact component={Navbar} />
+          <Route path={"/"} exact component={LandingPage} />
           <Route path={"/login"} exact component={Login} />
           <Route path={"/register"} exact component={Register} />
           <Route path={"/test"} exact component={Test} />
           <Route path={"/home"} exact component={Home} />
           <Route path={"/PostDetails/:id"} exact component={PostDetails} />
           <Route path={"/offers"} exact component={Offers} />
-          <Route path={"/landing"} exact component={LandingPage} />
           <Route path={"/deals"} exact component={Deals} />
           <Route path="*" exact component={NotFound} />
         </Switch>

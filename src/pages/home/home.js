@@ -10,6 +10,7 @@ import axios from 'axios'
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 
 export default function Home() {
     //get all posts
@@ -150,9 +151,11 @@ export default function Home() {
 
     return (
         <>
+        { localStorage.getItem("email") ? (
+        <>
             {/* navbar */}
             <Navbar />
-
+          
             {/* body */}
             <div className="container mx-auto px-10 mb-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -247,7 +250,9 @@ export default function Home() {
             <div > 
             </div>
          {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */}
+            
+         </>
+         ) : history.push("/login")}
         </>
-
     )
 }

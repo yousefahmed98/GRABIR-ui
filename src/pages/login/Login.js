@@ -1,34 +1,68 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory , Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./login.css";
 import { login } from "../../Store/Actions/auth";
 import Navbar from "../../components/navbar/navbar";
-
+import { useSelector } from "react-redux";
+import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
 const Login = ({ login }) => {
+  // const user = useSelector((state) => state.auth.user)
+  // const loggedin = useSelector((state) => state.auth.isAuthenticated)
   const history = useHistory(); //hook for props.history
+  // const [loginState , setLoginState] = useState({
+  //   state: null,
+  // })
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  // const [error, setError] = useState({
+  //       emailError: null,
+  //       passwordError: null,
+  //     });
   const { email, password } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = (e) => {
     e.preventDefault();
     login(email, password);
-    history.push("/home/");
+    // setLoginState({
+    //   ...loginState,
+    //   state: localStorage.getItem("loginErr")
+    // })
+    // if (loginState.state == null) {
+    //   console.log("congratulaions");
+    // } else {
+    //   console.log("oh,my baddddddddd");
+    // }
+    if (localStorage.getItem("loginErr") === "success" ) { //login success no errors
+      localStorage.removeItem("loginErr")
+      return history.push("/home/");
+    // return <Redirect to='/home'/>
+    // console.log(localStorage.getItem("loginErr"),"test tesst");
+    // console.log("login successss");
+    } else {
+      localStorage.getItem("loginErr")
+      history.push("/login/");
+      // return <Redirect to='/deals'/>
+      console.log(localStorage.getItem("loginErr"),"ERROR-LOGIN");
+    }
   };
   // Is the user authenticated
   // Redicrect them to the home page
   document.body.style.backgroundColor = "#151A1E";
   return (
     <>
-      <div className="bodylogin">
+    {localStorage.getItem("email") ? 
+      history.push("/"): (
+        <>
+<div className="">
         <Navbar />
-        <div className="container text-light mainPage">
-          <div className="row">
+        <div className="container text-light">
+          <div className="row pt-5">
             {/* LEFT */}
             <div className="col-lg-5 me-5 col-sm-12">
               <h3 className="mb-5 mt-5 headTitle">LOGIN</h3>
@@ -80,6 +114,7 @@ const Login = ({ login }) => {
                     Remember Me
                   </label>
                 </div>
+                <p className="text-danger">{localStorage.getItem("loginErr")}</p>
                 {/* <div className="text-danger">{error.loginError}</div> */}
                 <button
                   // disabled={error.emailError || error.passwordError}
@@ -89,9 +124,9 @@ const Login = ({ login }) => {
                   Login
                 </button>
                 <p className="mt-2">
-                  forgot your password?
-                  <Link to="home" className="text-primary">
-                    Reset password
+                  forgot your password? 
+                  <Link to="home" className="text-primary text-decoration-none">
+                    {" "}reset password
                   </Link>
                 </p>
               </form>
@@ -113,6 +148,9 @@ const Login = ({ login }) => {
           </div>
         </div>
       </div>
+        </>
+      )}
+      
     </>
   );
 };
