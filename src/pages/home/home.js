@@ -41,7 +41,7 @@ export default function Home() {
                                     <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
                                 </div>
                                 <div className="col-lg-9 col-sm-9 text-center text-lg-start mb-lg-3  mb-5">
-                               <button type="submit" className="btn btn-lg  darkcustombtn  ms-5">Add new post</button> 
+                               <button type="submit" className="btn btn-lg  darkcustombtn  ms-5">Add new post</button>
                                 </div>
 
                             </div>

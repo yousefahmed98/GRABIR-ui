@@ -27,6 +27,7 @@ export default function Navbar() {
         localStorage.removeItem("userPermissions")
         localStorage.removeItem("superUser")
         localStorage.removeItem("lastLogin")
+        localStorage.removeItem("loginErr")
   }
 
 return (
