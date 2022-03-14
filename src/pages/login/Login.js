@@ -57,12 +57,12 @@ const Login = ({ login }) => {
   return (
     <>
     {localStorage.getItem("email") ? 
-      history.push("/landing"): (
+      history.push("/"): (
         <>
-<div className="bodylogin">
+<div className="">
         <Navbar />
-        <div className="container text-light mainPage">
-          <div className="row">
+        <div className="container text-light">
+          <div className="row pt-5">
             {/* LEFT */}
             <div className="col-lg-5 me-5 col-sm-12">
               <h3 className="mb-5 mt-5 headTitle">LOGIN</h3>
@@ -124,9 +124,9 @@ const Login = ({ login }) => {
                   Login
                 </button>
                 <p className="mt-2">
-                  forgot your password?
-                  <Link to="home" className="text-primary">
-                    Reset password
+                  forgot your password? 
+                  <Link to="home" className="text-primary text-decoration-none">
+                    {" "}reset password
                   </Link>
                 </p>
               </form>
