@@ -41,6 +41,7 @@ export const load_user = () =>  (dispatch) => {
         localStorage.setItem("userPermissions", res.data.user_permissions);
         localStorage.setItem("superUser", res.data.is_superuser);
         localStorage.setItem("lastLogin", res.data.last_login);
+        localStorage.setItem("ProfilePic", res.data.ProfilePic);
         dispatch({
           type: USER_LOADED_SUCCESS,
           payload: res.data,
