@@ -30,7 +30,6 @@ export default function Popup(props) {
     // status: 'None',
     post: props.postID,
     offer_owner: localStorage.getItem("id"),
-    postPic:null,
   });
   const [errors, setErrors] = useState({
     detailsErr: null,
@@ -50,16 +49,7 @@ export default function Popup(props) {
         form_data.append('price', offerForm.price);
         form_data.append('post', offerForm.post);
         form_data.append('offer_owner', offerForm.offer_owner);
-
-        for (let post of posts) {
-          (post.id === offerForm.post) 
-           ? offerForm.postPic=post.postpicture
-           :console.log("mafesh")
-        }
-        console.log(offerForm.postPic)
-        if(offerForm.postPic !== null){
-          form_data.append('postpicture', offerForm.postPic, offerForm.postPic.name);
-      }
+      
 
     // SEND API REQUEST
     axiosInstance
