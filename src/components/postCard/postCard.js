@@ -15,7 +15,7 @@ import axios from 'axios'
 import Popup from '../popup/popup'
 
 export default function PostCard({ post }) {
-  
+  console.log("post.ownerProfilePic ",post.ownerProfilePic)
   const [style, setStyle] = useState("darkcustombtn");
   const history = useHistory()
   

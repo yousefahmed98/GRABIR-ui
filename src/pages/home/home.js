@@ -43,10 +43,6 @@ export default function Home() {
 
     //------------new post---------------------------------------------------
     const history = useHistory()
-    const gotohome = () => {
-        console.log("hiii")
-    }
-
     const [newPost, setNewPost] = useState({
         title: "",
         description: "",
@@ -121,15 +117,29 @@ export default function Home() {
         form_data.append('title', newPost.title);
         form_data.append('description', newPost.description);
         if(newPost.postpicture !== null){
+            console.log("object",newPost.postpicture)
             form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
         }
-        
+        // if(localStorage.getItem("ProfilePic")!== null){
+          
+        //     fetch(localStorage.getItem("ProfilePic"))
+        //     .then(response => response.blob())
+        //     .then(blob => {
+        //         var file = new File([blob], localStorage.getItem("ProfilePic").slice(35))
+        //         console.log("file.name ",file.name)
+        //         console.log("file," ,file)
+        //       form_data.append('ownerProfilePic',file,file.name)
+        //            })
+        //     .catch((err) => console.log(err))
+           
+           
+            
+        // }
         form_data.append('from_region', newPost.from_region);
         form_data.append('to', newPost.to);
         form_data.append('price', newPost.price);
         form_data.append('ownerName', newPost.ownerName);
         form_data.append('user', newPost.user);
-      
         //form_data.append('tags', newPost.tags);
         newPost.tags.forEach(item => {
             form_data.append('tags', item);
@@ -209,7 +219,7 @@ export default function Home() {
                                                         />
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" className="btn btn-lg  darkcustombtn mt-3" onClick={gotohome()}>Post</button>
+                                                            <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Post</button>
                                                         </div>
                                                     </form>
                                                 </div>
