@@ -10,6 +10,7 @@ import axios from 'axios'
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+//
 import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 
 export default function Home() {
@@ -120,21 +121,6 @@ export default function Home() {
             console.log("object",newPost.postpicture)
             form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
         }
-        // if(localStorage.getItem("ProfilePic")!== null){
-          
-        //     fetch(localStorage.getItem("ProfilePic"))
-        //     .then(response => response.blob())
-        //     .then(blob => {
-        //         var file = new File([blob], localStorage.getItem("ProfilePic").slice(35))
-        //         console.log("file.name ",file.name)
-        //         console.log("file," ,file)
-        //       form_data.append('ownerProfilePic',file,file.name)
-        //            })
-        //     .catch((err) => console.log(err))
-           
-           
-            
-        // }
         form_data.append('from_region', newPost.from_region);
         form_data.append('to', newPost.to);
         form_data.append('price', newPost.price);

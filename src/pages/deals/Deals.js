@@ -11,12 +11,17 @@ export default function Deals() {
   const history = useHistory();
   useEffect(() => {
     axiosInstance
-      .get("/deals")
+      .get("/deals/",{
+        headers: {
+            "Content-Type": "application/json",
+            Authorization:`Bearer ${localStorage.getItem("access")}`,
+            Accept: "application/json",
+        }})
       .then((res) => setDeals(res.data))
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(deals);
+  console.log(deals, "//////////////");
   return (
     <>
     {localStorage.getItem("email") ? (

@@ -1,6 +1,6 @@
 // import { setLoaderAction } from "./setLoader"
 import { axiosInstance } from "../../network/axiosInstance";
-export const getOffersAction = () => (dispatch) => {
+export const listOffersAction = () => (dispatch) => {
  
     return  axiosInstance.get(`/offers/`,{
             headers: {
@@ -11,7 +11,7 @@ export const getOffersAction = () => (dispatch) => {
     .then((res) => 
     {
         dispatch({
-            type: "GET_OFFERS",
+            type: "LIST_OFFERS",
             payload: res.data,
 
         })

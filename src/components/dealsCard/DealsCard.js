@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useEffect} from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -19,8 +20,8 @@ import PublicIcon from "@mui/icons-material/Public";
 import "./DealsCard.css";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
-import { useSelector } from "react-redux";
+import {listOffersAction} from "../../Store/Actions/listOffers"
+import { useSelector ,useDispatch} from "react-redux";
 import DealCountDown from "../../components/countDown/countdown";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -31,13 +32,21 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function DealsCard() {
-  const offers = useSelector((state) => state.OFFERS.offers);
+export default function DealsCard(props) {
+  const offers = useSelector((state) => state.OFFERS.offersList);
+  const dispatch = useDispatch();
   // const [dateInMs, setDateMs] = useState()
+  useEffect(() => {
+    dispatch(listOffersAction())
+  console.log("offers" , offers)
+  console.log("deals" , props.deals)
+}, []);
   return (
     <div style={{ backgroundColor: "#151A1E" }}>
       {offers.map((offer, index) => {
-        if (offer.status == true)
+        props.deals.map((deal, indx) => {
+        
+        if (offer.id == deal.offer)
           return (
             <Grid key={index} container>
               <Card
@@ -210,7 +219,7 @@ export default function DealsCard() {
               </Card>
             </Grid>
           );
-      })}
+                                })})}
     </div>
   );
 }

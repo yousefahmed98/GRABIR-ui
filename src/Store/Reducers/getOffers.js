@@ -3,11 +3,17 @@ import { axiosInstance } from "../../network/axiosInstance";
 const INITIAL_VALUE = {
   offers: [],
   deals:[],
+  offersList:[],
   offers_counter: 0,
 };
 
 export default function getOffersReducer(state = INITIAL_VALUE, action) {
   switch (action.type) {
+    case 'LIST_OFFERS':
+      return {
+          ...state,
+          offersList: action.payload,
+      }
     case "GET_OFFERS":
       let newOffersState = [...state.offers, ...action.payload];
       return {
@@ -28,11 +34,19 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
 
       return (
         axiosInstance
-          .put(`/offers/${action.payload.id}/`, action.payload)
+          .put(`/offers/${action.payload.id}/`, action.payload, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            }
+          })
           .then((res) => console.log(res))
           .catch((err) => console.log(err)),
         axiosInstance
-          .post("deals/", deal)
+          .post("/deals/", deal, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            }
+          })
           .then((res) => console.log(res))
           .catch((err) => console.log(err)),
         {
@@ -49,7 +63,11 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
 
         return (
           axiosInstance
-            .delete(`/offers/${action.payload.id}/`)
+            .delete(`/offers/${action.payload.id}/`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+              }
+            })
             .then((res) => console.log(res))
             .catch((err) => console.log(err)),
           {

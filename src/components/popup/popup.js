@@ -11,9 +11,17 @@ import logo from "../../static/navbar/logo-default.png";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import TextField from "@mui/material/TextField";
-
+import {getPosts} from "../../Store/Actions/getPosts"
 
 export default function Popup(props) {
+  /////////
+  const posts = useSelector((state) => state.POSTS.postsList)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPosts())
+    console.log("posts", posts)
+  }, [])
+  ///////////
   const [offerForm, setOfferForm] = useState({
     details: "",
     from_region: "",
@@ -21,7 +29,8 @@ export default function Popup(props) {
     price: "",
     // status: 'None',
     post: props.postID,
-    offer_owner: 1,
+    offer_owner: localStorage.getItem("id"),
+    postPic:null,
   });
   const [errors, setErrors] = useState({
     detailsErr: null,
@@ -34,9 +43,32 @@ export default function Popup(props) {
 
   const submitForm = (e) => {
     e.preventDefault();
+    let form_data = new FormData();
+        form_data.append('details', offerForm.details);
+        form_data.append('from_region', offerForm.from_region);
+        form_data.append('to_region', offerForm.to_region);
+        form_data.append('price', offerForm.price);
+        form_data.append('post', offerForm.post);
+        form_data.append('offer_owner', offerForm.offer_owner);
+
+        for (let post of posts) {
+          (post.id === offerForm.post) 
+           ? offerForm.postPic=post.postpicture
+           :console.log("mafesh")
+        }
+        console.log(offerForm.postPic)
+        if(offerForm.postPic !== null){
+          form_data.append('postpicture', offerForm.postPic, offerForm.postPic.name);
+      }
+
     // SEND API REQUEST
     axiosInstance
-      .post("/offers/", offerForm)
+      .post("/offers/", form_data,{
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization:`Bearer ${localStorage.getItem("access")}`,
+        }
+      })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
