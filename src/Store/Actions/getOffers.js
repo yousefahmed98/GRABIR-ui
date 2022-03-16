@@ -1,4 +1,3 @@
-// import { setLoaderAction } from "./setLoader"
 import { axiosInstance } from "../../network/axiosInstance";
 export const getOffersAction = () => (dispatch) => {
  
@@ -15,16 +14,9 @@ export const getOffersAction = () => (dispatch) => {
             payload: res.data,
 
         })
-        // dispatch(setLoaderAction(false))
         
     }        
     )
     .catch((err) => console.log(err));
 }
 
-// export const getOffersAction = (payload) => {
-//   return {
-//     type: "GET_OFFERS",
-//     payload,
-//   };
-// };

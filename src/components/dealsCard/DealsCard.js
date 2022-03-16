@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -16,10 +15,9 @@ import PublicIcon from "@mui/icons-material/Public";
 import "./DealsCard.css";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import DealCountDown from "../../components/countDown/countdown";
 import { getDeals } from "../../Store/Actions/getDeals";
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -29,9 +27,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function DealsCard(props) {
-  const offers = useSelector((state) => state.DEALS.dealsList);
+  const offers = useSelector((state) => state.OFFERS.deals);
+  // console.log("deaaaaaaaaaaaals: ",offers)
   const dispatch = useDispatch();
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getDeals());
   }, []);
   return (
@@ -49,7 +48,7 @@ export default function DealsCard(props) {
                     src={offer.ownerProfilePic}
                     className="me-2 userImage"
                     height="80"
-                    alt=""
+                    alt="deal owner"
                     loading="lazy"
                   />
                 }
@@ -69,7 +68,7 @@ export default function DealsCard(props) {
                 <Grid item xs={3}>
                   <Item>
                     {" "}
-                    <img src={offer.postPic} />
+                    <img src={offer.postPic} alt="post" />
                   </Item>
                 </Grid>
                 <Grid item xs={9}>

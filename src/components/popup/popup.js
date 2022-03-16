@@ -1,8 +1,7 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { axiosInstance } from "../../network/axiosInstance";
-import { getOffersAction } from "../../Store/Actions/getOffers";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -14,23 +13,15 @@ import TextField from "@mui/material/TextField";
 import {getPosts} from "../../Store/Actions/getPosts"
 
 export default function Popup(props) {
-  /////////
-  const posts = useSelector((state) => state.POSTS.postsList)
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPosts())
-    console.log("posts", posts)
-  }, [])
-  ///////////
+
   const [offerForm, setOfferForm] = useState({
     details: "",
     from_region: "",
     to_region: "",
     price: "",
-    // status: 'None',
     post: props.postID,
     delivery_date: "",
-    postObj: props.post,
+    // postObj: props.post,
     offer_owner: localStorage.getItem("id"),
   });
   const [errors, setErrors] = useState({
@@ -115,7 +106,7 @@ export default function Popup(props) {
       setErrors({
         ...errors,
         delivery_dateErr:
-          e.target.value == "" ? "This field is required" : null,
+          e.target.value === null ? "This field is required" : null,
       });
     }
   };

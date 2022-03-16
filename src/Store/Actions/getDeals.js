@@ -1,9 +1,7 @@
 import axios from "axios";
 import { setLoaderAction } from "./setLoader";
-import { useSelector, useDispatch } from "react-redux";
-import { getOffersReducer } from "../Reducers/getOffers";
-// import { listOffersAction } from "./listOffers";
-import store from "../store";
+import { updateStateAction } from "./updateState";
+
 export const getDeals = () => async (dispatch) => {
   return axios
     .get("http://127.0.0.1:8000/deals/", {
@@ -23,29 +21,31 @@ export const getDeals = () => async (dispatch) => {
             Accept: "application/json",
           },
         })
-        .then((res) => {
-          const offers = res.data;
-          // console.log("offer arraaayyyy", offers);
-          // console.log("deals arrayyyy", deals);
-          offers.map((offer, index) => {
-            deals.map((deal, indx) => {
-              if (offer.id == deal.offer) {
+        .then((res2) => {
+          const offers = res2.data;
+          return offers.map(offer => {
+             deals.map(deal => {
+              if (deal.offer === offer.id) {
+                console.log("deal oofer iddddd: ", deal.offer)
+                console.log("offer iddddd: ", offer.id)
+
                 console.log("matchiiiinnnnggggggggg", offer);
-                dispatch({
+                 dispatch({
                   type: "LIST_DEALS",
                   payload: res.data,
                 });
-                dispatch(setLoaderAction(false));
+                // updateStateAction
+                // dispatch(updateStateAction(deal));
+
+                 
               }
             });
+            dispatch(setLoaderAction(false));
+
           });
-        });
+         
 
-      // do stuff
-
-      //second dispatch de mesh bt fire 8er lma l data trga3
-      // ha set l data fl store
-    })
-    .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    });
 };
-//action contains type(no3 action) ,payload (values)
