@@ -29,6 +29,7 @@ export default function Popup(props) {
     price: "",
     // status: 'None',
     post: props.postID,
+    delivery_date: "",
     postObj: props.post,
     offer_owner: localStorage.getItem("id"),
   });
@@ -36,6 +37,7 @@ export default function Popup(props) {
     detailsErr: null,
     from_regionErr: null,
     to_regionErr: null,
+    delivery_dateErr: null,
     priceErr: null,
   });
 
@@ -49,7 +51,7 @@ export default function Popup(props) {
         form_data.append('to_region', offerForm.to_region);
         form_data.append('price', offerForm.price);
         form_data.append('post', offerForm.post);
-        // form_data.append('postObj', offerForm.postObj);
+        form_data.append('delivery_date', offerForm.delivery_date);
         form_data.append('offer_owner', offerForm.offer_owner);
       
 
@@ -104,6 +106,16 @@ export default function Popup(props) {
       setErrors({
         ...errors,
         priceErr: e.target.value.length === 0 ? "This field is required" : null,
+      });
+    }else if (e.target.name === "delivery_date") {
+      setOfferForm({
+        ...offerForm,
+        delivery_date: e.target.value,
+      });
+      setErrors({
+        ...errors,
+        delivery_dateErr:
+          e.target.value == "" ? "This field is required" : null,
       });
     }
   };
@@ -203,6 +215,23 @@ export default function Popup(props) {
                 <div id="usernameHelp" className="form-text text-danger">
                   {errors.priceErr}
                 </div>
+                <div className="mb-2 mr-5">
+                  <TextField
+                    id="outlined-number"
+                    label="Expected Delivery Date"
+                    style={{ marginRight: 3 , marginBottom: 8}}
+                    type="date"
+                    value={offerForm.delivery_date}
+                    onChange={(e) => changeData(e)}
+                    name="delivery_date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  </div>
+                  <div id="usernameHelp" className="form-text text-danger">
+                  {errors.delivery_dateErr}
+                </div>
                 <div className="modal-footer">
                   <Button
                     style={{ margin: 3 }}
@@ -222,7 +251,8 @@ export default function Popup(props) {
                       errors.detailsErr ||
                       errors.from_regionErr ||
                       errors.to_regionErr ||
-                      errors.priceErr
+                      errors.priceErr ||
+                      errors.delivery_dateErr
                     }
                   >
                     Send Offer

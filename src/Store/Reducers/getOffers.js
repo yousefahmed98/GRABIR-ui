@@ -3,17 +3,12 @@ import { axiosInstance } from "../../network/axiosInstance";
 const INITIAL_VALUE = {
   offers: [],
   deals:[],
-  offersList:[],
   offers_counter: 0,
 };
 
 export default function getOffersReducer(state = INITIAL_VALUE, action) {
   switch (action.type) {
-    case 'LIST_OFFERS':
-      return {
-          ...state,
-          offersList: action.payload,
-      }
+
     case "GET_OFFERS":
       let newOffersState = [...state.offers, ...action.payload];
       return {
