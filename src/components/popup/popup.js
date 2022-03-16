@@ -29,6 +29,7 @@ export default function Popup(props) {
     price: "",
     // status: 'None',
     post: props.postID,
+    postObj: props.post,
     offer_owner: localStorage.getItem("id"),
   });
   const [errors, setErrors] = useState({
@@ -48,6 +49,7 @@ export default function Popup(props) {
         form_data.append('to_region', offerForm.to_region);
         form_data.append('price', offerForm.price);
         form_data.append('post', offerForm.post);
+        // form_data.append('postObj', offerForm.postObj);
         form_data.append('offer_owner', offerForm.offer_owner);
       
 
