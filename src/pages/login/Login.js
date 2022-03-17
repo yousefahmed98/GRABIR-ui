@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./login.css";
@@ -38,17 +38,18 @@ const Login = ({ login }) => {
     // } else {
     //   console.log("oh,my baddddddddd");
     // }
-    if (localStorage.getItem("loginErr") === "success" ) { //login success no errors
-      localStorage.removeItem("loginErr")
+    if (localStorage.getItem("loginErr") === "success") {
+      //login success no errors
+      localStorage.removeItem("loginErr");
       return history.push("/home/");
-    // return <Redirect to='/home'/>
-    // console.log(localStorage.getItem("loginErr"),"test tesst");
-    // console.log("login successss");
+      // return <Redirect to='/home'/>
+      // console.log(localStorage.getItem("loginErr"),"test tesst");
+      // console.log("login successss");
     } else {
-      localStorage.getItem("loginErr")
+      localStorage.getItem("loginErr");
       history.push("/login/");
       // return <Redirect to='/deals'/>
-      console.log(localStorage.getItem("loginErr"),"ERROR-LOGIN");
+      console.log(localStorage.getItem("loginErr"), "ERROR-LOGIN");
     }
   };
   // Is the user authenticated
@@ -56,101 +57,116 @@ const Login = ({ login }) => {
   document.body.style.backgroundColor = "#151A1E";
   return (
     <>
-    {localStorage.getItem("email") ? 
-      history.push("/"): (
+      {localStorage.getItem("email") ? (
+        history.push("/")
+      ) : (
         <>
-<div className="">
-        <Navbar />
-        <div className="container text-light">
-          <div className="row pt-5">
-            {/* LEFT */}
-            <div className="col-lg-5 me-5 col-sm-12">
-              <h3 className="mb-5 mt-5 headTitle">LOGIN</h3>
-              {/* START OF FORM  */}
-              <form onSubmit={(e) => onSubmit(e)}>
-                <div className="mb-3 mr-5">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="EmailID"
-                    aria-describedby="emailHelp"
-                    name="email"
-                    value={email}
-                    onChange={(e) => onChange(e)}
-                    required
-                  />
-                  {/* <div id="emailHelp" className="form-text text-danger">
+          <div className="">
+            <Navbar />
+            <div className="container text-light">
+              <div className="row pt-5">
+                {/* LEFT */}
+                <div className="col-lg-5 me-5 col-sm-12">
+                  <h3 className="mb-5 mt-5 headTitle">LOGIN</h3>
+                  {/* START OF FORM  */}
+                  <form onSubmit={(e) => onSubmit(e)}>
+                    <div className="mb-3 mr-5">
+                      <label
+                        htmlFor="exampleInputEmail1"
+                        className="form-label"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="EmailID"
+                        aria-describedby="emailHelp"
+                        name="email"
+                        value={email}
+                        onChange={(e) => onChange(e)}
+                        required
+                      />
+                      {/* <div id="emailHelp" className="form-text text-danger">
                     {error.emailError}
                   </div> */}
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="PasswordID"
-                    name="password"
-                    value={password}
-                    onChange={(e) => onChange(e)}
-                    minLength="6"
-                    required
-                  />
-                  {/* <div id="passwordHelp" className="form-text text-danger">
+                    </div>
+                    <div className="mb-3">
+                      <label
+                        htmlFor="exampleInputPassword1"
+                        className="form-label"
+                      >
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="PasswordID"
+                        name="password"
+                        value={password}
+                        onChange={(e) => onChange(e)}
+                        minLength="6"
+                        required
+                      />
+                      {/* <div id="passwordHelp" className="form-text text-danger">
                     {error.passwordError}
                   </div> */}
+                    </div>
+                    <div className="mb-3 form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id="exampleCheck1"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="exampleCheck1"
+                      >
+                        Remember Me
+                      </label>
+                    </div>
+                    <p className="text-danger">
+                      {localStorage.getItem("loginErr")}
+                    </p>
+                    {/* <div className="text-danger">{error.loginError}</div> */}
+                    <button
+                      // disabled={error.emailError || error.passwordError}
+                      type="submit"
+                      className="btn btn-lg submitbtn"
+                    >
+                      Login
+                    </button>
+                    <p className="mt-2">
+                      forgot your password?
+                      <Link
+                        to="home"
+                        className="text-primary text-decoration-none"
+                      >
+                        {" "}
+                        reset password
+                      </Link>
+                    </p>
+                  </form>
                 </div>
-                <div className="mb-3 form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label className="form-check-label" htmlFor="exampleCheck1">
-                    Remember Me
-                  </label>
-                </div>
-                <p className="text-danger">{localStorage.getItem("loginErr")}</p>
-                {/* <div className="text-danger">{error.loginError}</div> */}
-                <button
-                  // disabled={error.emailError || error.passwordError}
-                  type="submit"
-                  className="btn btn-lg submitbtn"
-                >
-                  Login
-                </button>
-                <p className="mt-2">
-                  forgot your password? 
-                  <Link to="home" className="text-primary text-decoration-none">
-                    {" "}reset password
-                  </Link>
-                </p>
-              </form>
-            </div>
-            {/* RIGHT */}
-            <div className="col-lg-6 col-sm-12">
-              <h4 className="col-lg-8 col-sm-10 mb-5 ms-5 describtion">
-                We deliver on time{" "}
-                <span style={{ color: "#FAAF40" }}>Without </span> any taxes
-              </h4>
-              <div className="row">
-                <div className="col-lg-6 col-sm-12  text-center">
-                  <Link to="/register" className="btn registerbtn">
-                    Join us
-                  </Link>
+                {/* RIGHT */}
+                <div className="col-lg-5 text-end  col-sm-12">
+                  <h4 className="col-lg-12 col-sm-10 mb-5 ms-5 describtion">
+                    We deliver on time{" "}
+                    <span style={{ color: "#FAAF40" }}>Without </span> any taxes
+                  </h4>
+                  <div className="row">
+                    <div className="col-lg-6 col-sm-12  text-end">
+                      <Link to="/register" className="btn registerbtn">
+                        Join us
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
         </>
       )}
-      
     </>
   );
 };
