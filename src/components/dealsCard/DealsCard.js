@@ -22,6 +22,7 @@ import Grid from "@mui/material/Grid";
 
 import { useSelector } from "react-redux";
 import DealCountDown from "../../components/countDown/countdown";
+import StarRating from "../StarRating/StarRating";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -31,7 +32,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function DealsCard() {
+export default function DealsCard(props) {
   const offers = useSelector((state) => state.OFFERS.offers);
   // const [dateInMs, setDateMs] = useState()
   return (
@@ -51,7 +52,7 @@ export default function DealsCard() {
                       sx={{ backgroundColor: "#151A1E" }}
                       aria-label="recipe"
                     >
-                      R
+                    R
                     </Avatar>
                   }
                   action={
@@ -62,6 +63,7 @@ export default function DealsCard() {
                   title="Shrimp and Chorizo Paella"
                   subheader={offer.created_at}
                 />
+
                 <Grid
                   container
                   spacing={{ xs: 2, md: 3 }}
@@ -192,15 +194,15 @@ export default function DealsCard() {
                                   }}
                                 />
                               </IconButton>
-
-                             
                             </Item>
                           </Grid>
                           <Grid item xs={12}>
                             <Item>
                               {/* { setDateMs(new Date(...prepareDate(offer.delivery_date)))} */}
-                              <DealCountDown date = {offer.delivery_date}/>
+                              <DealCountDown date={offer.delivery_date} />
                             </Item>
+                            <StarRating
+                            offerOwner = {offer.offer_owner}/>
                           </Grid>
                         </Grid>
                       </CardActions>

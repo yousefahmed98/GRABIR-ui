@@ -21,7 +21,7 @@ export default function Popup(props) {
     price: "",
     // status: 'None',
     post: props.postID,
-    offer_owner: 1,
+    offer_owner: localStorage.getItem("id"),
   });
   const [errors, setErrors] = useState({
     detailsErr: null,

@@ -10,6 +10,7 @@ import LandingPage from "./components/landing_page/LandingPage";
 import NotFound from "./pages/NotFound/NotFound";
 import Offers from "./pages/offers/offers";
 import Deals from "./pages/deals/Deals";
+import StarRating from "./components/StarRating/StarRating";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path={"/PostDetails/:id"} exact component={PostDetails} />
           <Route path={"/offers"} exact component={Offers} />
           <Route path={"/deals"} exact component={Deals} />
+          <Route path={"/rate"} exact  component={StarRating} />
           <Route path="*" exact component={NotFound} />
         </Switch>
     </BrowserRouter>
