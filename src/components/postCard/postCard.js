@@ -1,6 +1,6 @@
+import React from "react"
 //style
 import "./postCard.css"
-import moment from 'react-moment';
 //hooks
 import { Link, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -15,9 +15,10 @@ import axios from 'axios'
 import Popup from '../popup/popup'
 
 export default function PostCard({ post }) {
+  console.log("post.ownerProfilePic ",post.ownerProfilePic)
   const [style, setStyle] = useState("darkcustombtn");
   const history = useHistory()
-
+  
   // ------------------------------update post if owner---------------------------------
   // get all tags 
   const dispatch = useDispatch();
@@ -33,11 +34,10 @@ export default function PostCard({ post }) {
   )
   )
   // -----updated post ---------------------------------------------
-  //intial values are values of original post
   const [newPost, setNewPost] = useState({
     title: post.title,
     description: post.description,
-    postpicture: post.postpicture,
+    postpicture: null,
     from_region: post.from_region,
     to: post.to,
     price: post.price,
@@ -99,43 +99,53 @@ export default function PostCard({ post }) {
       })
     }
   }
-  const submitForm = (e) => {
+  const submitForm = (e) => {   
     e.preventDefault();
     // SEND API REQUEST
     let form_data = new FormData();
     form_data.append('title', newPost.title);
     form_data.append('description', newPost.description);
-    form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+    if(newPost.postpicture !== null){
+      console.log("not null")
+      form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+  }
     form_data.append('from_region', newPost.from_region);
     form_data.append('to', newPost.to);
     form_data.append('price', newPost.price);
     form_data.append('ownerName', newPost.ownerName);
     form_data.append('user', newPost.user);
-    form_data.append('tags', newPost.tags);
-    axios.put(`http://127.0.0.1:8000/posts/posts/${post.id}/`, form_data, {
+    newPost.tags.forEach(item => {
+      form_data.append('tags', item);
+     });
+    axios.patch(`http://127.0.0.1:8000/posts/posts/${localStorage.getItem('Updated_post_id')}/`, form_data, {
       headers: {
-        'content-type': 'multipart/form-data'
+        'content-type': 'multipart/form-data',
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
       }
     })
-      .then(history.push(`/home`))
+      .then(history.push(`/home/`))
       .catch((err) => console.log(err))
   }
 
 
 
   //----------------------go to post details page------------------------------
-  const postDetails = (e, post_id) => {
-    e.preventDefault()
-    console.log(post_id)
-    history.push(`/PostDetails/${post_id}`)
-  }
+  // const postDetails = (e, post_id) => {
+  //   e.preventDefault()
+  //   console.log(post_id)
+  //   history.push(`/PostDetails/${post_id}`)
+  // }
   // --------------------delete post if owner-----------------------------------
   const postDelete = (e, post_id) => {
     e.preventDefault()
     console.log(post_id)
     setStyle('darkcustombtnActive')
-    axios.delete(`http://127.0.0.1:8000/posts/posts/${post_id}/`)
-      .then(history.push(`/home`))
+    axios.delete(`http://127.0.0.1:8000/posts/posts/${post_id}/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      }
+    })
+      .then(history.push(`/home/`))
       .catch((err) => console.log(err))
   }
 
@@ -144,7 +154,7 @@ export default function PostCard({ post }) {
   const getpostTags = () => {
     for (let tag of post.tags) {
       for (let t of tags) {
-        if (t.id == tag) {
+        if (t.id === tag) {
           postTags.push(t.name)
         }
       }
@@ -153,14 +163,14 @@ export default function PostCard({ post }) {
   getpostTags()
   //--------------------
   return (
-
+    // https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg
     <div className="pt-5">
       {/* post section  start*/}
       <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
         {/* profile + date  */}
         <div className="row align-items-center mb-4">
           <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
+            <img src={post.ownerProfilePic} className="me-2 userImage"
               height="80" alt="" loading="lazy" />
             <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
           </div>
@@ -169,7 +179,7 @@ export default function PostCard({ post }) {
         {/* profile + date end  */}
         {/* post content start */}
         <div className="row align-items-center mb-4">
-          <div class="col-lg-6 col-md-12 inline">
+          <div className="col-lg-6 col-md-12 inline">
             <h1>{post.title}</h1>
             <p>
               {post.description}
@@ -182,26 +192,46 @@ export default function PostCard({ post }) {
                 <span key={index} className="me-3" >#{tag}</span>))
             }
           </div>
+          { post.postpicture !== null
+            ?
           <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
-            alt="post image" width='60%' length='180px' />
+            alt="post" width='60%' length='180px' />
+            :
+            <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
+              
+            </div>
+            }
         </div>
         {/* post content end */}
         <div className="row align-items-center mb-4  ">
-          <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-            <Popup postID={post.id} post={post}/>
-          </div>
-          <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-            <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {history.push("/offers")}}>
-              show offers</button>
-          </div>
-          <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-            <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
-              delete</button>
-          </div>
-          <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-            <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" className="btn px-3 me-1 darkcustombtn">
-              update</button>
-          </div>
+          {
+
+            localStorage.getItem("id") === post.user
+              ?
+              (
+                <>
+                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                    <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => { history.push("/offers") }}>
+                      show offers</button>
+                  </div>
+                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                    <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
+                      delete</button>
+                  </div>
+                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                    <button type="submit" className="btn px-3 me-1 darkcustombtn"
+                    onClick={() =>  localStorage.setItem("Updated_post_id", post.id)}  data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
+                      update</button>
+                  </div>
+                </>
+              )
+              :
+              <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
+              <Popup postID={post.id} post={post} />
+              </div>
+
+          }
+
           {/* modal */}
           <div className="modal" id="staticBackdropupdate" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -238,7 +268,7 @@ export default function PostCard({ post }) {
                     />
                     <div className="modal-footer">
                       <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" className="btn btn-lg  darkcustombtn mt-3">Update</button>
+                      <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Update</button>
                     </div>
                   </form>
                 </div>

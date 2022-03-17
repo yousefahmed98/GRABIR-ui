@@ -1,4 +1,6 @@
-import axios from 'axios';
+// import axios from 'axios';
+import React from "react"
+
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { useEffect, useState } from 'react'
 import PostCard from '../../components/postCard/postCard'
@@ -6,9 +8,11 @@ import Navbar from '../../components/navbar/navbar'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
-
+// import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
+import { useHistory } from 'react-router-dom';
 
 export default function PostDetails() {
+  const history = useHistory();
   const posts = useSelector((state) => state.POSTS.postsList)
   const dispatch = useDispatch();
   const params = useParams();   // return object for dynamic params  like /:id
@@ -18,7 +22,7 @@ export default function PostDetails() {
   useEffect(() => {
     dispatch(getPosts())
     for (let post of posts) {
-      if (post.id == params.id) {
+      if (post.id === params.id) {
         console.log(post)
         setDetails(post)
       }
@@ -27,7 +31,9 @@ export default function PostDetails() {
 
   return (
     <>
-      <Navbar />
+    { localStorage.getItem("email") ? (
+      <>
+ <Navbar />
       <div className="container mx-auto px-10 mb-8 ">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -79,6 +85,8 @@ export default function PostDetails() {
           </div>
         </div>
       </div>
+      </>
+    ) : history.push("/login")}
     </>
   )
 }

@@ -1,3 +1,4 @@
+import React from "react"
 import { useEffect, useState } from 'react'
 import PostCard from '../../components/postCard/postCard'
 import Navbar from '../../components/navbar/navbar'
@@ -10,11 +11,18 @@ import axios from 'axios'
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+//
 
 export default function Home() {
     //get all posts
     const posts = useSelector((state) => state.POSTS.postsList)
-    const isloading = useSelector((state) => state.LOADER.isloading)
+    const isloading = useSelector((state) => state.LOADER.isloading);
+    const user = useSelector((state) => state.auth.user)
+    console.log(user,"*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+    console.log(localStorage.getItem("region"),"this is region");
+    console.log(localStorage.getItem("username"),"this is username of current user")
+    console.log(localStorage.getItem("isVerfied"),"verfieeeeeeeeeeeed or not");
+    // console.log(user.email,"this is current user email email");
     const dispatch = useDispatch();
     // get all tags 
     const tags = useSelector((state) => state.TAGS.allTags)
@@ -36,10 +44,6 @@ export default function Home() {
 
     //------------new post---------------------------------------------------
     const history = useHistory()
-    const gotohome = () => {
-        console.log("hiii")
-    }
-
     const [newPost, setNewPost] = useState({
         title: "",
         description: "",
@@ -47,8 +51,8 @@ export default function Home() {
         from_region: "",
         to: "",
         price: 0.0,
-        ownerName: "shrouk hussein",
-        user: 1,
+        ownerName: localStorage.getItem("username"),
+        user:localStorage.getItem("id"),
         tags: [],
     })
     // select tags------------
@@ -113,13 +117,15 @@ export default function Home() {
         let form_data = new FormData();
         form_data.append('title', newPost.title);
         form_data.append('description', newPost.description);
-        form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+        if(newPost.postpicture !== null){
+            console.log("object",newPost.postpicture)
+            form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+        }
         form_data.append('from_region', newPost.from_region);
         form_data.append('to', newPost.to);
         form_data.append('price', newPost.price);
         form_data.append('ownerName', newPost.ownerName);
         form_data.append('user', newPost.user);
-      
         //form_data.append('tags', newPost.tags);
         newPost.tags.forEach(item => {
             form_data.append('tags', item);
@@ -127,7 +133,8 @@ export default function Home() {
         console.log("taags " ,form_data)
         axios.post("http://127.0.0.1:8000/posts/posts/", form_data,{
             headers: {
-              'content-type': 'multipart/form-data'
+              'content-type': 'multipart/form-data',
+              Authorization:`Bearer ${localStorage.getItem("access")}`,
             }
           })
             .then((res) => {
@@ -140,9 +147,11 @@ export default function Home() {
 
     return (
         <>
+        { localStorage.getItem("email") ? (
+        <>
             {/* navbar */}
             <Navbar />
-
+          
             {/* body */}
             <div className="container mx-auto px-10 mb-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -153,9 +162,9 @@ export default function Home() {
                                 {/* profile + date  */}
                                 <div className="row align-items-center mb-4">
                                     <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
-                                            height="80" alt="" loading="lazy" />
-                                        <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
+                                        <img src={localStorage.getItem("ProfilePic")} className="me-2 userImage"
+                                            height="80" alt="ProfilePic" loading="lazy" />
+                                        <Link to="#" className="ps-2 text-link"> <span>{localStorage.getItem("username")}</span> </Link>
                                     </div>
                                     <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
                                         <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-lg  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0">Add new post</button>
@@ -175,9 +184,9 @@ export default function Home() {
                                                         <label>TiTle</label>
                                                         <input type='text' className='form-control' name='title' required onChange={(e) => changeData(e)} />
                                                         <label>details</label>
-                                                        <input type="text" className='form-control offertxt' name='details' onChange={(e) => changeData(e)} />
+                                                        <input type="text" className='form-control offertxt' name='details' required onChange={(e) => changeData(e)} />
                                                         <label>Post photo</label>
-                                                        <input type="file" className='form-control' name='photo' required onChange={(e) => changeData(e)} />
+                                                        <input type="file" className='form-control' name='photo'  onChange={(e) => changeData(e)} />
                                                         <label>price</label>
                                                         <input type='text' className='form-control' name='price' required onChange={(e) => changeData(e)} />
                                                         <label>From </label>
@@ -196,7 +205,7 @@ export default function Home() {
                                                         />
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" className="btn btn-lg  darkcustombtn mt-3" onClick={gotohome()}>Post</button>
+                                                            <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Post</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -234,7 +243,12 @@ export default function Home() {
                 </div>
 
             </div>
+            <div > 
+            </div>
+         {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */}
+            
+         </>
+         ) : history.push("/login")}
         </>
-
     )
 }
