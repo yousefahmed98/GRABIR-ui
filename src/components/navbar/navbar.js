@@ -118,17 +118,18 @@ export default function Navbar() {
                 {/* <img className="bell" src={bell} alt="bell" width={22} height={24}/> */}
               </CNavItem>
             </CNavbarNav>
-            <CForm className="d-flex  nav-right">
-              <CFormInput type="search" className="me-2" placeholder="Search" />
-              <CButton
+            {/* <CForm className="d-flex  nav-right"> */}
+              {/* <CFormInput type="search" className="me-2" placeholder="Search" /> */}
+
+              {/* <CButton
                 type="submit"
                 variant="outline"
                 color="light"
                 className="me-2"
               >
                 Search
-              </CButton>
-            </CForm>
+              </CButton> */}
+            {/* </CForm> */}
           </COffcanvasBody>
         </COffcanvas>
       </CContainer>
