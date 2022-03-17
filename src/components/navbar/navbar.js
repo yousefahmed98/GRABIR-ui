@@ -90,34 +90,23 @@ export default function Navbar() {
                   <p className="nav-link"> Offers</p>
                 </CNavLink>
               </CNavItem>
-              <CNavItem>
-                <CNavLink href="/profile">
-                  <p className="nav-link"> My Profile</p>
-                </CNavLink>
-              </CNavItem>
-              {/* <CNavItem>
-                <CNavLink href="#">Favourites</CNavLink>
-              </CNavItem> */}
-
               {localStorage.getItem("id") ? (
                 <>
                   <CNavItem>
                     <CNavLink onClick={() => logout()} href="/login">
                       <p  className="nav-link"> Logout</p>
-
                     </CNavLink>
                   </CNavItem>
                   <CNavItem>
-                    <CNavLink href="/profile">
+                    <CNavLink href="/myprofile">
                       <p className="nav-link">{localStorage.getItem("username")}</p>
-
                     </CNavLink>
                   </CNavItem>
                 </>
               ) : (
                 <>
                   <CNavItem>
-                    <CNavLink href="/login"><p className="nav-link"> Login</p></CNavLink>
+                    <CNavLink href="/login"><p className="nav-link">Login</p></CNavLink>
                   </CNavItem>
                   <CNavItem>
                     <CNavLink href="/register"><p className="nav-link">Register</p></CNavLink>
@@ -129,17 +118,18 @@ export default function Navbar() {
                 {/* <img className="bell" src={bell} alt="bell" width={22} height={24}/> */}
               </CNavItem>
             </CNavbarNav>
-            <CForm className="d-flex  nav-right">
-              <CFormInput type="search" className="me-2" placeholder="Search" />
-              <CButton
+            {/* <CForm className="d-flex  nav-right"> */}
+              {/* <CFormInput type="search" className="me-2" placeholder="Search" /> */}
+
+              {/* <CButton
                 type="submit"
                 variant="outline"
                 color="light"
                 className="me-2"
               >
                 Search
-              </CButton>
-            </CForm>
+              </CButton> */}
+            {/* </CForm> */}
           </COffcanvasBody>
         </COffcanvas>
       </CContainer>

@@ -1,16 +1,20 @@
 import React from "react"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "./pages/login/Login";
-import Home from "./pages/home/home";
-import PostDetails from "./pages/postDetails/PostDetails";
-import Test from "./pages/Test";
-import "./components/fonts.css";
-import Register from "./pages/register/register";
-import LandingPage from "./components/landing_page/LandingPage";
-import NotFound from "./pages/NotFound/NotFound";
-import Offers from "./pages/offers/offers";
-import Deals from "./pages/deals/Deals";
+
+import Login from './pages/login/Login';
+import Home from './pages/home/home'
+import PaymentTest from './pages/PaymentTest'
+import PostDetails from './pages/postDetails/PostDetails'
+import Test from './pages/Test';
+import "./components/fonts.css"
+import Register from './pages/register/register';
+import LandingPage from './components/landing_page/LandingPage';
+import NotFound from './pages/NotFound/NotFound';
+import Offers from './pages/offers/offers';
+import Deals from './pages/deals/Deals';
+import Profile from './pages/profile/Profile';
 import StarRating from "./components/StarRating/StarRating";
+
 
 function App() {
   return (
@@ -25,6 +29,8 @@ function App() {
           <Route path={"/offers"} exact component={Offers} />
           <Route path={"/deals"} exact component={Deals} />
           <Route path={"/rate"} exact  component={StarRating} />
+          <Route path={"/myprofile"} exact component={Profile} />
+          <Route path={"/PaymentTest"} exact component={PaymentTest} />
           <Route path="*" exact component={NotFound} />
         </Switch>
     </BrowserRouter>
