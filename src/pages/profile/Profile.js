@@ -30,32 +30,23 @@ export default function Profile() {
                 <h4>
                   First Name :
                </h4>
-                 <p> Nehal</p>
+                 <p> {localStorage.getItem("firstname")}</p>
                  <hr/>
                  <h4> 
                      Last Name :
                  </h4>
-                 <p> Hassan </p>
+                 <p> {localStorage.getItem("lastname")}</p>
                  <hr/>
                  <h4>
                     User Name :
                 </h4>
-                 <p> Nehalh4</p>
+                 <p> {localStorage.getItem("username")} </p>
                  <hr/>
                  <h4>
-                    City :
+                    Region :
                  </h4>
-                 <p> Giza </p>
+                 <p> {localStorage.getItem("region")} </p>
                  <hr/>
-                 <h4>
-                    State :
-                 </h4>
-                <p> 6oct</p>
-                <hr/>
-                 <h4>
-                     Zip Code :
-                 </h4>
-                 <p> 11062</p>
              </div>
            <br />
            <br />
@@ -65,44 +56,41 @@ export default function Profile() {
 
 
         {/*  TAB 2 */}
-        <Tab eventKey="profile" title="ADDRESS" className='tab'>
+        <Tab eventKey="profile" title=" Security Information" className='tab'>
         <>
             <div>
-                <h4>
+                 <h4>
+                    ID number :
+                </h4>
+                 <p> {localStorage.getItem("id")}</p>
+                 <hr/>
+                 <h4>
                   Email :
                </h4>
-                 <p> Nehalhbhsd@gmail.com</p>
+                 <p> {localStorage.getItem("email")} </p> 
                  <hr/>
                  <h4> 
                     Password :
                  </h4>
-                 <p>  </p>
+                 <p> ********** </p>
                  <hr/>
                  <h4>
-                    Address :
-                </h4>
-                 <p> Nehalh4</p>
-                 <hr/>
-                 <h4>
-                    Address 1 :
+                    Joined :
                  </h4>
-                 <p> Giza </p>
+                 <p> {localStorage.getItem("dataJoined")} </p>
                  <hr/>
                  <h4>
-                    State :
+                    Verfied :
                  </h4>
-                <p> 6oct</p>
+                <p> {localStorage.getItem("isVerfied") === "true" ? "Yes" : "No" } </p>
                 <hr/>
-                 <h4>
-                     Zip Code :
-                 </h4>
-                 <p> 11062</p>
              </div>
            <br />
            <br />
         <Editadd />
             </>
         </Tab>
+        
       </Tabs>
       </div>
       </>
