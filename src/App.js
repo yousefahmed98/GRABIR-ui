@@ -11,6 +11,7 @@ import LandingPage from './components/landing_page/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Offers from './pages/offers/offers';
 import Deals from './pages/deals/Deals';
+import Profile from './pages/profile/Profile';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     <Route path={"/offers"} exact component={Offers} />
     <Route path={"/landing"} exact component={LandingPage} />
     <Route path={"/deals"} exact component={Deals} />
+    <Route path={"/myprofile"} exact component={Profile} />
     <Route path={"/PaymentTest"} exact component={PaymentTest} />
 
     <Route path="*" exact component={NotFound} />
