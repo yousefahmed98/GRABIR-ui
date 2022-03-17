@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { axiosInstance } from "../../network/axiosInstance";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
@@ -10,7 +9,6 @@ import logo from "../../static/navbar/logo-default.png";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import TextField from "@mui/material/TextField";
-import {getPosts} from "../../Store/Actions/getPosts"
 
 export default function Popup(props) {
 

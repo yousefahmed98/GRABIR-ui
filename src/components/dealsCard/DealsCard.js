@@ -17,7 +17,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import DealCountDown from "../../components/countDown/countdown";
-import { getDeals } from "../../Store/Actions/getDeals";
+// import { getDeals } from "../../Store/Actions/getDeals";
 import { getOffersAction } from "../../Store/Actions/getOffers";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -198,7 +198,7 @@ export default function DealsCard(props) {
             </Grid>
           );
         }
-      })}
+      return <div> Deals Card </div>})}
     </div>
   );
 }

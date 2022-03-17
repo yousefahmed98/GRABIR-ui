@@ -1,4 +1,6 @@
-import axios from 'axios';
+// import axios from 'axios';
+import React from "react"
+
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { useEffect, useState } from 'react'
 import PostCard from '../../components/postCard/postCard'
@@ -6,7 +8,7 @@ import Navbar from '../../components/navbar/navbar'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
-import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
+// import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
 import { useHistory } from 'react-router-dom';
 
 export default function PostDetails() {
@@ -20,7 +22,7 @@ export default function PostDetails() {
   useEffect(() => {
     dispatch(getPosts())
     for (let post of posts) {
-      if (post.id == params.id) {
+      if (post.id === params.id) {
         console.log(post)
         setDetails(post)
       }

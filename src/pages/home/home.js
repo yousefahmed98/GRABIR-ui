@@ -1,3 +1,4 @@
+import React from "react"
 import { useEffect, useState } from 'react'
 import PostCard from '../../components/postCard/postCard'
 import Navbar from '../../components/navbar/navbar'
@@ -11,7 +12,6 @@ import axios from 'axios'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 //
-import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 
 export default function Home() {
     //get all posts

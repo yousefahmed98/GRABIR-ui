@@ -1,8 +1,9 @@
+import React from "react"
 import {useEffect} from "react";
 import { useSelector ,useDispatch} from "react-redux";
 import Navbar from "../../components/navbar/navbar";
 import OffersCard from "../../components/card/offerCard";
-import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
+// import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
 import { useHistory } from "react-router-dom";
 import { getOffersAction } from '../../Store/Actions/getOffers'
 export default function Offers(props) {
