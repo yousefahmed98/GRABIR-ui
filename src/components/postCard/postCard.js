@@ -22,15 +22,24 @@ export default function PostCard({ post ,socket}) {
   // get all tags 
   const dispatch = useDispatch();
   const tags = useSelector((state) => state.TAGS.allTags)
-  const [currentuser, setCurrentuser] = useState(null)
+  const [currentuser, setCurrentuser] = useState({
+    username:"",
+    id:null,
+  })
 
   useEffect(() => {
-    setCurrentuser(localStorage.getItem("username"))
+
+    setCurrentuser({
+      ...currentuser,
+      username:localStorage.getItem("username"),
+      id:localStorage.getItem("id"),
+    })
+
     dispatch(getTags())
   }, []);
 
   useEffect(() => {
-    if (currentuser !== null) {
+    if (currentuser.id !== null) {
         console.log(socket.on("welcomeMessage", (msg) => {
             console.log(msg, currentuser)
             console.log(currentuser, "currentuser messsage////////")
@@ -141,7 +150,9 @@ export default function PostCard({ post ,socket}) {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
       }
     })
-      .then(history.push(`/home/`))
+      .then(
+        history.push(`/home/`)
+        )
       .catch((err) => console.log(err))
   }
 
