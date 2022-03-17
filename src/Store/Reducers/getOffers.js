@@ -24,7 +24,7 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
         offers_counter: newOffersState.length,
       };
     case "UPDATE_OFFER_STATE":
-      
+
       action.payload = { ...action.payload, status: action.booleanVar };
       const updatedOffers = state.offers.map((el) =>
         el.id === action.payload.id ? action.payload : el
@@ -35,13 +35,10 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
         offer: action.payload.id,
       };
       let newdealssState = [...state.deals, action.payload];
-      // form_data.preventDefault();
-
       return (
         axiosInstance
-          .put(`/offers/${action.payload.id}/`, action.payload, {
+          .patch(`/offers/${action.payload.id}/`, { status: action.booleanVar }, {
             headers: {
-              // "Content-Type": "application/json",
               Authorization: `Bearer ${localStorage.getItem("access")}`,
             },
           })
@@ -57,6 +54,12 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
           })
           .then((res) => console.log(res))
           .catch((err) => console.log(err)),
+
+
+
+          window.alert("This offer if accepted successfully!"),
+
+
         {
           ...state,
           offers: [...newOffers], // 1
