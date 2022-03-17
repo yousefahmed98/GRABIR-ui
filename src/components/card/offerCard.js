@@ -21,6 +21,7 @@ import {
   updateStateAction,
   deleteOffer,
 } from "../../Store/Actions/updateState";
+import StarRating from "../StarRating/StarRating";
 import { useHistory } from "react-router-dom";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -213,7 +214,7 @@ export default function OffersCard(props) {
                                   }}
                                 />
                               </IconButton>
-
+                              <StarRating/>
                               <IconButton
                                 aria-label="public"
                                 // onClick={() => setOfferStatus(true)
@@ -246,6 +247,7 @@ export default function OffersCard(props) {
                 </Grid>
               </Card>
             </Grid>
+         
           );
         else return (
           <div key={index}>

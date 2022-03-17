@@ -20,6 +20,7 @@ export default function Popup(props) {
     post: props.postID,
     delivery_date: "",
     // postObj: props.post,
+
     offer_owner: localStorage.getItem("id"),
   });
   const [errors, setErrors] = useState({

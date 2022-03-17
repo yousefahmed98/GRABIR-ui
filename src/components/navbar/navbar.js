@@ -71,7 +71,7 @@ export default function Navbar() {
           </COffcanvasHeader>
           <COffcanvasBody>
             <CNavbarNav>
-              <CNavbarBrand href="#">
+              <CNavbarBrand href="/">
                 <img src={logodark} alt="GRABIRLOGO" width={43} height={44} />
               </CNavbarBrand>
               <CNavItem>
@@ -98,6 +98,7 @@ export default function Navbar() {
               {/* <CNavItem>
                 <CNavLink href="#">Favourites</CNavLink>
               </CNavItem> */}
+
               {localStorage.getItem("id") ? (
                 <>
                   <CNavItem>

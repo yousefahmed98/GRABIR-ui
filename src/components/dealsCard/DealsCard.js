@@ -17,8 +17,10 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import DealCountDown from "../../components/countDown/countdown";
+import StarRating from "../StarRating/StarRating";
 // import { getDeals } from "../../Store/Actions/getDeals";
 import { getOffersAction } from "../../Store/Actions/getOffers";
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -48,6 +50,14 @@ export default function DealsCard(props) {
               >
                 <CardHeader
                   avatar={
+
+//                     <Avatar
+//                       columns={{ xs: 4, sm: 8, md: 12 }}
+//                       sx={{ backgroundColor: "#151A1E" }}
+//                       aria-label="recipe"
+//                     >
+//                     R
+//                     </Avatar>
                     <img
                       src={offer.ownerProfilePic}
                       className="me-2 userImage"
@@ -55,6 +65,7 @@ export default function DealsCard(props) {
                       alt="deal owner"
                       loading="lazy"
                     />
+
                   }
                   action={
                     <IconButton aria-label="settings">
@@ -64,6 +75,7 @@ export default function DealsCard(props) {
                   title={offer.offer_owner_name}
                   subheader={offer.created_at}
                 />
+
                 <Grid
                   container
                   spacing={{ xs: 2, md: 3 }}
@@ -188,6 +200,8 @@ export default function DealsCard(props) {
                             <Item>
                               <DealCountDown date={offer.delivery_date} />
                             </Item>
+                            <StarRating
+                            offerOwner = {offer.offer_owner}/>
                           </Grid>
                         </Grid>
                       </CardActions>

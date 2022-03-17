@@ -1,2 +1,18 @@
-Main Color(orange)  =>       #FAAF40  
-Second Color (black) => #151A1E
+// Main Color(orange)  => #FAAF40  
+// Second Color (black) => #151A1E
+
+
+// axios
+// .get(`http://127.0.0.1:8000/posts/posts/${offer.post}`, {
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: `Bearer ${localStorage.getItem("access")}`,
+//     Accept: "application/json",
+//   },
+// })
+// .then((res) => {
+//   return {
+//   ...setUser,
+//   id : res.data.user
+//   }
+// });
