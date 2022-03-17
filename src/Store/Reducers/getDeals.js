@@ -1,27 +1,17 @@
-const INITIAL_VALUE = {
-    deals: [],
-    deals_counter: 0,
-  };
-  
-  export default function getDealsReducer(state = INITIAL_VALUE, action) {
-    switch (action.type) {
-      case "GET_DEALS":
-        // if (!(action.payload === 0)) { // payload == value
-        //   return {
-        //     ...state,
-        //     offers: [...state.offers, action.payload], // 1
-        //     offers_counter: state.offers.length + 1, 
-        //   };
-        // } else {
-        //   console.log("exist before");
-        //   return {
-        //     ...state,
-        //     offers_counter: state.offers.length,
-        //   };
-        // }
-  
+const intial_value = {
+  dealsList: [],
+}
+
+export default function getDealsReducer (state = intial_value, action){
+
+  switch (action.type) {
+      case 'LIST_DEALS':
+          return {
+              ...state,
+              dealsList: action.payload,
+          }
       default:
-        return state;
-    }
+          return state
   }
-  
+}
+// reducer check type of action and compare values 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import logodark from "../../static/navbar/logo-dark.png";
+// import logodark from "../../static/navbar/logo-dark.png";
 import logo from "../../static/navbar/logo-default.png";
 import { Link } from "react-router-dom";
 import "./register.css";
-import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
+// import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
 import Navbar from "../../components/navbar/navbar";
 
 export default function Register() {

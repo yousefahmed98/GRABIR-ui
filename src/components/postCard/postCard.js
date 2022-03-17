@@ -1,6 +1,6 @@
+import React from "react"
 //style
 import "./postCard.css"
-import moment from 'react-moment';
 //hooks
 import { Link, useHistory } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -130,11 +130,11 @@ export default function PostCard({ post }) {
 
 
   //----------------------go to post details page------------------------------
-  const postDetails = (e, post_id) => {
-    e.preventDefault()
-    console.log(post_id)
-    history.push(`/PostDetails/${post_id}`)
-  }
+  // const postDetails = (e, post_id) => {
+  //   e.preventDefault()
+  //   console.log(post_id)
+  //   history.push(`/PostDetails/${post_id}`)
+  // }
   // --------------------delete post if owner-----------------------------------
   const postDelete = (e, post_id) => {
     e.preventDefault()
@@ -154,7 +154,7 @@ export default function PostCard({ post }) {
   const getpostTags = () => {
     for (let tag of post.tags) {
       for (let t of tags) {
-        if (t.id == tag) {
+        if (t.id === tag) {
           postTags.push(t.name)
         }
       }
@@ -179,7 +179,7 @@ export default function PostCard({ post }) {
         {/* profile + date end  */}
         {/* post content start */}
         <div className="row align-items-center mb-4">
-          <div class="col-lg-6 col-md-12 inline">
+          <div className="col-lg-6 col-md-12 inline">
             <h1>{post.title}</h1>
             <p>
               {post.description}
@@ -195,7 +195,7 @@ export default function PostCard({ post }) {
           { post.postpicture !== null
             ?
           <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
-            alt="post image" width='60%' length='180px' />
+            alt="post" width='60%' length='180px' />
             :
             <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
               
@@ -206,7 +206,7 @@ export default function PostCard({ post }) {
         <div className="row align-items-center mb-4  ">
           {
 
-            localStorage.getItem("id") == post.user
+            localStorage.getItem("id") === post.user
               ?
               (
                 <>

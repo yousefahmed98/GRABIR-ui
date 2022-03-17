@@ -1,8 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { axiosInstance } from "../../network/axiosInstance";
-import { getOffersAction } from "../../Store/Actions/getOffers";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -12,21 +10,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import TextField from "@mui/material/TextField";
 
-
 export default function Popup(props) {
+
   const [offerForm, setOfferForm] = useState({
     details: "",
     from_region: "",
     to_region: "",
     price: "",
-    // status: 'None',
     post: props.postID,
+    delivery_date: "",
+    // postObj: props.post,
+
     offer_owner: localStorage.getItem("id"),
   });
   const [errors, setErrors] = useState({
     detailsErr: null,
     from_regionErr: null,
     to_regionErr: null,
+    delivery_dateErr: null,
     priceErr: null,
   });
 
@@ -34,9 +35,24 @@ export default function Popup(props) {
 
   const submitForm = (e) => {
     e.preventDefault();
+    let form_data = new FormData();
+        form_data.append('details', offerForm.details);
+        form_data.append('from_region', offerForm.from_region);
+        form_data.append('to_region', offerForm.to_region);
+        form_data.append('price', offerForm.price);
+        form_data.append('post', offerForm.post);
+        form_data.append('delivery_date', offerForm.delivery_date);
+        form_data.append('offer_owner', offerForm.offer_owner);
+      
+
     // SEND API REQUEST
     axiosInstance
-      .post("/offers/", offerForm)
+      .post("/offers/", form_data,{
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization:`Bearer ${localStorage.getItem("access")}`,
+        }
+      })
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
@@ -80,6 +96,16 @@ export default function Popup(props) {
       setErrors({
         ...errors,
         priceErr: e.target.value.length === 0 ? "This field is required" : null,
+      });
+    }else if (e.target.name === "delivery_date") {
+      setOfferForm({
+        ...offerForm,
+        delivery_date: e.target.value,
+      });
+      setErrors({
+        ...errors,
+        delivery_dateErr:
+          e.target.value === null ? "This field is required" : null,
       });
     }
   };
@@ -131,7 +157,6 @@ export default function Popup(props) {
                     type="text"
                     id="outlined-required"
                     label="From"
-                    defaultValue="USA"
                     value={offerForm.from_region}
                     onChange={(e) => changeData(e)}
                     name="from_region"
@@ -140,7 +165,6 @@ export default function Popup(props) {
                     type="text"
                     id="outlined-required"
                     label="To"
-                    defaultValue="EGYPT"
                     style={{ marginRight: 3 , marginBottom: 8}}
                     value={offerForm.to_region}
                     onChange={(e) => changeData(e)}
@@ -154,7 +178,7 @@ export default function Popup(props) {
                 <div className="mb-2 mr-5">
                   <TextField
                     id="outlined-number"
-                    label="Number"
+                    label="Price"
                     style={{ marginRight: 3 , marginBottom: 8}}
                     type="number"
                     value={offerForm.price}
@@ -166,7 +190,7 @@ export default function Popup(props) {
                   />
                   <TextField
                     id="outlined-read-only-input"
-                    label="Post id"
+                    label="Post ID"
                     style={{ marginRight: 3 , marginBottom: 8}}
                     defaultValue={props.postID}
                     onChange={(e) => changeData(e)}
@@ -178,6 +202,23 @@ export default function Popup(props) {
                 </div>
                 <div id="usernameHelp" className="form-text text-danger">
                   {errors.priceErr}
+                </div>
+                <div className="mb-2 mr-5">
+                  <TextField
+                    id="outlined-number"
+                    label="Expected Delivery Date"
+                    style={{ marginRight: 3 , marginBottom: 8}}
+                    type="date"
+                    value={offerForm.delivery_date}
+                    onChange={(e) => changeData(e)}
+                    name="delivery_date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  </div>
+                  <div id="usernameHelp" className="form-text text-danger">
+                  {errors.delivery_dateErr}
                 </div>
                 <div className="modal-footer">
                   <Button
@@ -198,7 +239,8 @@ export default function Popup(props) {
                       errors.detailsErr ||
                       errors.from_regionErr ||
                       errors.to_regionErr ||
-                      errors.priceErr
+                      errors.priceErr ||
+                      errors.delivery_dateErr
                     }
                   >
                     Send Offer
@@ -228,7 +270,7 @@ export default function Popup(props) {
             <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-outline-success"
+                className="btn btn-outline-success"
                 data-bs-dismiss="modal"
               >
                 Done

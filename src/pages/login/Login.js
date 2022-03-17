@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useHistory , Redirect } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "./login.css";
 import { login } from "../../Store/Actions/auth";
 import Navbar from "../../components/navbar/navbar";
-import { useSelector } from "react-redux";
-import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
+// import { useSelector } from "react-redux";
+// import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
 const Login = ({ login }) => {
   // const user = useSelector((state) => state.auth.user)
   // const loggedin = useSelector((state) => state.auth.isAuthenticated)
