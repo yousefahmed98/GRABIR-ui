@@ -212,7 +212,7 @@ export default function DealsCard(props) {
             </Grid>
           );
         }
-      return <div> Deals Card </div>})}
+      })}
     </div>
   );
 }

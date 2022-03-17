@@ -250,9 +250,7 @@ export default function OffersCard(props) {
          
           );
         else return (
-          <div key={index}>
-            There is not offers to show!
-          </div>
+          console.log("nothing to show")
         );
       })}
     </div>
