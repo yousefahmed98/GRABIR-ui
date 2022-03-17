@@ -22,7 +22,7 @@ import {
   CNavbarBrand,
 } from "@coreui/bootstrap-react";
 import Noty from "./notify";
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // new navbar component
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
@@ -76,25 +76,25 @@ export default function Navbar() {
                 <img src={logodark} alt="GRABIRLOGO" width={43} height={44} />
               </CNavbarBrand>
               <CNavItem>
-                <CNavLink href="#" active>
-                  <Link to="/home" className="nav-link"> Home</Link>
-                  
+                <CNavLink href="/home" active>
+                  <p className="nav-link"> Home</p>
+
                 </CNavLink>
               </CNavItem>
               <CNavItem>
-                <CNavLink href="#">
-                <Link to="/deals" className="nav-link"> Deals</Link>
-                  </CNavLink>
+                <CNavLink href="/deals">
+                  <p className="nav-link"> Deals</p>
+                </CNavLink>
               </CNavItem>
               <CNavItem>
-                <CNavLink href="#">
-                <Link to="/offers" className="nav-link"> Offers</Link>
-                  </CNavLink>
+                <CNavLink href="/offers">
+                  <p className="nav-link"> Offers</p>
+                </CNavLink>
               </CNavItem>
               <CNavItem>
-                <CNavLink href="#">
-                <Link to="/profile" className="nav-link"> My Profile</Link>
-                  </CNavLink>
+                <CNavLink href="/profile">
+                  <p className="nav-link"> My Profile</p>
+                </CNavLink>
               </CNavItem>
               {/* <CNavItem>
                 <CNavLink href="#">Favourites</CNavLink>
@@ -102,25 +102,25 @@ export default function Navbar() {
               {localStorage.getItem("id") ? (
                 <>
                   <CNavItem>
-                    <CNavLink onClick={() => logout()} href="#">
-                    <Link to="/login" className="nav-link"> Logout</Link>
-                      
+                    <CNavLink onClick={() => logout()} href="/login">
+                      <p  className="nav-link"> Logout</p>
+
                     </CNavLink>
                   </CNavItem>
                   <CNavItem>
-                    <CNavLink href="#">
-                    <Link to="/profile" className="nav-link">    {localStorage.getItem("username")}</Link>
-                   
+                    <CNavLink href="/profile">
+                      <p className="nav-link">{localStorage.getItem("username")}</p>
+
                     </CNavLink>
                   </CNavItem>
                 </>
               ) : (
                 <>
                   <CNavItem>
-                    <CNavLink href="/login">Login</CNavLink>
+                    <CNavLink href="/login"><p className="nav-link"> Login</p></CNavLink>
                   </CNavItem>
                   <CNavItem>
-                    <CNavLink href="/register">Register</CNavLink>
+                    <CNavLink href="/register"><p className="nav-link">Register</p></CNavLink>
                   </CNavItem>
                 </>
               )}
