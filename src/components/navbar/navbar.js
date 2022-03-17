@@ -22,7 +22,6 @@ import {
   CNavbarBrand,
 } from "@coreui/bootstrap-react";
 import Noty from "./notify";
-import { Link } from 'react-router-dom'
 // new navbar component
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
