@@ -158,7 +158,6 @@ export default function Popup(props) {
                     type="text"
                     id="outlined-required"
                     label="From"
-                    defaultValue="USA"
                     value={offerForm.from_region}
                     onChange={(e) => changeData(e)}
                     name="from_region"
@@ -167,7 +166,6 @@ export default function Popup(props) {
                     type="text"
                     id="outlined-required"
                     label="To"
-                    defaultValue="EGYPT"
                     style={{ marginRight: 3 , marginBottom: 8}}
                     value={offerForm.to_region}
                     onChange={(e) => changeData(e)}
@@ -181,7 +179,7 @@ export default function Popup(props) {
                 <div className="mb-2 mr-5">
                   <TextField
                     id="outlined-number"
-                    label="Number"
+                    label="Price"
                     style={{ marginRight: 3 , marginBottom: 8}}
                     type="number"
                     value={offerForm.price}
@@ -193,7 +191,7 @@ export default function Popup(props) {
                   />
                   <TextField
                     id="outlined-read-only-input"
-                    label="Post id"
+                    label="Post ID"
                     style={{ marginRight: 3 , marginBottom: 8}}
                     defaultValue={props.postID}
                     onChange={(e) => changeData(e)}
@@ -273,7 +271,7 @@ export default function Popup(props) {
             <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-outline-success"
+                className="btn btn-outline-success"
                 data-bs-dismiss="modal"
               >
                 Done
