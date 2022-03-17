@@ -11,8 +11,6 @@ export const getPosts = () => (dispatch) => {
             }})
     .then((res) => 
     {
-        //second dispatch de mesh bt fire 8er lma l data trga3 
-        // ha set l data fl store
         dispatch({
             type: "LIST_POSTS",
             payload: res.data,
@@ -24,4 +22,3 @@ export const getPosts = () => (dispatch) => {
     )
     .catch((err) => console.log(err));
 }
-//action contains type(no3 action) ,payload (values)

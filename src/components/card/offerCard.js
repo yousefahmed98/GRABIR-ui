@@ -2,14 +2,11 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import item from "../../static/iphone.png";
 import Chip from "@mui/material/Chip";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -19,13 +16,12 @@ import PublicIcon from "@mui/icons-material/Public";
 import "./card.css";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   updateStateAction,
   deleteOffer,
 } from "../../Store/Actions/updateState";
-
+import { useHistory } from "react-router-dom";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -35,16 +31,21 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function OffersCard(props) {
-  const [offerStatus, setOfferStatus] = useState();
+  const history = useHistory();
+
   const dispatch = useDispatch();
   const updateOfferStatusAccepted = (offer) => {
     dispatch(updateStateAction(offer, true));
-    window.alert("This offer if accepted successfully!");
+    // dispatch(deleteOffer(offer));
+    // window.alert("This offer if accepted successfully!");
+    // history.push("/offers");
   };
   const updateOfferStatusRejected = (offer) => {
     dispatch(deleteOffer(offer));
     window.alert("This offer is rejected!");
+    history.push("/offers");
   };
+
   return (
     <div style={{ backgroundColor: "#151A1E" }}>
       {props.offers.map((offer, index) => {
@@ -57,20 +58,27 @@ export default function OffersCard(props) {
               >
                 <CardHeader
                   avatar={
-                    <Avatar
-                      columns={{ xs: 4, sm: 8, md: 12 }}
-                      sx={{ backgroundColor: "#151A1E" }}
-                      aria-label="recipe"
-                    >
-                      R
-                    </Avatar>
+                    // <Avatar
+                    //   columns={{ xs: 4, sm: 8, md: 12 }}
+                    //   sx={{ backgroundColor: "#151A1E" }}
+                    //   aria-label="recipe"
+                    // >
+
+                    // </Avatar>
+                    <img
+                      src={offer.ownerProfilePic}
+                      className="me-2 userImage"
+                      height="80"
+                      alt="offer owner"
+                      loading="lazy"
+                    />
                   }
                   action={
                     <IconButton aria-label="settings">
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title="Shrimp and Chorizo Paella"
+                  title={offer.offer_owner_name}
                   subheader={offer.created_at}
                 />
                 <Grid
@@ -81,14 +89,15 @@ export default function OffersCard(props) {
                   <Grid item xs={3}>
                     <Item>
                       {" "}
-                      <CardMedia
+                      {/* <CardMedia
                         component="img"
                         spacing={{ xs: 2, md: 3 }}
                         columns={{ xs: 4, sm: 8, md: 12 }}
                         sx={{ height: "100%", width: "100%" }}
                         image={item}
                         alt="post offer image"
-                      />
+                      /> */}
+                      <img src={offer.postPic} alt="post" />
                     </Item>
                   </Grid>
                   <Grid item xs={9}>
@@ -185,7 +194,7 @@ export default function OffersCard(props) {
                               <IconButton
                                 aria-label="money"
                                 // onClick={() => setOfferStatus(true)}
-                                href="/offers"
+                                href="/deals"
                                 onClick={() => updateOfferStatusAccepted(offer)}
                               >
                                 <Chip
@@ -208,7 +217,7 @@ export default function OffersCard(props) {
                               <IconButton
                                 aria-label="public"
                                 // onClick={() => setOfferStatus(true)
-                                href="/offers"
+                                // href="/offers"
                                 onClick={() => updateOfferStatusRejected(offer)}
                               >
                                 {/* {offer.status = offerStatus} */}
@@ -238,7 +247,11 @@ export default function OffersCard(props) {
               </Card>
             </Grid>
           );
-        else return null;
+        else return (
+          <div key={index}>
+            There is not offers to show!
+          </div>
+        );
       })}
     </div>
   );

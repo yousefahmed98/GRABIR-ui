@@ -6,17 +6,19 @@ import { axiosInstance } from "../../network/axiosInstance";
 import FormControl from '@mui/material/FormControl';
 import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 import { useHistory } from "react-router-dom";
+import { getDeals } from "../../Store/Actions/getDeals";
+import { useSelector, useDispatch } from "react-redux"
+
 export default function Deals() {
+  const dispatch = useDispatch();
   const [deals, setDeals] = useState();
   const history = useHistory();
   useEffect(() => {
-    axiosInstance
-      .get("/deals")
-      .then((res) => setDeals(res.data))
-      .catch((err) => console.log(err));
+    dispatch(getDeals())
+      
   }, []);
 
-  console.log(deals);
+  console.log(deals, "//////////////");
   return (
     <>
     {localStorage.getItem("email") ? (

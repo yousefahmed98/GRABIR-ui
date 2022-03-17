@@ -1,44 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Countdown from "react-countdown-now";
-import styled from "styled-components";
+import CountdownTimer from "./CountdownTimer";
 
-const PurpleCount = styled.div`
-  span {
-    color: purple;
-  }
-`;
-// Random component
-const Finished = () => (
-  <span style={{ color: "blue" }}>You are good to go!</span>
-);
-
-// Renderer callback
-const renderer = ({ total, hours, minutes, seconds }) => {
-  if (total) {
-    // Render a countdown
-    return (
-      <span style={{ color: "red" }}>
-        {hours}:{minutes}:{seconds}
-      </span>
-    );
-  } else {
-    // Render a finished state
-    return <Finished />;
-  }
-};
+import "./count.css";
 
 export default function DealCountDown(props) {
-    var date = new Date(props.date);
-    var milliseconds = date.getTime();
-    // console.log(milliseconds);
+  const NOW_IN_MS = new Date().getTime();
+  const date = new Date(props.date);
+
+  const diffDays = (date - NOW_IN_MS) / (1000 * 60 * 60 * 24);
+
+  const THREE_DAYS_IN_MS = diffDays * 24 * 60 * 60 * 1000;
+
+  const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
+
   return (
-    <React.Fragment>
-      {/* <Countdown date={Date.now() + milliseconds}  />
-      <br /> */}
-      <PurpleCount>
-        <Countdown date={Date.now() + 30000000} />
-      </PurpleCount>
-    </React.Fragment>
+    <div>
+      <h1>Countdown Timer</h1>
+      <CountdownTimer targetDate={dateTimeAfterThreeDays} />
+    </div>
   );
 }
