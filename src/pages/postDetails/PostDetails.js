@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
 // import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
 import { useHistory } from 'react-router-dom';
+// import Search from "../../components/search/search"
 
 export default function PostDetails() {
   const history = useHistory();

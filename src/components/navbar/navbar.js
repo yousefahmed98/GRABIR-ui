@@ -22,6 +22,7 @@ import {
   CNavbarBrand,
 } from "@coreui/bootstrap-react";
 import Noty from "./notify";
+import Search from "../search/search";
 // new navbar component
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
@@ -129,7 +130,9 @@ export default function Navbar() {
               </CNavItem>
             </CNavbarNav>
             <CForm className="d-flex  nav-right">
-              <CFormInput type="search" className="me-2" placeholder="Search" />
+              {/* <CFormInput type="search" className="me-2" placeholder="Search" /> */}
+              <Search />
+
               <CButton
                 type="submit"
                 variant="outline"
