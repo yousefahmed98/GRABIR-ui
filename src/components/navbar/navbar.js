@@ -90,15 +90,6 @@ export default function Navbar() {
                   <p className="nav-link"> Offers</p>
                 </CNavLink>
               </CNavItem>
-              <CNavItem>
-                <CNavLink href="/profile">
-                  <p className="nav-link"> My Profile</p>
-                </CNavLink>
-              </CNavItem>
-              {/* <CNavItem>
-                <CNavLink href="#">Favourites</CNavLink>
-              </CNavItem> */}
-
               {localStorage.getItem("id") ? (
                 <>
                   <CNavItem>
@@ -107,7 +98,7 @@ export default function Navbar() {
                     </CNavLink>
                   </CNavItem>
                   <CNavItem>
-                    <CNavLink href="/profile">
+                    <CNavLink href="/myprofile">
                       <p className="nav-link">{localStorage.getItem("username")}</p>
                     </CNavLink>
                   </CNavItem>
@@ -115,7 +106,7 @@ export default function Navbar() {
               ) : (
                 <>
                   <CNavItem>
-                    <CNavLink href="/login"><p className="nav-link"> Login</p></CNavLink>
+                    <CNavLink href="/login"><p className="nav-link">Login</p></CNavLink>
                   </CNavItem>
                   <CNavItem>
                     <CNavLink href="/register"><p className="nav-link">Register</p></CNavLink>
