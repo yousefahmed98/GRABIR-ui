@@ -1,16 +1,12 @@
 import * as React from "react";
-import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import item from "../../static/iphone.png";
 import Chip from "@mui/material/Chip";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
@@ -20,9 +16,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import "./card.css";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPosts } from "../../Store/Actions/getPosts";
+import { useDispatch } from "react-redux";
 import {
   updateStateAction,
   deleteOffer,
@@ -39,13 +33,12 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function OffersCard(props) {
   const history = useHistory();
 
-  const [offerStatus, setOfferStatus] = useState();
   const dispatch = useDispatch();
   const updateOfferStatusAccepted = (offer) => {
     dispatch(updateStateAction(offer, true));
     // dispatch(deleteOffer(offer));
-    window.alert("This offer if accepted successfully!");
-    history.push("/offers");
+    // window.alert("This offer if accepted successfully!");
+    // history.push("/offers");
   };
   const updateOfferStatusRejected = (offer) => {
     dispatch(deleteOffer(offer));
@@ -56,7 +49,7 @@ export default function OffersCard(props) {
   return (
     <div style={{ backgroundColor: "#151A1E" }}>
       {props.offers.map((offer, index) => {
-        if (offer.status != true)
+        if (!offer.status)
           return (
             <Grid key={index} container>
               <Card
@@ -76,7 +69,7 @@ export default function OffersCard(props) {
                       src={offer.ownerProfilePic}
                       className="me-2 userImage"
                       height="80"
-                      alt=""
+                      alt="offer owner"
                       loading="lazy"
                     />
                   }
@@ -104,7 +97,7 @@ export default function OffersCard(props) {
                         image={item}
                         alt="post offer image"
                       /> */}
-                      <img src={offer.postPic} />
+                      <img src={offer.postPic} alt="post" />
                     </Item>
                   </Grid>
                   <Grid item xs={9}>
@@ -201,7 +194,7 @@ export default function OffersCard(props) {
                               <IconButton
                                 aria-label="money"
                                 // onClick={() => setOfferStatus(true)}
-                                // href="/offers"
+                                href="/deals"
                                 onClick={() => updateOfferStatusAccepted(offer)}
                               >
                                 <Chip
@@ -254,7 +247,11 @@ export default function OffersCard(props) {
               </Card>
             </Grid>
           );
-        else return null;
+        else return (
+          <div key={index}>
+            There is not offers to show!
+          </div>
+        );
       })}
     </div>
   );
