@@ -104,13 +104,11 @@ export default function Navbar() {
                   <CNavItem>
                     <CNavLink onClick={() => logout()} href="/login">
                       <p  className="nav-link"> Logout</p>
-
                     </CNavLink>
                   </CNavItem>
                   <CNavItem>
                     <CNavLink href="/profile">
                       <p className="nav-link">{localStorage.getItem("username")}</p>
-
                     </CNavLink>
                   </CNavItem>
                 </>

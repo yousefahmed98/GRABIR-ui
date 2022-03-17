@@ -28,9 +28,11 @@
   background-color: #faaf40 ;
   font-size: large;
   z-index: 0;
+  
 }
 .cnavbar{ 
   z-index: 100;
+  position:relative;
 }
 /* right side of navbar */
 .nav-right{
