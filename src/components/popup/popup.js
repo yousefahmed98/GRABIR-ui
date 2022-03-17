@@ -1,16 +1,16 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { axiosInstance } from "../../network/axiosInstance";
-import { getOffersAction } from "../../Store/Actions/getOffers";
-import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import "./popup.css";
-import logo from "../../static/navbar/logo-default.png";
-import DeleteIcon from "@mui/icons-material/Delete";
-import DoneIcon from "@mui/icons-material/Done";
-import TextField from "@mui/material/TextField";
+import React from "react"
+import { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { axiosInstance } from "../../network/axiosInstance"
+import { getOffersAction } from "../../Store/Actions/getOffers"
+import Button from "@mui/material/Button"
+import SendIcon from "@mui/icons-material/Send"
+import LocalOfferIcon from "@mui/icons-material/LocalOffer"
+import "./popup.css"
+import logo from "../../static/navbar/logo-default.png"
+import DeleteIcon from "@mui/icons-material/Delete"
+import DoneIcon from "@mui/icons-material/Done"
+import TextField from "@mui/material/TextField"
 
 
 export default function Popup(props) {
@@ -32,8 +32,8 @@ export default function Popup(props) {
 /////////////////////////////////////////////////////////////////////////////
 const handleNotification =(type)=>{
   props.socket.emit("sendNotification",{
-    senderId:props.user,
-    reciverId:props.post.user,
+    senderId:props.currentuser,
+    reciverId:props.post.ownerName,
     type,
   })
 }

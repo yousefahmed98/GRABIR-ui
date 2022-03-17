@@ -13,40 +13,33 @@ import makeAnimated from 'react-select/animated'
 //socket for notifications
 import { io } from "socket.io-client";
 
+import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 
 export default function Home() {
-  // notifications
-  const[userName ,setUserName] = useState("")
-  const[user,setUser] = useState(null)
-  const[socket,setSocket] = useState(null)
-  useEffect(() => {
-    const socket =io("http://localhost:5000") 
-    setSocket(socket)
-  },[])
-
-  console.log("userName",userName)
-  useEffect(() => {
-    if(user !== null){
-        console.log(socket.on("welcomeMessage", (msg) => {
-            console.log(msg,user)
-        }))
-    }
-    //send event to server
-    socket?.emit("newUser",user)
-  }, [socket,user])
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //get all posts
     const posts = useSelector((state) => state.POSTS.postsList)
-    const isloading = useSelector((state) => state.LOADER.isloading)
+    const isloading = useSelector((state) => state.LOADER.isloading);
+    const user = useSelector((state) => state.auth.user)
+    console.log(user, "*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+    console.log(localStorage.getItem("region"), "this is region");
+    console.log(localStorage.getItem("username"), "this is username of current user")
+    console.log(localStorage.getItem("isVerfied"), "verfieeeeeeeeeeeed or not");
+    // console.log(user.email,"this is current user email email");
     const dispatch = useDispatch();
     // get all tags 
     const tags = useSelector((state) => state.TAGS.allTags)
+    /////////////////////////
+    const [socket, setSocket] = useState(null)
+    /////////////////////
     useEffect(() => {
+        console.log("useEffect")
         dispatch(getPosts())
         dispatch(getTags())
+        const socket = io("http://localhost:5000")
+        setSocket(socket)
+        console.log("socket ",socket)
     }, []);
-
+    
     const animatedComponents = makeAnimated();
 
     const tagsoptions = []
@@ -58,10 +51,6 @@ export default function Home() {
 
     //------------new post---------------------------------------------------
     const history = useHistory()
-    const gotohome = () => {
-        console.log("hiii")
-    }
-
     const [newPost, setNewPost] = useState({
         title: "",
         description: "",
@@ -69,8 +58,8 @@ export default function Home() {
         from_region: "",
         to: "",
         price: 0.0,
-        ownerName: "shrouk hussein",
-        user: 1,
+        ownerName: localStorage.getItem("username"),
+        user: localStorage.getItem("id"),
         tags: [],
     })
     // select tags------------
@@ -79,7 +68,7 @@ export default function Home() {
         let list_of_tagsobjects = Object.values(e)
         let chosen = []
         for (let t of list_of_tagsobjects) {
-            chosen.push( parseInt(t.value))
+            chosen.push(parseInt(t.value))
         }
         console.log(chosen)
         setNewPost({
@@ -135,132 +124,158 @@ export default function Home() {
         let form_data = new FormData();
         form_data.append('title', newPost.title);
         form_data.append('description', newPost.description);
-        form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+        if (newPost.postpicture !== null) {
+            console.log("object", newPost.postpicture)
+            form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
+        }
+        // if(localStorage.getItem("ProfilePic")!== null){
+
+        //     fetch(localStorage.getItem("ProfilePic"))
+        //     .then(response => response.blob())
+        //     .then(blob => {
+        //         var file = new File([blob], localStorage.getItem("ProfilePic").slice(35))
+        //         console.log("file.name ",file.name)
+        //         console.log("file," ,file)
+        //       form_data.append('ownerProfilePic',file,file.name)
+        //            })
+        //     .catch((err) => console.log(err))
+
+
+
+        // }
         form_data.append('from_region', newPost.from_region);
         form_data.append('to', newPost.to);
         form_data.append('price', newPost.price);
         form_data.append('ownerName', newPost.ownerName);
         form_data.append('user', newPost.user);
-      
         //form_data.append('tags', newPost.tags);
         newPost.tags.forEach(item => {
             form_data.append('tags', item);
-           });
-        console.log("taags " ,form_data)
-        axios.post("http://127.0.0.1:8000/posts/posts/", form_data,{
+        });
+        console.log("taags ", form_data)
+        axios.post("http://127.0.0.1:8000/posts/posts/", form_data, {
             headers: {
-              'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
             }
-          })
+        })
             .then((res) => {
                 console.log(res.data)
                 dispatch(getPosts())
             })
             .catch((err) => console.log(err))
-            return history.push("/home");
+        return history.push("/home");
     }
 
     return (
         <>
-            {/* navbar */}
-            <Navbar socket={socket} />
+            {localStorage.getItem("email") ? (
+                <>
+                    {/* navbar */}
+                    <Navbar socket={socket} />
 
-            {/* body */}
-            <div className="container mx-auto px-10 mb-8">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div className="lg:col-span-8 col-span-1">
-                        {/* add post */}
-                     
-                        <div className="pt-5">
-                            <section className="border rounded shadow-lg p-5 postcard  mt-5 " >
-                                   {/* /////////////////////////////////////////////////////// */}
-                      <input type="text"  placeholder="userid" onChange={(e)=> setUserName(e.target.value)}/>
-                      <button onClick={()=> setUser(parseInt(userName))}></button>
-                                {/* profile + date  */}
-                                <div className="row align-items-center mb-4">
-                                    <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
-                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
-                                            height="80" alt="" loading="lazy" />
-                                        <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
-                                    </div>
-                                    <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
-                                        <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-lg  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0">Add new post</button>
-                                    </div>
-                                    {/* <!-- Modal --> */}
-                                    <div className="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div className="modal-dialog modal-dialog-centered">
-                                            <div className="modal-content">
-                                                <div className="modal-header ">
-                                                    <h5 className="modal-title" id="staticBackdropLabel">add post</h5>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
+                    {/* body */}
+                    <div className="container mx-auto px-10 mb-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                            <div className="lg:col-span-8 col-span-1">
+                                {/* add post */}
 
-                                                <div className="modal-body">
-                                                    <form method="post" onSubmit={(e) => submitForm(e)} >
-                                                        <label>TiTle</label>
-                                                        <input type='text' className='form-control' name='title' required onChange={(e) => changeData(e)} />
-                                                        <label>details</label>
-                                                        <input type="text" className='form-control offertxt' name='details' onChange={(e) => changeData(e)} />
-                                                        <label>Post photo</label>
-                                                        <input type="file" className='form-control' name='photo' required onChange={(e) => changeData(e)} />
-                                                        <label>price</label>
-                                                        <input type='text' className='form-control' name='price' required onChange={(e) => changeData(e)} />
-                                                        <label>From </label>
-                                                        <input type='text' className='form-control' name='from' required onChange={(e) => changeData(e)} />
-                                                        <label>Delivery location </label>
-                                                        <input type='text' className='form-control' name='to' required onChange={(e) => changeData(e)} />
-                                                        <label>Choose relevant tags</label>
-                                                        <Select
-                                                            closeMenuOnSelect={true}
-                                                            components={animatedComponents}
-                                                            isMulti
-                                                            options={tagsoptions}
-                                                            onChange={(e) => changeSelectedTags(e)}
-                                                            name="tags"
-                                                            setValue
-                                                        />
-                                                        <div className="modal-footer">
-                                                            <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" className="btn btn-lg  darkcustombtn mt-3" onClick={gotohome()}>Post</button>
+                                <div className="pt-5">
+                                    <section className="border rounded shadow-lg p-5 postcard  mt-5 " >
+                                        {/* /////////////////////////////////////////////////////// */}
+                                        {/* <input type="text"  placeholder="userid" onChange={(e)=> setUserName(e.target.value)}/>
+                      <button onClick={()=> setUser(parseInt(userName))}></button> */}
+                                        {/* profile + date  */}
+                                        <div className="row align-items-center mb-4">
+                                            <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
+                                                <img src={localStorage.getItem("ProfilePic")} className="me-2 userImage"
+                                                    height="80" alt="ProfilePic" loading="lazy" />
+                                                <Link to="#" className="ps-2 text-link"> <span>{localStorage.getItem("username")}</span> </Link>
+                                            </div>
+                                            <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
+                                                <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="btn btn-lg  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0">Add new post</button>
+                                            </div>
+                                            {/* <!-- Modal --> */}
+                                            <div className="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div className="modal-dialog modal-dialog-centered">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header ">
+                                                            <h5 className="modal-title" id="staticBackdropLabel">add post</h5>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                    </form>
+
+                                                        <div className="modal-body">
+                                                            <form method="post" onSubmit={(e) => submitForm(e)} >
+                                                                <label>TiTle</label>
+                                                                <input type='text' className='form-control' name='title' required onChange={(e) => changeData(e)} />
+                                                                <label>details</label>
+                                                                <input type="text" className='form-control offertxt' name='details' required onChange={(e) => changeData(e)} />
+                                                                <label>Post photo</label>
+                                                                <input type="file" className='form-control' name='photo' onChange={(e) => changeData(e)} />
+                                                                <label>price</label>
+                                                                <input type='text' className='form-control' name='price' required onChange={(e) => changeData(e)} />
+                                                                <label>From </label>
+                                                                <input type='text' className='form-control' name='from' required onChange={(e) => changeData(e)} />
+                                                                <label>Delivery location </label>
+                                                                <input type='text' className='form-control' name='to' required onChange={(e) => changeData(e)} />
+                                                                <label>Choose relevant tags</label>
+                                                                <Select
+                                                                    closeMenuOnSelect={true}
+                                                                    components={animatedComponents}
+                                                                    isMulti
+                                                                    options={tagsoptions}
+                                                                    onChange={(e) => changeSelectedTags(e)}
+                                                                    name="tags"
+                                                                    setValue
+                                                                />
+                                                                <div className="modal-footer">
+                                                                    <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Post</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            {/* end Modal  */}
+
+                                        </div>
+                                    </section>
+                                </div>
+
+                                {/* add post end */}
+                                {/* posts */}
+                                {isloading
+                                    ? (
+                                        <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
+                                            <div className="flex items-center justify-center mb-8 lg:mb-4 w-full lg:w-auto mr-8 items-center">
+                                                <h1 className="align-middle mt-8">
+                                                    < Loader />
+                                                </h1>
 
                                             </div>
                                         </div>
-                                    </div>
-                                    {/* end Modal  */}
+                                    )
+                                    : (
+                                        posts.map((post, index) => (
+                                            
+                                            <PostCard key={index} post={post} socket={socket}  />
+                                        ))
+                                    )
+                                }
+                            </div>
 
-                                </div>
-                            </section>
                         </div>
 
-                        {/* add post end */}
-                        {/* posts */}
-                        {isloading
-                            ? (
-                                <div className="block lg:flex text-center items-center justify-center mb-8 w-full">
-                                    <div className="flex items-center justify-center mb-8 lg:mb-4 w-full lg:w-auto mr-8 items-center">
-                                        <h1 className="align-middle mt-8">
-                                            < Loader />
-                                        </h1>
-
-                                    </div>
-                                </div>
-                            )
-                            : (
-                                posts.map((post, index) => (
-                                    <PostCard key={index} post={post} socket={socket} user={user}/>
-                                ))
-                            )
-                        }
                     </div>
+                    <div >
+                    </div>
+                    {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */}
 
-                </div>
-
-            </div>
+                </>
+            ) : history.push("/login")}
         </>
-
     )
 }

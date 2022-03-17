@@ -15,9 +15,14 @@
 .darkcustombtnActive{
     background-color: #FAAF40 !important;
     color: #151A1E !important;
+    border: #FAAF40 !important;
 
 }
 .offertxt{
     height: 130px !important;
 }
-
+.userImage{
+    /* width: 30px; */
+    border-radius: 50%;
+    object-fit: cover;
+}

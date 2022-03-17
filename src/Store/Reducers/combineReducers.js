@@ -4,6 +4,7 @@ import loader from "./setLoader"
 import tagsList from './getTags'
 import offers from "./getOffers"
 import deals from "./getDeals";
+import auth from "./auth";
 
 // combineReducers is built in function in redux
 export default combineReducers(
@@ -13,5 +14,6 @@ export default combineReducers(
         TAGS:tagsList,
         OFFERS: offers,
         DEALS: deals,
+        auth: auth,
     }
 );

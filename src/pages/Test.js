@@ -1,7 +1,13 @@
-import React from 'react'
-
+import React from "react";
+import NotLoggedIn from "../components/NotLoggedIn/NotLoggedIn";
 export default function Test() {
+  console.log(localStorage.getItem("email"));
   return (
-    <div>test redirect</div>
-  )
+    <>
+
+  { localStorage.getItem("email") ? (
+    <div><h1>iam logged in</h1></div>
+  ) : <NotLoggedIn/>}
+    </>
+  );
 }
