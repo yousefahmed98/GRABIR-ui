@@ -64,7 +64,6 @@ export default function StarRating(props) {
         window.location.pathname === "/deals/" ? (
           <>
             <form onSubmit={(e) => submitForm(e)}>
-              <p>POST OWNER **TO** OFFER OWENER</p>
               {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
