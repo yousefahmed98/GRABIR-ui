@@ -78,35 +78,19 @@ export default function Navbar({ socket }) {
     for (let n of AllNotifications) {
       if (n.to_user == localStorage.getItem("id")) {
         setMyNotifications((prev) => [...prev, n])
-        // console.log(n)
-        // let flag = false
-        // // //senderName reseverid body
-        // if (mynotifications.length > 0) {
-        //   console.log("akter mn wahda")
-        //   for (let obj of AllNotifications) {
-        //     console.log("obj.id",obj.id)
-        //     if (obj.id == n.id) {
-        //       console.log(n.id)
-        //       flag = true
-        //     }
-        //   }
-        //   if (!flag) setMyNotifications((prev) => [...prev, n])
-        // }
-        // else {
-        //   setMyNotifications([n])
-        // }
-
       }
     }
     console.log(mynotifications)
 
   }
   const displayNotification = (nObj) => {
-    let senderName
     return (
-      <div>
-      <span className="notification border-bottom-dark">{`${nObj.from_user_name} ${nObj.body}`}</span>
-      {/* <button type="button" className=" btn  btn-sm darkcustombtnActive" onClick={handelRead(nObj)}>Mark as read</button> */}
+      <div className="row border">
+         <span className="col-lg-4 col-md-4 col-sm-4 rounded-5">
+        <img src={nObj.from_user_ProfilePic} className="img-fluid  rounded-5 me-2 userImage" height="30"
+          alt="ProfilePic" loading="lazy"/>
+      </span>
+      <span className="notification border-bottom-dark col-lg-8 col-md-8 col-sm-8 pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
       </div>
     )
 
@@ -161,14 +145,6 @@ export default function Navbar({ socket }) {
                     <Link to="/offers" className="nav-link"> Offers</Link>
                   </CNavLink>
                 </CNavItem>
-                {/* <CNavItem>
-                  <CNavLink href="#">
-                    <Link to="/profile" className="nav-link"> My Profile</Link>
-                  </CNavLink>
-                </CNavItem> */}
-                {/* <CNavItem>
-                <CNavLink href="#">Favourites</CNavLink>
-              </CNavItem> */}
                 {localStorage.getItem("id") ? (
                   <>
                     <CNavItem>
@@ -216,7 +192,7 @@ export default function Navbar({ socket }) {
       {openNotifications &&
         <div className="notifications border border-dark rounded  p-3">
           {mynotifications.map((n) => displayNotification(n))}
-          <button type="button" className=" btn  btn-sm darkcustombtnActive" onClick={handelRead}>Mark as read</button>
+          <button type="button" className=" btn  btn-sm darkcustombtnActive mt-3" onClick={handelRead}>Mark as read</button>
         </div>
       }
 
