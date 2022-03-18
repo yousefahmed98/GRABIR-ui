@@ -38,7 +38,7 @@ export default function DealsCard(props) {
     dispatch(getOffersAction());
   }, []);
   return (
-    <div style={{ backgroundColor: "#151A1E" }}>
+    <div style={{ backgroundColor: "#151A1E" }} className="dealsCard">
       {offers.map((offer, index) => {
         if (offer.status) {
           console.log("offer deals carddd: ", offer);

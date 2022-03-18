@@ -16,7 +16,7 @@ export default function Reviews(props) {
   //   console.log("test user",rates)
   const current_user = localStorage.getItem("id");
   return (
-    <>
+    <div className="reviews">
       {/* <label>
             <input type="radio" name="rating" />
             <FaStar className="star" color={"#ffc107"} size={70} />
@@ -72,6 +72,6 @@ export default function Reviews(props) {
             <hr />
         </div>
       ) : null}
-    </>
+    </div>
   );
 }

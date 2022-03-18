@@ -7,7 +7,7 @@
     -moz-column-gap: 1em;
 } */
 
-.item {
+.offersCard .item {
     margin-top:5%;
     z-index: 0;
 }

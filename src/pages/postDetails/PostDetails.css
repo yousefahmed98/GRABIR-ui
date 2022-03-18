@@ -1,7 +1,7 @@
-.postcontainer{
+.post-page .postcontainer{
     position: relative;
 }
-.post{
+.post-page .post{
     position: absolute;
     top: 50%;
     left: 50%;

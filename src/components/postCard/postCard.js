@@ -164,7 +164,8 @@ export default function PostCard({ post }) {
   //--------------------
   return (
     // https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg
-    <div className="pt-5">
+    <div className="postsCards">
+    <div className="pt-5 ">
       {/* post section  start*/}
       <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
         {/* profile + date  */}
@@ -283,7 +284,7 @@ export default function PostCard({ post }) {
 
     </div>
 
-
+    </div>
 
   )
 

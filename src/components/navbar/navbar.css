@@ -1,44 +1,46 @@
 /***************************** NAVABAR**********************************************/
 /*   old nav style */
 /* NAVLOGO */
-.navbar{
-  background-color: #faaf40 !important;
+.navbaring .navbar{
+  background-color: #212529 !important;
 }
-.nav-link {
-  color: #151a1e !important;
+.navbaring .nav-link {
+  color: #ffff ;
+  height: 1vh;
 }
 
 /* 3 LINKS ON RIGHT */
-.homelink {
+.navbaring .homelink {
   margin: 10px 0px;
   font-weight: 500;
   font-size: x-large;
 }
+.navbaring .nav-link:hover {
+  color: #cca000;
+}
 
-.bell {
-  width: 50px;
-}
-.chat {
-  width: 50px;
-}
 
 /* Nav bar */
-.cnavbar , .COffcanvas{
+.navbaring .cnavbar , .navbaring .COffcanvas{
 
-  background-color: #faaf40 ;
+  background-color: #212529 ;
   font-size: large;
   z-index: 0;
   
 }
-.cnavbar{ 
+.navbaring .navbar-toggler{
+  background-color:#ece48c ;
+  color:#212529 ;
+}
+.navbaring .cnavbar{ 
   z-index: 100;
   position:relative;
 }
 /* right side of navbar */
-.nav-right{
+.navbaring .nav-right{
   margin-left: auto;
-  padding: 0.5%;
+  /* padding: 0.5%; */
 }
-.notify-icon{
-  padding-top: 1.3%;
+.navbaring .notify-icon{
+  margin-top: 8% ;
 }

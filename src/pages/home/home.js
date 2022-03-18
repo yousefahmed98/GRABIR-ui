@@ -174,7 +174,7 @@ export default function Home() {
   });
 
   return (
-    <>
+    <div className="home">
       {localStorage.getItem("email") ? (
         <>
           {/* navbar */}
@@ -366,6 +366,6 @@ export default function Home() {
       ) : (
         history.push("/login")
       )}
-    </>
+    </div>
   );
 }

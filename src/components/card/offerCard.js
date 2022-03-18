@@ -48,7 +48,7 @@ export default function OffersCard(props) {
   };
 
   return (
-    <div style={{ backgroundColor: "#151A1E" }}>
+    <div style={{ backgroundColor: "#151A1E" }} className="offersCard">
       {props.offers.map((offer, index) => {
         if (!offer.status)
           return (

@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import "./popup.css";
-import logo from "../../static/navbar/logo-default.png";
+import logo from "../../pages/landing/assets/img/logo2.svg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import TextField from "@mui/material/TextField";
@@ -111,7 +111,7 @@ export default function Popup(props) {
   };
 
   return (
-    <>
+    <div className="popup">
       <div
         className="modal fade"
         id="exampleModalToggle"
@@ -122,7 +122,7 @@ export default function Popup(props) {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content ">
             <div className="modal-header ">
-              <img className="modaaalcss" src={logo} alt="logo"></img>
+              <img className="modaaalcss" src={logo} alt="logo" style={{width:"25%"}}></img>
               <h5 className="modal-title" id="exampleModalLabel">
                 Make Your Offer
               </h5>
@@ -288,6 +288,6 @@ export default function Popup(props) {
       >
         Make Offer
       </Button>
-    </>
+    </div>
   );
 }

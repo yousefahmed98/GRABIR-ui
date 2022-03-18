@@ -13,7 +13,7 @@ export default function Profile() {
     const [key, setKey] = useState('home');
   
     return (
-    <>
+    <div class="profile">
         <Navbar />
         {/* <Picture  /> */}
         <Btnpic />
@@ -105,7 +105,7 @@ export default function Profile() {
         </Tab>
       </Tabs>
       </div>
-      </>
+      </div>
     );
   }
   

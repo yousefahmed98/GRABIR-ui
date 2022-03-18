@@ -1,8 +1,8 @@
-input[type="radio"] {
+.reviews input[type="radio"] {
     display: none;
 }
 
-.star{
+.reviews .star{
     cursor: pointer;
     transition: color 200ms;
 }
