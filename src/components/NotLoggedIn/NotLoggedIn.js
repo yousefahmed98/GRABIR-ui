@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function NotLoggedIn() {
-    document.body.style.backgroundColor = "#151A1E" ;
+    // document.body.style.backgroundColor = "#151A1E" ;
   return (
       <div>
     <div className='container text-center'>

@@ -94,8 +94,9 @@ export const login = (email, password) => (dispatch) => {
         type: LOGIN_SUCCESS,
         payload: res.data.tokens,
       });
-      localStorage.setItem("loginErr", "success")
       dispatch(load_user());
+      localStorage.setItem("loginErr", "success")
+
     })
     
     .catch((err) => {
@@ -103,14 +104,14 @@ export const login = (email, password) => (dispatch) => {
         type: LOGIN_FAIL,
       })
       localStorage.setItem("loginErr",err.response.data.detail)
-      return (
-        <div>
-          <Login>
-          <h1>test test</h1>
-          </Login>
+      // return (
+      //   <div>
+      //     <Login>
+      //     <h1>test test</h1>
+      //     </Login>
           
-        </div>
-      )
+      //   </div>
+      // )
     }
             
     );
