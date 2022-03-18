@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getNotifications } from "../../Store/Actions/getNotifications"
 import { axiosInstance } from "../../network/axiosInstance"
 // new navbar component 
-export default function Navbar({ socket }) {
+export default function Navbar() {
   const logout = () => {
     localStorage.removeItem("is_staff");
     localStorage.removeItem("id");
@@ -35,6 +35,7 @@ export default function Navbar({ socket }) {
   const [mynotifications, setMyNotifications] = useState([])
   const [openNotifications, setOpenNotifications] = useState(false)
   const AllNotifications = useSelector((state) => state.NOTIFICATIONS.notificationsList) //state
+  const socket = useSelector((state) => state.SOCKET.socket);
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function Navbar({ socket }) {
 
   useEffect(() => {
     //get all notifications of current user
-    if (AllNotifications.length > 0) {
+    if (AllNotifications.length > 0 && mynotifications.length == 0 ) {
       getCurrentUserNotifications()
     }
 
@@ -78,24 +79,6 @@ export default function Navbar({ socket }) {
     for (let n of AllNotifications) {
       if (n.to_user == localStorage.getItem("id")) {
         setMyNotifications((prev) => [...prev, n])
-        // console.log(n)
-        // let flag = false
-        // // //senderName reseverid body
-        // if (mynotifications.length > 0) {
-        //   console.log("akter mn wahda")
-        //   for (let obj of AllNotifications) {
-        //     console.log("obj.id",obj.id)
-        //     if (obj.id == n.id) {
-        //       console.log(n.id)
-        //       flag = true
-        //     }
-        //   }
-        //   if (!flag) setMyNotifications((prev) => [...prev, n])
-        // }
-        // else {
-        //   setMyNotifications([n])
-        // }
-
       }
     }
     console.log(mynotifications)
@@ -105,10 +88,9 @@ export default function Navbar({ socket }) {
     console.log(nObj.from_user_ProfilePic)
     return (
       
-      <div className="row">
-      <span className="col-lg-4 col-md-4 rounded-5">
-        <img src={nObj.from_user_ProfilePic} className="img-fluid  rounded-5 me-2 "
-            alt="post image" width='60%' length='130px' />
+      <div className="row border mb-3">
+      <span className="col-lg-3 col-md-3 rounded-5 p-2">
+       <img src={nObj.from_user_ProfilePic} className="me-2 userImage"height="60" alt="ProfilePic" loading="lazy" />
       </span>
       <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
       {/* <button type="button" className=" btn  btn-sm darkcustombtnActive" onClick={handelRead(nObj)}>Mark as read</button> */}
