@@ -75,7 +75,7 @@ export default function DealsCard(props) {
   // };
 console.log(userid,"-------------------------------------------------")
   return (
-    <div style={{ backgroundColor: "#151A1E" }}>
+    <div style={{ backgroundColor: "#151A1E" }} className="dealsCard">
       {offers.map((offer, index) => {
         if (offer.status) {
           console.log("offer deals carddd: ", offer);
@@ -258,7 +258,6 @@ console.log(userid,"-------------------------------------------------")
             </Grid>
           );
         }
-        return <div> Deals Card </div>;
       })}
     </div>
   );

@@ -6,12 +6,13 @@ import Home from './pages/home/home'
 import PostDetails from './pages/postDetails/PostDetails'
 import "./components/fonts.css"
 import Register from './pages/register/register';
-import LandingPage from './components/landing_page/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Offers from './pages/offers/offers';
 import Deals from './pages/deals/Deals';
 import Profile from './pages/profile/Profile';
 import StarRating from "./components/StarRating/StarRating";
+import Landing from "./pages/landing/landing";
+
 import PayPal from "./components/PayPal/PayPal";
 
 
@@ -20,7 +21,6 @@ function App() {
     <BrowserRouter>
         <Switch>
         <Route path={"/paypal"} exact component={PayPal} />
-          <Route path={"/"} exact component={LandingPage} />
           <Route path={"/login"} exact component={Login} />
           <Route path={"/register"} exact component={Register} />
           <Route path={"/home"} exact component={Home} />
@@ -29,6 +29,11 @@ function App() {
           <Route path={"/deals"} exact component={Deals} />
           <Route path={"/rate"} exact  component={StarRating} />
           <Route path={"/myprofile"} exact component={Profile} />
+
+          <Route path={"/"} exact component={Landing} />
+
+
+
           <Route path="*" exact component={NotFound} />
         </Switch>
     </BrowserRouter>

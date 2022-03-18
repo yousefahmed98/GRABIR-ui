@@ -1,5 +1,14 @@
+import React from "react"
+
 import { useState, useEffect } from "react";
-import logodark from "../../static/navbar/logo-dark.png";
+// import logodark from "../../static/navbar/logo-dark.png";
+// import logo from "../../static/navbar/logo-default.png";
+import logo from "../../pages/landing/assets/img/logo2.svg";
+
+
+// import bell from "../../static/navbar/bell.png"
+// import chat from "../../static/navbar/chat.png"
+
 import "./navbar.css";
 import {
   CNavbar, CContainer, CNavbarToggler, COffcanvas, COffcanvasHeader, COffcanvasBody, CNavbarNav, CNavLink
@@ -109,90 +118,106 @@ export default function Navbar() {
   }
   }
   return (
-    <div className="navParent">
-      <CNavbar colorScheme="light" className="bg-light fixed-top cnavbar" expand="lg">
-        <CContainer fluid>
-          <CNavbarToggler
-            aria-controls="offcanvasNavbar2"
-            aria-label="Toggle navigation"
-            onClick={() => setVisible(!visible)}
-          />
-          <COffcanvas className="COffcanvas" id="offcanvasNavbar2" placement="end" portal={false} visible={visible} onHide={() => setVisible(false)}>
-            <COffcanvasHeader>
-              <CCloseButton className="text-reset" onClick={() => setVisible(false)} />
-            </COffcanvasHeader>
-            <COffcanvasBody>
-              <CNavbarNav>
-                <CNavbarBrand href="/">
-                  <img src={logodark} alt="GRABIRLOGO" width={43} height={44} />
-                </CNavbarBrand>
-                <CNavItem>
-                  <CNavLink href="#" active>
-                    <Link to="/home" className="nav-link"> Home</Link>
+    <div className="navbaring">
+    <CNavbar    
+      className="fixed-top"
+      expand="lg"
+      style={{backgroundColor:"#212529", color: "#ffff"}}
+    >
+      <CContainer fluid>
+        <CNavbarToggler
+          aria-controls="offcanvasNavbar2"
+          aria-label="Toggle navigation"
+          onClick={() => setVisible(!visible)}
+        />
+        <COffcanvas
+          className="COffcanvas"
+          id="offcanvasNavbar2"
+          placement="end"
+          portal={false}
+          visible={visible}
+          onHide={() => setVisible(false)}
+        >
+          <COffcanvasHeader>
+            <CCloseButton
+              className="text-reset"
+              onClick={() => setVisible(false)}
+            />
+          </COffcanvasHeader>
+          <COffcanvasBody>
+            <CNavbarNav>
+              <CNavbarBrand href="/">
+                <img src={logo} alt="GRABIRLOGO" style={{width:"5vw", height: "5vh"}} />
+              </CNavbarBrand>
+              <CNavItem>
+                <CNavLink href="/home" active>
+                  <p className="nav-link"> Home</p>
 
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink href="#">
-                    <Link to="/deals" className="nav-link"> Deals</Link>
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink href="#">
-                    <Link to="/offers" className="nav-link"> Offers</Link>
-                  </CNavLink>
-                </CNavItem>
-                {localStorage.getItem("id") ? (
-                  <>
-                    <CNavItem>
-                      <CNavLink onClick={() => logout()} href="#">
-                        <Link to="/login" className="nav-link"> Logout</Link>
-
-                      </CNavLink>
-                    </CNavItem>
-                    <CNavItem>
-                      <CNavLink href="#">
-                        <Link to="/profile" className="nav-link">    {localStorage.getItem("username")}</Link>
-
-                      </CNavLink>
-                    </CNavItem>
-                  </>
-                ) : (
-                  <>
-                    <CNavItem>
-                      <CNavLink href="/login">Login</CNavLink>
-                    </CNavItem>
-                    <CNavItem>
-                      <CNavLink href="/register">Register</CNavLink>
-                    </CNavItem>
-                  </>
-                )}
-                {/* ////////////////////////////////////////////// */}
-
-                <CNavItem className="notify-icon"  >
+                </CNavLink>
+              </CNavItem>
+              <CNavItem>
+                <CNavLink href="/deals">
+                  <p className="nav-link"> Deals</p>
+                </CNavLink>
+              </CNavItem>
+              <CNavItem>
+                <CNavLink href="/offers">
+                  <p className="nav-link"> Offers</p>
+                </CNavLink>
+              </CNavItem>
+           
+              
+            </CNavbarNav>
+            {/* <CForm className="d-flex  nav-right">  */}
+              {/* <CFormInput type="search" className="me-2" placeholder="Search" /> */}
+              <CNavbarNav className="d-flex  nav-right">
+             <CNavItem className="notify-icon"  >
                   <div onClick={() => setOpenNotifications(!openNotifications)}>
                     {visible ? null : <Notify width={"30px"} count={openNotifications ? 0 : mynotifications.length} />}
                   </div>
                 </CNavItem>
-
+              {localStorage.getItem("id") ? (
+                <>
+                 <CNavItem>
+                    <CNavLink href="/myprofile">
+                      <p className="nav-link">{localStorage.getItem("username")}</p>
+                    </CNavLink>
+                  </CNavItem>
+                  <CNavItem>
+                    <CNavLink onClick={() => logout()} href="/login">
+                      <p  className="nav-link"> Logout</p>
+                    </CNavLink>
+                  </CNavItem>
+                 
+                </>
+              ) : (
+                <>
+                  {null}
+                
+                </>
+              )}
+            
               </CNavbarNav>
-              {/* <CForm className="d-flex  nav-right">
-                <CFormInput type="search" className="me-2" placeholder="Search" />
-                <CButton type="submit" variant="outline" color="light" className="me-2">
-                  Search
-                </CButton>
-              </CForm> */}
-            </COffcanvasBody>
-          </COffcanvas>
-        </CContainer>
-      </CNavbar>
-      {openNotifications &&
+              {/* <CButton
+                type="submit"
+                variant="outline"
+                color="light"
+                className="me-2"
+              >
+                Search
+              </CButton> */}
+             {/* </CForm> */}
+          </COffcanvasBody>
+        </COffcanvas>
+      </CContainer>
+    </CNavbar>
+     {openNotifications &&
         <div className="notifications border border-dark rounded  p-3">
           {mynotifications.map((n) => displayNotification(n))}
           <button type="button" className=" btn  btn-sm darkcustombtnActive mt-3" onClick={handelRead}>Mark as read</button>
         </div>
       }
-
     </div>
-  )
+  );
+
 }

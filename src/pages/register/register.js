@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
-// import logodark from "../../static/navbar/logo-dark.png";
-import logo from "../../static/navbar/logo-default.png";
 import { Link } from "react-router-dom";
-import "./register.css";
-// import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
+import axios from "axios";
+import { connect } from "react-redux";
+import "../login/login2.css";
+import { login } from "../../Store/Actions/auth";
+import TextField from "@mui/material/TextField";
+import logo from "../landing/assets/img/logo2.svg";
 import Navbar from "../../components/navbar/navbar";
-
+// import { useSelector } from "react-redux";
+// import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
 export default function Register() {
-  document.body.style.backgroundColor = "#151A1E";
   const history = useHistory();
   const [userForm, setUserForm] = useState({
     first_name: "",
@@ -181,190 +182,194 @@ export default function Register() {
   };
 
   return (
-    <>
+    <div className="login">
       {localStorage.getItem("email") ? (
-        history.push("/")
+        history.push("/home")
       ) : (
         <>
-        <Navbar/>
-          <div className="container text-light ">
-            <div className="row p-5">
-              {/* LEFT */}
-              <div className="col-lg-8 col-sm-12 mainPage">
-                <h3 className="mb-3 mt-1 headTitle">REGISTER</h3>
-                {/* START OF FORM  */}
-                <form onSubmit={(e) => submitForm(e)} className="col-8">
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-2 mr-5">
-                    <label htmlFor="exampleInputUser1" className="form-label">
-                      Username
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="usernameID"
-                      aria-describedby="userHelp"
-                      value={userForm.username}
-                      onChange={(e) => changeData(e)}
-                      name="username"
-                    />
-                    <div id="usernameHelp" className="form-text text-danger">
-                      {errors.usernameErr}
+          <section className="vh-100 bg-image bgImage">
+            <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+              <div className="container h-100">
+                <div className="row d-flex justify-content-center align-items-center ">
+                  <img src={logo} style={{ width: "40%" }} alt="..." />
+                </div>
+
+                <div className="row d-flex justify-content-center align-items-center ">
+                  <div className="col-8 col-md-8 col-lg-5 col-xl-6 ">
+                    <div className="card" style={{ borderRadius: 15 }}>
+                      <div className="card-body p-5">
+                        <h2 className="text-uppercase text-center mb-2">
+                          REGISTER
+                        </h2>
+
+                        <form onSubmit={(e) => submitForm(e)} >
+                          <div className="mb-2">
+                            <TextField
+                              id="usernameID"
+                              className="form-control"
+                              label="Username"
+                              type="text"
+                              // style={{ marginBottom: 5 }}
+                              value={userForm.username}
+                              onChange={(e) => changeData(e)}
+                              name="username"
+                              required
+                            />
+                            <div
+                              id="usernameHelp"
+                              className="form-text text-danger"
+                            >
+                              {errors.usernameErr}
+                            </div>
+                          </div>
+                          <div className="mb-2">
+                            <TextField
+                              id="EmailID"
+                              className={`form-control ${
+                                errors.emailErr ? "border-danger" : ""
+                              }`}
+                              label="Email"
+                              type="email"
+                              // style={{ marginBottom: 5 }}
+                              name="email"
+                              value={userForm.email}
+                              onChange={(e) => changeData(e)}
+                              minLength="6"
+                              required
+                            />
+                            <div
+                              id="emailHelp"
+                              className="form-text text-danger"
+                            >
+                              {errors.emailErr}
+                            </div>
+                          </div>
+                          <div className="mb-2">
+                            <TextField
+                              id="PasswordID"
+                              className={`form-control ${
+                                errors.passwordErr ? "border-danger" : ""
+                              }`}
+                              label="Password"
+                              type="password"
+                              // style={{ marginBottom: 5 }}
+                              name="password"
+                              value={userForm.password}
+                              onChange={(e) => changeData(e)}
+                              minLength="6"
+                              required
+                            />
+
+                            <div
+                              id="passwordHelp"
+                              className="form-text text-danger"
+                            >
+                              {errors.passwordErr}
+                            </div>
+                          </div>
+                          <div className="mb-2">
+                            <TextField
+                              id="conpasswordID"
+                              type="password"
+                              className={`form-control ${
+                                errors.confirmpassErr ? "border-danger" : ""
+                              }`}
+                              label="Password"
+                              // style={{ marginBottom: 5 }}
+                              name="confirmpassword"
+                              value={userForm.confirmpass}
+                              onChange={(e) => changeData(e)}
+                              required
+                            />
+                            <div
+                              id="conpasswordHelp"
+                              className="form-text text-danger"
+                            >
+                              {errors.confirmpassErr}
+                            </div>
+                          </div>
+                          <div className="mb-2">
+                            <TextField
+                              id="firstnameID"
+                              className="form-control"
+                              label="First name"
+                              type="text"
+                              // style={{ marginBottom: 5 }}
+                              value={userForm.first_name}
+                              onChange={(e) => changeData(e)}
+                              name="firstname"
+                              required
+                            />
+                          </div>
+                          <div className="mb-2">
+                            <TextField
+                              id="lastnameID"
+                              className="form-control"
+                              label="Last name"
+                              type="text"
+                              // style={{ marginBottom: 5 }}
+                              value={userForm.last_name}
+                              onChange={(e) => changeData(e)}
+                              name="lastname"
+                              required
+                            />
+                          </div>
+                          <div className="mb-2">
+                            <TextField
+                              id="phoneID"
+                              className="form-control"
+                              label="Phone number"
+                              type="text"
+                              // style={{ marginBottom: 5 }}
+                              value={userForm.phone_number}
+                              onChange={(e) => changeData(e)}
+                              name="phonenumber"
+                              required
+                            />
+                          </div>
+                          <div className="mb-2">
+                            <TextField
+                              id="regionID"
+                              className="form-control"
+                              label="Region"
+                              type="text"
+                              // style={{ marginBottom: 5 }}
+                              value={userForm.region}
+                              onChange={(e) => changeData(e)}
+                              name="region"
+                              required
+                            />
+                          </div>
+                          <div className="text-danger">
+                            {errors.all_registerErr}
+                          </div>
+
+                          <div className="d-flex justify-content-center">
+                            <button
+                              disabled={errors.emailErr || errors.passwordErr}
+                              type="submit"
+                              className="btn btn-warning btn-block btn-lg gradient-custom-4 text-body"
+                            >
+                              Register
+                            </button>
+                          </div>
+
+                          <p className="text-center text-muted">
+                            Already have an account?{" "}
+                            <a href="/login" className="fw-bold text-body">
+                              <u>Login here!</u>
+                            </a>
+                          </p>
+                        </form>
+                      </div>
                     </div>
                   </div>
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-2 mr-5">
-                    <label htmlFor="exampleInputEmail1" className="form-label">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      className={`form-control ${
-                        errors.emailErr ? "border-danger" : ""
-                      }`}
-                      id="EmailID"
-                      aria-describedby="emailHelp"
-                      value={userForm.email}
-                      onChange={(e) => changeData(e)}
-                      name="email"
-                    />
-                    <div id="emailHelp" className="form-text text-danger">
-                      {errors.emailErr}
-                    </div>
-                  </div>
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-2 mr-5">
-                    <label
-                      htmlFor="exampleInputPassword1"
-                      className="form-label"
-                    >
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      className={`form-control ${
-                        errors.passwordErr ? "border-danger" : ""
-                      }`}
-                      id="PasswordID"
-                      name="password"
-                      value={userForm.password}
-                      onChange={(e) => changeData(e)}
-                    />
-                    <div id="passwordHelp" className="form-text text-danger">
-                      {errors.passwordErr}
-                    </div>
-                  </div>
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-2 mr-5">
-                    <label
-                      htmlFor="exampleInputPassword1"
-                      className="form-label"
-                    >
-                      Confirm password
-                    </label>
-                    <input
-                      type="password"
-                      className={`form-control ${
-                        errors.confirmpassErr ? "border-danger" : ""
-                      }`}
-                      id="conpasswordID"
-                      name="confirmpassword"
-                      value={userForm.confirmpass}
-                      onChange={(e) => changeData(e)}
-                    />
-                    <div id="conpasswordHelp" className="form-text text-danger">
-                      {errors.confirmpassErr}
-                    </div>
-                  </div>
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-2 mr-5">
-                    <label
-                      htmlFor="exampleInputFirstname1"
-                      className="form-label"
-                    >
-                      First name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="firstnameID"
-                      aria-describedby="firstnameHelp"
-                      value={userForm.first_name}
-                      onChange={(e) => changeData(e)}
-                      name="firstname"
-                    />
-                  </div>
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-2 mr-5">
-                    <label
-                      htmlFor="exampleInputLastname1"
-                      className="form-label"
-                    >
-                      Last name
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="lastnameID"
-                      aria-describedby="lastnameHelp"
-                      value={userForm.last_name}
-                      onChange={(e) => changeData(e)}
-                      name="lastname"
-                    />
-                  </div>
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-2 mr-5">
-                    <label htmlFor="exampleInputPhone1" className="form-label">
-                      Phone number
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="phoneID"
-                      aria-describedby="phoneHelp"
-                      value={userForm.phone_number}
-                      onChange={(e) => changeData(e)}
-                      name="phonenumber"
-                    />
-                  </div>
-                  {/* ----------------------------------------------------------------------------------------- */}
-                  <div className="mb-4 mr-5">
-                    <label htmlFor="exampleInputRegion1" className="form-label">
-                      Region
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="regionID"
-                      aria-describedby="regionHelp"
-                      value={userForm.region}
-                      onChange={(e) => changeData(e)}
-                      name="region"
-                    />
-                  </div>
-                  <div className="text-danger">{errors.all_registerErr}</div>
-                  <div className="row">
-                    <button
-                      disabled={errors.emailErr || errors.passwordErr}
-                      type="submit"
-                      className="btn submitbtn me-2 col-lg-6 col-sm-12"
-                    >
-                      Register
-                    </button>
-                    <p className="col-lg-5 col-sm-12">have an account? <Link className="text-primary text-decoration-none" to="/login">Login here</Link></p>
-                  </div>
-                </form>
+                </div>
               </div>
-              {/* RIGHT */}
-              <div className="col-lg-4 describtion">
-                <img src={logo} className="logo" alt="logoimage"/>
-                <h5 className="mb-5 mt-2 ms-5 headTitle">GRABIR</h5>
-              </div>
-              
             </div>
-          </div>
-          </>
+          </section>
+        </>
       )}
-    </>
+    </div>
   );
 }

@@ -1,25 +1,25 @@
-.custom-modal-header{
+.home .custom-modal-header{
     background-color: #FAAF40 !important;
     color:#151A1E !important;
 }
 
-.main {
+.home .main {
     display: flex;
     align-items: center;
     flex-direction: column;
     row-gap: 20px;
 }
 
-h1 {
+.home h1 {
     margin: 10px;
     font-size: 40px;
     color: rgb(1, 1, 59);
 }
 
-.search {
+.home .search {
     width: 30%;
 }
 
-ul li {
+.home ul li {
     font-size: 20px;
 } 

@@ -18,13 +18,13 @@ export default function Offers(props) {
 }, []);
   
   return (
-    <>
+    <div className="offers">
       {localStorage.getItem("email") ? (
         <>
           <Navbar />
           <OffersCard offers={offersArray} />
         </>
       ) : history.push("/login")}
-    </>
+    </div>
   );
 }

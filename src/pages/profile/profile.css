@@ -1,10 +1,10 @@
-.tabss {
+.profile .tabss {
     background-color: #fffcf8;
     padding:5% !important ;
     border: solid black 1px;
 }
 
-.tab {
+.profile .tab {
     background-color: #fffcf8;
     padding:5%;
     border: solid black 2px;
@@ -15,27 +15,27 @@
     -o-border-radius: 15px;
 }
 
-.btn-add {
+.profile .btn-add {
     background-color: #faaf40 !important;
     color: black !important;
 }
-.btn-add:hover {
+.profile .btn-add:hover {
     background-color: rgb(24, 22, 22) !important;
     color: #faaf40 !important;
 }
 
 
-h4, p {
+.profile h4, p {
     display : inline;
 }
 
-.modal-box {
+.profile .modal-box {
     /* border: red solid 2px; */
     color:rgb(24, 22, 22);
     background-color:#faaf40;
     
 }
-.pic {
+.profile .pic {
     border: solid red 10px;
 
 }

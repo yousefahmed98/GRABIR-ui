@@ -48,7 +48,7 @@ export default function OffersCard(props) {
   };
 
   return (
-    <div style={{ backgroundColor: "#151A1E" }}>
+    <div style={{ backgroundColor: "#151A1E" }} className="offersCard">
       {props.offers.map((offer, index) => {
         if (!offer.status)
           return (
@@ -250,9 +250,7 @@ export default function OffersCard(props) {
          
           );
         else return (
-          <div key={index}>
-            There is not offers to show!
-          </div>
+          console.log("nothing to show")
         );
       })}
     </div>

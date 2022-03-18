@@ -1,27 +1,27 @@
-.postcard{
+.postsCards .postcard{
     background-color: #ffff !important;
     color: #000 !important;
 }
-.text-link{
+.postsCards .text-link{
    text-decoration: none; 
    color: #000 !important;
    font: bold;
    font-size: large;
 }
-.darkcustombtn{
+.postsCards .darkcustombtn{
     background-color: #151A1E !important;
     color: #ffff !important;
 }
-.darkcustombtnActive{
+.postsCards .darkcustombtnActive{
     background-color: #FAAF40 !important;
     color: #151A1E !important;
     border: #FAAF40 !important;
 
 }
-.offertxt{
+.postsCards .offertxt{
     height: 130px !important;
 }
-.userImage{
+.postsCards .userImage{
     /* width: 30px; */
     border-radius: 50%;
     object-fit: cover;
