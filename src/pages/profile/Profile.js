@@ -1,3 +1,4 @@
+import { Reviews } from '@mui/icons-material';
 import React, { useState } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import Navbar from '../../components/navbar/navbar';
@@ -8,7 +9,7 @@ import Editadd from './Edit copy';
 // import Picture from './Picture';
 // import Picture from './picture';
 import './profile.css'
-
+import StarRating from "../../components/StarRating/StarRating"
 export default function Profile() {
     const [key, setKey] = useState('home');
   
@@ -28,34 +29,25 @@ export default function Profile() {
             <>
             <div>
                 <h4>
-                  First Name :
+                  Firstname : 
                </h4>
-                 <p> Nehal</p>
+                 <p className='text-capitalize'> {localStorage.getItem("firstname")}</p>
                  <hr/>
                  <h4> 
-                     Last Name :
+                     Lastname :
                  </h4>
-                 <p> Hassan </p>
+                 <p className='text-capitalize'> {localStorage.getItem("lastname")}</p>
                  <hr/>
                  <h4>
-                    User Name :
+                    Username :
                 </h4>
-                 <p> Nehalh4</p>
+                 <p className='text-capitalize'> {localStorage.getItem("username")} </p>
                  <hr/>
                  <h4>
-                    City :
+                    Region :
                  </h4>
-                 <p> Giza </p>
+                 <p className='text-capitalize'> {localStorage.getItem("region")} </p>
                  <hr/>
-                 <h4>
-                    State :
-                 </h4>
-                <p> 6oct</p>
-                <hr/>
-                 <h4>
-                     Zip Code :
-                 </h4>
-                 <p> 11062</p>
              </div>
            <br />
            <br />
@@ -65,42 +57,46 @@ export default function Profile() {
 
 
         {/*  TAB 2 */}
-        <Tab eventKey="profile" title="ADDRESS" className='tab'>
+        <Tab eventKey="profile" title=" Security Information" className='tab'>
         <>
             <div>
-                <h4>
+                 <h4>
+                    ID :
+                </h4>
+                 <p> {localStorage.getItem("id")}</p>
+                 <hr/>
+                 <h4>
                   Email :
                </h4>
-                 <p> Nehalhbhsd@gmail.com</p>
+                 <p className='text-capitalize'> {localStorage.getItem("email")} </p> 
                  <hr/>
                  <h4> 
                     Password :
                  </h4>
-                 <p>  </p>
+                 <p> ********** </p>
                  <hr/>
                  <h4>
-                    Address :
-                </h4>
-                 <p> Nehalh4</p>
-                 <hr/>
-                 <h4>
-                    Address 1 :
+                   Date joined :
                  </h4>
-                 <p> Giza </p>
+                 <p> {localStorage.getItem("dateJoined")} </p>
                  <hr/>
                  <h4>
-                    State :
+                   Email verfied :
                  </h4>
-                <p> 6oct</p>
+                <p> {localStorage.getItem("isVerfied") === "true" ? "Yes" : "No" } </p>
                 <hr/>
-                 <h4>
-                     Zip Code :
-                 </h4>
-                 <p> 11062</p>
              </div>
            <br />
            <br />
         <Editadd />
+            </>
+        </Tab>
+
+        <Tab eventKey="review" title="Reviews" className='tab'>
+            <>
+            <h3>Rates & comments : </h3>
+
+            <StarRating/>
             </>
         </Tab>
       </Tabs>
@@ -108,4 +104,3 @@ export default function Profile() {
       </>
     );
   }
-  

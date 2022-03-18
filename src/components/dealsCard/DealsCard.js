@@ -21,7 +21,6 @@ import StarRating from "../StarRating/StarRating";
 // import { getDeals } from "../../Store/Actions/getDeals";
 import { getOffersAction } from "../../Store/Actions/getOffers";
 
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -50,14 +49,13 @@ export default function DealsCard(props) {
               >
                 <CardHeader
                   avatar={
-
-//                     <Avatar
-//                       columns={{ xs: 4, sm: 8, md: 12 }}
-//                       sx={{ backgroundColor: "#151A1E" }}
-//                       aria-label="recipe"
-//                     >
-//                     R
-//                     </Avatar>
+                    //                     <Avatar
+                    //                       columns={{ xs: 4, sm: 8, md: 12 }}
+                    //                       sx={{ backgroundColor: "#151A1E" }}
+                    //                       aria-label="recipe"
+                    //                     >
+                    //                     R
+                    //                     </Avatar>
                     <img
                       src={offer.ownerProfilePic}
                       className="me-2 userImage"
@@ -65,7 +63,6 @@ export default function DealsCard(props) {
                       alt="deal owner"
                       loading="lazy"
                     />
-
                   }
                   action={
                     <IconButton aria-label="settings">
@@ -201,7 +198,9 @@ export default function DealsCard(props) {
                               <DealCountDown date={offer.delivery_date} />
                             </Item>
                             <StarRating
-                            offerOwner = {offer.offer_owner}/>
+                              offerOwner={offer.offer_owner}
+                              PostID={offer.post}
+                            />
                           </Grid>
                         </Grid>
                       </CardActions>
@@ -212,7 +211,8 @@ export default function DealsCard(props) {
             </Grid>
           );
         }
-      return <div> Deals Card </div>})}
+        return <div> Deals Card </div>;
+      })}
     </div>
   );
 }
