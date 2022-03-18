@@ -1,3 +1,4 @@
+import { Reviews } from '@mui/icons-material';
 import React, { useState } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import Navbar from '../../components/navbar/navbar';
@@ -8,7 +9,7 @@ import Editadd from './Edit copy';
 // import Picture from './Picture';
 // import Picture from './picture';
 import './profile.css'
-
+import StarRating from "../../components/StarRating/StarRating"
 export default function Profile() {
     const [key, setKey] = useState('home');
   
@@ -28,24 +29,24 @@ export default function Profile() {
             <>
             <div>
                 <h4>
-                  First Name :
+                  Firstname : 
                </h4>
-                 <p> {localStorage.getItem("firstname")}</p>
+                 <p className='text-capitalize'> {localStorage.getItem("firstname")}</p>
                  <hr/>
                  <h4> 
-                     Last Name :
+                     Lastname :
                  </h4>
-                 <p> {localStorage.getItem("lastname")}</p>
+                 <p className='text-capitalize'> {localStorage.getItem("lastname")}</p>
                  <hr/>
                  <h4>
-                    User Name :
+                    Username :
                 </h4>
-                 <p> {localStorage.getItem("username")} </p>
+                 <p className='text-capitalize'> {localStorage.getItem("username")} </p>
                  <hr/>
                  <h4>
                     Region :
                  </h4>
-                 <p> {localStorage.getItem("region")} </p>
+                 <p className='text-capitalize'> {localStorage.getItem("region")} </p>
                  <hr/>
              </div>
            <br />
@@ -60,14 +61,14 @@ export default function Profile() {
         <>
             <div>
                  <h4>
-                    ID number :
+                    ID :
                 </h4>
                  <p> {localStorage.getItem("id")}</p>
                  <hr/>
                  <h4>
                   Email :
                </h4>
-                 <p> {localStorage.getItem("email")} </p> 
+                 <p className='text-capitalize'> {localStorage.getItem("email")} </p> 
                  <hr/>
                  <h4> 
                     Password :
@@ -75,12 +76,12 @@ export default function Profile() {
                  <p> ********** </p>
                  <hr/>
                  <h4>
-                    Joined :
+                   Date joined :
                  </h4>
-                 <p> {localStorage.getItem("dataJoined")} </p>
+                 <p> {localStorage.getItem("dateJoined")} </p>
                  <hr/>
                  <h4>
-                    Verfied :
+                   Email verfied :
                  </h4>
                 <p> {localStorage.getItem("isVerfied") === "true" ? "Yes" : "No" } </p>
                 <hr/>
@@ -90,10 +91,16 @@ export default function Profile() {
         <Editadd />
             </>
         </Tab>
-        
+
+        <Tab eventKey="review" title="Reviews" className='tab'>
+            <>
+            <h3>Rates & comments : </h3>
+
+            <StarRating/>
+            </>
+        </Tab>
       </Tabs>
       </div>
       </>
     );
   }
-  

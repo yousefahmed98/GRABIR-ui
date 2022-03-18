@@ -42,95 +42,97 @@ export default function StarRating(props) {
       .catch((err) => console.log(err));
   };
 
-
-
   const getid = () => {
     axios
-    .get(`http://127.0.0.1:8000/posts/posts/${props.PostID}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-        Accept: "application/json",
-      },
-    })
-    .then((res) => {
-      if (props.offerOwner == localStorage.getItem("id"))
-       setRating({ ...rating, user: res.data.user })
-    });
-  }
+      .get(`http://127.0.0.1:8000/posts/posts/${props.PostID}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+          Accept: "application/json",
+        },
+      })
+      .then((res) => {
+        if (props.offerOwner == localStorage.getItem("id"))
+          setRating({ ...rating, user: res.data.user });
+      });
+  };
 
   return (
     <div className="mt-2">
-        <>
-          {window.location.pathname === "/deals" ||
-          window.location.pathname === "/deals/" ? (
-            <>
-              <form onSubmit={(e) => submitForm(e)}>
-                <p>POST OWNER **TO** OFFER OWENER</p>
-                {[...Array(5)].map((star, i) => {
-                  const ratingValue = i + 1;
-                  return (
-                    <>
-                      <label key={i}>
-                        <input
-                          type="radio"
-                          name="rating"
-                          value={ratingValue}
-                          onClick={() =>
-                            setRating({
-                              ...rating,
-                              stars: ratingValue,
-                            })
-                          }
-                        />
-                        <FaStar
-                          className="star"
-                          color={
-                            ratingValue <= (hover || rating.stars)
-                              ? "#ffc107"
-                              : "#e4e5e9"
-                          }
-                          size={30}
-                          onMouseEnter={() => setHover(ratingValue)}
-                          onMouseLeave={() => setHover(null)}
-                        />
-                      </label>
-                    </>
-                  );
-                })}
-                <input
-                  placeholder="Leave your message"
-                  type="text-area"
-                  name="review"
-                  onChange={(e) => onChange(e)}
-                />
-                <button type="submit" className="btn btn-info bt-lg ms-2"
-                onMouseEnter={() => getid()}>
-                  Submit
-                </button>
-              </form>
-            </>
-          ) : null}
-
-          {window.location.pathname === "/rate/" ||
-          window.location.pathname === "/rate" ? (
-            <>
-              {rates.map((rate) => {
+      <>
+        {window.location.pathname === "/deals" ||
+        window.location.pathname === "/deals/" ? (
+          <>
+            <form onSubmit={(e) => submitForm(e)}>
+              <p>POST OWNER **TO** OFFER OWENER</p>
+              {[...Array(5)].map((star, i) => {
+                const ratingValue = i + 1;
                 return (
                   <>
-                    <Reviews
-                      rateReviewMsg={rate.review}
-                      rateReviewUser={rate.user}
-                      rateReviewID={rate.id}
-                      rateReviewStars={rate.stars}
-                    />
+                    <label key={i}>
+                      <input
+                        type="radio"
+                        name="rating"
+                        value={ratingValue}
+                        onClick={() =>
+                          setRating({
+                            ...rating,
+                            stars: ratingValue,
+                          })
+                        }
+                      />
+                      <FaStar
+                        className="star"
+                        color={
+                          ratingValue <= (hover || rating.stars)
+                            ? "#ffc107"
+                            : "#e4e5e9"
+                        }
+                        size={30}
+                        onMouseEnter={() => setHover(ratingValue)}
+                        onMouseLeave={() => setHover(null)}
+                      />
+                    </label>
                   </>
                 );
               })}
-            </>
-          ) : null}
-        </>
-      )
+              <input
+                placeholder="Leave your message"
+                type="text-area"
+                name="review"
+                onChange={(e) => onChange(e)}
+              />
+              <button
+                type="submit"
+                className="btn btn-info bt-lg ms-2"
+                onMouseEnter={() => getid()}
+              >
+                Submit
+              </button>
+            </form>
+          </>
+        ) : null}
+
+        {window.location.pathname === "/rate/" ||
+        window.location.pathname === "/rate" ||
+        window.location.pathname === "/myprofile" ||
+        window.location.pathname === "/myprofile/" ? (
+          <>
+            {rates.map((rate) => {
+              return (
+                <>
+                  <Reviews
+                    rateReviewMsg={rate.review}
+                    rateReviewUser={rate.user}
+                    rateReviewID={rate.id}
+                    rateReviewStars={rate.stars}
+                  />
+                </>
+              );
+            })}
+          </>
+        ) : null}
+      </>
     </div>
   );
 }
