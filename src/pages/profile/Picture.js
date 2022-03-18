@@ -3,7 +3,7 @@ import {
     Card,
     Stack
 } from 'react-bootstrap'
-import Btnpic from './Btnpicture'
+// import Btnpic from './Btnpicture'
 import "./profile.css"
 
 
@@ -18,7 +18,7 @@ export default function Picture({data}) {
             </Card>
         </div>
 
-        <div className="bg-light border"> <Btnpic /> </div>
+        {/* <div className="bg-light border"> <Btnpic /> </div> */}
         </Stack>
         </>
   )

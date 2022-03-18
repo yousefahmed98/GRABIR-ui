@@ -116,6 +116,7 @@ const Login2 = ({ login }) => {
                           </p>
                         </form>
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -125,6 +126,7 @@ const Login2 = ({ login }) => {
         </>
       )}
     </div>
+
   );
 };
 

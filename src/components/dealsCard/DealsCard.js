@@ -20,6 +20,10 @@ import DealCountDown from "../../components/countDown/countdown";
 import StarRating from "../StarRating/StarRating";
 // import { getDeals } from "../../Store/Actions/getDeals";
 import { getOffersAction } from "../../Store/Actions/getOffers";
+import PayPal from "../PayPal/PayPal";
+import axios from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -32,11 +36,44 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function DealsCard(props) {
   const offers = useSelector((state) => state.OFFERS.offers);
-  // console.log("deaaaaaaaaaaaals: ",offers)
+  const [userid , setUserid] = useState(null);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getOffersAction());
+
   }, []);
+
+  const getUSerID = (postid) => {
+    axios
+        .get(`http://127.0.0.1:8000/posts/posts/${postid}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+            Accept: "application/json",
+          },
+        })
+        .then((res) => {
+          // console.log(res.data.user, "tesssssssssssssssssssst")
+          // setUserid(res.data.user)
+          return res.data.user
+        })
+    }
+  // useEffect
+  // const getid = () => {
+  //   axios
+  //     .get(`http://127.0.0.1:8000/posts/posts/${props.PostID}`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${localStorage.getItem("access")}`,
+  //         Accept: "application/json",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       if (props.offerOwner == localStorage.getItem("id"))
+  //         setRating({ ...rating, user: res.data.user });
+  //     });
+  // };
+console.log(userid,"-------------------------------------------------")
   return (
     <div style={{ backgroundColor: "#151A1E" }} className="dealsCard">
       {offers.map((offer, index) => {
@@ -50,14 +87,13 @@ export default function DealsCard(props) {
               >
                 <CardHeader
                   avatar={
-
-//                     <Avatar
-//                       columns={{ xs: 4, sm: 8, md: 12 }}
-//                       sx={{ backgroundColor: "#151A1E" }}
-//                       aria-label="recipe"
-//                     >
-//                     R
-//                     </Avatar>
+                    //                     <Avatar
+                    //                       columns={{ xs: 4, sm: 8, md: 12 }}
+                    //                       sx={{ backgroundColor: "#151A1E" }}
+                    //                       aria-label="recipe"
+                    //                     >
+                    //                     R
+                    //                     </Avatar>
                     <img
                       src={offer.ownerProfilePic}
                       className="me-2 userImage"
@@ -65,7 +101,6 @@ export default function DealsCard(props) {
                       alt="deal owner"
                       loading="lazy"
                     />
-
                   }
                   action={
                     <IconButton aria-label="settings">
@@ -196,12 +231,23 @@ export default function DealsCard(props) {
                               </IconButton>
                             </Item>
                           </Grid>
+                       
                           <Grid item xs={12}>
                             <Item>
                               <DealCountDown date={offer.delivery_date} />
                             </Item>
+                            {/* { localStorage.getItem("id") == getUSerID(offer.post) ? <p>sheif</p> :  
+                            
+                            <PayPal 
+                            USERID = {userid}
+                            />} */}
+                            <Link to="/paypal" className="btn btn-warning btn-lg">
+                              Checkout
+                            </Link>
                             <StarRating
-                            offerOwner = {offer.offer_owner}/>
+                              offerOwner={offer.offer_owner}
+                              PostID={offer.post}
+                            />
                           </Grid>
                         </Grid>
                       </CardActions>
