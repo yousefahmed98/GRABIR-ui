@@ -14,8 +14,7 @@ import makeAnimated from 'react-select/animated'
 import axios from 'axios'
 import Popup from '../popup/popup'
 
-export default function PostCard({ post }) {
-  console.log("post.ownerProfilePic ",post.ownerProfilePic)
+export default function PostCard({ post ,socket}) {
   const [style, setStyle] = useState("darkcustombtn");
   const history = useHistory()
   
@@ -23,9 +22,37 @@ export default function PostCard({ post }) {
   // get all tags 
   const dispatch = useDispatch();
   const tags = useSelector((state) => state.TAGS.allTags)
+  const [currentuser, setCurrentuser] = useState({
+    username:"",
+    id:null,
+  })
+
   useEffect(() => {
+
+    setCurrentuser({
+      ...currentuser,
+      username:localStorage.getItem("username"),
+      id:localStorage.getItem("id"),
+    })
+
     dispatch(getTags())
   }, []);
+
+  useEffect(() => {
+    if (currentuser.id !== null) {
+        console.log(socket.on("welcomeMessage", (msg) => {
+            console.log(msg, currentuser)
+            console.log(currentuser, "currentuser messsage////////")
+        }))
+
+       //send event to server
+       socket?.emit("newUser", currentuser)
+    }
+  
+    
+}, [socket, currentuser])
+
+
   // for tags select component
   const animatedComponents = makeAnimated();
   const tagsoptions = []
@@ -123,7 +150,9 @@ export default function PostCard({ post }) {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
       }
     })
-      .then(history.push(`/home/`))
+      .then(
+        history.push(`/home/`)
+        )
       .catch((err) => console.log(err))
   }
 
@@ -206,7 +235,7 @@ export default function PostCard({ post }) {
         <div className="row align-items-center mb-4  ">
           {
 
-            localStorage.getItem("id") === post.user
+            localStorage.getItem("id") == post.user
               ?
               (
                 <>
@@ -227,8 +256,8 @@ export default function PostCard({ post }) {
               )
               :
               <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-              <Popup postID={post.id} post={post} />
-              </div>
+              <Popup postID={post.id} post={post} socket={socket} currentuser={currentuser}/>
+            </div>
 
           }
 

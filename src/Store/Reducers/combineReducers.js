@@ -6,6 +6,7 @@ import offers from "./getOffers"
 import deals from "./getDeals";
 import auth from "./auth";
 import rateList from "./getRate"
+import notificationsList from "./getNotifications"
 
 // combineReducers is built in function in redux
 export default combineReducers(
@@ -18,5 +19,6 @@ export default combineReducers(
         auth: auth,
         RATE: rateList,
 
+        NOTIFICATIONS:notificationsList,
     }
 );

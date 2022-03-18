@@ -1,17 +1,25 @@
-import React from "react";
-import { useState } from "react";
-import { axiosInstance } from "../../network/axiosInstance";
-import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import "./popup.css";
-import logo from "../../static/navbar/logo-default.png";
-import DeleteIcon from "@mui/icons-material/Delete";
-import DoneIcon from "@mui/icons-material/Done";
-import TextField from "@mui/material/TextField";
+import React from "react"
+import { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { axiosInstance } from "../../network/axiosInstance"
+import { getOffersAction } from "../../Store/Actions/getOffers"
+import Button from "@mui/material/Button"
+import SendIcon from "@mui/icons-material/Send"
+import LocalOfferIcon from "@mui/icons-material/LocalOffer"
+import "./popup.css"
+import logo from "../../static/navbar/logo-default.png"
+import DeleteIcon from "@mui/icons-material/Delete"
+import DoneIcon from "@mui/icons-material/Done"
+import TextField from "@mui/material/TextField"
+import axios from 'axios'
 
 export default function Popup(props) {
-
+  const [newNotifyObj, setNewNotifyObj] = useState({
+    body: "",
+    from_user_name: null,
+    to_user: null,
+  })
+  //////////////////////////
   const [offerForm, setOfferForm] = useState({
     details: "",
     from_region: "",
@@ -30,6 +38,41 @@ export default function Popup(props) {
     delivery_dateErr: null,
     priceErr: null,
   });
+/////////////////////////////////////////////////////////////////////////////
+const handleNotification =(type)=>{
+  //lmafrod acreate notification object f db
+  //type hwa body
+  props.socket.emit("sendNotification",{
+    senderName:props.currentuser.username,
+    reciverId:props.post.user,
+    type,
+  })
+
+  setNewNotifyObj({
+    ...newNotifyObj,
+    body: type,
+    from_user_name: props.currentuser.username,
+    from_user:props.currentuser.id,
+    to_user: props.post.user,
+  })
+
+}
+useEffect(() => {
+  //post request new notification object 
+  if (newNotifyObj.body.length > 0) {
+    console.log("sending api post request" ,newNotifyObj)
+    axiosInstance.post('/notification/notifications/',newNotifyObj, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      }
+    })
+      .then((res) => {
+        console.log(newNotifyObj)
+      })
+      .catch((err) => console.log(err))
+  }
+}, [newNotifyObj])
+/////////////////////////////////////////////////////////////////////////////
 
   //-------------------------------------------------------
 
@@ -242,6 +285,8 @@ export default function Popup(props) {
                       errors.priceErr ||
                       errors.delivery_dateErr
                     }
+                    onClick={()=>handleNotification("send you offer")} /////////////////
+
                   >
                     Send Offer
                   </Button>
