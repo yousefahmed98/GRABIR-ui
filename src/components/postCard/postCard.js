@@ -206,22 +206,22 @@ const setuser = ()=>{
               height="80" alt="" loading="lazy" />
             <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
           </div>
-          <span className='pt-2 me-2'> Published on<u>{post.created_at}</u></span>
+          <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
         </div>
         {/* profile + date end  */}
         {/* post content start */}
         <div className="row align-items-center mb-4">
           <div className="col-lg-6 col-md-12 inline">
-            <h1>{post.title}</h1>
+            <h2>{post.title}</h2>
             <p>
               {post.description}
-            </p>
-            <p>want it from : {post.from_region}</p>
-            <p>Delivery will be in: {post.to}</p>
-            <p>Price maximun limit: {post.price} $</p>
+            </p> <br/>
+            <p>From : {post.from_region}</p> <br/>
+            <p>I am in: {post.to}</p> <br/>
+            <p>Price: {post.price}$</p> <br/>
             {
               postTags.map((tag, index) => (
-                <span key={index} className="me-3" >#{tag}</span>))
+                <span  key={index} className="me-3 text-info" >#laptop#macbookpro#getthis#unitedstates</span>))
             }
           </div>
           { post.postpicture !== null
