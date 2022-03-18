@@ -1,34 +1,35 @@
 
-.bodylogin {
+.login .bodylogin {
     height: 100vh;
     font-family: 'Roboto', sans-serif;
 }
 /* Page Body After NavBar */
 
 /* LOGIN REGISTER */
-.headTitle {
+.login .headTitle {
     font-size: 4rem;
+    color:#FAAF40;
 }
 
 /* description under REGISTER */
-.describtion{
+.login .describtion{
     font-size: 3rem;
 }
 /* FORM */
-input{
-    height: 4.5vh;
+.login input{
+    height: 3vh;
 }
 /* SubmitBTN */
-.submitbtn {
+.login .submitbtn {
     background-color: #FAAF40;
     font-size: 1.5rem;
     font-weight: 600;
-    padding: 3% 15%;
+    margin-right: 4%;
+    margin-top: 4%;
 }
 /* REGISTER */
-.registerbtn {
+.login .registerbtn {
     background-color: #FAAF40;
     font-size: 1.5rem;
-    padding: 5% 10%;
     font-weight: 600;
 }

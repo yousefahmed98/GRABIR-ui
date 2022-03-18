@@ -8,19 +8,18 @@ import PostDetails from './pages/postDetails/PostDetails'
 import Test from './pages/Test';
 import "./components/fonts.css"
 import Register from './pages/register/register';
-import LandingPage from './components/landing_page/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Offers from './pages/offers/offers';
 import Deals from './pages/deals/Deals';
 import Profile from './pages/profile/Profile';
 import StarRating from "./components/StarRating/StarRating";
+import Landing from "./pages/landing/landing";
 
 
 function App() {
   return (
     <BrowserRouter>
         <Switch>
-          <Route path={"/"} exact component={LandingPage} />
           <Route path={"/login"} exact component={Login} />
           <Route path={"/register"} exact component={Register} />
           <Route path={"/test"} exact component={Test} />
@@ -31,6 +30,9 @@ function App() {
           <Route path={"/rate"} exact  component={StarRating} />
           <Route path={"/myprofile"} exact component={Profile} />
           <Route path={"/PaymentTest"} exact component={PaymentTest} />
+          <Route path={"/"} exact component={Landing} />
+
+
           <Route path="*" exact component={NotFound} />
         </Switch>
     </BrowserRouter>
