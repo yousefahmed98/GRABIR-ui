@@ -102,10 +102,15 @@ export default function Navbar({ socket }) {
 
   }
   const displayNotification = (nObj) => {
-    let senderName
+    console.log(nObj.from_user_ProfilePic)
     return (
-      <div>
-      <span className="notification border-bottom-dark">{`${nObj.from_user_name} ${nObj.body}`}</span>
+      
+      <div className="row">
+      <span className="col-lg-4 col-md-4 rounded-5">
+        <img src={nObj.from_user_ProfilePic} className="img-fluid  rounded-5 me-2 "
+            alt="post image" width='60%' length='130px' />
+      </span>
+      <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
       {/* <button type="button" className=" btn  btn-sm darkcustombtnActive" onClick={handelRead(nObj)}>Mark as read</button> */}
       </div>
     )
