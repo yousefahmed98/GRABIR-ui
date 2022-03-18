@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getNotifications } from "../../Store/Actions/getNotifications"
 import { axiosInstance } from "../../network/axiosInstance"
 // new navbar component 
-export default function Navbar({ socket }) {
+export default function Navbar() {
   const logout = () => {
     localStorage.removeItem("is_staff");
     localStorage.removeItem("id");
@@ -35,6 +35,7 @@ export default function Navbar({ socket }) {
   const [mynotifications, setMyNotifications] = useState([])
   const [openNotifications, setOpenNotifications] = useState(false)
   const AllNotifications = useSelector((state) => state.NOTIFICATIONS.notificationsList) //state
+  const socket = useSelector((state) => state.SOCKET.socket);
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function Navbar({ socket }) {
 
   useEffect(() => {
     //get all notifications of current user
-    if (AllNotifications.length > 0 && mynotifications.length==0) {
+    if (AllNotifications.length > 0 && mynotifications.length == 0 ) {
       getCurrentUserNotifications()
     }
 
@@ -67,10 +68,6 @@ export default function Navbar({ socket }) {
   
   }, [socket])
 
-  
-
-  console.log(notifications, "gaya mn socket")
-  console.log(mynotifications, "after set")
 
   const getCurrentUserNotifications = () => {
     console.log("AllNotifications: ", AllNotifications)
@@ -85,12 +82,13 @@ export default function Navbar({ socket }) {
   }
   const displayNotification = (nObj) => {
     return (
-      <div className="row border">
-         <span className="col-lg-4 col-md-4 col-sm-4 rounded-5">
-        <img src={nObj.from_user_ProfilePic} className="img-fluid  rounded-5 me-2 userImage" height="30"
-          alt="ProfilePic" loading="lazy"/>
+      
+      <div className="row border mb-3">
+      <span className="col-lg-3 col-md-3 rounded-5 p-2">
+       <img src={nObj.from_user_ProfilePic} className="me-2 userImage"height="60" alt="ProfilePic" loading="lazy" />
       </span>
-      <span className="notification border-bottom-dark col-lg-8 col-md-8 col-sm-8 pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
+      <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
+      {/* <button type="button" className=" btn  btn-sm darkcustombtnActive" onClick={handelRead(nObj)}>Mark as read</button> */}
       </div>
     )
 
@@ -110,7 +108,6 @@ export default function Navbar({ socket }) {
 
   }
   }
-  console.log(mynotifications, "after set")
   return (
     <div className="navParent">
       <CNavbar colorScheme="light" className="bg-light fixed-top cnavbar" expand="lg">

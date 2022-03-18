@@ -14,10 +14,11 @@ import makeAnimated from 'react-select/animated'
 import axios from 'axios'
 import Popup from '../popup/popup'
 
-export default function PostCard({ post ,socket}) {
+export default function PostCard({ post}) {
   const [style, setStyle] = useState("darkcustombtn");
   const history = useHistory()
-  
+  //socket
+  const socket = useSelector((state) => state.SOCKET.socket);
   // ------------------------------update post if owner---------------------------------
   // get all tags 
   const dispatch = useDispatch();
@@ -28,16 +29,11 @@ export default function PostCard({ post ,socket}) {
   })
 
   useEffect(() => {
-
-    setCurrentuser({
-      ...currentuser,
-      username:localStorage.getItem("username"),
-      id:localStorage.getItem("id"),
-    })
-
     dispatch(getTags())
   }, []);
-
+  useEffect(()=>{
+    setuser()
+  },[localStorage.getItem("id")])
   useEffect(() => {
     if (currentuser.id !== null) {
         console.log(socket.on("welcomeMessage", (msg) => {
@@ -47,11 +43,16 @@ export default function PostCard({ post ,socket}) {
 
        //send event to server
        socket?.emit("newUser", currentuser)
-    }
-  
-    
+    }  
 }, [socket, currentuser])
 
+const setuser = ()=>{
+  setCurrentuser({
+    ...currentuser,
+    username:localStorage.getItem("username"),
+    id:localStorage.getItem("id"),
+  })
+}
 
   // for tags select component
   const animatedComponents = makeAnimated();
@@ -193,7 +194,7 @@ export default function PostCard({ post ,socket}) {
   //--------------------
   return (
     // https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg
-    <div className="pt-5">
+    <div className="pt-5"  >
       {/* post section  start*/}
       <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
         {/* profile + date  */}

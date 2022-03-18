@@ -13,8 +13,7 @@ import "../../components/fonts.css";
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-//socket for notifications
-import { io } from "socket.io-client";
+
 
 import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 
@@ -31,16 +30,10 @@ export default function Home() {
     const dispatch = useDispatch();
     // get all tags 
     const tags = useSelector((state) => state.TAGS.allTags)
-    /////////////////////////
-    const [socket, setSocket] = useState(null)
-    /////////////////////
+   
     useEffect(() => {
-        console.log("useEffect")
         dispatch(getPosts())
         dispatch(getTags())
-        const socket = io("http://localhost:5000")
-        setSocket(socket)
-        console.log("socket ",socket)
     }, []);
     
     const animatedComponents = makeAnimated();
@@ -183,7 +176,7 @@ export default function Home() {
       {localStorage.getItem("email") ? (
         <>
           {/* navbar */}
-          <Navbar socket={socket}/>
+          <Navbar/>
 
           {/* body */}
           <div className="container mx-auto px-10 mb-8">
@@ -359,7 +352,7 @@ export default function Home() {
                   </div>
                 ) : (
                   filteredData.map((post, index) => (
-                    <PostCard key={index} post={post} socket={socket}  />
+                    <PostCard key={index} post={post}  />
                   ))
                 )}
               </div>
