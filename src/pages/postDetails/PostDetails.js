@@ -10,6 +10,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
 // import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
 import { useHistory } from 'react-router-dom';
+import { getOffersAction } from "../../Store/Actions/getOffers";
+import SweetAlert from 'react-bootstrap-sweetalert';
+import OffersCard from "../../components/card/offerCard"
 
 export default function PostDetails() {
   const history = useHistory();
@@ -17,18 +20,32 @@ export default function PostDetails() {
   const dispatch = useDispatch();
   const params = useParams();   // return object for dynamic params  like /:id
   const [details, setDetails] = useState({})  //to store returned data
-  // const [owner, setOwner] = useState(false);
-
+  const offers = useSelector((state) => state.OFFERS.offers);
   useEffect(() => {
     dispatch(getPosts())
-    for (let post of posts) {
-      if (post.id === params.id) {
-        console.log(post)
-        setDetails(post)
-      }
-    }
-  }, [])
+    dispatch(getOffersAction());
 
+    
+  }, [])
+  
+///////////////////////////////////////////////////////////
+const [MyOffers, setMyOffers] = useState([]);
+const [CloseAlert, setCloseAlert] = useState(false);
+const getmyOffersListFun = () => {
+    let myOffersList = []
+    console.log("AllOffers" , offers)
+     for (let o of offers ){
+         if(o.post == params.id )
+         {
+             myOffersList.push(o)
+             setMyOffers((prev)=>[...prev,o])
+         }
+     }
+    console.log("myOffersList",myOffersList)
+         setMyOffers(myOffersList)
+         setCloseAlert(true)
+}
+///////////////////////////////////////////////////////////
   return (
     <>
     { localStorage.getItem("email") ? (
@@ -36,55 +53,11 @@ export default function PostDetails() {
  <Navbar />
  <div class="post-page">
       <div className="container mx-auto px-10 mb-8 ">
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="mt-3 lg:col-span-8 col-span-1 ">
-            <PostCard post={details} />
-            {/* add offer */}
-            {/* {owner} ? <></> : */}
-            <section className="border rounded shadow-1-strong p-5 postcard  mb-5" >
-              {/* profile + date  */}
-              <div className="row align-items-center mb-4">
-                <div className="col-lg-3 col-sm-3 text-center text-lg-start mb-lg-3 ">
-                  <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" className="rounded-5 shadow-1-strong me-2"
-                    height="80" alt="" loading="lazy" />
-                  <Link to="#" className="ps-2 text-link"> <span>Rahma</span> </Link>
-                </div>
-                <div className="col-lg-9 col-sm-9 text-center text-lg-start mb-lg-3  mb-5">
-                  <button type="submit" ata-bs-toggle="modal" className="btn btn-lg  darkcustombtn mt-3 ">send offer</button>
-
-                </div>
-                {/* <!-- Modal --> */}
-                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-                  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                  <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h5 className="modal-title" id="staticBackdropLabel">add post</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div className="modal-body">
-                        <form id="contact_form" className="form" action="login.html" encType="multipart/form-data" method="post">
-
-                          <label>details</label>
-                          <input type="text" className='form-control offertxt' />
-                          <label>price</label>
-                          <input type='text' className='form-control' />
-                          <label>Delivery date</label>
-                          <input type='text' className='form-control' />
-                          <button type="submit" className="btn btn-lg  darkcustombtn mt-3 ">send offer</button>
-                        </form>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </section>
-          </div>
-        </div>
+           {!CloseAlert &&
+             <SweetAlert title="Do you want to show  offers of this post? " onConfirm={()=>{ getmyOffersListFun()}}  />
+            
+            }
+            <OffersCard offers={MyOffers} />
       </div>
       </div>
       </>

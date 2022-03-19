@@ -210,10 +210,10 @@ export default function Home() {
                           alt="ProfilePic"
                           loading="lazy"
                         />
-                        <Link to="#" className="ps-2 text-link">
-                          {" "}
+                        {/* <Link to="#" className="ps-2 text-link">
+                          {" "} */}
                           <span>{localStorage.getItem("username")}</span>{" "}
-                        </Link>
+                        {/* </Link> */}
                       </div>
                       <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
                         <button

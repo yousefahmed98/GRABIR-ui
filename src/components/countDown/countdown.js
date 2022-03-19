@@ -15,7 +15,7 @@ export default function DealCountDown(props) {
 
   return (
     <div>
-      <h1>Countdown Timer</h1>
+      {/* <h1>Countdown Timer</h1> */}
       <CountdownTimer targetDate={dateTimeAfterThreeDays} />
     </div>
   );

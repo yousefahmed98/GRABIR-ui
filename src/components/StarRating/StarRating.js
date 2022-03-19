@@ -103,7 +103,7 @@ export default function StarRating(props) {
               />
               <button
                 type="submit"
-                className="btn btn-info bt-lg ms-2"
+                className="btn btn-info bt-lg ms-2 reviewbtn"
                 onMouseEnter={() => getid()}
               >
                 Submit

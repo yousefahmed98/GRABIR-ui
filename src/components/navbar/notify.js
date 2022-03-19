@@ -7,7 +7,7 @@ const notyIconStyle = {
 const notyNumStyle = {
   position: "absolute",
   right: "0",
-  backgroundColor: "rgb(0, 0, 0)",
+  backgroundColor: "#cca000",
   fontSize: "11px",
   color: "white",
   display: "inline",
