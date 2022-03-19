@@ -70,9 +70,16 @@ function MyCard(props) {
           {
             props.offer.offer_owner == localStorage.getItem("id")
               ?
-              <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Mark as Completed</button>
+
+              <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Mark as Completed</button>
               :
-              <Link to="/paypal"><button className="card__btn ms-5 " onClick={() => deleteDeal()}>Checkout </button></Link>
+              (
+               <div>
+                 <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Rate {props.offer.offer_owner_name}</button>
+                 <button className="card__btn ms-5 "  onClick={() => deleteDeal()} > Checkout </button>
+              </div>
+              )
+
 
           }
         </div>
@@ -119,7 +126,7 @@ function MyCard(props) {
                 <div className="lg:col-span-8 col-span-1">
                   {/* add post */}
                   <div className="pt-5">
-                    {offers.map((offer, index) => {
+                    {props.deals.map((offer, index) => {
                       if (offer.status) {
                         return (
                           <div className="wrapper mt-5 p-2" key={index}>

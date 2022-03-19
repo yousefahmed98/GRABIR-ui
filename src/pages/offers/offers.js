@@ -68,7 +68,6 @@ const getmyOffersListFun = () => {
             
             }
         
-          {/* <Button className="mt-5 p-t-5" onClick={ ()=>getmyOffersListFun()}>hellllllllllllo</Button> */}
           <OffersCard offers={MyOffers} />
         </>
       ) : history.push("/login")}
