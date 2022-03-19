@@ -69,9 +69,9 @@ function MyCard(props) {
           {
             props.offer.offer_owner == localStorage.getItem("id")
               ?
-              <Link to="/paypal"><button className="card__btn ms-5 " >Checkout </button></Link>
-              :
               <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => deleteDeal()}>Mark as Completed</button>
+              :
+              <Link to="/paypal"><button className="card__btn ms-5 " >Checkout </button></Link>
 
           }
         </div>
@@ -94,7 +94,7 @@ function MyCard(props) {
              
                 </div>
                 <div className="modal-body">
-                <StarRating offerOwner={props.offer_owner} PostID={props.post} />
+                <StarRating offerOwner={props.offer.offer_owner} PostID={props.offer.post} />
                 </div>
                 </div>
                 </div>
