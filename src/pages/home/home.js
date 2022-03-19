@@ -16,6 +16,7 @@ import makeAnimated from 'react-select/animated'
 
 
 import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
+import PayPal from "../../components/PayPal/PayPal";
 
 export default function Home() {
     //get all posts
