@@ -157,14 +157,6 @@ const setuser = ()=>{
       .catch((err) => console.log(err))
   }
 
-
-
-  //----------------------go to post details page------------------------------
-  // const postDetails = (e, post_id) => {
-  //   e.preventDefault()
-  //   console.log(post_id)
-  //   history.push(`/PostDetails/${post_id}`)
-  // }
   // --------------------delete post if owner-----------------------------------
   const postDelete = (e, post_id) => {
     e.preventDefault()
@@ -243,7 +235,7 @@ const setuser = ()=>{
               (
                 <>
                   <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                    <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => { history.push("/offers") }}>
+                    <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
                       show offers</button>
                   </div>
                   <div className="col-lg-3 col-md-3 col-sm-3 text-center">

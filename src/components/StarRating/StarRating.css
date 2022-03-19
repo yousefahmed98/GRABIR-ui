@@ -6,3 +6,11 @@ input[type="radio"] {
     cursor: pointer;
     transition: color 200ms;
 }
+.reviewbtn{
+    background: #cca000;
+    color: white;
+}
+.reviewbtn:hover {
+    background: white;
+    color: #cca000;
+  } 
