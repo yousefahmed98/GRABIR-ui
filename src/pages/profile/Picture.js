@@ -14,7 +14,7 @@ export default function Picture({data}) {
         <Stack direction="horizontal" gap={3}>
         <div className=" border pic">
             <Card style={{ width: '18rem' }}>
-                <Card.Img  variant="top" src={data} width="200px" height="200px"/>
+                <Card.Img  variant="top" src={localStorage.getItem("ProfilePic")}/>
             </Card>
         </div>
 
