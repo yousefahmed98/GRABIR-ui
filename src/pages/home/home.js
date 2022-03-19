@@ -203,6 +203,7 @@ export default function Home() {
 
                     <div className="row align-items-center mb-4">
                       <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
+                     
                         <img
                           src={localStorage.getItem("ProfilePic")}
                           className="me-2 userImage"
@@ -210,10 +211,7 @@ export default function Home() {
                           alt="ProfilePic"
                           loading="lazy"
                         />
-                        {/* <Link to="#" className="ps-2 text-link">
-                          {" "} */}
-                          <span>{localStorage.getItem("username")}</span>{" "}
-                        {/* </Link> */}
+                          <span className="">{localStorage.getItem("username")}</span>
                       </div>
                       <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
                         <button
