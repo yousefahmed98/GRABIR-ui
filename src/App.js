@@ -12,8 +12,12 @@ import Deals from './pages/deals/Deals';
 import Profile from './pages/profile/Profile';
 import StarRating from "./components/StarRating/StarRating";
 import Landing from "./pages/landing/landing";
+// import Landing from "./pages/reset-password/Confirmpass";
+
 
 import PayPal from "./components/PayPal/PayPal";
+import Confirmpass from "./pages/reset-password/Confirmpass";
+import Pass from "./pages/reset-password/Pass";
 
 
 function App() {
@@ -28,6 +32,8 @@ function App() {
           <Route path={"/offers"} exact component={Offers} />
           <Route path={"/deals"} exact component={Deals} />
           <Route path={"/rate"} exact  component={StarRating} />
+          <Route path={"/confirm"} exact  component={Confirmpass} />
+          <Route path={"/reset"} exact  component={Pass} />
           <Route path={"/myprofile"} exact component={Profile} />
 
           <Route path={"/"} exact component={Landing} />
