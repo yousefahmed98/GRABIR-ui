@@ -13,7 +13,7 @@ import "../../components/fonts.css";
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-
+import "./home.css"
 
 import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 import PayPal from "../../components/PayPal/PayPal";

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
-
-
-
+import Navbar from "../../components/navbar/navbar";
+import "./paypal.css"
 export default function PayPal() {
     const history = useHistory();
-    useEffect(() =>{
+    useEffect(() => {
         window.paypal.Buttons({
             createOrder: (data, actions) => {
                 return actions.order.create({
@@ -16,20 +15,24 @@ export default function PayPal() {
                     }]
                 });
             },
-            onApprove: (data,actions) => {
-                return actions.order.capture().then(details =>{
+            onApprove: (data, actions) => {
+                return actions.order.capture().then(details => {
                     history.push("/")
                     alert('Thanks for paying dear' + details.payer.name.given_name)
                 });
             }
         }).render('#paypal-button')
-    },[])
+    }, [])
     document.body.style.backgroundColor = "#151A1E"
-  return (
-    <div className='text-center' style={{padding: 150}}>
-        <h1 className='text-light p-4'>Click here to pay</h1>
-            <div id="paypal-button"></div>
-    </div>
-  
-  )
+    return (
+        <>
+            <Navbar />
+            <div className='text-center ' style={{ padding: 150 }}>
+                <h1 className='text-light p-4 title'>Click here to pay</h1>
+                <div id="paypal-button"></div>
+            </div>
+        </>
+
+
+    )
 }
