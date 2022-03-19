@@ -67,8 +67,8 @@ export default function StarRating(props) {
               {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
-                  <div key={i}>
-                    <label >
+                  <>
+                    <label key={i}>
                       <input
                         type="radio"
                         name="rating"
@@ -92,7 +92,7 @@ export default function StarRating(props) {
                         onMouseLeave={() => setHover(null)}
                       />
                     </label>
-                  </div>
+                  </>
                 );
               })}
               <input
@@ -117,16 +117,16 @@ export default function StarRating(props) {
         window.location.pathname === "/myprofile" ||
         window.location.pathname === "/myprofile/" ? (
           <>
-            {rates.map((rate, index) => {
+            {rates.map((rate) => {
               return (
-                <div key={index}>
+                <>
                   <Reviews
                     rateReviewMsg={rate.review}
                     rateReviewUser={rate.user}
                     rateReviewID={rate.id}
                     rateReviewStars={rate.stars}
                   />
-                </div>
+                </>
               );
             })}
           </>
