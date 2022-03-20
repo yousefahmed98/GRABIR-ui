@@ -76,7 +76,7 @@ function MyCard(props) {
               (
                <div>
                  <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Rate {props.offer.offer_owner_name}</button>
-                 <button className="card__btn ms-5 "  onClick={() => deleteDeal()} > Checkout </button>
+                <Link to ="/paypal"><button className="card__btn ms-5 "  onClick={() => deleteDeal()} > Checkout </button></Link> 
               </div>
               )
 
