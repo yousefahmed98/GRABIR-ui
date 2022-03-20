@@ -1,65 +1,49 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-// import { Link } from "react-router-dom";
 import axios from "axios";
-// import { connect } from "react-redux";
 import "../login/login2.css";
-// import { login } from "../../Store/Actions/auth";
 import TextField from "@mui/material/TextField";
 import logo from "../landing/assets/img/logo2.svg";
-// import Navbar from "../../components/navbar/navbar";
-// import { useSelector } from "react-redux";
-// import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
+import { useLocation } from "react-router-dom";
+
 export default function Confirmpass() {
   const history = useHistory();
+  const search = useLocation().search;
+  const token_valid_param = new URLSearchParams(search).get("token_valid");
+  const uidb64_param = new URLSearchParams(search).get("uidb64");
+  const token_param = new URLSearchParams(search).get("token");
+
+  console.log("naaaaaaaaaaame toke_valid: ", token_valid_param);
+  console.log("naaaaaaaaaaame uidb64: ", uidb64_param);
+  console.log("naaaaaaaaaaame token: ", token_param);
+
+  // const search =this.props.location.query;
+  // const params = new URLSearchParams(search);
+  // const token_valid  = params.get('token_valid');
+  // console.log("hahahahha ", token_valid)
   const [userForm, setUserForm] = useState({
-    email: "",
-    password: ""
+    token_valid: null,
+    uidb64: null,
+    password: null,
   });
 
   const [errors, setErrors] = useState({
-    emailErr: null,
     passwordErr: null,
-    confirmpassErr: null
   });
-  const validateEmail = (userOption) => {
-    let checker = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-    return checker.test(userOption);
-  };
+
   const validatePassword = (userOption) => {
     let checker =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return checker.test(userOption);
   };
 
-  const hasWhiteSpace = (s) => {
-    return s.indexOf(" ") >= 0;
-  };
-  // const checkConfirmPassword = () => {
-  //   if (userForm.password === userForm.confirmpass) {
-  //     return true;
-  //   } else return false;
-  // };
   const changeData = (e) => {
-    if (e.target.name === "email") {
-      const isEmail = validateEmail(e.target.value);
-      setUserForm({
-        ...userForm,
-        email: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        emailErr:
-          e.target.value.length === 0
-            ? "This field is required"
-            : !isEmail
-            ? "Invalid Email Format"
-            : null,
-      });
-    } else if (e.target.name === "password") {
+    if (e.target.name === "password") {
       const isPassword = validatePassword(e.target.value);
       setUserForm({
         ...userForm,
+        token: token_param,
+        uidb64: uidb64_param,
         password: e.target.value,
       });
       setErrors({
@@ -71,88 +55,16 @@ export default function Confirmpass() {
             ? "Invalid! Password Should contain atleast 8 characters --> one UpperCase, LowerCase, digit and special character"
             : null,
       });
-    } else if (e.target.name === "firstname") {
-      setUserForm({
-        ...userForm,
-        first_name: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        firstnameErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
-    } else if (e.target.name === "lastname") {
-      setUserForm({
-        ...userForm,
-        last_name: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        lastnameErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
-    } else if (e.target.name === "username") {
-      const has_WhiteSpace = hasWhiteSpace(e.target.value);
-      setUserForm({
-        ...userForm,
-        username: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        usernameErr:
-          e.target.value.length === 0
-            ? "This field is required"
-            : has_WhiteSpace
-            ? "Invalid Format! Username does not have spaces"
-            : null,
-      });
-    } else if (e.target.name === "confirmpassword") {
-      // const samePassword = checkConfirmPassword();
-      setUserForm({
-        ...userForm,
-        confirmpass: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        confirmpassErr:
-          e.target.value.length === 0
-            ? "This field is required"
-            : !userForm.password
-            ? "Does not match password!"
-            : null,
-      });
-    } else if (e.target.name === "phonenumber") {
-      setUserForm({
-        ...userForm,
-        phone_number: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        phone_numberErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
-    } else if (e.target.name === "region") {
-      setUserForm({
-        ...userForm,
-        region: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        regionErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
     }
   };
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (
-      !errors.emailErr &&
-      !errors.passwordErr 
-    ) {
+
+    if (!errors.passwordErr) {
       // SEND API REQUEST
       axios
-        .post("http://127.0.0.1:8000/base/register/", userForm)
+        .patch("http://127.0.0.1:8000/base/set-pass/", userForm)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
 
@@ -183,10 +95,10 @@ export default function Confirmpass() {
                     <div className="card" style={{ borderRadius: 15 }}>
                       <div className="card-body p-5">
                         <h2 className="text-uppercase text-center mb-2">
-                            Enter your new password :
+                          Enter your new password :
                         </h2>
 
-                        <form onSubmit={(e) => submitForm(e)} >
+                        <form onSubmit={(e) => submitForm(e)}>
                           <div className="mb-2">
                             <TextField
                               id="PasswordID"
@@ -224,17 +136,11 @@ export default function Confirmpass() {
                               onChange={(e) => changeData(e)}
                               required
                             />
-                            <div
-                              id="conpasswordHelp"
-                              className="form-text text-danger"
-                            >
-                              {errors.confirmpassErr}
-                            </div>
                           </div>
 
                           <div className="d-flex justify-content-center">
                             <button
-                              disabled={errors.emailErr || errors.passwordErr}
+                              disabled={errors.passwordErr}
                               type="submit"
                               className="btn btn-warning btn-block btn-lg gradient-custom-4 text-body"
                             >

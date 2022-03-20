@@ -15,7 +15,8 @@ import logo from "../landing/assets/img/logo2.svg";
 export default function Pass() {
   const history = useHistory();
   const [userForm, setUserForm] = useState({
-    email: ""
+    email: null,
+    redirect_url: "http://localhost:3000/confirm",
   });
 
   const [errors, setErrors] = useState({
@@ -26,14 +27,6 @@ export default function Pass() {
     return checker.test(userOption);
   };
 
-  const hasWhiteSpace = (s) => {
-    return s.indexOf(" ") >= 0;
-  };
-  // const checkConfirmPassword = () => {
-  //   if (userForm.password === userForm.confirmpass) {
-  //     return true;
-  //   } else return false;
-  // };
   const changeData = (e) => {
     if (e.target.name === "email") {
       const isEmail = validateEmail(e.target.value);
@@ -50,104 +43,19 @@ export default function Pass() {
             ? "Invalid Email Format"
             : null,
       });
-    } else if (e.target.name === "password") {
-      const isPassword = (e.target.value);
-      setUserForm({
-        ...userForm,
-        password: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        passwordErr:
-          e.target.value.length === 0
-            ? "This field is required"
-            : !isPassword
-            ? "Invalid! Password Should contain atleast 8 characters --> one UpperCase, LowerCase, digit and special character"
-            : null,
-      });
-    } else if (e.target.name === "firstname") {
-      setUserForm({
-        ...userForm,
-        first_name: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        firstnameErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
-    } else if (e.target.name === "lastname") {
-      setUserForm({
-        ...userForm,
-        last_name: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        lastnameErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
-    } else if (e.target.name === "username") {
-      const has_WhiteSpace = hasWhiteSpace(e.target.value);
-      setUserForm({
-        ...userForm,
-        username: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        usernameErr:
-          e.target.value.length === 0
-            ? "This field is required"
-            : has_WhiteSpace
-            ? "Invalid Format! Username does not have spaces"
-            : null,
-      });
-    } else if (e.target.name === "confirmpassword") {
-      // const samePassword = checkConfirmPassword();
-      setUserForm({
-        ...userForm,
-        confirmpass: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        confirmpassErr:
-          e.target.value.length === 0
-            ? "This field is required"
-            : !userForm.password
-            ? "Does not match password!"
-            : null,
-      });
-    } else if (e.target.name === "phonenumber") {
-      setUserForm({
-        ...userForm,
-        phone_number: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        phone_numberErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
-    } else if (e.target.name === "region") {
-      setUserForm({
-        ...userForm,
-        region: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        regionErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
     }
   };
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (!errors.emailErr && !errors.passwordErr) {
+    if (!errors.emailErr) {
       // SEND API REQUEST
-      axios
-        .post("http://127.0.0.1:8000/base/register/", userForm)
+      return axios
+        .post("http://127.0.0.1:8000/base/request-reset-email/", userForm)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
 
-      return history.push("/login");
+      // return history.push("/login");
     } else {
       return setErrors({
         ...errors,
