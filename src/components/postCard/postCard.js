@@ -213,7 +213,7 @@ const setuser = ()=>{
             <p>Price: {post.price}$</p> <br/>
             {
               postTags.map((tag, index) => (
-                <span  key={index} className="me-3 text-info" >#laptop#macbookpro#getthis#unitedstates</span>))
+                <span  key={index} className="me-3 text-info" >{tag}</span>))
             }
           </div>
           { post.postpicture !== null

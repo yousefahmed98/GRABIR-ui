@@ -178,6 +178,11 @@ export default function Navbar() {
                 </CNavItem>
               {localStorage.getItem("id") ? (
                 <>
+                  {/* <CNavItem>
+                    <CNavLink href="/myprofile">
+                    <img src={localStorage.getItem("ProfilePic")} className=" userImage"height="50" alt="ProfilePic" loading="lazy" />
+                    </CNavLink>
+                  </CNavItem> */}
                  <CNavItem>
                     <CNavLink href="/myprofile">
                       <p className="nav-link">{localStorage.getItem("username")}</p>

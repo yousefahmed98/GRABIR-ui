@@ -28,3 +28,35 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.box{
+
+	width: 100%;
+
+	height: 50px;
+
+	background-color: white;
+
+	border-radius: 30px;
+
+	display: flex;
+
+	align-items: center;
+
+	padding: 20px;
+
+}
+.input{
+    width: 100%;
+    border: none;
+    border: none;
+	outline: none;
+}
+.card__btn{
+    background: #e2b203 !important;
+    color: white !important;
+    border: none;
+}
+/* .card__btn:hover {
+   
+  }  */
