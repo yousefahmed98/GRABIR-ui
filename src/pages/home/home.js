@@ -19,58 +19,58 @@ import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
 import PayPal from "../../components/PayPal/PayPal";
 
 export default function Home() {
-    //get all posts
-    const posts = useSelector((state) => state.POSTS.postsList)
-    const isloading = useSelector((state) => state.LOADER.isloading);
-    const user = useSelector((state) => state.auth.user)
-    console.log(user, "*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-    console.log(localStorage.getItem("region"), "this is region");
-    console.log(localStorage.getItem("username"), "this is username of current user")
-    console.log(localStorage.getItem("isVerfied"), "verfieeeeeeeeeeeed or not");
-    // console.log(user.email,"this is current user email email");
-    const dispatch = useDispatch();
-    // get all tags 
-    const tags = useSelector((state) => state.TAGS.allTags)
-   
-    useEffect(() => {
-        dispatch(getPosts())
-        dispatch(getTags())
-    }, []);
-    
-    const animatedComponents = makeAnimated();
+  //get all posts
+  const posts = useSelector((state) => state.POSTS.postsList)
+  const isloading = useSelector((state) => state.LOADER.isloading);
+  const user = useSelector((state) => state.auth.user)
+  console.log(user, "*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+  console.log(localStorage.getItem("region"), "this is region");
+  console.log(localStorage.getItem("username"), "this is username of current user")
+  console.log(localStorage.getItem("isVerfied"), "verfieeeeeeeeeeeed or not");
+  // console.log(user.email,"this is current user email email");
+  const dispatch = useDispatch();
+  // get all tags 
+  const tags = useSelector((state) => state.TAGS.allTags)
+
+  useEffect(() => {
+    dispatch(getPosts())
+    dispatch(getTags())
+  }, []);
+
+  const animatedComponents = makeAnimated();
 
   const tagsoptions = [];
   tags.map((tag) => tagsoptions.push({ value: tag.id, label: `${tag.name}` }));
 
 
-    //------------new post---------------------------------------------------
-    const history = useHistory()
-    const [newPost, setNewPost] = useState({
-        title: "",
-        description: "",
-        postpicture: null,
-        from_region: "",
-        to: "",
-        price: 0.0,
-        ownerName: localStorage.getItem("username"),
-        user: localStorage.getItem("id"),
-        tags: [],
-    })
-    // select tags------------
-    const changeSelectedTags = (e) => {
-        console.log(Object.values(e))
-        let list_of_tagsobjects = Object.values(e)
-        let chosen = []
-        for (let t of list_of_tagsobjects) {
-            chosen.push(parseInt(t.value))
-        }
-        console.log(chosen)
-        setNewPost({
-            ...newPost,
-            tags: chosen,
-        })
+  //------------new post---------------------------------------------------
+  const history = useHistory()
+  const [newPost, setNewPost] = useState({
+    title: "",
+    description: "",
+    postpicture: null,
+    from_region: "",
+    to: "",
+    price: 0.0,
+    ownerName: localStorage.getItem("username"),
+    user: localStorage.getItem("id"),
+    tags: [],
+  })
+  // select tags------------
+  const changeSelectedTags = (e) => {
+    console.log(Object.values(e))
+    let list_of_tagsobjects = Object.values(e)
+    let chosen = []
+    for (let t of list_of_tagsobjects) {
+      chosen.push(parseInt(t.value))
     }
-    
+    console.log(chosen)
+    setNewPost({
+      ...newPost,
+      tags: chosen,
+    })
+  }
+
   // store values in newPost state
   const changeData = (e) => {
     if (e.target.name === "title") {
@@ -158,8 +158,8 @@ export default function Home() {
     if (inputText === "") {
       return el;
     }
-     //return the item which contains the user input
-     else {
+    //return the item which contains the user input
+    else {
       for (let tag of el.tags) {
         for (let t of tags) {
           if (t.id === tag && t.name.toLowerCase().includes(inputText)) {
@@ -169,15 +169,15 @@ export default function Home() {
       }
     }
   })
-    
- 
+
+
 
   return (
     <div className="home">
       {localStorage.getItem("email") ? (
         <>
           {/* navbar */}
-          <Navbar/>
+          <Navbar />
 
           {/* body */}
           <div className="container mx-auto px-10 mb-8">
@@ -185,40 +185,44 @@ export default function Home() {
               <div className="lg:col-span-8 col-span-1">
                 {/* add post */}
                 <div className="pt-5">
-                  <section className="border rounded shadow-lg p-5 postcard  mt-5 ">
-                    <div className="main">
-                      <div className="search">
+                  {/* <section className="border rounded shadow-lg p-3   mt-5 rounded-pill ">
                         <TextField
                           id="outlined-basic"
                           onChange={inputHandler}
                           variant="outlined"
                           fullWidth
                           label="Search Posts with Tags"
+                          className="rounded-pill"
                         />
-                      </div>
-                    </div>
-                  </section>
-                  <section className="border rounded shadow-lg p-5 postcard  mt-5 ">
+                  </section> */}
+                  <div className="box  border mt-5 ms-3 me-3" >
+
+                    <i className="fa fa-search" aria-hidden="true"></i>
+
+                    <input type="text" name="" className="input p-2" onChange={(e)=>inputHandler(e)}  placeholder="Search Posts with Tags"/>
+
+                  </div>
+                  <section className="border rounded shadow-sm p-1 postcard  mt-5  ">
                     {/* profile + date  */}
 
-                    <div className="row align-items-center mb-4">
-                      <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start mb-lg-3 ">
-                     
+                    <div className="row align-items-center ">
+                      <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start ">
+
                         <img
                           src={localStorage.getItem("ProfilePic")}
-                          className="me-2 userImage"
+                          className="me-2 ms-5 userImage"
                           height="80"
                           alt="ProfilePic"
                           loading="lazy"
                         />
-                          <span className="">{localStorage.getItem("username")}</span>
+                        <span className="">{localStorage.getItem("username")}</span>
                       </div>
-                      <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-start  p-5">
+                      <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-end  p-5 ">
                         <button
                           type="submit"
                           data-bs-toggle="modal"
                           data-bs-target="#staticBackdrop"
-                          className="btn btn-lg btn-outline-dark  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0"
+                          className="btn btn-lg btn-outline-dark    ms-5  text-lg-end pe-3 m-lg-0 card__btn"
                         >
                           Add new post
                         </button>
@@ -351,7 +355,7 @@ export default function Home() {
                   </div>
                 ) : (
                   filteredData.map((post, index) => (
-                    <PostCard key={index} post={post}  />
+                    <PostCard key={index} post={post} />
                   ))
                 )}
               </div>
