@@ -20,6 +20,7 @@ import ibm from "./assets/img/logos/ibm.svg";
 import facebook from "./assets/img/logos/facebook.svg";
 import closeIcon from "./assets/img/close-icon.svg";
 import "./js/scripts";
+import { Link } from "react-router-dom";
 export default function Landing() {
   // useScript("./js/scripts")
 
@@ -95,13 +96,13 @@ export default function Landing() {
           <br />
           {localStorage.getItem("id") ? (
             <>
-              <a
+              <Link
                 className="btn btn-primary btn-xl text-uppercase"
                 style={{ marginRight: 20 }}
-                href="/home"
+                to="/home"
               >
                 Home
-              </a>
+              </Link>
             </>
           ) : (
             <>

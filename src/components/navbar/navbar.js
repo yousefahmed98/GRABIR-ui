@@ -40,6 +40,7 @@ export default function Navbar() {
   };
   ///////////////////////////////////////////////////
   const [visible, setVisible] = useState(false)
+  const [portal, setPortal] = useState(false)
   const [notifications, setNotifications] = useState([])
   const [mynotifications, setMyNotifications] = useState([])
   const [openNotifications, setOpenNotifications] = useState(false)
@@ -128,41 +129,41 @@ export default function Navbar() {
         <CNavbarToggler
           aria-controls="offcanvasNavbar2"
           aria-label="Toggle navigation"
-          onClick={() => setVisible(!visible)}
+          onClick={() =>{ setVisible(!visible)}}
         />
         <COffcanvas
           className="COffcanvas"
           id="offcanvasNavbar2"
           placement="end"
-          portal={false}
+          portal={visible}
           visible={visible}
           onHide={() => setVisible(false)}
         >
           <COffcanvasHeader>
             <CCloseButton
               className="text-reset"
-              onClick={() => setVisible(false)}
+              onClick={() => setPortal(true)}
             />
           </COffcanvasHeader>
           <COffcanvasBody>
-            <CNavbarNav>
-              <CNavbarBrand href="/">
-                <img src={logo} alt="GRABIRLOGO" style={{width:"5vw", height: "5vh"}} />
+            <CNavbarNav className="pb-5">
+              <CNavbarBrand href="#">
+              <Link to= "/" className=" nav-link"> <img src={logo} alt="GRABIRLOGO" style={{width:"5vw", height: "5vh"}} /></Link>
+               
               </CNavbarBrand>
-              <CNavItem>
-                <CNavLink href="/home" active>
-                  <p className="nav-link"> Home</p>
-
+              <CNavItem className="">
+                <CNavLink href="#" active className="">
+                  <Link to= "/home" className=" nav-link">  <p className="nav-link"> Home</p></Link>
                 </CNavLink>
               </CNavItem>
-              <CNavItem>
-                <CNavLink href="/deals">
-                  <p className="nav-link"> Deals</p>
+              <CNavItem className="">
+                <CNavLink href="#">
+                <Link to= "/deals" className=" nav-link">  <p className="nav-link"> Deals</p></Link>
                 </CNavLink>
               </CNavItem>
-              <CNavItem>
-                <CNavLink href="/offers">
-                  <p className="nav-link"> Offers</p>
+              <CNavItem className="">
+                <CNavLink href="#">
+                <Link to= "/offers" className=" nav-link">  <p className="nav-link"> Offers</p></Link>
                 </CNavLink>
               </CNavItem>
            
@@ -171,9 +172,9 @@ export default function Navbar() {
             {/* <CForm className="d-flex  nav-right">  */}
               {/* <CFormInput type="search" className="me-2" placeholder="Search" /> */}
               <CNavbarNav className="d-flex  nav-right">
-             <CNavItem className="notify-icon"  >
+              <CNavItem className="notify-icon "  >
                   <div onClick={() => setOpenNotifications(!openNotifications)}>
-                    {visible ? null : <Notify width={"30px"} count={openNotifications ? 0 : mynotifications.length} />}
+                    {!visible ? null : <Notify width={"30px"} count={openNotifications ? 0 : mynotifications.length} />}
                   </div>
                 </CNavItem>
               {localStorage.getItem("id") ? (
@@ -183,17 +184,16 @@ export default function Navbar() {
                     <img src={localStorage.getItem("ProfilePic")} className=" userImage"height="50" alt="ProfilePic" loading="lazy" />
                     </CNavLink>
                   </CNavItem> */}
-                 <CNavItem>
-                    <CNavLink href="/myprofile">
-                      <p className="nav-link">{localStorage.getItem("username")}</p>
+                 <CNavItem className="">
+                    <CNavLink href="#">
+                    <Link to= "/myprofile" className=" nav-link"> <p className="nav-link">{localStorage.getItem("username")}</p></Link>
                     </CNavLink>
                   </CNavItem>
                   <CNavItem>
-                    <CNavLink onClick={() => logout()} href="/login">
-                      <p  className="nav-link"> Logout</p>
+                    <CNavLink onClick={() => logout()} href="#" >
+                    <Link to= "/login" className=" nav-link"> <p className="nav-link">Logout</p></Link>
                     </CNavLink>
                   </CNavItem>
-                 
                 </>
               ) : (
                 <>
