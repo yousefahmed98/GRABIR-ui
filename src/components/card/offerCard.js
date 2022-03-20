@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
+import { useEffect ,useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -17,14 +17,14 @@ import PublicIcon from "@mui/icons-material/Public";
 import "./card.css";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { useDispatch } from "react-redux";
+import {useSelector, useDispatch } from "react-redux";
 import {
   updateStateAction,
   deleteOffer,
 } from "../../Store/Actions/updateState";
 import StarRating from "../StarRating/StarRating";
 import { useHistory } from "react-router-dom";
-
+import { axiosInstance } from "../../network/axiosInstance";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -35,12 +35,16 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function MyCard(props) {
+ 
   const updateOfferStatusRejected = (offer) => {
     props.dispatch(deleteOffer(offer));
     // window.alert("This offer is rejected!");
     // history.push("/offers");
   };
-  const updateOfferStatusAccepted = (offer) => {
+  const updateOfferStatusAccepted = (offer,reciverid) => {
+    
+    props.handleNotification("accepts your offer",reciverid,localStorage.getItem("username")) /////////////////
+    console.log("////////////",props.handleNotification)
     props.dispatch(updateStateAction(offer, true));
     // dispatch(deleteOffer(offer));
     // window.alert("This offer if accepted successfully!");
@@ -69,7 +73,7 @@ function MyCard(props) {
           <span className="details"> Delivery date:</span> <span className="me-3"> {props.delivery_date}  </span>
         </div>
         <div className=" text-center">
-          <button className="card__btn me-5 " onClick={() => updateOfferStatusAccepted(props.offer)}>Accept</button>
+          <button className="card__btn me-5 " onClick={() => updateOfferStatusAccepted(props.offer,props.offer.offer_owner)}>Accept</button>
           <button className="card__btn ms-5 " onClick={() => updateOfferStatusRejected(props.offer)}>Reject</button>
         </div>
       </div>
@@ -80,8 +84,54 @@ function MyCard(props) {
 }
 
 export default function OffersCard(props) {
+  const socket = useSelector((state) => state.SOCKET.socket);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [newNotifyObj, setNewNotifyObj] = useState({
+    body: "",
+    from_user_name: null,
+    to_user: null,
+  })
+
+  
+  const handleNotification =(type ,reciverId,senderName)=>{
+    console.log("******************************", type)
+    //lmafrod acreate notification object f db
+    //type hwa body
+      socket.emit("sendNotification",{
+      senderName:senderName,
+      reciverId:reciverId,
+      type,
+    })
+  
+    setNewNotifyObj({
+      ...newNotifyObj,
+      body: type,
+      from_user_name: localStorage.getItem("username"),
+      from_user:localStorage.getItem("id"),
+      to_user: reciverId,
+    })
+  
+  }
+  useEffect(() => {
+    //post request new notification object 
+    if (newNotifyObj.body.length > 0) {
+      console.log("sending api post request" ,newNotifyObj)
+      axiosInstance.post('/notification/notifications/',newNotifyObj, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        }
+      })
+        .then((res) => {
+          console.log(newNotifyObj)
+        })
+        .catch((err) => console.log(err))
+    }
+  }, [newNotifyObj])
+  /////////////////////////////////////////////////////////////////////////////
+
+
+
   return (
     <div className="container mx-auto px-10 mb-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -106,7 +156,7 @@ export default function OffersCard(props) {
                         from={offer.from_region}
                         price={offer.price}
                         delivery_date={offer.delivery_date}
-
+                        handleNotification ={handleNotification}
                       />
 
                     </div>
