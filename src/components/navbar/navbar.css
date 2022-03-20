@@ -5,6 +5,7 @@
   background-color: #212529 !important;
 }
 .navbaring .nav-link {
+  text-decoration: none;
   color: #ffff ;
   height: 1vh;
 }
