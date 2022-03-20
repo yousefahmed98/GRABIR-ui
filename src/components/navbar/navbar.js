@@ -4,7 +4,7 @@ import logo from "../../pages/landing/assets/img/logo2.svg";
 import "./navbar.css";
 import {
   CNavbar, CContainer, CNavbarToggler, COffcanvas, COffcanvasHeader, COffcanvasBody, CNavbarNav, CNavLink
-  , CNavItem, CFormInput, CForm, CButton, CCloseButton, CNavbarBrand
+  , CNavItem, CCloseButton, CNavbarBrand
 } from '@coreui/bootstrap-react';
 import Notify from './notify'
 import { Link } from "react-router-dom";
@@ -80,7 +80,7 @@ export default function Navbar() {
   const displayNotification = (nObj) => {
     return (
       
-      <div className="row border mb-3">
+      <div key={nObj.id} className="row border mb-3">
       <span className="col-lg-3 col-md-3 rounded-5 p-2">
        <img src={nObj.from_user_ProfilePic} className="me-2 userImage"height="60" alt="ProfilePic" loading="lazy" />
       </span>

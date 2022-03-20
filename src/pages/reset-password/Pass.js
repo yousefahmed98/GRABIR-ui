@@ -1,9 +1,12 @@
-import React, { useState } from "react"
-import { useHistory } from "react-router-dom"
-import axios from "axios"
-import "../login/login2.css"
-import TextField from "@mui/material/TextField"
-import logo from "../landing/assets/img/logo2.svg"
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import "../login/login2.css";
+import TextField from "@mui/material/TextField";
+import logo from "../landing/assets/img/logo2.svg";
+
+
+
 export default function Pass() {
   const history = useHistory();
   const [userForm, setUserForm] = useState({

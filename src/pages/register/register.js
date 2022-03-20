@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { connect } from "react-redux";
 import "../login/login2.css";
-import { login } from "../../Store/Actions/auth";
 import TextField from "@mui/material/TextField";
 import logo from "../landing/assets/img/logo2.svg";
-import Navbar from "../../components/navbar/navbar";
 export default function Register() {
   const history = useHistory();
   const [userForm, setUserForm] = useState({

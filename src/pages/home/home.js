@@ -6,17 +6,13 @@ import Loader from "../../components/loader/loader";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../Store/Actions/getPosts";
 import { getTags } from "../../Store/Actions/getTags";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import TextField from "@mui/material/TextField";
 import "../../components/fonts.css";
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import "./home.css"
-
-import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
-import PayPal from "../../components/PayPal/PayPal";
 
 export default function Home() {
   //get all posts
@@ -30,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getPosts())
     dispatch(getTags())
-  }, []);
+  }, [dispatch]);
 
   const animatedComponents = makeAnimated();
 
@@ -155,8 +151,11 @@ export default function Home() {
           }
         }
       }
-    }
-  })
+      return console.log("else return")
+    }   
+  }
+  
+  )
 
 
 

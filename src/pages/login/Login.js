@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import "../login/login2.css";
 import { login } from "../../Store/Actions/auth";
 import TextField from "@mui/material/TextField";
 import logo from "../landing/assets/img/logo2.svg"
-import Navbar from "../../components/navbar/navbar";
 
 const Login2 = ({ login }) => {
+ 
   const history = useHistory(); //hook for props.history
 
   const [formData, setFormData] = useState({

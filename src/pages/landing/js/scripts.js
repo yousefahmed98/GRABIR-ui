@@ -1,5 +1,3 @@
-import { Modal } from 'bootstrap'
-
 window.addEventListener('DOMContentLoaded', event => {
     // Navbar shrink function
     
@@ -29,7 +27,7 @@ window.addEventListener('DOMContentLoaded', event => {
         document.querySelectorAll('#navbarResponsive .nav-link')
     );
     responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
+        return responsiveNavItem.addEventListener('click', () => {
             if (window.getComputedStyle(navbarToggler).display !== 'none') {
                 navbarToggler.click();
             }

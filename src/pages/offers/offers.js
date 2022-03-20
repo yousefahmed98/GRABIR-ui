@@ -5,7 +5,6 @@ import Navbar from "../../components/navbar/navbar";
 import OffersCard from "../../components/card/offerCard";
 import { useHistory } from "react-router-dom";
 import { getOffersAction } from '../../Store/Actions/getOffers'
-import { Button } from "@mui/material";
 import { getPosts } from '../../Store/Actions/getPosts'
 import SweetAlert from 'react-bootstrap-sweetalert';
 
@@ -17,8 +16,8 @@ export default function Offers(props) {
   const posts = useSelector((state) => state.POSTS.postsList)
   useEffect(() => {
     dispatch(getOffersAction())
-    dispatch(getPosts())
-}, []);
+    dispatch(getPosts())  
+}, [dispatch]);
 
 ///////////////////////////////////////////////////////////
 

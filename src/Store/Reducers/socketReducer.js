@@ -2,7 +2,7 @@
 import { io } from "socket.io-client";
 
 const INITIAL_VALUE={
-    socket:io("http://localhost:5000"),
+    socket:io("http://localhost:3000"),
 
 }
 //component function

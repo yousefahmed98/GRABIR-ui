@@ -1,7 +1,6 @@
 import axios from "axios";
 import jwt from 'jwt-decode'
-import Login from "../../pages/login/Login";
-import React from "react"
+
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,

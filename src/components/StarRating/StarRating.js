@@ -1,4 +1,3 @@
-import { RateReview } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import "./StarRating.css";
@@ -14,7 +13,9 @@ export default function StarRating(props) {
   const rates = useSelector((state) => state.RATE.rateList);
   useEffect(() => {
     dispatch(getRate());
-  }, []);
+    // console.log("ratesssss", rates)
+  }, [dispatch]);
+  // console.log("test user",rates)
 
   const [rating, setRating] = useState({
     stars: "",
@@ -43,7 +44,7 @@ export default function StarRating(props) {
         },
       })
       .then((res) => {
-        if (props.offerOwner == localStorage.getItem("id"))
+        if (props.offerOwner === localStorage.getItem("id"))
           setRating({ ...rating, user: res.data.user });
 
       });

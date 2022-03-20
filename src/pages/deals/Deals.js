@@ -3,10 +3,8 @@ import Navbar from "../../components/navbar/navbar";
 import "./deals.css";
 import DealsCard from "../../components/dealsCard/DealsCard";
 import { useHistory } from "react-router-dom";
-import { getDeals } from "../../Store/Actions/getDeals";
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { useDispatch, useSelector } from "react-redux";
-import { getOffersAction } from "../../Store/Actions/getOffers";
 import { getPosts } from '../../Store/Actions/getPosts'
 export default function Deals() {
   const dispatch = useDispatch();
@@ -15,7 +13,7 @@ export default function Deals() {
   const history = useHistory();
   useEffect(() => {
     dispatch(getPosts())  
-  }, []);
+  }, [dispatch]);
 
   const [MyOffers, setMyOffers] = useState([]);
   const [CloseAlert, setCloseAlert] = useState(false);
@@ -35,7 +33,7 @@ const getmyDealssListFun = () => {
              myOffersList.push(o)
          }
          else{
-           if(o.offer_owner == localStorage.getItem("id")){
+           if(o.offer_owner === localStorage.getItem("id")){
             myOffersList.push(o)
            }
          }

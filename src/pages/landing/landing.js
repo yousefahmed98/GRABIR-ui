@@ -10,10 +10,6 @@ import portfolio6 from "./assets/img/portfolio/6.jpg";
 import about1 from "./assets/img/about/1.jpg";
 import about2 from "./assets/img/about/2.jpg";
 import about3 from "./assets/img/about/3.jpg";
-import about4 from "./assets/img/about/4.jpg";
-import team1 from "./assets/img/team/1.jpg";
-import team2 from "./assets/img/team/2.jpg";
-import team3 from "../../static/dev.webp";
 import microsoft from "./assets/img/logos/microsoft.svg";
 import google from "./assets/img/logos/google.svg";
 import ibm from "./assets/img/logos/ibm.svg";
@@ -176,7 +172,7 @@ export default function Landing() {
       <section className="page-section bg-light" id="portfolio">
         <div className="container">
           <div className="text-center">
-            <h2 className="section-heading text-uppercase"></h2>
+            {/* <h2 className="section-heading text-uppercase"></h2> */}
           </div>
           <div className="row">
             <div className="col-lg-4 col-sm-6 mb-4">
@@ -313,7 +309,7 @@ export default function Landing() {
         <div className="container">
           <div className="text-center">
             <h2 className="section-heading text-uppercase">About</h2>
-            <h3 className="section-subheading text-muted"></h3>
+            {/* <h3 className="section-subheading text-muted"></h3> */}
           </div>
           <ul className="timeline">
             <li>
