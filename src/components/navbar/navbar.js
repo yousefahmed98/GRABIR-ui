@@ -174,7 +174,7 @@ export default function Navbar() {
               <CNavbarNav className="d-flex  nav-right">
               <CNavItem className="notify-icon "  >
                   <div onClick={() => setOpenNotifications(!openNotifications)}>
-                    {!visible ? null : <Notify width={"30px"} count={openNotifications ? 0 : mynotifications.length} />}
+                    {visible ? null : <Notify width={"30px"} count={openNotifications ? 0 : mynotifications.length} />}
                   </div>
                 </CNavItem>
               {localStorage.getItem("id") ? (

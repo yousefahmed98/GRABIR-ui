@@ -23,12 +23,12 @@ export default function PayPal() {
             }
         }).render('#paypal-button')
     }, [])
-    document.body.style.backgroundColor = "#151A1E"
+    // document.body.style.backgroundColor = "#151A1E"
     return (
         <>
             <Navbar />
             <div className='text-center ' style={{ padding: 150 }}>
-                <h1 className='text-light p-4 title'>Click here to pay</h1>
+                <h1 className='text-dark p-4 title'>Click here to pay</h1>
                 <div id="paypal-button"></div>
             </div>
         </>
