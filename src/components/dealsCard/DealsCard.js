@@ -70,6 +70,7 @@ function MyCard(props) {
           {
             props.offer.offer_owner == localStorage.getItem("id")
               ?
+
               <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Mark as Completed</button>
               :
               (
@@ -78,8 +79,7 @@ function MyCard(props) {
                  <button className="card__btn ms-5 "  onClick={() => deleteDeal()} > Checkout </button>
               </div>
               )
-              
-              
+
 
           }
         </div>

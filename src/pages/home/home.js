@@ -218,7 +218,7 @@ export default function Home() {
                           type="submit"
                           data-bs-toggle="modal"
                           data-bs-target="#staticBackdrop"
-                          className="btn btn-lg  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0"
+                          className="btn btn-lg btn-outline-dark  darkcustombtn  ms-5  text-lg-end pe-3 m-lg-0"
                         >
                           Add new post
                         </button>
