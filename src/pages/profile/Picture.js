@@ -3,12 +3,10 @@ import {
     Card,
     Stack
 } from 'react-bootstrap'
-// import Btnpic from './Btnpicture'
 import "./profile.css"
 
 
 export default function Picture({data}) {
-    console.log(data,"hello world");
   return (
       <>
         <Stack direction="horizontal" gap={3}>
@@ -17,8 +15,6 @@ export default function Picture({data}) {
                 <Card.Img  variant="top" src={localStorage.getItem("ProfilePic")}/>
             </Card>
         </div>
-
-        {/* <div className="bg-light border"> <Btnpic /> </div> */}
         </Stack>
         </>
   )

@@ -60,7 +60,6 @@ const handleNotification =(type)=>{
 useEffect(() => {
   //post request new notification object 
   if (newNotifyObj.body.length > 0) {
-    console.log("sending api post request" ,newNotifyObj)
     axiosInstance.post('/notification/notifications/',newNotifyObj, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -72,7 +71,7 @@ useEffect(() => {
       .catch((err) => console.log(err))
   }
 }, [newNotifyObj])
-/////////////////////////////////////////////////////////////////////////////
+
 
   //-------------------------------------------------------
 

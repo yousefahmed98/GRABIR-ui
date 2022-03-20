@@ -23,22 +23,15 @@ export default function Deals() {
 const getmyDealssListFun = () => {
     let myOffersList = []
     let myPostsList =[]
-    console.log("AllPosts" , posts)
-    console.log("AllOffers" , offersArray)
-  
+      
       for( let p of posts){
-        console.log("p" , p)
-        console.log("localStorage.getItem(" , localStorage.getItem("id"))
           if(p.user == localStorage.getItem("id")){
               myPostsList.push(p.id)
           }
       }
-      console.log("myPostsList" , myPostsList)
      for (let o of offersArray ){
-         console.log("o" , o)
          if(myPostsList.includes(o.post))
          {
-             console.log("****************************", o)
              myOffersList.push(o)
          }
          else{
@@ -49,13 +42,10 @@ const getmyDealssListFun = () => {
  
      }
 
-    console.log("myOffersList",myOffersList)
          setMyOffers(myOffersList)
         setCloseAlert(true)
     
 }
-
-  // console.log(deals, "//////////////");
   return (
     <>
     {localStorage.getItem("email") ? (

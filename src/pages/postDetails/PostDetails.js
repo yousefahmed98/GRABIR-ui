@@ -1,6 +1,5 @@
-// import axios from 'axios';
-import React from "react"
 
+import React from "react"
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { useEffect, useState } from 'react'
 import PostCard from '../../components/postCard/postCard'
@@ -8,7 +7,6 @@ import Navbar from '../../components/navbar/navbar'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { getPosts } from '../../Store/Actions/getPosts'
-// import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
 import { useHistory } from 'react-router-dom';
 import { getOffersAction } from "../../Store/Actions/getOffers";
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -33,7 +31,6 @@ const [MyOffers, setMyOffers] = useState([]);
 const [CloseAlert, setCloseAlert] = useState(false);
 const getmyOffersListFun = () => {
     let myOffersList = []
-    console.log("AllOffers" , offers)
      for (let o of offers ){
          if(o.post == params.id )
          {
@@ -41,7 +38,6 @@ const getmyOffersListFun = () => {
              setMyOffers((prev)=>[...prev,o])
          }
      }
-    console.log("myOffersList",myOffersList)
          setMyOffers(myOffersList)
          setCloseAlert(true)
 }

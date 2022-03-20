@@ -17,11 +17,6 @@ export default function Reviews(props) {
   return (
 
     <div className="reviews">
-      {/* <label>
-            <input type="radio" name="rating" />
-            <FaStar className="star" color={"#ffc107"} size={70} />
-          </label> */}
-      {/* check for user review only  */}
       {current_user == props.rateReviewUser ? (
                   <div className="mt-5">
           {props.rateReviewStars === 1 ? (

@@ -37,7 +37,6 @@ export default function (state = initialState, action) {
     case LOGIN_SUCCESS:
       const USER = jwt(payload.access); // decode your token here
       localStorage.setItem("access", payload.access);
-      console.log(USER.user_id);
       return {
         ...state,
         isAuthenticated: true,
@@ -47,10 +46,6 @@ export default function (state = initialState, action) {
         id: payload.id,
         region: payload.region,
         isVerfied: payload.isVerfied,
-
-        //   const token = res.data.token;
-        //   const user = jwt(token); // decode your token here
-        //   localStorage.setItem('token', token);
       };
 
     case USER_LOADED_SUCCESS:

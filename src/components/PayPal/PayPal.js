@@ -23,7 +23,6 @@ export default function PayPal() {
             }
         }).render('#paypal-button')
     }, [])
-    // document.body.style.backgroundColor = "#151A1E"
     return (
         <>
             <Navbar />

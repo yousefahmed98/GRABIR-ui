@@ -1,14 +1,6 @@
 import React from "react"
-
 import { useState, useEffect } from "react";
-// import logodark from "../../static/navbar/logo-dark.png";
-// import logo from "../../static/navbar/logo-default.png";
 import logo from "../../pages/landing/assets/img/logo2.svg";
-
-
-// import bell from "../../static/navbar/bell.png"
-// import chat from "../../static/navbar/chat.png"
-
 import "./navbar.css";
 import {
   CNavbar, CContainer, CNavbarToggler, COffcanvas, COffcanvasHeader, COffcanvasBody, CNavbarNav, CNavLink
@@ -64,9 +56,7 @@ export default function Navbar() {
   useEffect(() => {
     //get notification from socket
     socket?.on("getNotification", (data) => {
-      console.log("data", data)
       setNotifications((prev) => [...prev, data])
-      console.log(data.type, data.senderName, data.reciverId)
       setMyNotifications((prev) => [...prev, {
         body: data.type,
         from_user_name: data.senderName,
@@ -80,14 +70,11 @@ export default function Navbar() {
 
 
   const getCurrentUserNotifications = () => {
-    console.log("AllNotifications: ", AllNotifications)
-    console.log("current user ", localStorage.getItem("id"))
     for (let n of AllNotifications) {
       if (n.to_user == localStorage.getItem("id")) {
         setMyNotifications((prev) => [...prev, n])
       }
     }
-    console.log(mynotifications)
 
   }
   const displayNotification = (nObj) => {
@@ -98,7 +85,6 @@ export default function Navbar() {
        <img src={nObj.from_user_ProfilePic} className="me-2 userImage"height="60" alt="ProfilePic" loading="lazy" />
       </span>
       <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
-      {/* <button type="button" className=" btn  btn-sm darkcustombtnActive" onClick={handelRead(nObj)}>Mark as read</button> */}
       </div>
     )
 
@@ -169,8 +155,6 @@ export default function Navbar() {
            
               
             </CNavbarNav>
-            {/* <CForm className="d-flex  nav-right">  */}
-              {/* <CFormInput type="search" className="me-2" placeholder="Search" /> */}
               <CNavbarNav className="d-flex  nav-right">
               <CNavItem className="notify-icon "  >
                   <div onClick={() => setOpenNotifications(!openNotifications)}>
@@ -179,11 +163,6 @@ export default function Navbar() {
                 </CNavItem>
               {localStorage.getItem("id") ? (
                 <>
-                  {/* <CNavItem>
-                    <CNavLink href="/myprofile">
-                    <img src={localStorage.getItem("ProfilePic")} className=" userImage"height="50" alt="ProfilePic" loading="lazy" />
-                    </CNavLink>
-                  </CNavItem> */}
                  <CNavItem className="">
                     <CNavLink href="#">
                     <Link to= "/myprofile" className=" nav-link"> <p className="nav-link">{localStorage.getItem("username")}</p></Link>

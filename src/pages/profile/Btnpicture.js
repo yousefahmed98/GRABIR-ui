@@ -9,30 +9,11 @@ function MyVerticallyCenteredModal(props) {
   const changedata = (a) => {
     if (a.target.name === "pic") {
       setData(a.target.files[0]);
-      console.log(
-        data.name,
-        "///////////////////////////////////////////////////"
-      );
-      //   axios.patch(
-      //     `http://127.0.0.1:8000/base/users/${localStorage.getItem("id")}/`,
-      //     { ProfilePic: data },
-      //     {
-      //       headers: {
-      //         'content-type': 'multipart/form-data',
-      //         Authorization: `Bearer ${localStorage.getItem("access")}`,
-      //       },
-      //     }
-      //   )
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err))
-      // }
-     
     }
   };
 
 const submitPic = (a) => {
   a.preventDefault();
-  console.log(data,"''''''''''''''''''''''''''''''''''''''''''''''")
   const formData = new FormData();
   const imagefile = data
   formData.append("ProfilePic", imagefile);

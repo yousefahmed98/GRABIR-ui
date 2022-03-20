@@ -15,6 +15,4 @@ const useScript = url => {
     }
   }, [url]);
 };
-// ../src/pages/landing/js/scripts.js
-
 export default useScript;

@@ -7,24 +7,14 @@ import { login } from "../../Store/Actions/auth";
 import TextField from "@mui/material/TextField";
 import logo from "../landing/assets/img/logo2.svg"
 import Navbar from "../../components/navbar/navbar";
-// import { useSelector } from "react-redux";
-// import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
+
 const Login2 = ({ login }) => {
-  // const user = useSelector((state) => state.auth.user)
-  // const loggedin = useSelector((state) => state.auth.isAuthenticated)
   const history = useHistory(); //hook for props.history
-  // const [loginState , setLoginState] = useState({
-  //   state: null,
-  // })
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  // const [error, setError] = useState({
-  //       emailError: null,
-  //       passwordError: null,
-  //     });
   const { email, password } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,7 +31,6 @@ const Login2 = ({ login }) => {
       localStorage.getItem("loginErr");
       history.push("/login/");
       // return <Redirect to='/deals'/>
-      console.log(localStorage.getItem("loginErr"), "ERROR-LOGIN");
     }
   };
   return (

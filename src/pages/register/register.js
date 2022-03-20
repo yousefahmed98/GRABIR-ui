@@ -8,8 +8,6 @@ import { login } from "../../Store/Actions/auth";
 import TextField from "@mui/material/TextField";
 import logo from "../landing/assets/img/logo2.svg";
 import Navbar from "../../components/navbar/navbar";
-// import { useSelector } from "react-redux";
-// import AlreadyLogged from "../../components/NotLoggedIn/AlreadyLogged";
 export default function Register() {
   const history = useHistory();
   const [userForm, setUserForm] = useState({
@@ -46,11 +44,7 @@ export default function Register() {
   const hasWhiteSpace = (s) => {
     return s.indexOf(" ") >= 0;
   };
-  // const checkConfirmPassword = () => {
-  //   if (userForm.password === userForm.confirmpass) {
-  //     return true;
-  //   } else return false;
-  // };
+
   const changeData = (e) => {
     if (e.target.name === "email") {
       const isEmail = validateEmail(e.target.value);
