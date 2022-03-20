@@ -25,7 +25,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "../card/card.css";
-
+import {deleteOffer} from  "../../Store/Actions/updateState";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -37,7 +37,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function MyCard(props) {
   function deleteDeal() {
-    //
+    props.dispatch(deleteOffer(props.offer));
+    
   }
   return (
     <div className="offerCard ">
@@ -69,9 +70,16 @@ function MyCard(props) {
           {
             props.offer.offer_owner == localStorage.getItem("id")
               ?
-              <Link to="/paypal"><button className="card__btn ms-5 " >Checkout </button></Link>
+
+              <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Mark as Completed</button>
               :
-              <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => deleteDeal()}>Mark as Completed</button>
+              (
+               <div>
+                 <button className="card__btn me-5 "  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Rate {props.offer.offer_owner_name}</button>
+                 <button className="card__btn ms-5 "  onClick={() => deleteDeal()} > Checkout </button>
+              </div>
+              )
+
 
           }
         </div>
@@ -94,7 +102,7 @@ function MyCard(props) {
              
                 </div>
                 <div className="modal-body">
-                <StarRating offerOwner={props.offer_owner} PostID={props.post} />
+                <StarRating offerOwner={props.offer.offer_owner} PostID={props.offer.post} />
                 </div>
                 </div>
                 </div>
@@ -103,8 +111,8 @@ function MyCard(props) {
             </div>
             );
 }
-            ////////////////////////////////////////////////////
-            export default function DealsCard(props) {
+////////////////////////////////////////////////////
+ export default function DealsCard(props) {
   const offers = useSelector((state) => state.OFFERS.offers);
             const [userid, setUserid] = useState(null);
             const dispatch = useDispatch();
@@ -118,7 +126,7 @@ function MyCard(props) {
                 <div className="lg:col-span-8 col-span-1">
                   {/* add post */}
                   <div className="pt-5">
-                    {offers.map((offer, index) => {
+                    {props.deals.map((offer, index) => {
                       if (offer.status) {
                         return (
                           <div className="wrapper mt-5 p-2" key={index}>
