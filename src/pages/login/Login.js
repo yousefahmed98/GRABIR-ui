@@ -53,7 +53,7 @@ const Login2 = ({ login }) => {
           <section className="vh-100 bg-image bgImage">
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
               <div className="container h-100">
-              <div className="row d-flex justify-content-center align-items-center h-50"><img src={logo} style={{width:"50%"}}alt="..." /></div>
+                <div className="row d-flex justify-content-center align-items-center h-50"><img src={logo} style={{ width: "50%" }} alt="..." /></div>
 
                 <div className="row d-flex justify-content-center align-items-center h-50">
 
@@ -61,7 +61,7 @@ const Login2 = ({ login }) => {
                     <div className="card" style={{ borderRadius: 15 }}>
                       <div className="card-body p-5">
                         <h2 className="text-uppercase text-center mb-5">
-                         LOGIN
+                          LOGIN
                         </h2>
 
                         <form onSubmit={(e) => onSubmit(e)}>
@@ -77,10 +77,10 @@ const Login2 = ({ login }) => {
                               onChange={(e) => onChange(e)}
                               required
                             />
-                       
+
                           </div>
                           <div className="mb-3">
-            
+
                             <TextField
                               id="PasswordID"
                               className="form-control"
@@ -93,12 +93,12 @@ const Login2 = ({ login }) => {
                               minLength="6"
                               required
                             />
-                       
-                          </div>                        
+
+                          </div>
                           <p className="text-danger">
                             {localStorage.getItem("loginErr")}
                           </p>
-                         
+
                           <div className="d-flex justify-content-center">
                             <button
                               type="submit"
@@ -107,13 +107,21 @@ const Login2 = ({ login }) => {
                               Login
                             </button>
                           </div>
-
+                          <br/>
+                          <p className="text-center text-muted mt-5 mb-0">
+                            Forgot your password?{" "}
+                            <a href="/reset" className="fw-bold text-body">
+                              <u> Reset! </u>
+                            </a>
+                          </p>
+                          <br />
                           <p className="text-center text-muted mt-5 mb-0">
                             Doesn't have an account?{" "}
                             <a href="/register" className="fw-bold text-body">
                               <u>Register now!</u>
                             </a>
                           </p>
+
                         </form>
                       </div>
 
