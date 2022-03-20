@@ -325,7 +325,7 @@ export default function Landing() {
               </div>
               <div className="timeline-panel">
                 <div className="timeline-heading">
-                  <h4>2018-2019</h4>
+                  <h4>2022</h4>
                   <h4 className="subheading">Our Humble Beginnings</h4>
                 </div>
                 <div className="timeline-body">
@@ -348,9 +348,9 @@ export default function Landing() {
                   alt="..."
                 />
               </div>
-              <div className="timeline-panel">
+              {/* <div className="timeline-panel">
                 <div className="timeline-heading">
-                  <h4>Dec 2021</h4>
+                  <h4>march 2022</h4>
                   <h4 className="subheading">An Agency is Born</h4>
                 </div>
                 <div className="timeline-body">
@@ -363,7 +363,7 @@ export default function Landing() {
                     you can find in GRABIR App.
                   </p>
                 </div>
-              </div>
+              </div> */}
             </li>
             <li>
               <div className="timeline-image">
@@ -403,7 +403,7 @@ export default function Landing() {
         </div>
       </section>
       {/* <!-- Team--> */}
-      <section className="page-section bg-light" id="team">
+      {/* <section className="page-section bg-light" id="team">
         <div className="container">
           <div className="text-center">
             <h2 className="section-heading text-uppercase">Our Amazing Team</h2>
@@ -463,7 +463,7 @@ export default function Landing() {
             <div className="col-lg-8 mx-auto text-center"></div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* <!-- Clients--> */}
       <div className="py-5">
         <div className="container">
