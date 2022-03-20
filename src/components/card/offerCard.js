@@ -1,10 +1,15 @@
 import * as React from "react";
+import { useEffect ,useState } from "react";
 import "./card.css";
-import { useDispatch } from "react-redux";
+import {useSelector, useDispatch } from "react-redux";
+
 import {
   updateStateAction,
   deleteOffer,
 } from "../../Store/Actions/updateState";
+import { useHistory } from "react-router-dom";
+import { axiosInstance } from "../../network/axiosInstance";
+
 
 function MyCard(props) {
  
@@ -55,6 +60,7 @@ function MyCard(props) {
 }
 
 export default function OffersCard(props) {
+  const socket = useSelector((state) => state.SOCKET.socket);
   const dispatch = useDispatch();
   const [newNotifyObj, setNewNotifyObj] = useState({
     body: "",
