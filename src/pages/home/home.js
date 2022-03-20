@@ -18,7 +18,7 @@ export default function Home() {
   //get all posts
   const posts = useSelector((state) => state.POSTS.postsList)
   const isloading = useSelector((state) => state.LOADER.isloading);
-  const user = useSelector((state) => state.auth.user)
+  // const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch();
   // get all tags 
   const tags = useSelector((state) => state.TAGS.allTags)

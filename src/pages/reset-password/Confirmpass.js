@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 export default function Confirmpass() {
   const history = useHistory();
   const search = useLocation().search;
-  const token_valid_param = new URLSearchParams(search).get("token_valid");
+  // const token_valid_param = new URLSearchParams(search).get("token_valid");
   const uidb64_param = new URLSearchParams(search).get("uidb64");
   const token_param = new URLSearchParams(search).get("token");
   const [userForm, setUserForm] = useState({

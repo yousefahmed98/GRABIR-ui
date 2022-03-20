@@ -30,7 +30,7 @@ export default function PostCard({ post}) {
 
   useEffect(() => {
     dispatch(getTags())
-  }, []);
+  }, [dispatch]);
   useEffect(()=>{
     setuser()
   },[localStorage.getItem("id")])
