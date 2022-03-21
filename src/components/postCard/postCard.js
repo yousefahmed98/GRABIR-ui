@@ -228,10 +228,10 @@ const setuser = ()=>{
               ?
               (
                 <>
-                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                  {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center">
                     <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
                       show offers</button>
-                  </div>
+                  </div> */}
                   <div className="col-lg-3 col-md-3 col-sm-3 text-center">
                     <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
                       delete</button>

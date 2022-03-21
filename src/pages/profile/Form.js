@@ -21,6 +21,9 @@ export default function Formm() {
     let checker = /^[a-z ,.'-]+$/i;
     return checker.test(userOption);
   };
+  const hasWhiteSpace = (s) => {
+    return s.indexOf(" ") >= 0;
+  };
 
   //***********************************VALIDATIONS************************************************ */
   // const validateEmail = (userOption) => {
@@ -39,6 +42,8 @@ export default function Formm() {
   const changeData = (e) => {
     if (e.target.name === "firstname") {
       const isFirstName = validateName(e.target.value);
+      const has_WhiteSpace = hasWhiteSpace(e.target.value);
+
       setUserForm({
         ...userForm,
         first_name: e.target.value,
@@ -52,10 +57,14 @@ export default function Formm() {
             ? "FirstName must be more than 2 letters"
             : !isFirstName
             ? "Invalid name Format"
+            : has_WhiteSpace
+            ? "You should not include spaces"
             : null,
       });
     } else if (e.target.name === "lastname") {
       const isLastName = validateName(e.target.value);
+      const has_WhiteSpace = hasWhiteSpace(e.target.value);
+
       setUserForm({
         ...userForm,
         last_name: e.target.value,
@@ -69,10 +78,14 @@ export default function Formm() {
             ? "LastName must be more than 2 letters"
             : !isLastName
             ? "Invalid name Format"
+            : has_WhiteSpace
+            ? "You should not include spaces"
             : null,
       });
     } else if (e.target.name === "username") {
       const isUsername = validateName(e.target.value);
+      const has_WhiteSpace = hasWhiteSpace(e.target.value);
+
       setUserForm({
         ...userForm,
         username: e.target.value,
@@ -86,6 +99,8 @@ export default function Formm() {
             ? "Username must be more than 2 Characters"
             : !isUsername
             ? "Invalid username Format, Can't include number or *&;'/_-=$#@! "
+            : has_WhiteSpace
+            ? "Invalid format! Username does not have spaces!"
             : null,
       });
     } else if (e.target.name === "region") {
@@ -99,10 +114,12 @@ export default function Formm() {
         regionErr:
           e.target.value.length === 0
             ? "This field is required"
-            : e.target.value.length === 1
-            ? "Region must be more at least two characters"
+            : e.target.value.length === 1 || e.target.value == " "
+            ? "Region must be more at least two characters and not a space"
             : !isRegion
             ? "Invalid Region Format"
+            : e.target.value.trim().length === 0
+            ? "Invalid foramt, required a meaningful value!"
             : null,
       });
     }
@@ -132,8 +149,22 @@ export default function Formm() {
           localStorage.setItem("lastname", userForm.last_name);
           localStorage.setItem("username", userForm.username);
           localStorage.setItem("region", userForm.region);
+          setErrors({
+            ...errors,
+            all_registerErr: null,
+          });
+          window.alert("Your Data Updated Successfully!")
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          console.log("errrorrrr", err.response.data.username[0]);
+          setErrors({
+            ...errors,
+            all_registerErr: err.response.data.username[0],
+          });
+          
+          // all_registerErr
+        });
     } else {
       return setErrors({
         ...errors,
@@ -196,6 +227,7 @@ export default function Formm() {
               <div id="lastnameHelp" className="form-text text-danger">
                 {errors.usernameErr}
               </div>
+
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </InputGroup>
           </Form.Group>

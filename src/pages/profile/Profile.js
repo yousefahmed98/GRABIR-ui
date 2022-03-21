@@ -80,17 +80,15 @@ export default function Profile() {
           <Tab eventKey="profile" title=" Security Information" className="tab">
             <>
               <div>
-                <h4>ID :</h4>
+                {/* <h4>ID :</h4>
                 <p> {localStorage.getItem("id")}</p>
-                <hr />
+                <hr /> */}
                 <h4>Email :</h4>
                 <p className="text-capitalize">
                   {" "}
                   {localStorage.getItem("email")}{" "}
                 </p>
-                <hr />
-                <h4>Password :</h4>
-                <p> ********** </p>
+         
                 <hr />
                 <h4>Date joined :</h4>
                 <p> {localStorage.getItem("dateJoined")} </p>
