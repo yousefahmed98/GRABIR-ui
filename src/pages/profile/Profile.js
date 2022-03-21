@@ -36,7 +36,7 @@ export default function Profile() {
                       <img
                         src={localStorage.getItem("ProfilePic")}
                         className="mb-1 userImage"
-                        height="140"
+                        height="120"
                         alt="deal owner"
                         loading="lazy"
                       />
@@ -113,7 +113,7 @@ export default function Profile() {
               </div>
               <br />
               <br />
-              <Editadd />
+              {/* <Editadd /> */}
             </>
           </Tab>
 
