@@ -10,34 +10,36 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "../../components/fonts.css";
 //animated select react
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated'
-import "./home.css"
-import CustomInput from '../../components/CustomInput'
-
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+import "./home.css";
+import CustomInput from "../../components/CustomInput";
 
 export default function Home() {
   //get all posts
-  const posts = useSelector((state) => state.POSTS.postsList)
+  const posts = useSelector((state) => state.POSTS.postsList);
   const isloading = useSelector((state) => state.LOADER.isloading);
   // const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch();
-  // get all tags 
-  const tags = useSelector((state) => state.TAGS.allTags)
+  // get all tags
+  const tags = useSelector((state) => state.TAGS.allTags);
 
   useEffect(() => {
-    dispatch(getPosts())
-    dispatch(getTags())
+    dispatch(getPosts());
+    dispatch(getTags());
   }, [dispatch]);
+
+  const hasWhiteSpace = (s) => {
+    return s.indexOf(" ") >= 0;
+  };
 
   const animatedComponents = makeAnimated();
 
   const tagsoptions = [];
   tags.map((tag) => tagsoptions.push({ value: tag.id, label: `${tag.name}` }));
 
-
   //------------new post---------------------------------------------------
-  const history = useHistory()
+  const history = useHistory();
   const [newPost, setNewPost] = useState({
     title: "",
     description: "",
@@ -48,7 +50,7 @@ export default function Home() {
     ownerName: localStorage.getItem("username"),
     user: localStorage.getItem("id"),
     tags: [],
-  })
+  });
   //------------------errors------------------------------------
   const [errors, setErrors] = useState(
     // initialState intial values
@@ -61,30 +63,24 @@ export default function Home() {
       price: "",
       tags: "",
     }
-  )
+  );
   // select tags------------
   const changeSelectedTags = (e) => {
-
     setErrors({
       ...errors,
-      tags: Object.values(e).length === 0 ?
-        "required" :
-        ""
-      ,
-    })
+      tags: Object.values(e).length === 0 ? "required" : "",
+    });
 
-    let list_of_tagsobjects = Object.values(e)
-    let chosen = []
+    let list_of_tagsobjects = Object.values(e);
+    let chosen = [];
     for (let t of list_of_tagsobjects) {
-      chosen.push(parseInt(t.value))
+      chosen.push(parseInt(t.value));
     }
     setNewPost({
       ...newPost,
       tags: chosen,
-    })
-
-
-  }
+    });
+  };
 
   // store values in newPost state
   const changeData = (e) => {
@@ -95,18 +91,16 @@ export default function Home() {
       });
       setErrors({
         ...errors,
-        title: e.target.value.length === 0
-          ? "Title is required"
-          : e.target.value[0] ===" "
-          ? "enter valid country name"
-          : /^[a-zA-Z\s]+$/.test(e.target.value)
+        title:
+          e.target.value.length === 0 || e.target.value.length < 10
+            ? "Title is required at least 10 Character"
+            : e.target.value[0] === " "
+            ? "Enter valid title"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
             ? ""
-            : "Title should contains letters only"
-        ,
-      })
-
-    }
-    else if (e.target.name === "details") {
+            : "Title should contains letters only",
+      });
+    } else if (e.target.name === "details") {
       setNewPost({
         ...newPost,
         description: e.target.value,
@@ -114,52 +108,51 @@ export default function Home() {
 
       setErrors({
         ...errors,
-        description: e.target.value.length === 0
-          ? "You should write details to facilitate handling"
-          : e.target.value[0] ===" "
-          ? "enter valid country name"
-          : /^[a-zA-Z\s]+$/.test(e.target.value)
+        description:
+          e.target.value.length === 0 && e.target.value.length < 10
+            ? "You should write details to facilitate handling"
+            : e.target.value[0] === " "
+            ? "enter valid title"
+            : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
             ? ""
-            : "Details should contains letters only"
-        ,
-      })
-    }
-    else if (e.target.name === "postpic") {
-      console.log(e.target.files[0].name.split(".")[1])
+            : "Title shouldn't contain !@#$%^&*",
+      });
+    } else if (e.target.name === "postpic") {
+      console.log(e.target.files[0].name.split(".")[1]);
       setNewPost({
         ...newPost,
         postpicture: e.target.files[0],
       });
       setErrors({
         ...errors,
-        postpicture: e.target.files[0].name.split(".")[1] === "jpg" || e.target.files[0].name.split(".")[1] === "png"
-          ? ""
-          : "you should upload images only"
-        ,
-      })
-
-    }
-    else if (e.target.name === "price") {
+        postpicture:
+          e.target.files[0].name.split(".")[1] === "jpg" ||
+          e.target.files[0].name.split(".")[1] === "png" ||
+          e.target.files[0].name.split(".")[1] === "svg" ||
+          e.target.files[0].name.split(".")[1] === "JPG" ||
+          e.target.files[0].name.split(".")[1] === "PNG" ||
+          e.target.files[0].name.split(".")[1] === "SVG"
+            ? null
+            : "you should upload images only",
+      });
+    } else if (e.target.name === "price") {
+      const has_WhiteSpace = hasWhiteSpace(e.target.value);
       setNewPost({
         ...newPost,
         price: e.target.value,
       });
       setErrors({
         ...errors,
-        price: e.target.value.length === 0 ?
-          "price is required" :
-          /^[a-zA-Z]+$/.test(e.target.value) ?
-            "Enter valid price"
-            :
-            e.target.value > 0
-              ? ""
-              : " Enter valid price"
-        ,
-      })
-
-
-    }
-    else if (e.target.name === "from") {
+        price:
+          e.target.value.length === 0
+            ? "Price is required"
+            : !/^[0-9]+$/.test(e.target.value)
+            ? "Enter valid price"
+            : e.target.value > 0 || !has_WhiteSpace
+            ? ""
+            : "Enter valid price shouldn't contain spaces",
+      });
+    } else if (e.target.name === "from") {
       setNewPost({
         ...newPost,
         from_region: e.target.value,
@@ -167,95 +160,93 @@ export default function Home() {
 
       setErrors({
         ...errors,
-        from_region: e.target.value.length === 0 ?
-          " required"
-          : e.target.value[0] ===" "
-          ? "enter valid country name"
-          : /^[a-zA-Z\s]+$/.test(e.target.value)
+        from_region:
+          e.target.value.length === 0 || e.target.value.length < 2
+            ? " This field is required and must be at least 2 characters"
+            : e.target.value[0] === " "
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
             ? ""
-            : "enter valid country name"
-        ,
-      })
-
-    }
-    else if (e.target.name === "to_region") {
+            : "enter valid country name",
+      });
+    } else if (e.target.name === "to_region") {
       setNewPost({
         ...newPost,
         to: e.target.value,
       });
       setErrors({
         ...errors,
-        to: e.target.value.length === 0 ?
-          " required"
-          : e.target.value[0] ===" "
-          ? "enter valid country name"
-          :/^[a-zA-Z\s]+$/.test(e.target.value)
+        to:
+          e.target.value.length === 0 || e.target.value.length < 2
+            ? " This field is required and must be at least 2 characters"
+            : e.target.value[0] === " "
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
             ? ""
-            : "enter valid country name"
-        ,
-      })
-
+            : "enter valid country name",
+      });
     }
   };
-
 
   // send post api------------------
   const submitForm = (e) => {
     e.preventDefault();
     let form_data = new FormData();
-    let sendRequest = true
+    let sendRequest = true;
 
-
-    if (newPost.tags.length ===0){
-      sendRequest = false
+    if (newPost.tags.length === 0) {
+      sendRequest = false;
       setErrors({
         ...errors,
-        tags :" required"
-        ,
-      })
-
+        tags: " required",
+      });
     }
     if (document.getElementById("from").value.length === 0) {
-      sendRequest = false
+      sendRequest = false;
       setErrors({
         ...errors,
-        from_region: " required"
-        ,
-      })
+        from_region: " required",
+      });
     }
     if (document.getElementById("to_region").value.length === 0) {
-      sendRequest = false
+      sendRequest = false;
       setErrors({
         ...errors,
-        to: " required"
-        ,
-      })
+        to: " required",
+      });
     }
     if (document.getElementById("title").value.length === 0) {
-      sendRequest = false
+      sendRequest = false;
       setErrors({
         ...errors,
-        title: "Title is required"
-        ,
-      })
+        title: "Title is required",
+      });
     }
     if (document.getElementById("details").value.length === 0) {
-      sendRequest = false
+      sendRequest = false;
       setErrors({
         ...errors,
-        description: "Description is required"
-        ,
-
-      })
+        description: "Description is required",
+      });
     }
-    if (document.getElementById("price").value.length === 0 || document.getElementById("price").value == 0) {
-      sendRequest = false
+    if (
+      document.getElementById("price").value.length === 0 ||
+      document.getElementById("price").value == 0
+    ) {
+      sendRequest = false;
       setErrors({
         ...errors,
-        price: "Title is required"
-        ,
-      })
-    }
+        price: "Title is required",
+      });
+    } if ( !errors.title &&
+      !errors.description &&
+      !errors.postpicture &&
+      !errors.from_region &&
+      !errors.to &&
+      !errors.price &&
+      !errors.tags) {
+        history.push("/home")
+      }
 
     // SEND API REQUEST
     if (sendRequest === true) {
@@ -315,13 +306,9 @@ export default function Home() {
           }
         }
       }
-      return console.log("else return")
-    }   
-  }
-  
-  )
-
-
+      return console.log("else return");
+    }
+  });
 
   return (
     <div className="home">
@@ -336,19 +323,22 @@ export default function Home() {
               <div className="lg:col-span-8 col-span-1">
                 {/* add post */}
                 <div className="pt-5">
-                  <div className="box  border mt-5 ms-3 me-3" >
-
+                  <div className="box  border mt-5 ms-3 me-3">
                     <i className="fa fa-search" aria-hidden="true"></i>
 
-                    <input type="text" name="" className="input p-2" onChange={(e) => inputHandler(e)} placeholder="Search Posts with Tags" />
-
+                    <input
+                      type="text"
+                      name=""
+                      className="input p-2"
+                      onChange={(e) => inputHandler(e)}
+                      placeholder="Search Posts with Tags"
+                    />
                   </div>
                   <section className="border rounded shadow-sm p-1 postcard  mt-5  ">
                     {/* profile + date  */}
 
                     <div className="row align-items-center ">
                       <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start ">
-
                         <img
                           src={localStorage.getItem("ProfilePic")}
                           className="me-2 ms-5 userImage"
@@ -356,7 +346,9 @@ export default function Home() {
                           alt="ProfilePic"
                           loading="lazy"
                         />
-                        <span className="">{localStorage.getItem("username")}</span>
+                        <span className="">
+                          {localStorage.getItem("username")}
+                        </span>
                       </div>
                       <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-end  p-5 ">
                         <button
@@ -438,7 +430,9 @@ export default function Home() {
                                 />
                                 <CustomInput
                                   id="from"
-                                  label={"Add the country from where you want your order "}
+                                  label={
+                                    "Add the country from where you want your order "
+                                  }
                                   errors={errors.from_region}
                                   value={newPost.from_region}
                                   handleChange={(e) => changeData(e)}
@@ -447,7 +441,9 @@ export default function Home() {
                                 />
                                 <CustomInput
                                   id="to_region"
-                                  label={"Add the country  you want to recive your order in "}
+                                  label={
+                                    "Add the country  you want to recive your order in "
+                                  }
                                   errors={errors.to}
                                   value={newPost.to}
                                   handleChange={(e) => changeData(e)}
@@ -465,18 +461,31 @@ export default function Home() {
                                   name="tags"
                                   setValue
                                 />
-                                <div className="form-text text-danger">{errors.tags}</div>
+                                <div className="form-text text-danger">
+                                  {errors.tags}
+                                </div>
                                 <div className="modal-footer">
                                   <button
                                     type="button"
-                                    className="btn btn-lg  darkcustombtn mt-3"
+                                    className="btn btn-lg btn-danger  darkcustombtn mt-3"
                                     data-bs-dismiss="modal"
                                   >
                                     Close
                                   </button>
                                   <button
                                     type="submit"
-                                    className="btn btn-lg  darkcustombtn mt-3"
+                                    href="/home"
+                                    data-bs-dismiss="modal"
+                                    className="btn btn-lg btn-dark  darkcustombtn mt-3"
+                                    disabled={
+                                      errors.title ||
+                                      errors.description ||
+                                      errors.postpicture ||
+                                      errors.from_region ||
+                                      errors.to ||
+                                      errors.price ||
+                                      errors.tags
+                                    }
                                   >
                                     Post
                                   </button>
@@ -515,5 +524,4 @@ export default function Home() {
       )}
     </div>
   );
-
 }
