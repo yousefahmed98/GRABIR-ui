@@ -20,7 +20,7 @@ function MyVerticallyCenteredModal(props) {
             <Formm />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide} className="btn-add">Close</Button>
+          <Button onClick={props.onHide} className="btn-add" href="/myprofile">Close</Button>
         </Modal.Footer>
       </Modal>
       </>
