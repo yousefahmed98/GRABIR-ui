@@ -17,8 +17,93 @@ import facebook from "./assets/img/logos/facebook.svg";
 import closeIcon from "./assets/img/close-icon.svg";
 import "./js/scripts";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { data } from "uikit";
 export default function Landing() {
-  // useScript("./js/scripts")
+  const [userForm, setUserForm] = useState({
+    subject: "",
+    email: "",
+    body: "",
+  });
+  const [done, setDone] = useState({
+    msg: null,
+  });
+  const [errors, setErrors] = useState({
+    subjectErr: null,
+    emailErr: null,
+    bodyErr: null,
+  });
+
+  const validateEmail = (userOption) => {
+    let checker = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    return checker.test(userOption);
+  };
+
+  const validateName = (userOption) => {
+    let checker = /^[a-z ,.'-]+$/i;
+    return checker.test(userOption);
+  };
+  const changeData = (e) => {
+    if (e.target.name === "subject") {
+      const isName = validateName(e.target.value);
+      setUserForm({
+        ...userForm,
+        subject: e.target.value,
+      });
+      setErrors({
+        ...errors,
+        subjectErr:
+          e.target.value.length === 0
+            ? "A subject is required."
+            : !isName
+            ? "Invalid subject Format"
+            : e.target.value.length < 5
+            ? "Subject should be at least 5 charters"
+            : null,
+      });
+    } else if (e.target.name === "email") {
+      const isEmail = validateEmail(e.target.value);
+      setUserForm({
+        ...userForm,
+        email: e.target.value,
+      });
+      setErrors({
+        ...errors,
+        emailErr:
+          e.target.value.length === 0
+            ? "Email is required."
+            : !isEmail
+            ? "Invalid Email Format"
+            : null,
+      });
+    } else if (e.target.name === "body") {
+      setUserForm({
+        ...userForm,
+        body: e.target.value,
+      });
+      setErrors({
+        ...errors,
+        bodyErr:
+          e.target.value.length === 0
+            ? "Message is required."
+            : e.target.value.length < 20
+            ? "Your message must be at least 20 Character"
+            : null,
+      });
+    }
+  };
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (!errors.emailErr && !errors.subjectErr && !errors.bodyErr) {
+      // axios
+      //     .post("http://127.0.0.1:8000/base/email-receiver/", userForm)
+      //     .then((res) => console.log(res.data))
+      //     .catch((err) => console.log(err));
+      console.log(userForm, "mail successsssssssy");
+      return setDone({ ...done, msg: "Your Message has ben succefully sent" });
+    }
+  };
 
   return (
     <div id="page-top">
@@ -435,7 +520,11 @@ export default function Landing() {
               You can always tell us what you thinking about
             </h3>
           </div>
-          <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+          <form
+            id="contactForm"
+            data-sb-form-api-token="API_TOKEN"
+            onSubmit={(e) => submitForm(e)}
+          >
             <div className="row align-items-stretch mb-5">
               <div className="col-md-6">
                 <div className="form-group">
@@ -444,14 +533,14 @@ export default function Landing() {
                     className="form-control"
                     id="name"
                     type="text"
-                    placeholder="Your Name *"
+                    placeholder="Email Subject *"
                     data-sb-validations="required"
+                    name="subject"
+                    value={userForm.subject}
+                    onChange={(e) => changeData(e)}
                   />
-                  <div
-                    className="invalid-feedback"
-                    data-sb-feedback="name:required"
-                  >
-                    A name is required.
+                  <div>
+                    <p className="text-danger">{errors.subjectErr}</p>
                   </div>
                 </div>
                 <div className="form-group">
@@ -462,34 +551,12 @@ export default function Landing() {
                     type="email"
                     placeholder="Your Email *"
                     data-sb-validations="required,email"
+                    name="email"
+                    value={userForm.email}
+                    onChange={(e) => changeData(e)}
                   />
-                  <div
-                    className="invalid-feedback"
-                    data-sb-feedback="email:required"
-                  >
-                    An email is required.
-                  </div>
-                  <div
-                    className="invalid-feedback"
-                    data-sb-feedback="email:email"
-                  >
-                    Email is not valid.
-                  </div>
-                </div>
-                <div className="form-group mb-md-0">
-                  {/* <!-- Phone number input--> */}
-                  <input
-                    className="form-control"
-                    id="phone"
-                    type="tel"
-                    placeholder="Your Phone *"
-                    data-sb-validations="required"
-                  />
-                  <div
-                    className="invalid-feedback"
-                    data-sb-feedback="phone:required"
-                  >
-                    A phone number is required.
+                  <div>
+                    <p className="text-danger">{errors.emailErr}</p>
                   </div>
                 </div>
               </div>
@@ -501,20 +568,20 @@ export default function Landing() {
                     id="message"
                     placeholder="Your Message *"
                     data-sb-validations="required"
+                    name="body"
+                    value={userForm.body}
+                    onChange={(e) => changeData(e)}
                   ></textarea>
-                  <div
-                    className="invalid-feedback"
-                    data-sb-feedback="message:required"
-                  >
-                    A message is required.
+                  <div>
+                    <p className="text-danger"> {errors.bodyErr}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="d-none" id="submitSuccessMessage">
+            {/* <div className="d-none" id="submitSuccessMessage">
               <div className="text-center text-white mb-3">
                 <div className="fw-bolder">Form submission successful!</div>
-                To activate this form, sign up at
+                Thank you for your time, we will contact you soon.
                 <br />
                 <a href="https://startbootstrap.com/solution/contact-forms">
                   https://startbootstrap.com/solution/contact-forms
@@ -525,16 +592,22 @@ export default function Landing() {
               <div className="text-center text-danger mb-3">
                 Error sending message!
               </div>
-            </div>
+            </div> */}
             {/* <!-- Submit Button--> */}
             <div className="text-center">
               <button
-                className="btn btn-primary btn-xl text-uppercase disabled"
+                className="btn btn-primary btn-xl text-uppercase "
                 id="submitButton"
                 type="submit"
+                disabled={
+                  errors.subjectErr || errors.bodyErr || errors.emailErr
+                }
               >
                 Send Message
               </button>
+              <div>
+                <p className="text-success">{done.msg}</p>
+              </div>
             </div>
           </form>
         </div>
@@ -846,7 +919,7 @@ export default function Landing() {
                   <div className="modal-body">
                     {/* <!-- Project details--> */}
                     <h2 className="text-uppercase">Perfume</h2>
-                 
+
                     <img
                       className="img-fluid d-block mx-auto"
                       src={portfolio6}
