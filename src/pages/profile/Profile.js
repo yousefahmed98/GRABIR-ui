@@ -1,19 +1,12 @@
-import { Reviews } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Tabs, Tab, Stack } from "react-bootstrap";
 import Navbar from "../../components/navbar/navbar";
 import Btnpic from "./Btnpicture";
-import IconButton from "@mui/material/IconButton";
 import CardHeader from "@mui/material/CardHeader";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Edit from "./Edit";
 import Editadd from "./Edit copy";
-
-// import Picture from './Picture';
-// import Picture from './picture';
 import "./profile.css";
 import StarRating from "../../components/StarRating/StarRating";
-import Picture from "./Picture";
 export default function Profile() {
   const [key, setKey] = useState("home");
 
@@ -87,17 +80,15 @@ export default function Profile() {
           <Tab eventKey="profile" title=" Security Information" className="tab">
             <>
               <div>
-                <h4>ID :</h4>
+                {/* <h4>ID :</h4>
                 <p> {localStorage.getItem("id")}</p>
-                <hr />
+                <hr /> */}
                 <h4>Email :</h4>
                 <p className="text-capitalize">
                   {" "}
                   {localStorage.getItem("email")}{" "}
                 </p>
-                <hr />
-                <h4>Password :</h4>
-                <p> ********** </p>
+         
                 <hr />
                 <h4>Date joined :</h4>
                 <p> {localStorage.getItem("dateJoined")} </p>

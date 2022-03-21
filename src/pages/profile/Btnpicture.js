@@ -8,16 +8,14 @@ function MyVerticallyCenteredModal(props) {
   const [err, setErr] = useState({
     imgErr: null,
   });
+
+ 
   const changedata = (a) => {
     if (a.target.name === "pic") {
       setData(a.target.files[0]);
-      if (!data.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+      if (!data.name.match(/\.(jpg|jpeg|png|gif|svg|PNG|JPG|JPEG|GIF|SVG)$/)) {
         console.log("select valid image.");
       }
-      console.log(
-        data.name,
-        "///////////////////////////////////////////////////"
-      );
     }
   };
 
@@ -26,32 +24,38 @@ function MyVerticallyCenteredModal(props) {
     console.log(data, "''''''''''''''''''''''''''''''''''''''''''''''");
     const formData = new FormData();
     const imagefile = data;
-    formData.append("ProfilePic", imagefile);
-    axios
-      .patch(
-        `http://127.0.0.1:8000/base/users/${localStorage.getItem("id")}/`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
-      .then((res) => {
-        if (!data.name.match(/\.(jpg|jpeg|png|gif)$/)) {
-          console.log("select valid image.");
-          setErr({ ...err, imgErr: "Select valid image" });
-        } else {
-          localStorage.removeItem("ProfilePic");
-          localStorage.setItem("ProfilePic", res.data.ProfilePic);
-          window.alert("Profile Picture updated succefully");
-        }
-      });
+
+    if (!data.name.match(/\.(jpg|jpeg|png|gif|svg|PNG|JPG|JPEG|GIF|SVG)$/)) {
+      console.log("select valid image.");
+      setErr({ ...err, imgErr: "Select valid image" });
+    } else {
+      localStorage.removeItem("ProfilePic");
+      formData.append("ProfilePic", imagefile);
+      axios
+        .patch(
+          `http://127.0.0.1:8000/base/users/${localStorage.getItem("id")}/`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+   
+            localStorage.setItem("ProfilePic", res.data.ProfilePic);
+            setErr({ ...err, imgErr: null });
+
+            window.alert("Profile Picture updated succefully");
+
+        
+        }).catch((err)=> console.log(err))
+    }
   };
-  console.log(
-    "image typeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee not working",
-    err.imgErr
-  );
+  // console.log(
+  //   "image typeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee not working",
+  //   err.imgErr
+  // );
   return (
     <>
       <Modal
@@ -79,10 +83,13 @@ function MyVerticallyCenteredModal(props) {
               >
                 Save
               </Button>
-              { err.imgErr ?  <div>
-                <p className="text-danger">Invalid image type Please insert(jpg,jpeg,png)</p>
-              </div> : null}
-              
+              {err.imgErr ? (
+                <div>
+                  <p className="text-danger">
+                    Invalid image type Please insert(jpg,jpeg,png,svg)
+                  </p>
+                </div>
+              ) : null}
             </Form.Group>
           </Form>
           <Picture data={data} />

@@ -5,13 +5,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getOffersAction } from "../../Store/Actions/getOffers";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import "./popup.css"
-import axios from 'axios'
 
 export default function Popup(props) {
   const [newNotifyObj, setNewNotifyObj] = useState({
@@ -60,7 +57,6 @@ const handleNotification =(type)=>{
 useEffect(() => {
   //post request new notification object 
   if (newNotifyObj.body.length > 0) {
-    console.log("sending api post request" ,newNotifyObj)
     axiosInstance.post('/notification/notifications/',newNotifyObj, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -72,7 +68,7 @@ useEffect(() => {
       .catch((err) => console.log(err))
   }
 }, [newNotifyObj])
-/////////////////////////////////////////////////////////////////////////////
+
 
   //-------------------------------------------------------
 

@@ -3,25 +3,18 @@ import { FaStar } from "react-icons/fa";
 import "./Reviews.css";
 import { useDispatch } from "react-redux";
 import { getRate } from "../../Store/Actions/getRate";
-import { useSelector } from "react-redux";
 
 
 export default function Reviews(props) {
   const dispatch = useDispatch();
-  const rates = useSelector((state) => state.RATE.rateList);
   useEffect(() => {
     dispatch(getRate());
-  }, []);
+  }, [dispatch]);
 
   const current_user = localStorage.getItem("id");
   return (
 
     <div className="reviews">
-      {/* <label>
-            <input type="radio" name="rating" />
-            <FaStar className="star" color={"#ffc107"} size={70} />
-          </label> */}
-      {/* check for user review only  */}
       {current_user == props.rateReviewUser ? (
                   <div className="mt-5">
           {props.rateReviewStars === 1 ? (
