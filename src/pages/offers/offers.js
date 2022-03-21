@@ -3,10 +3,8 @@ import {useEffect , useState} from "react";
 import { useSelector ,useDispatch} from "react-redux";
 import Navbar from "../../components/navbar/navbar";
 import OffersCard from "../../components/card/offerCard";
-// import NotLoggedIn from "../../components/NotLoggedIn/NotLoggedIn";
 import { useHistory } from "react-router-dom";
 import { getOffersAction } from '../../Store/Actions/getOffers'
-import { Button } from "@mui/material";
 import { getPosts } from '../../Store/Actions/getPosts'
 import SweetAlert from 'react-bootstrap-sweetalert';
 
@@ -18,10 +16,8 @@ export default function Offers(props) {
   const posts = useSelector((state) => state.POSTS.postsList)
   useEffect(() => {
     dispatch(getOffersAction())
-    dispatch(getPosts())
-    console.log("oferrrs", offersArray);
-  
-}, []);
+    dispatch(getPosts())  
+}, [dispatch]);
 
 ///////////////////////////////////////////////////////////
 
@@ -31,27 +27,19 @@ const [CloseAlert, setCloseAlert] = useState(false);
 const getmyOffersListFun = () => {
     let myOffersList = []
     let myPostsList =[]
-    console.log("AllPosts" , posts)
-    console.log("AllOffers" , offersArray)
   
       for( let p of posts){
-        console.log("p" , p)
-        console.log("localStorage.getItem(" , localStorage.getItem("id"))
           if(p.user == localStorage.getItem("id")){
               myPostsList.push(p.id)
           }
       }
-      console.log("myPostsList" , myPostsList)
      for (let o of offersArray ){
-         console.log("o" , o)
          if(myPostsList.includes(o.post) )
          {
-             console.log("****************************", o)
              myOffersList.push(o)
              setMyOffers((prev)=>[...prev,o])
          }
      }
-    console.log("myOffersList",myOffersList)
          setMyOffers(myOffersList)
         setCloseAlert(true)
     

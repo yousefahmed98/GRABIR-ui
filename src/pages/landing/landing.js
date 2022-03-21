@@ -10,10 +10,6 @@ import portfolio6 from "./assets/img/portfolio/6.jpg";
 import about1 from "./assets/img/about/1.jpg";
 import about2 from "./assets/img/about/2.jpg";
 import about3 from "./assets/img/about/3.jpg";
-import about4 from "./assets/img/about/4.jpg";
-import team1 from "./assets/img/team/1.jpg";
-import team2 from "./assets/img/team/2.jpg";
-import team3 from "../../static/dev.webp";
 import microsoft from "./assets/img/logos/microsoft.svg";
 import google from "./assets/img/logos/google.svg";
 import ibm from "./assets/img/logos/ibm.svg";
@@ -176,7 +172,7 @@ export default function Landing() {
       <section className="page-section bg-light" id="portfolio">
         <div className="container">
           <div className="text-center">
-            <h2 className="section-heading text-uppercase"></h2>
+            {/* <h2 className="section-heading text-uppercase"></h2> */}
           </div>
           <div className="row">
             <div className="col-lg-4 col-sm-6 mb-4">
@@ -313,7 +309,7 @@ export default function Landing() {
         <div className="container">
           <div className="text-center">
             <h2 className="section-heading text-uppercase">About</h2>
-            <h3 className="section-subheading text-muted"></h3>
+            {/* <h3 className="section-subheading text-muted"></h3> */}
           </div>
           <ul className="timeline">
             <li>
@@ -349,22 +345,6 @@ export default function Landing() {
                   alt="..."
                 />
               </div>
-              {/* <div className="timeline-panel">
-                <div className="timeline-heading">
-                  <h4>march 2022</h4>
-                  <h4 className="subheading">An Agency is Born</h4>
-                </div>
-                <div className="timeline-body">
-                  <p className="text-muted">
-                    An application that connect people from another countries
-                    together eaisly and safely, Client is a person who wants to
-                    buy something from outside his country, traveller is a
-                    person travelling soon and he has no problem to fetch
-                    something with him that clients want All of this and more
-                    you can find in GRABIR App.
-                  </p>
-                </div>
-              </div> */}
             </li>
             <li>
               <div className="timeline-image">
@@ -403,68 +383,6 @@ export default function Landing() {
           </ul>
         </div>
       </section>
-      {/* <!-- Team--> */}
-      {/* <section className="page-section bg-light" id="team">
-        <div className="container">
-          <div className="text-center">
-            <h2 className="section-heading text-uppercase">Our Amazing Team</h2>
-            <h3 className="section-subheading text-muted"></h3>
-          </div>
-          <div className="row">
-            <div className="col-lg-4">
-              <div className="team-member">
-                <img className="mx-auto rounded-circle" src={team1} alt="..." />
-                <h4>Parveen Anand</h4>
-                <p className="text-muted">Lead Designer</p>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="team-member">
-                <img className="mx-auto rounded-circle" src={team2} alt="..." />
-                <h4>Diana Petersen</h4>
-                <p className="text-muted">Lead Marketer</p>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="team-member">
-                <img className="mx-auto rounded-circle" src={team3} alt="..." />
-                <h4>Larry Parker</h4>
-                <p className="text-muted">Lead Developer</p>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a className="btn btn-dark btn-social mx-2" href="#!">
-                  <i className="fab fa-linkedin-in"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-8 mx-auto text-center"></div>
-          </div>
-        </div>
-      </section> */}
       {/* <!-- Clients--> */}
       <div className="py-5">
         <div className="container">
@@ -517,13 +435,6 @@ export default function Landing() {
               You can always tell us what you thinking about
             </h3>
           </div>
-          {/* <!-- * * * * * * * * * * * * * * *-->
-            <!-- * * SB Forms Contact Form * *-->
-            <!-- * * * * * * * * * * * * * * *-->
-            <!-- This form is pre-integrated with SB Forms.-->
-            <!-- To make this form functional, sign up at-->
-            <!-- https://startbootstrap.com/solution/contact-forms-->
-            <!-- to get an API token!--> */}
           <form id="contactForm" data-sb-form-api-token="API_TOKEN">
             <div className="row align-items-stretch mb-5">
               <div className="col-md-6">
@@ -600,10 +511,6 @@ export default function Landing() {
                 </div>
               </div>
             </div>
-            {/* <!-- Submit success message-->
-                <!---->
-                <!-- This is what your users will see when the form-->
-                <!-- has successfully submitted--> */}
             <div className="d-none" id="submitSuccessMessage">
               <div className="text-center text-white mb-3">
                 <div className="fw-bolder">Form submission successful!</div>
@@ -614,10 +521,6 @@ export default function Landing() {
                 </a>
               </div>
             </div>
-            {/* <!-- Submit error message--> */}
-            {/* <!----> */}
-            {/* <!-- This is what your users will see when there is--> */}
-            {/* <!-- an error submitting the form--> */}
             <div className="d-none" id="submitErrorMessage">
               <div className="text-center text-danger mb-3">
                 Error sending message!

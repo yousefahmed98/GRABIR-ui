@@ -65,8 +65,7 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
           offers: [...newOffers], // 1
           deals: [...newdealssState],
           offers_counter: newOffers.length,
-        },
-        console.log("deallllllllls222: ", state.deals)
+        }
       );
 
     case "DELETE_OFFER":
@@ -90,7 +89,6 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
           }
         );
       } else {
-        console.log("does not exist before");
         return {
           ...state,
           offers_counter: state.offers.length,

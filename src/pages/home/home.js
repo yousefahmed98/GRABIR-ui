@@ -6,28 +6,19 @@ import Loader from "../../components/loader/loader";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../Store/Actions/getPosts";
 import { getTags } from "../../Store/Actions/getTags";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import TextField from "@mui/material/TextField";
 import "../../components/fonts.css";
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import "./home.css"
 
-import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
-import PayPal from "../../components/PayPal/PayPal";
-
 export default function Home() {
   //get all posts
   const posts = useSelector((state) => state.POSTS.postsList)
   const isloading = useSelector((state) => state.LOADER.isloading);
-  const user = useSelector((state) => state.auth.user)
-  console.log(user, "*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-  console.log(localStorage.getItem("region"), "this is region");
-  console.log(localStorage.getItem("username"), "this is username of current user")
-  console.log(localStorage.getItem("isVerfied"), "verfieeeeeeeeeeeed or not");
-  // console.log(user.email,"this is current user email email");
+  // const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch();
   // get all tags 
   const tags = useSelector((state) => state.TAGS.allTags)
@@ -35,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getPosts())
     dispatch(getTags())
-  }, []);
+  }, [dispatch]);
 
   const animatedComponents = makeAnimated();
 
@@ -58,13 +49,11 @@ export default function Home() {
   })
   // select tags------------
   const changeSelectedTags = (e) => {
-    console.log(Object.values(e))
     let list_of_tagsobjects = Object.values(e)
     let chosen = []
     for (let t of list_of_tagsobjects) {
       chosen.push(parseInt(t.value))
     }
-    console.log(chosen)
     setNewPost({
       ...newPost,
       tags: chosen,
@@ -74,7 +63,6 @@ export default function Home() {
   // store values in newPost state
   const changeData = (e) => {
     if (e.target.name === "title") {
-      console.log(e.target.value);
       setNewPost({
         ...newPost,
         title: e.target.value,
@@ -114,7 +102,6 @@ export default function Home() {
     form_data.append("title", newPost.title);
     form_data.append("description", newPost.description);
     if (newPost.postpicture !== null) {
-      console.log("object", newPost.postpicture);
       form_data.append(
         "postpicture",
         newPost.postpicture,
@@ -126,11 +113,9 @@ export default function Home() {
     form_data.append("price", newPost.price);
     form_data.append("ownerName", newPost.ownerName);
     form_data.append("user", newPost.user);
-    //form_data.append('tags', newPost.tags);
     newPost.tags.forEach((item) => {
       form_data.append("tags", item);
     });
-    console.log("taags ", form_data);
     axios
       .post("http://127.0.0.1:8000/posts/posts/", form_data, {
         headers: {
@@ -151,7 +136,6 @@ export default function Home() {
     //convert input text to lower case
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
-    console.log("lower caseee: ", lowerCase);
   };
   const filteredData = posts.filter((el) => {
     //if no input the return the original
@@ -167,8 +151,11 @@ export default function Home() {
           }
         }
       }
-    }
-  })
+      return console.log("else return")
+    }   
+  }
+  
+  )
 
 
 
@@ -185,16 +172,6 @@ export default function Home() {
               <div className="lg:col-span-8 col-span-1">
                 {/* add post */}
                 <div className="pt-5">
-                  {/* <section className="border rounded shadow-lg p-3   mt-5 rounded-pill ">
-                        <TextField
-                          id="outlined-basic"
-                          onChange={inputHandler}
-                          variant="outlined"
-                          fullWidth
-                          label="Search Posts with Tags"
-                          className="rounded-pill"
-                        />
-                  </section> */}
                   <div className="box  border mt-5 ms-3 me-3" >
 
                     <i className="fa fa-search" aria-hidden="true"></i>
@@ -361,8 +338,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div></div>
-          {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */}
         </>
       ) : (
         history.push("/login")

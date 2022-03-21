@@ -30,7 +30,7 @@ export default function PostCard({ post}) {
 
   useEffect(() => {
     dispatch(getTags())
-  }, []);
+  }, [dispatch]);
   useEffect(()=>{
     setuser()
   },[localStorage.getItem("id")])
@@ -38,7 +38,6 @@ export default function PostCard({ post}) {
     if (currentuser.id !== null) {
         console.log(socket.on("welcomeMessage", (msg) => {
             console.log(msg, currentuser)
-            console.log(currentuser, "currentuser messsage////////")
         }))
 
        //send event to server
@@ -80,7 +79,6 @@ const setuser = ()=>{
     for (let t of list_of_tagsobjects) {
       chosen.push(parseInt(t.value))
     }
-    console.log(chosen)
     setNewPost({
       ...newPost,
       tags: chosen,
@@ -89,7 +87,6 @@ const setuser = ()=>{
   // store values in newPost state
   const changeData = (e) => {
     if (e.target.name === "title") {
-      console.log(e.target.value)
       setNewPost({
         ...newPost,
         title: e.target.value,
@@ -134,7 +131,6 @@ const setuser = ()=>{
     form_data.append('title', newPost.title);
     form_data.append('description', newPost.description);
     if(newPost.postpicture !== null){
-      console.log("not null")
       form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
   }
     form_data.append('from_region', newPost.from_region);
@@ -160,7 +156,6 @@ const setuser = ()=>{
   // --------------------delete post if owner-----------------------------------
   const postDelete = (e, post_id) => {
     e.preventDefault()
-    console.log(post_id)
     setStyle('darkcustombtnActive')
     axios.delete(`http://127.0.0.1:8000/posts/posts/${post_id}/`, {
       headers: {
@@ -185,7 +180,6 @@ const setuser = ()=>{
   getpostTags()
   //--------------------
   return (
-    // https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg
     <div className="postsCards">
     <div className="pt-5 ">
 

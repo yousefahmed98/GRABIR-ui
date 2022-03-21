@@ -9,18 +9,9 @@ import { useLocation } from "react-router-dom";
 export default function Confirmpass() {
   const history = useHistory();
   const search = useLocation().search;
-  const token_valid_param = new URLSearchParams(search).get("token_valid");
+  // const token_valid_param = new URLSearchParams(search).get("token_valid");
   const uidb64_param = new URLSearchParams(search).get("uidb64");
   const token_param = new URLSearchParams(search).get("token");
-
-  console.log("naaaaaaaaaaame toke_valid: ", token_valid_param);
-  console.log("naaaaaaaaaaame uidb64: ", uidb64_param);
-  console.log("naaaaaaaaaaame token: ", token_param);
-
-  // const search =this.props.location.query;
-  // const params = new URLSearchParams(search);
-  // const token_valid  = params.get('token_valid');
-  // console.log("hahahahha ", token_valid)
   const [userForm, setUserForm] = useState({
     token_valid: null,
     uidb64: null,
