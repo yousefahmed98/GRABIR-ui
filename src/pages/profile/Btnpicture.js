@@ -5,52 +5,53 @@ import axios from "axios";
 
 function MyVerticallyCenteredModal(props) {
   const [data, setData] = useState(null);
-  
+  const [err, setErr] = useState({
+    imgErr: null,
+  });
   const changedata = (a) => {
     if (a.target.name === "pic") {
       setData(a.target.files[0]);
+      if (!data.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+        console.log("select valid image.");
+      }
       console.log(
         data.name,
         "///////////////////////////////////////////////////"
       );
-      //   axios.patch(
-      //     `http://127.0.0.1:8000/base/users/${localStorage.getItem("id")}/`,
-      //     { ProfilePic: data },
-      //     {
-      //       headers: {
-      //         'content-type': 'multipart/form-data',
-      //         Authorization: `Bearer ${localStorage.getItem("access")}`,
-      //       },
-      //     }
-      //   )
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err))
-      // }
-     
     }
   };
 
-const submitPic = (a) => {
-  a.preventDefault();
-  console.log(data,"''''''''''''''''''''''''''''''''''''''''''''''")
-  const formData = new FormData();
-  const imagefile = data
-  formData.append("ProfilePic", imagefile);
-  axios.patch(
-    `http://127.0.0.1:8000/base/users/${localStorage.getItem("id")}/`,
-    formData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  )
-  .then((res) => {
-    localStorage.removeItem("ProfilePic")
-    localStorage.setItem("ProfilePic", res.data.ProfilePic)
-    window.alert("Profile Picture updated succefully")
-  })
-}
+  const submitPic = (a) => {
+    a.preventDefault();
+    console.log(data, "''''''''''''''''''''''''''''''''''''''''''''''");
+    const formData = new FormData();
+    const imagefile = data;
+    formData.append("ProfilePic", imagefile);
+    axios
+      .patch(
+        `http://127.0.0.1:8000/base/users/${localStorage.getItem("id")}/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        if (!data.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+          console.log("select valid image.");
+          setErr({ ...err, imgErr: "Select valid image" });
+        } else {
+          localStorage.removeItem("ProfilePic");
+          localStorage.setItem("ProfilePic", res.data.ProfilePic);
+          window.alert("Profile Picture updated succefully");
+        }
+      });
+  };
+  console.log(
+    "image typeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee not working",
+    err.imgErr
+  );
   return (
     <>
       <Modal
@@ -63,18 +64,26 @@ const submitPic = (a) => {
           <Modal.Title id="contained-modal-title-vcenter">Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={ (a) => submitPic(a)}>
-          <Form.Group controlId="formFile" className="mb-3">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="file"
-              name="pic"
-              onChange={(a) => changedata(a)}
-            />
-            <Button  onClick={props.onSave} className="btn-add mt-2" type="submit">
-              Save
-            </Button>
-          </Form.Group>
+          <Form onSubmit={(a) => submitPic(a)}>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label></Form.Label>
+              <Form.Control
+                type="file"
+                name="pic"
+                onChange={(a) => changedata(a)}
+              />
+              <Button
+                onClick={props.onSave}
+                className="btn-add mt-2"
+                type="submit"
+              >
+                Save
+              </Button>
+              { err.imgErr ?  <div>
+                <p className="text-danger">Invalid image type Please insert(jpg,jpeg,png)</p>
+              </div> : null}
+              
+            </Form.Group>
           </Form>
           <Picture data={data} />
         </Modal.Body>
