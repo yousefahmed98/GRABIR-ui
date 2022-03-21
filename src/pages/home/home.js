@@ -6,17 +6,14 @@ import Loader from "../../components/loader/loader";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../Store/Actions/getPosts";
 import { getTags } from "../../Store/Actions/getTags";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-import TextField from "@mui/material/TextField";
 import "../../components/fonts.css";
 //animated select react
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import "./home.css"
-
-import NotLoggedIn from '../../components/NotLoggedIn/NotLoggedIn'
-import PayPal from "../../components/PayPal/PayPal";
+import CustomInput from '../../components/CustomInput'
 
 export default function Home() {
   //get all posts
@@ -48,7 +45,7 @@ export default function Home() {
   const [newPost, setNewPost] = useState({
     title: "",
     description: "",
-    postpicture: null,
+    postpicture: "",
     from_region: "",
     to: "",
     price: 0.0,
@@ -56,19 +53,41 @@ export default function Home() {
     user: localStorage.getItem("id"),
     tags: [],
   })
+  //------------------errors------------------------------------
+  const [errors, setErrors] = useState(
+    // initialState intial values
+    {
+      title: "",
+      description: "",
+      postpicture: "",
+      from_region: "",
+      to: "",
+      price: "",
+      tags: "",
+    }
+  )
   // select tags------------
   const changeSelectedTags = (e) => {
-    console.log(Object.values(e))
+    setErrors({
+      ...errors,
+      tags: Object.values(e).length === 0 ?
+        "required" :
+        ""
+      ,
+    })
+
+
     let list_of_tagsobjects = Object.values(e)
     let chosen = []
     for (let t of list_of_tagsobjects) {
       chosen.push(parseInt(t.value))
     }
-    console.log(chosen)
     setNewPost({
       ...newPost,
       tags: chosen,
     })
+
+
   }
 
   // store values in newPost state
@@ -79,71 +98,206 @@ export default function Home() {
         ...newPost,
         title: e.target.value,
       });
-    } else if (e.target.name === "details") {
+      setErrors({
+        ...errors,
+        title: e.target.value.length === 0
+          ? "Title is required"
+          : e.target.value[0] ===" "
+          ? "enter valid country name"
+          : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "Title should contains letters only"
+        ,
+      })
+
+    }
+    else if (e.target.name === "details") {
       setNewPost({
         ...newPost,
         description: e.target.value,
       });
-    } else if (e.target.name === "photo") {
+
+      setErrors({
+        ...errors,
+        description: e.target.value.length === 0
+          ? "You should write details to facilitate handling"
+          : e.target.value[0] ===" "
+          ? "enter valid country name"
+          : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "Details should contains letters only"
+        ,
+      })
+    }
+    else if (e.target.name === "postpic") {
+      console.log(e.target.files[0].name.split(".")[1])
       setNewPost({
         ...newPost,
         postpicture: e.target.files[0],
       });
-    } else if (e.target.name === "price") {
+      setErrors({
+        ...errors,
+        postpicture: e.target.files[0].name.split(".")[1] === "jpg" || e.target.files[0].name.split(".")[1] === "png"
+          ? ""
+          : "you should upload images only"
+        ,
+      })
+
+    }
+    else if (e.target.name === "price") {
       setNewPost({
         ...newPost,
         price: e.target.value,
       });
-    } else if (e.target.name === "from") {
+      setErrors({
+        ...errors,
+        price: e.target.value.length === 0 ?
+          "price is required" :
+          /^[a-zA-Z]+$/.test(e.target.value) ?
+            "Enter valid price"
+            :
+            e.target.value > 0
+              ? ""
+              : " Enter valid price"
+        ,
+      })
+
+
+    }
+    else if (e.target.name === "from") {
       setNewPost({
         ...newPost,
         from_region: e.target.value,
       });
-    } else if (e.target.name === "to") {
+
+      setErrors({
+        ...errors,
+        from_region: e.target.value.length === 0 ?
+          " required"
+          : e.target.value[0] ===" "
+          ? "enter valid country name"
+          : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name"
+        ,
+      })
+
+    }
+    else if (e.target.name === "to_region") {
       setNewPost({
         ...newPost,
         to: e.target.value,
       });
+      setErrors({
+        ...errors,
+        to: e.target.value.length === 0 ?
+          " required"
+          : e.target.value[0] ===" "
+          ? "enter valid country name"
+          :/^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name"
+        ,
+      })
+
     }
   };
+
+
   // send post api------------------
   const submitForm = (e) => {
     e.preventDefault();
-    // SEND API REQUEST
     let form_data = new FormData();
-    form_data.append("title", newPost.title);
-    form_data.append("description", newPost.description);
-    if (newPost.postpicture !== null) {
-      console.log("object", newPost.postpicture);
-      form_data.append(
-        "postpicture",
-        newPost.postpicture,
-        newPost.postpicture.name
-      );
+    let sendRequest = true
+
+
+    if (newPost.tags.length ===0){
+      sendRequest = false
+      setErrors({
+        ...errors,
+        tags :" required"
+        ,
+      })
+
     }
-    form_data.append("from_region", newPost.from_region);
-    form_data.append("to", newPost.to);
-    form_data.append("price", newPost.price);
-    form_data.append("ownerName", newPost.ownerName);
-    form_data.append("user", newPost.user);
-    //form_data.append('tags', newPost.tags);
-    newPost.tags.forEach((item) => {
-      form_data.append("tags", item);
-    });
-    console.log("taags ", form_data);
-    axios
-      .post("http://127.0.0.1:8000/posts/posts/", form_data, {
-        headers: {
-          "content-type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
+    console.log(Object.values(document.getElementById("tags")))
+    if (document.getElementById("from").value.length === 0) {
+      sendRequest = false
+      setErrors({
+        ...errors,
+        from_region: " required"
+        ,
       })
-      .then((res) => {
-        console.log(res.data);
-        dispatch(getPosts());
+    }
+    if (document.getElementById("to_region").value.length === 0) {
+      sendRequest = false
+      setErrors({
+        ...errors,
+        to: " required"
+        ,
       })
-      .catch((err) => console.log(err));
-    return history.push("/home");
+    }
+    if (document.getElementById("title").value.length === 0) {
+      sendRequest = false
+      setErrors({
+        ...errors,
+        title: "Title is required"
+        ,
+      })
+    }
+    if (document.getElementById("details").value.length === 0) {
+      sendRequest = false
+      setErrors({
+        ...errors,
+        description: "Description is required"
+        ,
+      })
+    }
+    if (document.getElementById("price").value.length === 0 || document.getElementById("price").value == 0) {
+      sendRequest = false
+      setErrors({
+        ...errors,
+        price: "Title is required"
+        ,
+      })
+    }
+
+    // SEND API REQUEST
+    if (sendRequest === true) {
+      if (newPost.tags.length !== 0 || newPost.description.length !== 0) {
+        form_data.append("title", newPost.title);
+        form_data.append("description", newPost.description);
+        if (newPost.postpicture !== "") {
+          form_data.append(
+            "postpicture",
+            newPost.postpicture,
+            newPost.postpicture.name
+          );
+        }
+        form_data.append("from_region", newPost.from_region);
+        form_data.append("to", newPost.to);
+        form_data.append("price", newPost.price);
+        form_data.append("ownerName", newPost.ownerName);
+        form_data.append("user", newPost.user);
+        //form_data.append('tags', newPost.tags);
+        newPost.tags.forEach((item) => {
+          form_data.append("tags", item);
+        });
+        console.log("taags ", form_data);
+        axios
+          .post("http://127.0.0.1:8000/posts/posts/", form_data, {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+            dispatch(getPosts());
+          })
+          .catch((err) => console.log(err));
+      }
+    }
   };
   const [inputText, setInputText] = useState("");
 
@@ -185,21 +339,11 @@ export default function Home() {
               <div className="lg:col-span-8 col-span-1">
                 {/* add post */}
                 <div className="pt-5">
-                  {/* <section className="border rounded shadow-lg p-3   mt-5 rounded-pill ">
-                        <TextField
-                          id="outlined-basic"
-                          onChange={inputHandler}
-                          variant="outlined"
-                          fullWidth
-                          label="Search Posts with Tags"
-                          className="rounded-pill"
-                        />
-                  </section> */}
                   <div className="box  border mt-5 ms-3 me-3" >
 
                     <i className="fa fa-search" aria-hidden="true"></i>
 
-                    <input type="text" name="" className="input p-2" onChange={(e)=>inputHandler(e)}  placeholder="Search Posts with Tags"/>
+                    <input type="text" name="" className="input p-2" onChange={(e) => inputHandler(e)} placeholder="Search Posts with Tags" />
 
                   </div>
                   <section className="border rounded shadow-sm p-1 postcard  mt-5  ">
@@ -260,55 +404,62 @@ export default function Home() {
                                 method="post"
                                 onSubmit={(e) => submitForm(e)}
                               >
-                                <label>TiTle</label>
-                                <input
+                                <CustomInput
+                                  id="title"
+                                  label={"TiTle"}
+                                  errors={errors.title}
+                                  value={newPost.title}
+                                  handleChange={(e) => changeData(e)}
+                                  name={"title"}
                                   type="text"
-                                  className="form-control"
-                                  name="title"
-                                  required
-                                  onChange={(e) => changeData(e)}
                                 />
-                                <label>details</label>
-                                <input
+                                <CustomInput
+                                  id="details"
+                                  label={"Details about your order"}
+                                  errors={errors.description}
+                                  value={newPost.description}
+                                  handleChange={(e) => changeData(e)}
+                                  name={"details"}
                                   type="text"
-                                  className="form-control offertxt"
-                                  name="details"
-                                  required
-                                  onChange={(e) => changeData(e)}
                                 />
-                                <label>Post photo</label>
-                                <input
+                                <CustomInput
+                                  id="postpic"
+                                  label={"Add image of your order"}
+                                  errors={errors.postpicture}
+                                  handleChange={(e) => changeData(e)}
+                                  name="postpic"
                                   type="file"
-                                  className="form-control"
-                                  name="photo"
-                                  onChange={(e) => changeData(e)}
                                 />
-                                <label>price</label>
-                                <input
-                                  type="text"
-                                  className="form-control"
+                                <CustomInput
+                                  id="price"
+                                  label={"Add price you well pay"}
+                                  errors={errors.price}
+                                  value={newPost.price}
+                                  handleChange={(e) => changeData(e)}
                                   name="price"
-                                  required
-                                  onChange={(e) => changeData(e)}
-                                />
-                                <label>From </label>
-                                <input
                                   type="text"
-                                  className="form-control"
+                                />
+                                <CustomInput
+                                  id="from"
+                                  label={"Add the country from where you want your order "}
+                                  errors={errors.from_region}
+                                  value={newPost.from_region}
+                                  handleChange={(e) => changeData(e)}
                                   name="from"
-                                  required
-                                  onChange={(e) => changeData(e)}
-                                />
-                                <label>Delivery location </label>
-                                <input
                                   type="text"
-                                  className="form-control"
-                                  name="to"
-                                  required
-                                  onChange={(e) => changeData(e)}
+                                />
+                                <CustomInput
+                                  id="to_region"
+                                  label={"Add the country  you want to recive your order in "}
+                                  errors={errors.to}
+                                  value={newPost.to}
+                                  handleChange={(e) => changeData(e)}
+                                  name="to_region"
+                                  type="text"
                                 />
                                 <label>Choose relevant tags</label>
                                 <Select
+                                  id="tags"
                                   closeMenuOnSelect={true}
                                   components={animatedComponents}
                                   isMulti
@@ -317,6 +468,7 @@ export default function Home() {
                                   name="tags"
                                   setValue
                                 />
+                                <div className="form-text text-danger">{errors.tags}</div>
                                 <div className="modal-footer">
                                   <button
                                     type="button"
@@ -328,7 +480,6 @@ export default function Home() {
                                   <button
                                     type="submit"
                                     className="btn btn-lg  darkcustombtn mt-3"
-                                    data-bs-dismiss="modal"
                                   >
                                     Post
                                   </button>
