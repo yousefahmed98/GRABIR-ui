@@ -15,16 +15,12 @@ import makeAnimated from 'react-select/animated'
 import "./home.css"
 import CustomInput from '../../components/CustomInput'
 
+
 export default function Home() {
   //get all posts
   const posts = useSelector((state) => state.POSTS.postsList)
   const isloading = useSelector((state) => state.LOADER.isloading);
-  const user = useSelector((state) => state.auth.user)
-  console.log(user, "*/*/*/*/**************///////////////*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-  console.log(localStorage.getItem("region"), "this is region");
-  console.log(localStorage.getItem("username"), "this is username of current user")
-  console.log(localStorage.getItem("isVerfied"), "verfieeeeeeeeeeeed or not");
-  // console.log(user.email,"this is current user email email");
+  // const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch();
   // get all tags 
   const tags = useSelector((state) => state.TAGS.allTags)
@@ -32,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getPosts())
     dispatch(getTags())
-  }, []);
+  }, [dispatch]);
 
   const animatedComponents = makeAnimated();
 
@@ -68,6 +64,7 @@ export default function Home() {
   )
   // select tags------------
   const changeSelectedTags = (e) => {
+
     setErrors({
       ...errors,
       tags: Object.values(e).length === 0 ?
@@ -75,7 +72,6 @@ export default function Home() {
         ""
       ,
     })
-
 
     let list_of_tagsobjects = Object.values(e)
     let chosen = []
@@ -93,7 +89,6 @@ export default function Home() {
   // store values in newPost state
   const changeData = (e) => {
     if (e.target.name === "title") {
-      console.log(e.target.value);
       setNewPost({
         ...newPost,
         title: e.target.value,
@@ -220,7 +215,6 @@ export default function Home() {
       })
 
     }
-    console.log(Object.values(document.getElementById("tags")))
     if (document.getElementById("from").value.length === 0) {
       sendRequest = false
       setErrors({
@@ -251,6 +245,7 @@ export default function Home() {
         ...errors,
         description: "Description is required"
         ,
+
       })
     }
     if (document.getElementById("price").value.length === 0 || document.getElementById("price").value == 0) {
@@ -305,7 +300,6 @@ export default function Home() {
     //convert input text to lower case
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
-    console.log("lower caseee: ", lowerCase);
   };
   const filteredData = posts.filter((el) => {
     //if no input the return the original
@@ -321,8 +315,11 @@ export default function Home() {
           }
         }
       }
-    }
-  })
+      return console.log("else return")
+    }   
+  }
+  
+  )
 
 
 
@@ -512,8 +509,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div></div>
-          {/* { localStorage.getItem("isVerfied") ? console.log("truetruetruetruetruetruetruetrue") : console.log("FalseFalseFalseFalseFalseFalseFalse") } */}
         </>
       ) : (
         history.push("/login")

@@ -11,14 +11,10 @@ import Offers from './pages/offers/offers';
 import Deals from './pages/deals/Deals';
 import Profile from './pages/profile/Profile';
 import StarRating from "./components/StarRating/StarRating";
-import Landing from "./pages/landing/landing";
-// import Landing from "./pages/reset-password/Confirmpass";
-
-
+import Landing from "./pages/landing/landing"
 import PayPal from "./components/PayPal/PayPal";
 import Confirmpass from "./pages/reset-password/Confirmpass";
 import Pass from "./pages/reset-password/Pass";
-
 
 function App() {
   return (
