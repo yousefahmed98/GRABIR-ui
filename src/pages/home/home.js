@@ -115,7 +115,7 @@ export default function Home() {
             ? "enter valid title"
             : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
             ? ""
-            : "Title shouldn't contain !@#$%^&*",
+            : "details shouldn't contain !@#$%^&*",
       });
     } else if (e.target.name === "postpic") {
       console.log(e.target.files[0].name.split(".")[1]);
@@ -152,7 +152,8 @@ export default function Home() {
             ? ""
             : "Enter valid price shouldn't contain spaces",
       });
-    } else if (e.target.name === "from") {
+    } 
+    else if (e.target.name === "from") {
       setNewPost({
         ...newPost,
         from_region: e.target.value,
