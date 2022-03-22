@@ -12,7 +12,6 @@ export default function Register() {
     email: "",
     username: "",
     password: "",
-    phone_number: "",
     region: "",
   });
 
@@ -24,7 +23,6 @@ export default function Register() {
     passwordErr: null,
     confirmpassErr: null,
     all_registerErr: null,
-    phone_numberErr: null,
     regionErr: null,
   });
   const validateEmail = (userOption) => {
@@ -37,6 +35,10 @@ export default function Register() {
     return checker.test(userOption);
   };
 
+  const validateName = (userOption) => {
+    let checker = /^[a-z ,.'-]+$/i;
+    return checker.test(userOption);
+  };
   const hasWhiteSpace = (s) => {
     return s.indexOf(" ") >= 0;
   };
@@ -73,6 +75,7 @@ export default function Register() {
             : null,
       });
     } else if (e.target.name === "firstname") {
+      const isFname = validateName(e.target.value);
       setUserForm({
         ...userForm,
         first_name: e.target.value,
@@ -80,9 +83,17 @@ export default function Register() {
       setErrors({
         ...errors,
         firstnameErr:
-          e.target.value.length === 0 ? "This field is required" : null,
+          e.target.value.length === 0
+            ? "This field is required"
+            : e.target.value.length < 3
+            ? "First Name should be at least 3 Characters"
+            : !isFname
+            ? "Invalid Name Format Shouldn't Containt special characters of numbers"
+            : null,
       });
     } else if (e.target.name === "lastname") {
+      const isLastName = validateName(e.target.value);
+      const has_WhiteSpace = hasWhiteSpace(e.target.value);
       setUserForm({
         ...userForm,
         last_name: e.target.value,
@@ -90,10 +101,19 @@ export default function Register() {
       setErrors({
         ...errors,
         lastnameErr:
-          e.target.value.length === 0 ? "This field is required" : null,
+        e.target.value.length === 0
+        ? "This field is required"
+        : e.target.value.length < 3
+        ? "LastName must be more than 2 letters"
+        : !isLastName
+        ? "Invalid name Format"
+        : has_WhiteSpace
+        ? "You should not include spaces"
+        : null,
       });
     } else if (e.target.name === "username") {
       const has_WhiteSpace = hasWhiteSpace(e.target.value);
+      const isUsername = validateName(e.target.value);
       setUserForm({
         ...userForm,
         username: e.target.value,
@@ -101,11 +121,15 @@ export default function Register() {
       setErrors({
         ...errors,
         usernameErr:
-          e.target.value.length === 0
-            ? "This field is required"
-            : has_WhiteSpace
-            ? "Invalid Format! Username does not have spaces"
-            : null,
+        e.target.value.length === 0
+        ? "Username field is required and shouldn't include Number or *&;'/_-=$#@!"
+        : e.target.value.length < 3
+        ? "Username must be more than 2 Characters"
+        : !isUsername
+        ? "Invalid username Format, Can't include number or *&;'/_-=$#@! "
+        : has_WhiteSpace
+        ? "Invalid format! Username does not have spaces!"
+        : null,
       });
     } else if (e.target.name === "confirmpassword") {
       // const samePassword = checkConfirmPassword();
@@ -118,21 +142,22 @@ export default function Register() {
         confirmpassErr:
           e.target.value.length === 0
             ? "This field is required"
-            : !userForm.password
+            : e.target.value != userForm.password
             ? "Does not match password!"
             : null,
       });
-    } else if (e.target.name === "phonenumber") {
-      setUserForm({
-        ...userForm,
-        phone_number: e.target.value,
-      });
-      setErrors({
-        ...errors,
-        phone_numberErr:
-          e.target.value.length === 0 ? "This field is required" : null,
-      });
+      // } else if (e.target.name === "phonenumber") {
+      //   setUserForm({
+      //     ...userForm,
+      //     phone_number: e.target.value,
+      //   });
+      //   setErrors({
+      //     ...errors,
+      //     phone_numberErr:
+      //       e.target.value.length === 0 ? "This field is required" : null,
+      //   });
     } else if (e.target.name === "region") {
+      const isRegion = validateName(e.target.value);
       setUserForm({
         ...userForm,
         region: e.target.value,
@@ -140,7 +165,15 @@ export default function Register() {
       setErrors({
         ...errors,
         regionErr:
-          e.target.value.length === 0 ? "This field is required" : null,
+          e.target.value.length === 0
+            ? "This field is required"
+            : e.target.value.length === 1 || e.target.value == " "
+            ? "Region must be more at least two characters and not a space"
+            : !isRegion
+            ? "Invalid Region Format"
+            : e.target.value.trim().length === 0
+            ? "Invalid foramt, required a meaningful value!"
+            : null,
       });
     }
   };
@@ -153,7 +186,6 @@ export default function Register() {
       !errors.usernameErr &&
       !errors.firstnameErr &&
       !errors.lastnameErr &&
-      !errors.phone_numberErr &&
       !errors.regionErr
     ) {
       // SEND API REQUEST
@@ -192,7 +224,7 @@ export default function Register() {
                           REGISTER
                         </h2>
 
-                        <form onSubmit={(e) => submitForm(e)} >
+                        <form onSubmit={(e) => submitForm(e)}>
                           <div className="mb-2">
                             <TextField
                               id="usernameID"
@@ -291,6 +323,12 @@ export default function Register() {
                               required
                             />
                           </div>
+                          <div>
+                            <p className="text-danger">
+                              {" "}
+                              {errors.firstnameErr}
+                            </p>
+                          </div>
                           <div className="mb-2">
                             <TextField
                               id="lastnameID"
@@ -304,7 +342,10 @@ export default function Register() {
                               required
                             />
                           </div>
-                          <div className="mb-2">
+                          <div>
+                            <p className="text-danger"> {errors.lastnameErr}</p>
+                          </div>
+                          {/* <div className="mb-2">
                             <TextField
                               id="phoneID"
                               className="form-control"
@@ -316,7 +357,7 @@ export default function Register() {
                               name="phonenumber"
                               required
                             />
-                          </div>
+                          </div> */}
                           <div className="mb-2">
                             <TextField
                               id="regionID"
@@ -330,13 +371,24 @@ export default function Register() {
                               required
                             />
                           </div>
+                          <div>
+                            <p className="text-danger"> {errors.regionErr}</p>
+                          </div>
                           <div className="text-danger">
                             {errors.all_registerErr}
                           </div>
 
                           <div className="d-flex justify-content-center">
                             <button
-                              disabled={errors.emailErr || errors.passwordErr}
+                              disabled={
+                                errors.emailErr ||
+                                errors.passwordErr ||
+                                errors.firstnameErr ||
+                                errors.lastnameErr ||
+                                errors.regionErr ||
+                                errors.confirmpassErr ||
+                                errors.usernameErr
+                              }
                               type="submit"
                               className="btn btn-warning btn-block btn-lg gradient-custom-4 text-body"
                             >
