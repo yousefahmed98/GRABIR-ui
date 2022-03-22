@@ -129,6 +129,8 @@ export default function Home() {
           e.target.files[0].name.split(".")[1] === "jpg" ||
           e.target.files[0].name.split(".")[1] === "png" ||
           e.target.files[0].name.split(".")[1] === "svg" ||
+          e.target.files[0].name.split(".")[1] === "jpeg" ||
+          e.target.files[0].name.split(".")[1] === "JEPG" ||
           e.target.files[0].name.split(".")[1] === "JPG" ||
           e.target.files[0].name.split(".")[1] === "PNG" ||
           e.target.files[0].name.split(".")[1] === "SVG"
@@ -152,8 +154,7 @@ export default function Home() {
             ? ""
             : "Enter valid price shouldn't contain spaces",
       });
-    } 
-    else if (e.target.name === "from") {
+    } else if (e.target.name === "from") {
       setNewPost({
         ...newPost,
         from_region: e.target.value,
@@ -534,13 +535,13 @@ export default function Home() {
           <hr />
           <div>
             {/* <!-- Footer--> */}
-              <footer className="footer py-4">
-                <div className="container">
-                  <div className="row align-items-center">
-                    <div className="col-lg-4 text-lg-start">
-                      Copyright &copy; GRABIR 2022
-                    </div>
-                    {/* <div className="col-lg-4 my-3 my-lg-0">
+            <footer className="footer py-4">
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-lg-4 text-lg-start">
+                    Copyright &copy; GRABIR 2022
+                  </div>
+                  {/* <div className="col-lg-4 my-3 my-lg-0">
                       <a className="btn btn-dark btn-social mx-2" href="https://twitter.com/?lang=en">
                         <i className="fab fa-twitter"></i>
                       </a>
@@ -551,14 +552,17 @@ export default function Home() {
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </div> */}
-                    <div className="col-lg-4 text-lg-end">
-                      <a className="link-dark text-decoration-none me-3" href="/privacy">
-                        Privacy Policy
-                      </a>
-                    </div>
+                  <div className="col-lg-4 text-lg-end">
+                    <a
+                      className="link-dark text-decoration-none me-3"
+                      href="/privacy"
+                    >
+                      Privacy Policy
+                    </a>
                   </div>
                 </div>
-              </footer>
+              </div>
+            </footer>
           </div>
         </>
       ) : (
