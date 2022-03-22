@@ -180,11 +180,12 @@ const setuser = ()=>{
   getpostTags()
   //--------------------
   return (
-    <div className="postsCards">
-    <div className="pt-5 ">
+    <div className="container" >
+    <div className="postsCards col-sm-7 col-lg-12 col-md-11 ">
+    <div className="py-4 ">
 
       {/* post section  start*/}
-      <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
+      <section className="boxxx rounded shadow-lg p-5 postcard mt-5 mb-5" >
         {/* profile + date  */}
         <div className="row align-items-center mb-4">
           <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
@@ -195,24 +196,27 @@ const setuser = ()=>{
           <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
         </div>
         {/* profile + date end  */}
+        <hr/>
         {/* post content start */}
         <div className="row align-items-center mb-4">
-          <div className="col-lg-6 col-md-12 inline">
-            <h2>{post.title}</h2>
+          <div className="col-lg-6 col-md-12 carddddd">
+            <h2 className="titlee">{post.title}</h2>
+            <br/>
             <p>
               {post.description}
-            </p> <br/>
-            <p>From : {post.from_region}</p> <br/>
-            <p>I am in: {post.to}</p> <br/>
-            <p>Price: {post.price}$</p> <br/>
+            </p>
+            <p>From : {post.from_region}</p>
+            <p>I am in: {post.to}</p>
+            <p>Price: {post.price}$</p>
             {
               postTags.map((tag, index) => (
-                <span  key={index} className="me-3 text-info" >{tag}</span>))
+                <span  key={index} className="me-3 tagg" >{tag}</span>))
             }
           </div>
+          <br />
           { post.postpicture !== null
             ?
-          <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
+          <img src={post.postpicture} className=" img-box col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
             alt="post" width='60%' length='180px' />
             :
             <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
@@ -232,12 +236,12 @@ const setuser = ()=>{
                     <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
                       show offers</button>
                   </div> */}
-                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                    <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
+                  <div className="col-lg-6 col-md-5 col-sm-3 my-2 text-center">
+                    <button type="button" className={`btn px-5 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
                       delete</button>
                   </div>
-                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                    <button type="submit" className="btn px-3 me-1 darkcustombtn"
+                  <div className="col-lg-6 col-md-5 col-sm-3 my-2 text-center">
+                    <button type="submit" className="btn px-5 me-1 darkcustombtn"
                     onClick={() =>  localStorage.setItem("Updated_post_id", post.id)}  data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
                       update</button>
                   </div>
@@ -302,7 +306,7 @@ const setuser = ()=>{
     </div>
 
     </div>
-
+</div>
   )
 
 }

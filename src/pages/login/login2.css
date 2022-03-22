@@ -28,3 +28,7 @@
  .form-color-login{
      background:blue;
  }
+
+ .loginn {
+   min-width: 5vw !important;
+ }

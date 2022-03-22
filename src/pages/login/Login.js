@@ -40,15 +40,15 @@ const Login2 = ({ login }) => {
         <>
           <section className="vh-100 bg-image bgImage">
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
-              <div className="container h-100">
-                <div className="row d-flex justify-content-center align-items-center h-50"><img src={logo} style={{ width: "50%" }} alt="..." /></div>
+              <div className="container-sm h-100">
+                <div className="row d-flex justify-content-center align-items-center h-30 my-4 "><img src={logo} style={{ width: "50%" }} alt="..." /></div>
 
                 <div className="row d-flex justify-content-center align-items-center h-50">
 
-                  <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+                  <div className="col-12 col-md-7 col-lg-6 col-xl-5 col-sm-10">
                     <div className="card" style={{ borderRadius: 15 }}>
                       <div className="card-body p-5">
-                        <h2 className="text-uppercase text-center mb-5">
+                        <h2 className="text-uppercase text-center mb-5 loginn">
                           LOGIN
                         </h2>
 
@@ -87,10 +87,10 @@ const Login2 = ({ login }) => {
                             {localStorage.getItem("loginErr")}
                           </p>
 
-                          <div className="d-flex justify-content-center">
+                          <div className="d-flex justify-content-center mb-3">
                             <button
                               type="submit"
-                              className="btn btn-warning btn-block btn-lg gradient-custom-4 text-body"
+                              className="btn btn-warning btn-block btn-lg gradient-custom-4 text-body loginn"
                             >
                               Login
                             </button>

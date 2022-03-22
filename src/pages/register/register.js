@@ -177,18 +177,18 @@ export default function Register() {
         history.push("/home")
       ) : (
         <>
-          <section className="vh-100 bg-image bgImage">
+          <section className="vh-150 bg-image bgImage">
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
-              <div className="container h-100">
-                <div className="row d-flex justify-content-center align-items-center ">
-                  <img src={logo} style={{ width: "40%" }} alt="..." />
+              <div className="container-sm h-100">
+                <div className="row d-flex justify-content-center align-items-center h-50 my-3 ">
+                  <img src={logo} style={{ width: "50%" }} alt="..." />
                 </div>
 
-                <div className="row d-flex justify-content-center align-items-center ">
-                  <div className="col-8 col-md-8 col-lg-5 col-xl-6 ">
+                <div className="row d-flex justify-content-center align-items-center h-50">
+                  <div className="col-12 col-md-7 col-lg-6 col-xl-5 col-sm-10 my-5">
                     <div className="card" style={{ borderRadius: 15 }}>
                       <div className="card-body p-5">
-                        <h2 className="text-uppercase text-center mb-2">
+                        <h2 className="text-uppercase text-center mb-5">
                           REGISTER
                         </h2>
 
@@ -334,7 +334,7 @@ export default function Register() {
                             {errors.all_registerErr}
                           </div>
 
-                          <div className="d-flex justify-content-center">
+                          <div className="d-flex justify-content-center my-4">
                             <button
                               disabled={errors.emailErr || errors.passwordErr}
                               type="submit"
@@ -344,7 +344,7 @@ export default function Register() {
                             </button>
                           </div>
 
-                          <p className="text-center text-muted">
+                          <p className="text-center text-muted my-y">
                             Already have an account?{" "}
                             <a href="/login" className="fw-bold text-body">
                               <u>Login here!</u>
