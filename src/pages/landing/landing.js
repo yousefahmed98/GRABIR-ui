@@ -157,11 +157,6 @@ export default function Landing() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#team">
-                  Team
-                </a>
-              </li>
-              <li className="nav-item">
                 <a className="nav-link" href="#contact">
                   Contact
                 </a>
@@ -582,6 +577,7 @@ export default function Landing() {
                     name="body"
                     value={userForm.body}
                     onChange={(e) => changeData(e)}
+                    style = { errors.subjectErr ? {height:185} : {height: "90px"} } 
                   ></textarea>
                   <div>
                     <p className="text-danger"> {errors.bodyErr}</p>
@@ -630,7 +626,7 @@ export default function Landing() {
             <div className="col-lg-4 text-lg-start">
               Copyright &copy; GRABIR 2022
             </div>
-            <div className="col-lg-4 my-3 my-lg-0">
+            {/* <div className="col-lg-4 my-3 my-lg-0">
               <a className="btn btn-dark btn-social mx-2" href="#!">
                 <i className="fab fa-twitter"></i>
               </a>
@@ -640,7 +636,7 @@ export default function Landing() {
               <a className="btn btn-dark btn-social mx-2" href="#!">
                 <i className="fab fa-linkedin-in"></i>
               </a>
-            </div>
+            </div> */}
             <div className="col-lg-4 text-lg-end">
               <a className="link-dark text-decoration-none me-3" href="/privacy">
                 Privacy Policy
