@@ -115,7 +115,7 @@ export default function Home() {
             ? "enter valid title"
             : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
             ? ""
-            : "Title shouldn't contain !@#$%^&*",
+            : "details shouldn't contain !@#$%^&*",
       });
     } else if (e.target.name === "postpic") {
       console.log(e.target.files[0].name.split(".")[1]);
@@ -152,7 +152,8 @@ export default function Home() {
             ? ""
             : "Enter valid price shouldn't contain spaces",
       });
-    } else if (e.target.name === "from") {
+    } 
+    else if (e.target.name === "from") {
       setNewPost({
         ...newPost,
         from_region: e.target.value,
@@ -238,15 +239,18 @@ export default function Home() {
         ...errors,
         price: "Title is required",
       });
-    } if ( !errors.title &&
+    }
+    if (
+      !errors.title &&
       !errors.description &&
       !errors.postpicture &&
       !errors.from_region &&
       !errors.to &&
       !errors.price &&
-      !errors.tags) {
-        history.push("/home")
-      }
+      !errors.tags
+    ) {
+      history.push("/home");
+    }
 
     // SEND API REQUEST
     if (sendRequest === true) {
@@ -306,6 +310,14 @@ export default function Home() {
           }
         }
       }
+      if (
+        el.ownerName.toLowerCase().includes(inputText) ||
+        el.title.toLowerCase().includes(inputText) ||
+        el.from_region.toLowerCase().includes(inputText) ||
+        el.to.toLowerCase().includes(inputText)
+      ) {
+        return el;
+      }
       return console.log("else return");
     }
   });
@@ -331,9 +343,10 @@ export default function Home() {
                       name=""
                       className="input p-2"
                       onChange={(e) => inputHandler(e)}
-                      placeholder="Search Posts with Tags"
+                      placeholder="Search Posts with Person, Title, Country or Tags"
                     />
                   </div>
+
                   <hr />
                   <section className="boxx rounded shadow-sm p-1 postcard  mt-5 ">
                     {/* profile + date  */}

@@ -24,7 +24,7 @@ export default function Popup(props) {
     price: "",
     post: props.postID,
     delivery_date: "",
-    // postObj: props.post,
+    postObj: props.post,
 
     offer_owner: localStorage.getItem("id"),
   });
@@ -105,9 +105,17 @@ useEffect(() => {
       setErrors({
         ...errors,
         detailsErr:
-          e.target.value.length === 0 ? "This field is required" : null,
+          e.target.value.length === 0 || e.target.value.length < 10
+            ? "You should write details to facilitate handling"
+            : e.target.value[0] === " "
+            ? "enter valid details not starting with space"
+            : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
+            ? ""
+            : "details shouldn't contain !@#$%^&*",
       });
-    } else if (e.target.name === "from_region") {
+
+    } 
+    else if (e.target.name === "from_region") {
       setOfferForm({
         ...offerForm,
         from_region: e.target.value,
@@ -115,9 +123,16 @@ useEffect(() => {
       setErrors({
         ...errors,
         from_regionErr:
-          e.target.value.length === 0 ? "This field is required" : null,
+          e.target.value.length === 0 || e.target.value.length < 3
+            ? " This field is required and must be at least 2 characters"
+            : e.target.value[0] === " "
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name",
       });
-    } else if (e.target.name === "to_region") {
+    } 
+    else if (e.target.name === "to_region") {
       setOfferForm({
         ...offerForm,
         to_region: e.target.value,
@@ -125,17 +140,33 @@ useEffect(() => {
       setErrors({
         ...errors,
         to_regionErr:
-          e.target.value.length === 0 ? "This field is required" : null,
+          e.target.value.length === 0 || e.target.value.length < 3
+            ? " This field is required and must be at least 2 characters"
+            : e.target.value[0] === " "
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name",
       });
-    } else if (e.target.name === "price") {
+    }
+    else if (e.target.name === "price") {
       setOfferForm({
         ...offerForm,
         price: e.target.value,
       });
       setErrors({
         ...errors,
-        priceErr: e.target.value.length === 0 ? "This field is required" : null,
+        priceErr:
+          e.target.value.length === 0
+            ? "Price is required"
+            : !/^[0-9]+$/.test(e.target.value)
+            ? "Enter valid price"
+            : e.target.value > 0 || !/\s/.test(e.target.value)
+            ? ""
+            : "Enter valid price shouldn't contain spaces",
       });
+
+
     }else if (e.target.name === "delivery_date") {
       setOfferForm({
         ...offerForm,
@@ -144,7 +175,11 @@ useEffect(() => {
       setErrors({
         ...errors,
         delivery_dateErr:
-          e.target.value === null ? "This field is required" : null,
+          e.target.value === null ? 
+          "This field is required" 
+          : e.target.value > offerForm.postObj.created_at
+          ? ""
+          :"Enter valid date ",
       });
     }
   };
@@ -280,6 +315,16 @@ useEffect(() => {
                       errors.to_regionErr ||
                       errors.priceErr ||
                       errors.delivery_dateErr
+                      ||
+                      offerForm.details.length === 0
+                      ||
+                      offerForm.from_region.length === 0
+                      ||
+                      offerForm.to_region.length === 0
+                      ||
+                      offerForm.price.length === 0
+                      ||
+                      offerForm.delivery_date.length === 0
                     }
                     onClick={()=>handleNotification("send you offer")} /////////////////
 

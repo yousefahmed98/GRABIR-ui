@@ -1,0 +1,6 @@
+.fullpage{
+    /* background-image: url("/home/smart/GraduationProject/GRABIR-ui/src/pages/landing/assets/img/logo2.svg"); */
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-color: rgb(231, 230, 230) !important;
+}
