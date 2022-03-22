@@ -236,45 +236,49 @@ export default function PostCard({ post }) {
   getpostTags()
   //--------------------
   return (
-    <div className="postsCards">
-      <div className="pt-5 ">
+    <div className="container" >
+    <div className="postsCards col-sm-7 col-lg-12 col-md-11 ">
+    <div className="py-4 ">
 
-        {/* post section  start*/}
-        <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
-          {/* profile + date  */}
-          <div className="row align-items-center mb-4">
-            <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
-              <img src={post.ownerProfilePic} className="me-2 userImage"
-                height="80" alt="" loading="lazy" />
-              <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
-            </div>
-            <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
+      {/* post section  start*/}
+      <section className="boxxx rounded shadow-lg p-5 postcard mt-5 mb-5" >
+        {/* profile + date  */}
+        <div className="row align-items-center mb-4">
+          <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
+            <img src={post.ownerProfilePic} className="me-2 userImage"
+              height="80" alt="" loading="lazy" />
+            <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
           </div>
-          {/* profile + date end  */}
-          {/* post content start */}
-          <div className="row align-items-center mb-4">
-            <div className="col-lg-6 col-md-12 inline">
-              <h2>{post.title}</h2>
-              <p>
-                {post.description}
-              </p> <br />
-              <p>From : {post.from_region}</p> <br />
-              <p>I am in: {post.to}</p> <br />
-              <p>Price: {post.price}$</p> <br />
-              {
-                postTags.map((tag, index) => (
-                  <span key={index} className="me-3 text-info" >{tag}</span>))
-              }
-            </div>
-            {post.postpicture !== null
-              ?
-              <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
-                alt="post" width='60%' length='180px' />
-              :
-              <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
-
-              </div>
+          <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
+        </div>
+        {/* profile + date end  */}
+        <hr/>
+        {/* post content start */}
+        <div className="row align-items-center mb-4">
+          <div className="col-lg-6 col-md-12 carddddd">
+            <h2 className="titlee">{post.title}</h2>
+            <br/>
+            <p>
+              {post.description}
+            </p>
+            <p>From : {post.from_region}</p>
+            <p>I am in: {post.to}</p>
+            <p>Price: {post.price}$</p>
+            {
+              postTags.map((tag, index) => (
+                <span  key={index} className="me-3 tagg" >{tag}</span>))
             }
+          </div>
+          <br />
+          { post.postpicture !== null
+            ?
+          <img src={post.postpicture} className=" p-0 img-box col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
+            alt="post" width='60%' length='180px' />
+            :
+            <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
+          
+        </div>
+          }
           </div>
           {/* post content end */}
           <div className="row align-items-center mb-4  ">
@@ -288,6 +292,7 @@ export default function PostCard({ post }) {
                     <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
                       show offers</button>
                   </div> */}
+
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center">
                       <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
                         delete</button>
@@ -296,6 +301,7 @@ export default function PostCard({ post }) {
                       <button type="submit" className="btn px-3 me-1 darkcustombtn"
                         onClick={() => handleShow(post.id)} data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
                         update</button>
+
                     </div>
                   </>
                 )
@@ -406,7 +412,7 @@ export default function PostCard({ post }) {
                   <div className="modal-header ">
                     <h5 className="modal-title" id="staticBackdropLabel">Update post</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
+                    </div>
 
                   <div className="modal-body">
                     <form method="post" onSubmit={(e) => submitForm(e)} >
@@ -497,7 +503,7 @@ export default function PostCard({ post }) {
       </div>
 
     </div>
-
+</div>
   )
 
 }

@@ -239,15 +239,18 @@ export default function Home() {
         ...errors,
         price: "Title is required",
       });
-    } if ( !errors.title &&
+    }
+    if (
+      !errors.title &&
       !errors.description &&
       !errors.postpicture &&
       !errors.from_region &&
       !errors.to &&
       !errors.price &&
-      !errors.tags) {
-        history.push("/home")
-      }
+      !errors.tags
+    ) {
+      history.push("/home");
+    }
 
     // SEND API REQUEST
     if (sendRequest === true) {
@@ -307,6 +310,14 @@ export default function Home() {
           }
         }
       }
+      if (
+        el.ownerName.toLowerCase().includes(inputText) ||
+        el.title.toLowerCase().includes(inputText) ||
+        el.from_region.toLowerCase().includes(inputText) ||
+        el.to.toLowerCase().includes(inputText)
+      ) {
+        return el;
+      }
       return console.log("else return");
     }
   });
@@ -319,12 +330,12 @@ export default function Home() {
           <Navbar />
 
           {/* body */}
-          <div className="container mx-auto px-10 mb-8">
+          <div className="container-sm mx-auto px-10 my-5">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-8 col-span-1">
+              <div className="lg:col-span-8 col-span-1 my-5 ">
                 {/* add post */}
-                <div className="pt-5">
-                  <div className="box  border mt-5 ms-3 me-3">
+                <div className="py-5">
+                  <div className="box my-5">
                     <i className="fa fa-search" aria-hidden="true"></i>
 
                     <input
@@ -332,10 +343,12 @@ export default function Home() {
                       name=""
                       className="input p-2"
                       onChange={(e) => inputHandler(e)}
-                      placeholder="Search Posts with Tags"
+                      placeholder="Search Posts with Person, Title, Country or Tags"
                     />
                   </div>
-                  <section className="border rounded shadow-sm p-1 postcard  mt-5  ">
+
+                  <hr />
+                  <section className="boxx rounded shadow-sm p-1 postcard  mt-5 ">
                     {/* profile + date  */}
 
                     <div className="row align-items-center ">
@@ -362,7 +375,6 @@ export default function Home() {
                         </button>
                       </div>
                       {/* <!-- Modal --> */}
-
                       <div
                         className="modal"
                         id="staticBackdrop"
@@ -518,6 +530,35 @@ export default function Home() {
                 )}
               </div>
             </div>
+          </div>
+          <hr />
+          <div>
+            {/* <!-- Footer--> */}
+              <footer className="footer py-4">
+                <div className="container">
+                  <div className="row align-items-center">
+                    <div className="col-lg-4 text-lg-start">
+                      Copyright &copy; GRABIR 2022
+                    </div>
+                    <div className="col-lg-4 my-3 my-lg-0">
+                      <a className="btn btn-dark btn-social mx-2" href="https://twitter.com/?lang=en">
+                        <i className="fab fa-twitter"></i>
+                      </a>
+                      <a className="btn btn-dark btn-social mx-2" href="https://facebook.com">
+                        <i className="fab fa-facebook-f"></i>
+                      </a>
+                      <a className="btn btn-dark btn-social mx-2" href="https://linkedin.com">
+                        <i className="fab fa-linkedin-in"></i>
+                      </a>
+                    </div>
+                    <div className="col-lg-4 text-lg-end">
+                      <a className="link-dark text-decoration-none me-3" href="/privacy">
+                        Privacy Policy
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </footer>
           </div>
         </>
       ) : (
