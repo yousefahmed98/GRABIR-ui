@@ -29,6 +29,7 @@ export default function PostCard({ post }) {
       .then((res) => {
         setupdatedPost({
           ...updatedPost,
+          id:postId,
           title: res.data.title,
           description: res.data.description,
           postpicture: null,
@@ -47,6 +48,9 @@ export default function PostCard({ post }) {
   }
   const handleClose = () => {
     submitForm()
+     setShow(false);
+  }
+  const handleClosewithoutChanges = () =>{
     setShow(false);
   }
   const [style, setStyle] = useState("darkcustombtn");
@@ -99,15 +103,15 @@ export default function PostCard({ post }) {
   // -----updated post ---------------------------------------------
   
   const [updatedPost, setupdatedPost] = useState({
-    title: post.title,
-    description: post.description,
+    title: "",
+    description: "",
     postpicture: null,
-    from_region: post.from_region,
-    to: post.to,
-    price: post.price,
-    ownerName: post.ownerName,
-    user: post.user,
-    tags: post.tags,
+    from_region: "",
+    to: "",
+    price: "",
+    ownerName: "",
+    user: "",
+    tags: "",
   })
   const [errors, setErrors] = useState(
     // initialState intial values
@@ -150,7 +154,7 @@ export default function PostCard({ post }) {
         description: e.target.value,
       })
     }
-    else if (e.target.name === "photo") {
+    else if (e.target.name === "postpic") {
       setupdatedPost({
         ...updatedPost,
         postpicture: e.target.files[0],
@@ -168,7 +172,7 @@ export default function PostCard({ post }) {
         from_region: e.target.value,
       })
     }
-    else if (e.target.name === "to") {
+    else if (e.target.name === "to_region") {
       setupdatedPost({
         ...updatedPost,
         to: e.target.value,
@@ -178,7 +182,7 @@ export default function PostCard({ post }) {
   const submitForm = () => {
     // e.preventDefault();
     // SEND API REQUEST
-    console.log(updatedPost.from_region,updatedPost.title)
+    console.log(updatedPost.from_region,updatedPost.title,updatedPost.id)
     let form_data = new FormData();
     form_data.append('title', updatedPost.title);
     form_data.append('description', updatedPost.description);
@@ -193,7 +197,7 @@ export default function PostCard({ post }) {
     updatedPost.tags.forEach(item => {
       form_data.append('tags', item);
     });
-    axios.patch(`http://127.0.0.1:8000/posts/posts/${localStorage.getItem('Updated_post_id')}/`, form_data, {
+    axios.patch(`http://127.0.0.1:8000/posts/posts/${updatedPost.id}/`, form_data, {
       headers: {
         'content-type': 'multipart/form-data',
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -385,7 +389,7 @@ export default function PostCard({ post }) {
 
               </Modal.Body>
               <Modal.Footer>
-                <Button type="submit" variant="secondary" onClick={handleClose}>
+                <Button type="submit" variant="secondary" onClick={handleClosewithoutChanges}>
                   close
                 </Button>
                 <Button variant="primary" onClick={handleClose}>
