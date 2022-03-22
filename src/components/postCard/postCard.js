@@ -13,8 +13,10 @@ import makeAnimated from 'react-select/animated'
 //API requests 
 import axios from 'axios'
 import Popup from '../popup/popup'
+import CustomInput from "../CustomInput";
 
-export default function PostCard({ post}) {
+
+export default function PostCard({ post }) {
   const [style, setStyle] = useState("darkcustombtn");
   const history = useHistory()
   //socket
@@ -24,34 +26,34 @@ export default function PostCard({ post}) {
   const dispatch = useDispatch();
   const tags = useSelector((state) => state.TAGS.allTags)
   const [currentuser, setCurrentuser] = useState({
-    username:"",
-    id:null,
+    username: "",
+    id: null,
   })
 
   useEffect(() => {
     dispatch(getTags())
   }, [dispatch]);
-  useEffect(()=>{
+  useEffect(() => {
     setuser()
-  },[localStorage.getItem("id")])
+  }, [localStorage.getItem("id")])
   useEffect(() => {
     if (currentuser.id !== null) {
-        console.log(socket.on("welcomeMessage", (msg) => {
-            console.log(msg, currentuser)
-        }))
+      console.log(socket.on("welcomeMessage", (msg) => {
+        console.log(msg, currentuser)
+      }))
 
-       //send event to server
-       socket?.emit("newUser", currentuser)
-    }  
-}, [socket, currentuser])
+      //send event to server
+      socket?.emit("newUser", currentuser)
+    }
+  }, [socket, currentuser])
 
-const setuser = ()=>{
-  setCurrentuser({
-    ...currentuser,
-    username:localStorage.getItem("username"),
-    id:localStorage.getItem("id"),
-  })
-}
+  const setuser = () => {
+    setCurrentuser({
+      ...currentuser,
+      username: localStorage.getItem("username"),
+      id: localStorage.getItem("id"),
+    })
+  }
 
   // for tags select component
   const animatedComponents = makeAnimated();
@@ -61,7 +63,7 @@ const setuser = ()=>{
   )
   )
   // -----updated post ---------------------------------------------
-  const [newPost, setNewPost] = useState({
+  const [updatedPost, setupdatedPost] = useState({
     title: post.title,
     description: post.description,
     postpicture: null,
@@ -72,6 +74,48 @@ const setuser = ()=>{
     user: post.user,
     tags: post.tags,
   })
+  const [errors, setErrors] = useState(
+    // initialState intial values
+    {
+      title: "",
+      description: "",
+      postpicture: "",
+      from_region: "",
+      to: "",
+      price: "",
+      tags: "",
+    }
+  );
+  const updatePost = (postId) => {
+    axios.get(`http://127.0.0.1:8000/posts/posts/${postId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      }
+    })
+      .then((res) => {
+        console.log("res.data.title",res.data.title)
+        console.log("res.data.tags",res.data.tags)
+        setupdatedPost({
+          ...updatedPost,
+          title: res.data.title,
+          description: res.data.description,
+          postpicture: res.data.postpicture,
+          from_region: res.data.from_region,
+          to: res.data.to,
+          price: res.data.price,
+          ownerName: res.data.ownerName,
+          user: res.data.user,
+          tags:res.data.tags,
+        })
+
+      }
+      )
+      .catch((err) => console.log(err));
+
+  }
+
   // selected tags------------
   const changeSelectedTags = (e) => {
     let list_of_tagsobjects = Object.values(e)
@@ -79,68 +123,68 @@ const setuser = ()=>{
     for (let t of list_of_tagsobjects) {
       chosen.push(parseInt(t.value))
     }
-    setNewPost({
-      ...newPost,
+    setupdatedPost({
+      ...updatedPost,
       tags: chosen,
     })
   }
-  // store values in newPost state
+  // store values in updatedPost state
   const changeData = (e) => {
     if (e.target.name === "title") {
-      setNewPost({
-        ...newPost,
+      setupdatedPost({
+        ...updatedPost,
         title: e.target.value,
       })
     }
 
     else if (e.target.name === "details") {
-      setNewPost({
-        ...newPost,
+      setupdatedPost({
+        ...updatedPost,
         description: e.target.value,
       })
     }
     else if (e.target.name === "photo") {
-      setNewPost({
-        ...newPost,
+      setupdatedPost({
+        ...updatedPost,
         postpicture: e.target.files[0],
       })
     }
     else if (e.target.name === "price") {
-      setNewPost({
-        ...newPost,
+      setupdatedPost({
+        ...updatedPost,
         price: e.target.value,
       })
     }
     else if (e.target.name === "from") {
-      setNewPost({
-        ...newPost,
+      setupdatedPost({
+        ...updatedPost,
         from_region: e.target.value,
       })
     }
     else if (e.target.name === "to") {
-      setNewPost({
-        ...newPost,
+      setupdatedPost({
+        ...updatedPost,
         to: e.target.value,
       })
     }
   }
-  const submitForm = (e) => {   
+  const submitForm = (e) => {
     e.preventDefault();
     // SEND API REQUEST
     let form_data = new FormData();
-    form_data.append('title', newPost.title);
-    form_data.append('description', newPost.description);
-    if(newPost.postpicture !== null){
-      form_data.append('postpicture', newPost.postpicture, newPost.postpicture.name);
-  }
-    form_data.append('from_region', newPost.from_region);
-    form_data.append('to', newPost.to);
-    form_data.append('price', newPost.price);
-    form_data.append('ownerName', newPost.ownerName);
-    form_data.append('user', newPost.user);
-    newPost.tags.forEach(item => {
+    form_data.append('title', updatedPost.title);
+    form_data.append('description', updatedPost.description);
+    if (updatedPost.postpicture !== null) {
+      form_data.append('postpicture', updatedPost.postpicture, updatedPost.postpicture.name);
+    }
+    form_data.append('from_region', updatedPost.from_region);
+    form_data.append('to', updatedPost.to);
+    form_data.append('price', updatedPost.price);
+    form_data.append('ownerName', updatedPost.ownerName);
+    form_data.append('user', updatedPost.user);
+    updatedPost.tags.forEach(item => {
       form_data.append('tags', item);
-     });
+    });
     axios.patch(`http://127.0.0.1:8000/posts/posts/${localStorage.getItem('Updated_post_id')}/`, form_data, {
       headers: {
         'content-type': 'multipart/form-data',
@@ -149,7 +193,7 @@ const setuser = ()=>{
     })
       .then(
         history.push(`/home/`)
-        )
+      )
       .catch((err) => console.log(err))
   }
 
@@ -181,125 +225,172 @@ const setuser = ()=>{
   //--------------------
   return (
     <div className="postsCards">
-    <div className="pt-5 ">
+      <div className="pt-5 ">
 
-      {/* post section  start*/}
-      <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
-        {/* profile + date  */}
-        <div className="row align-items-center mb-4">
-          <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
-            <img src={post.ownerProfilePic} className="me-2 userImage"
-              height="80" alt="" loading="lazy" />
-            <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
-          </div>
-          <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
-        </div>
-        {/* profile + date end  */}
-        {/* post content start */}
-        <div className="row align-items-center mb-4">
-          <div className="col-lg-6 col-md-12 inline">
-            <h2>{post.title}</h2>
-            <p>
-              {post.description}
-            </p> <br/>
-            <p>From : {post.from_region}</p> <br/>
-            <p>I am in: {post.to}</p> <br/>
-            <p>Price: {post.price}$</p> <br/>
-            {
-              postTags.map((tag, index) => (
-                <span  key={index} className="me-3 text-info" >{tag}</span>))
-            }
-          </div>
-          { post.postpicture !== null
-            ?
-          <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
-            alt="post" width='60%' length='180px' />
-            :
-            <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
-              
+        {/* post section  start*/}
+        <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
+          {/* profile + date  */}
+          <div className="row align-items-center mb-4">
+            <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
+              <img src={post.ownerProfilePic} className="me-2 userImage"
+                height="80" alt="" loading="lazy" />
+              <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
             </div>
-            }
-        </div>
-        {/* post content end */}
-        <div className="row align-items-center mb-4  ">
-          {
-
-            localStorage.getItem("id") == post.user
+            <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
+          </div>
+          {/* profile + date end  */}
+          {/* post content start */}
+          <div className="row align-items-center mb-4">
+            <div className="col-lg-6 col-md-12 inline">
+              <h2>{post.title}</h2>
+              <p>
+                {post.description}
+              </p> <br />
+              <p>From : {post.from_region}</p> <br />
+              <p>I am in: {post.to}</p> <br />
+              <p>Price: {post.price}$</p> <br />
+              {
+                postTags.map((tag, index) => (
+                  <span key={index} className="me-3 text-info" >{tag}</span>))
+              }
+            </div>
+            {post.postpicture !== null
               ?
-              (
-                <>
-                  {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+              <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
+                alt="post" width='60%' length='180px' />
+              :
+              <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
+
+              </div>
+            }
+          </div>
+          {/* post content end */}
+          <div className="row align-items-center mb-4  ">
+            {
+
+              localStorage.getItem("id") == post.user
+                ?
+                (
+                  <>
+                    {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center">
                     <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
                       show offers</button>
                   </div> */}
-                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                    <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
-                      delete</button>
-                  </div>
-                  <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                    <button type="submit" className="btn px-3 me-1 darkcustombtn"
-                    onClick={() =>  localStorage.setItem("Updated_post_id", post.id)}  data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
-                      update</button>
-                  </div>
-                </>
-              )
-              :
-              <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-              <Popup postID={post.id} post={post} socket={socket} currentuser={currentuser}/>
-            </div>
-
-          }
-
-          {/* modal */}
-          <div className="modal" id="staticBackdropupdate" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-header ">
-                  <h5 className="modal-title" id="staticBackdropLabel">Update post</h5>
-                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div className="modal-body">
-                  <form method="post" onSubmit={(e) => submitForm(e)} >
-                    <label>TiTle</label>
-                    <input type='text' className='form-control' name='title' onChange={(e) => changeData(e)} />
-                    <label>details</label>
-                    <input type="text" className='form-control offertxt' name='details' onChange={(e) => changeData(e)} />
-                    <label>Post photo</label>
-                    <input type="file" className='form-control' name='photo' onChange={(e) => changeData(e)} />
-                    <label>price</label>
-                    <input type='text' className='form-control' name='price' onChange={(e) => changeData(e)} />
-                    <label>From </label>
-                    <input type='text' className='form-control' name='from' onChange={(e) => changeData(e)} />
-                    <label>Delivery location </label>
-                    <input type='text' className='form-control' name='to' onChange={(e) => changeData(e)} />
-                    <label>Choose relevant tags</label>
-                    <Select
-                      closeMenuOnSelect={true}
-                      components={animatedComponents}
-                      isMulti
-                      options={tagsoptions}
-                      onChange={(e) => changeSelectedTags(e)}
-                      name="tags"
-                      setValue
-                    />
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Update</button>
+                    <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                      <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
+                        delete</button>
                     </div>
-                  </form>
+                    <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                      <button type="submit" className="btn px-3 me-1 darkcustombtn"
+                        onClick={() => updatePost(post.id)} data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
+                        update</button>
+                    </div>
+                  </>
+                )
+                :
+                <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
+                  <Popup postID={post.id} post={post} socket={socket} currentuser={currentuser} />
                 </div>
 
+            }
+
+            {/* modal */}
+            <div className="modal" id="staticBackdropupdate" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                  <div className="modal-header ">
+                    <h5 className="modal-title" id="staticBackdropLabel">Update post</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <div className="modal-body">
+                    <form method="post" onSubmit={(e) => submitForm(e)} >
+                      <CustomInput
+                        id="title"
+                        label={"TiTle"}
+                        errors={errors.title}
+                        value={updatedPost.title}
+                        handleChange={(e) => changeData(e)}
+                        name={"title"}
+                        type="text"
+                      />
+                      <CustomInput
+                        id="details"
+                        label={"Details about your order"}
+                        errors={errors.description}
+                        value={updatedPost.description}
+                        handleChange={(e) => changeData(e)}
+                        name={"details"}
+                        type="text"
+                      />
+                      <CustomInput
+                        id="postpic"
+                        label={"Add image of your order"}
+                        errors={errors.postpicture}
+                        handleChange={(e) => changeData(e)}
+                        name="postpic"
+                        type="file"
+                      />
+                      <CustomInput
+                        id="price"
+                        label={"Add price you well pay"}
+                        errors={errors.price}
+                        value={updatedPost.price}
+                        handleChange={(e) => changeData(e)}
+                        name="price"
+                        type="text"
+                      />
+                      <CustomInput
+                        id="from"
+                        label={
+                          "Add the country from where you want your order "
+                        }
+                        errors={errors.from_region}
+                        value={updatedPost.from_region}
+                        handleChange={(e) => changeData(e)}
+                        name="from"
+                        type="text"
+                      />
+                      <CustomInput
+                        id="to_region"
+                        label={
+                          "Add the country  you want to recive your order in "
+                        }
+                        errors={errors.to}
+                        value={updatedPost.to}
+                        handleChange={(e) => changeData(e)}
+                        name="to_region"
+                        type="text"
+                      />
+                      <label>Choose relevant tags</label>
+                      <Select
+                        id="tags"
+                        closeMenuOnSelect={true}
+                        components={animatedComponents}
+                        isMulti
+                        options={tagsoptions}
+                        onChange={(e) => changeSelectedTags(e)}
+                        name="tags"
+                        setValue
+                      />
+
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Update</button>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
               </div>
             </div>
+            {/* modal end */}
           </div>
-          {/* modal end */}
-        </div>
 
-      </section>
+        </section>
 
-    </div>
+      </div>
 
     </div>
 
