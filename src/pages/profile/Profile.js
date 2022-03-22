@@ -11,16 +11,18 @@ export default function Profile() {
   const [key, setKey] = useState("home");
 
   return (
-    <div className="profile">
-      <Navbar />
-      <div className=" tabss">
+    <>
+    <Navbar />
+    <div className="profile mt-5">
+    
+      <div className=" tabsssss">
         <Tabs
           id="controlled-tab-example"
           activeKey={key}
           onSelect={(k) => setKey(k)}
           className="mb-3"
         >
-          <Tab eventKey="home" title="BASIC INFORMATION" className="tab">
+          <Tab eventKey="home" title="BASIC INFORMATION" className="tab titleProfile">
             <>
               <Stack direction="horizontal" gap={4}>
                 <div className="">
@@ -50,25 +52,25 @@ export default function Profile() {
                   {" "}
                   {localStorage.getItem("firstname")}
                 </p>
-                <hr />
+                <hr className="text-dark"/>
                 <h4>Lastname :</h4>
                 <p className="text-capitalize">
                   {" "}
                   {localStorage.getItem("lastname")}
                 </p>
-                <hr />
+                <hr className="text-dark"/>
                 <h4>Username :</h4>
                 <p className="text-capitalize">
                   {" "}
                   {localStorage.getItem("username")}{" "}
                 </p>
-                <hr />
+                <hr className="text-dark"/>
                 <h4>Region :</h4>
                 <p className="text-capitalize">
                   {" "}
                   {localStorage.getItem("region")}{" "}
                 </p>
-                <hr />
+                <hr className="text-dark" />
               </div>
               <br />
               <br />
@@ -89,10 +91,10 @@ export default function Profile() {
                   {localStorage.getItem("email")}{" "}
                 </p>
          
-                <hr />
+                <hr className="text-dark"/>
                 <h4>Date joined :</h4>
                 <p> {localStorage.getItem("dateJoined")} </p>
-                <hr />
+                <hr className="text-dark"/>
                 <h4>Email verfied :</h4>
                 <p>
                   {" "}
@@ -100,23 +102,23 @@ export default function Profile() {
                     ? "Yes"
                     : "No"}{" "}
                 </p>
-                <hr />
+                <hr className="text-dark"/>
               </div>
               <br />
               <br />
               {/* <Editadd /> */}
             </>
           </Tab>
-
           <Tab eventKey="review" title="Reviews" className="tab">
             <>
-              <h3>Rates & comments : </h3>
-
+              <h3 className="text-dark">Rates & comments : </h3>
+              <hr className="text-dark"/>
               <StarRating />
             </>
           </Tab>
         </Tabs>
       </div>
     </div>
+    </>
   );
 }

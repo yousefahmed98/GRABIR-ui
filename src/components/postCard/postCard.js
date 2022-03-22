@@ -264,10 +264,13 @@ export default function PostCard({ post }) {
             <p>From : {post.from_region}</p>
             <p>I am in: {post.to}</p>
             <p>Price: {post.price}$</p>
+            <div className="row">
             {
               postTags.map((tag, index) => (
-                <span  key={index} className="me-3 tagg" >{tag}</span>))
+              <span   key={index} className="tagg me-1 col-lg-3 col-sm-6" >#{tag}</span>
+               ))
             }
+            </div>
           </div>
           <br />
           { post.postpicture !== null
@@ -294,15 +297,15 @@ export default function PostCard({ post }) {
                   </div> */}
 
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                      <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
-                        delete</button>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                      <button type="submit" className="btn px-3 me-1 darkcustombtn"
+                      <button type="button" className={`btn px-3 me-1 btn-outline-dark`} onClick={(e) => { postDelete(e, post.id) }}>
+                        Delete</button>
+                        <button type="submit" className="btn px-3 me-1 btn-outline-dark"
                         onClick={() => handleShow(post.id)} data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
-                        update</button>
-
+                        Update</button>
                     </div>
+                    {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
+        
+                    </div> */}
                   </>
                 )
                 :

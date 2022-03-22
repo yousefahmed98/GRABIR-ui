@@ -4,3 +4,7 @@
     background-repeat: no-repeat;
     background-color: rgb(231, 230, 230) !important;
 }
+
+ul {
+    list-style-type: none;
+}

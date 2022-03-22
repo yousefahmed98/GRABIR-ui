@@ -1,11 +1,11 @@
-.profile .tabss {
+.profile .tabsssss {
     background-color: #fffcf8;
     padding:5% !important ;
     border: solid black 1px;
 }
 
 .profile .tab {
-    background-color: #fffcf8;
+    background-color: #ffffff;
     padding:5%;
     border: solid black 2px;
     border-radius: 15px;
@@ -21,12 +21,13 @@
 }
 .profile .btn-add:hover {
     background-color: rgb(24, 22, 22) !important;
-    color: #faaf40 !important;
+    color: #f3a42d !important;
 }
 
 
 .profile h4, p {
     display : inline;
+    color: black;
 }
 
 .profile .modal-box {
@@ -38,4 +39,7 @@
 .profile .pic {
     border: solid red 10px;
 
+}
+.titleProfile {
+    color: red !important;
 }
