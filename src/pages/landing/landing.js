@@ -108,6 +108,7 @@ export default function Landing() {
       })
         .then(function (response) {
           console.log(response);
+          return setDone({...done, msg: "Your Message Has been Successfully Sent"})
         })
         .catch(function (response) {
           console.log(response);
@@ -483,7 +484,7 @@ export default function Landing() {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-3 col-sm-6 my-3">
-              <a href="#!">
+              <a href="https://www.microsoft.com/en-eg">
                 <img
                   className="img-fluid img-brand d-block mx-auto"
                   src={microsoft}
@@ -492,7 +493,7 @@ export default function Landing() {
               </a>
             </div>
             <div className="col-md-3 col-sm-6 my-3">
-              <a href="#!">
+              <a href="https://www.google.com">
                 <img
                   className="img-fluid img-brand d-block mx-auto"
                   src={google}
@@ -501,7 +502,7 @@ export default function Landing() {
               </a>
             </div>
             <div className="col-md-3 col-sm-6 my-3">
-              <a href="#!">
+              <a href="https://www.facebook.com">
                 <img
                   className="img-fluid img-brand d-block mx-auto"
                   src={facebook}
@@ -510,7 +511,7 @@ export default function Landing() {
               </a>
             </div>
             <div className="col-md-3 col-sm-6 my-3">
-              <a href="#!">
+              <a href="https://www.ibm.com">
                 <img
                   className="img-fluid img-brand d-block mx-auto"
                   src={ibm}
@@ -641,11 +642,8 @@ export default function Landing() {
               </a>
             </div>
             <div className="col-lg-4 text-lg-end">
-              <a className="link-dark text-decoration-none me-3" href="#!">
+              <a className="link-dark text-decoration-none me-3" href="/privacy">
                 Privacy Policy
-              </a>
-              <a className="link-dark text-decoration-none" href="#!">
-                Terms of Use
               </a>
             </div>
           </div>
