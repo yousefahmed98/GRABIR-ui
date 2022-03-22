@@ -14,9 +14,45 @@ import makeAnimated from 'react-select/animated'
 import axios from 'axios'
 import Popup from '../popup/popup'
 import CustomInput from "../CustomInput";
-
+import { Modal, Button } from "react-bootstrap";
 
 export default function PostCard({ post }) {
+  const [show, setShow] = useState(false);
+  function handleShow(postId) {
+    axios.get(`http://127.0.0.1:8000/posts/posts/${postId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        Accept: "application/json",
+      }
+    })
+      .then((res) => {
+        setupdatedPost({
+          ...updatedPost,
+          id:postId,
+          title: res.data.title,
+          description: res.data.description,
+          postpicture: null,
+          from_region: res.data.from_region,
+          to: res.data.to,
+          price: res.data.price,
+          ownerName: res.data.ownerName,
+          user: res.data.user,
+          tags: res.data.tags,
+        })
+
+      }
+      )
+      .catch((err) => console.log(err));
+    setShow(true);
+  }
+  const handleClose = () => {
+    submitForm()
+     setShow(false);
+  }
+  const handleClosewithoutChanges = () =>{
+    setShow(false);
+  }
   const [style, setStyle] = useState("darkcustombtn");
   const history = useHistory()
   //socket
@@ -30,12 +66,15 @@ export default function PostCard({ post }) {
     id: null,
   })
 
+
   useEffect(() => {
     dispatch(getTags())
   }, [dispatch]);
+
   useEffect(() => {
     setuser()
   }, [localStorage.getItem("id")])
+
   useEffect(() => {
     if (currentuser.id !== null) {
       console.log(socket.on("welcomeMessage", (msg) => {
@@ -54,7 +93,6 @@ export default function PostCard({ post }) {
       id: localStorage.getItem("id"),
     })
   }
-
   // for tags select component
   const animatedComponents = makeAnimated();
   const tagsoptions = []
@@ -63,16 +101,17 @@ export default function PostCard({ post }) {
   )
   )
   // -----updated post ---------------------------------------------
+  
   const [updatedPost, setupdatedPost] = useState({
-    title: post.title,
-    description: post.description,
+    title: "",
+    description: "",
     postpicture: null,
-    from_region: post.from_region,
-    to: post.to,
-    price: post.price,
-    ownerName: post.ownerName,
-    user: post.user,
-    tags: post.tags,
+    from_region: "",
+    to: "",
+    price: "",
+    ownerName: "",
+    user: "",
+    tags: "",
   })
   const [errors, setErrors] = useState(
     // initialState intial values
@@ -86,35 +125,7 @@ export default function PostCard({ post }) {
       tags: "",
     }
   );
-  const updatePost = (postId) => {
-    axios.get(`http://127.0.0.1:8000/posts/posts/${postId}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-        Accept: "application/json",
-      }
-    })
-      .then((res) => {
-        console.log("res.data.title",res.data.title)
-        console.log("res.data.tags",res.data.tags)
-        setupdatedPost({
-          ...updatedPost,
-          title: res.data.title,
-          description: res.data.description,
-          postpicture: res.data.postpicture,
-          from_region: res.data.from_region,
-          to: res.data.to,
-          price: res.data.price,
-          ownerName: res.data.ownerName,
-          user: res.data.user,
-          tags:res.data.tags,
-        })
-
-      }
-      )
-      .catch((err) => console.log(err));
-
-  }
+  
 
   // selected tags------------
   const changeSelectedTags = (e) => {
@@ -143,7 +154,7 @@ export default function PostCard({ post }) {
         description: e.target.value,
       })
     }
-    else if (e.target.name === "photo") {
+    else if (e.target.name === "postpic") {
       setupdatedPost({
         ...updatedPost,
         postpicture: e.target.files[0],
@@ -161,16 +172,17 @@ export default function PostCard({ post }) {
         from_region: e.target.value,
       })
     }
-    else if (e.target.name === "to") {
+    else if (e.target.name === "to_region") {
       setupdatedPost({
         ...updatedPost,
         to: e.target.value,
       })
     }
   }
-  const submitForm = (e) => {
-    e.preventDefault();
+  const submitForm = () => {
+    // e.preventDefault();
     // SEND API REQUEST
+    console.log(updatedPost.from_region,updatedPost.title,updatedPost.id)
     let form_data = new FormData();
     form_data.append('title', updatedPost.title);
     form_data.append('description', updatedPost.description);
@@ -185,7 +197,7 @@ export default function PostCard({ post }) {
     updatedPost.tags.forEach(item => {
       form_data.append('tags', item);
     });
-    axios.patch(`http://127.0.0.1:8000/posts/posts/${localStorage.getItem('Updated_post_id')}/`, form_data, {
+    axios.patch(`http://127.0.0.1:8000/posts/posts/${updatedPost.id}/`, form_data, {
       headers: {
         'content-type': 'multipart/form-data',
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -224,45 +236,49 @@ export default function PostCard({ post }) {
   getpostTags()
   //--------------------
   return (
-    <div className="postsCards">
-      <div className="pt-5 ">
+    <div className="container" >
+    <div className="postsCards col-sm-7 col-lg-12 col-md-11 ">
+    <div className="py-4 ">
 
-        {/* post section  start*/}
-        <section className="border rounded shadow-lg p-5 postcard mt-5 mb-5" >
-          {/* profile + date  */}
-          <div className="row align-items-center mb-4">
-            <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
-              <img src={post.ownerProfilePic} className="me-2 userImage"
-                height="80" alt="" loading="lazy" />
-              <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
-            </div>
-            <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
+      {/* post section  start*/}
+      <section className="boxxx rounded shadow-lg p-5 postcard mt-5 mb-5" >
+        {/* profile + date  */}
+        <div className="row align-items-center mb-4">
+          <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
+            <img src={post.ownerProfilePic} className="me-2 userImage"
+              height="80" alt="" loading="lazy" />
+            <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
           </div>
-          {/* profile + date end  */}
-          {/* post content start */}
-          <div className="row align-items-center mb-4">
-            <div className="col-lg-6 col-md-12 inline">
-              <h2>{post.title}</h2>
-              <p>
-                {post.description}
-              </p> <br />
-              <p>From : {post.from_region}</p> <br />
-              <p>I am in: {post.to}</p> <br />
-              <p>Price: {post.price}$</p> <br />
-              {
-                postTags.map((tag, index) => (
-                  <span key={index} className="me-3 text-info" >{tag}</span>))
-              }
-            </div>
-            {post.postpicture !== null
-              ?
-              <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
-                alt="post" width='60%' length='180px' />
-              :
-              <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
-
-              </div>
+          <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
+        </div>
+        {/* profile + date end  */}
+        <hr/>
+        {/* post content start */}
+        <div className="row align-items-center mb-4">
+          <div className="col-lg-6 col-md-12 carddddd">
+            <h2 className="titlee">{post.title}</h2>
+            <br/>
+            <p>
+              {post.description}
+            </p>
+            <p>From : {post.from_region}</p>
+            <p>I am in: {post.to}</p>
+            <p>Price: {post.price}$</p>
+            {
+              postTags.map((tag, index) => (
+                <span  key={index} className="me-3 tagg" >{tag}</span>))
             }
+          </div>
+          <br />
+          { post.postpicture !== null
+            ?
+          <img src={post.postpicture} className=" p-0 img-box col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
+            alt="post" width='60%' length='180px' />
+            :
+            <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
+          
+        </div>
+          }
           </div>
           {/* post content end */}
           <div className="row align-items-center mb-4  ">
@@ -276,14 +292,16 @@ export default function PostCard({ post }) {
                     <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
                       show offers</button>
                   </div> */}
+
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center">
                       <button type="button" className={`btn px-3 me-1 darkcustombtn ${style}`} onClick={(e) => { postDelete(e, post.id) }}>
                         delete</button>
                     </div>
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center">
                       <button type="submit" className="btn px-3 me-1 darkcustombtn"
-                        onClick={() => updatePost(post.id)} data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
+                        onClick={() => handleShow(post.id)} data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
                         update</button>
+
                     </div>
                   </>
                 )
@@ -293,16 +311,108 @@ export default function PostCard({ post }) {
                 </div>
 
             }
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+              <form method="post" >
+                      <CustomInput
+                        id="title"
+                        label={"TiTle"}
+                        errors={errors.title}
+                        value={updatedPost.title}
+                        handleChange={(e) => changeData(e)}
+                        name={"title"}
+                        type="text"
+                      />
+                      <CustomInput
+                        id="details"
+                        label={"Details about your order"}
+                        errors={errors.description}
+                        value={updatedPost.description}
+                        handleChange={(e) => changeData(e)}
+                        name={"details"}
+                        type="text"
+                      />
+                      <CustomInput
+                        id="postpic"
+                        label={"Add image of your order"}
+                        errors={errors.postpicture}
+                        handleChange={(e) => changeData(e)}
+                        name="postpic"
+                        type="file"
+                      />
+                      <CustomInput
+                        id="price"
+                        label={"Add price you well pay"}
+                        errors={errors.price}
+                        value={updatedPost.price}
+                        handleChange={(e) => changeData(e)}
+                        name="price"
+                        type="text"
+                      />
+                      <CustomInput
+                        id="from"
+                        label={
+                          "Add the country from where you want your order "
+                        }
+                        errors={errors.from_region}
+                        value={updatedPost.from_region}
+                        handleChange={(e) => changeData(e)}
+                        name="from"
+                        type="text"
+                      />
+                      <CustomInput
+                        id="to_region"
+                        label={
+                          "Add the country  you want to recive your order in "
+                        }
+                        errors={errors.to}
+                        value={updatedPost.to}
+                        handleChange={(e) => changeData(e)}
+                        name="to_region"
+                        type="text"
+                      />
+                      <label>Choose relevant tags</label>
+                      <Select
+                        id="tags"
+                        closeMenuOnSelect={true}
+                        components={animatedComponents}
+                        isMulti
+                        options={tagsoptions}
+                        onChange={(e) => changeSelectedTags(e)}
+                        name="tags"
+                        setValue
+                      />
+
+                      {/* <div className="modal-footer">
+                        <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Update</button>
+                      </div> */}
+                    </form>
+
+
+              </Modal.Body>
+              <Modal.Footer>
+                <Button type="submit" variant="secondary" onClick={handleClosewithoutChanges}>
+                  close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal>
 
             {/* modal */}
-            <div className="modal" id="staticBackdropupdate" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
+            {/* <div className="modal" id="staticBackdropupdate" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
               aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                   <div className="modal-header ">
                     <h5 className="modal-title" id="staticBackdropLabel">Update post</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
+                    </div>
 
                   <div className="modal-body">
                     <form method="post" onSubmit={(e) => submitForm(e)} >
@@ -384,7 +494,7 @@ export default function PostCard({ post }) {
 
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* modal end */}
           </div>
 
@@ -393,7 +503,7 @@ export default function PostCard({ post }) {
       </div>
 
     </div>
-
+</div>
   )
 
 }
