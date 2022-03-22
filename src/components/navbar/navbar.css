@@ -4,12 +4,11 @@
 .navbaring .navbar{
   background-color: #212529 !important;
 }
-.navbaring .nav-link {
-  text-decoration: none;
-  color: #ffff ;
-  height: 1vh;
-}
 
+.active {
+ color: #ffff !important;
+ 
+  }
 /* 3 LINKS ON RIGHT */
 .navbaring .homelink {
   margin: 10px 0px;
@@ -53,7 +52,6 @@
   position: fixed;
   top: 70px;
   right: 10px;
-  background-color: white;
   color:black;
   font-weight: 300;
   display: flex;

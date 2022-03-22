@@ -1,18 +1,33 @@
-import React from "react"
+import React from "react";
 import { useState, useEffect } from "react";
 import logo from "../../pages/landing/assets/img/logo2.svg";
-import "./navbar.css";
+// import "./navbar.css";
 import {
-  CNavbar, CContainer, CNavbarToggler, COffcanvas, COffcanvasHeader, COffcanvasBody, CNavbarNav, CNavLink
-  , CNavItem, CCloseButton, CNavbarBrand
-} from '@coreui/bootstrap-react';
-import Notify from './notify'
+  CNavbar,
+  CContainer,
+  CNavbarToggler,
+  COffcanvas,
+  COffcanvasHeader,
+  COffcanvasBody,
+  CNavbarNav,
+  CNavLink,
+  CNavItem,
+  CCloseButton,
+  CNavbarBrand,
+} from "@coreui/bootstrap-react";
+import Notify from "./notify";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
-import { getNotifications } from "../../Store/Actions/getNotifications"
-import { axiosInstance } from "../../network/axiosInstance"
-// new navbar component 
+import { useHistory, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getNotifications } from "../../Store/Actions/getNotifications";
+import { axiosInstance } from "../../network/axiosInstance";
+import "../../pages/landing/css/styles.css";
+import "./navbar.css";
+import { className } from "postcss-selector-parser";
+// new navbar component
 export default function Navbar() {
+  const history = useHistory();
+
   const logout = () => {
     localStorage.removeItem("is_staff");
     localStorage.removeItem("id");
@@ -29,179 +44,196 @@ export default function Navbar() {
     localStorage.removeItem("superUser");
     localStorage.removeItem("lastLogin");
     localStorage.removeItem("loginErr");
+    history.push("/login");
   };
   ///////////////////////////////////////////////////
-  const [visible, setVisible] = useState(false)
-  const [portal, setPortal] = useState(false)
-  const [notifications, setNotifications] = useState([])
-  const [mynotifications, setMyNotifications] = useState([])
-  const [openNotifications, setOpenNotifications] = useState(false)
-  const AllNotifications = useSelector((state) => state.NOTIFICATIONS.notificationsList) //state
+  const [visible, setVisible] = useState(false);
+  const [portal, setPortal] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [mynotifications, setMyNotifications] = useState([]);
+  const [openNotifications, setOpenNotifications] = useState(false);
+  const AllNotifications = useSelector(
+    (state) => state.NOTIFICATIONS.notificationsList
+  ); //state
   const socket = useSelector((state) => state.SOCKET.socket);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     //get all notifications here
-    dispatch(getNotifications())
-  }, [])
+    dispatch(getNotifications());
+  }, []);
 
   useEffect(() => {
     //get all notifications of current user
-    if (AllNotifications.length > 0 && mynotifications.length == 0 ) {
-      getCurrentUserNotifications()
+    if (AllNotifications.length > 0 && mynotifications.length == 0) {
+      getCurrentUserNotifications();
     }
-
-  }, [AllNotifications])
+  }, [AllNotifications]);
 
   useEffect(() => {
     //get notification from socket
     socket?.on("getNotification", (data) => {
-      setNotifications((prev) => [...prev, data])
-      setMyNotifications((prev) => [...prev, {
-        body: data.type,
-        from_user_name: data.senderName,
-        to_user: data.reciverId,
-      }])
-
-
-    })
-  
-  }, [socket])
-
+      setNotifications((prev) => [...prev, data]);
+      setMyNotifications((prev) => [
+        ...prev,
+        {
+          body: data.type,
+          from_user_name: data.senderName,
+          to_user: data.reciverId,
+        },
+      ]);
+    });
+  }, [socket]);
 
   const getCurrentUserNotifications = () => {
     for (let n of AllNotifications) {
       if (n.to_user == localStorage.getItem("id")) {
-        setMyNotifications((prev) => [...prev, n])
+        setMyNotifications((prev) => [...prev, n]);
       }
     }
-
-  }
+  };
   const displayNotification = (nObj) => {
     return (
-      
       <div key={nObj.id} className="row border mb-3">
-      <span className="col-lg-3 col-md-3 rounded-5 p-2">
-       <img src={nObj.from_user_ProfilePic} className="me-2 userImage"height="60" alt="ProfilePic" loading="lazy" />
-      </span>
-      <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
+        <span className="col-lg-3 col-md-3 rounded-5 p-2">
+          <img
+            src={nObj.from_user_ProfilePic}
+            className="me-2 userImage"
+            height="60"
+            alt="ProfilePic"
+            loading="lazy"
+          />
+        </span>
+        <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
       </div>
-    )
-
-  }
+    );
+  };
   const handelRead = () => {
-    setMyNotifications([])
-    setOpenNotifications(false)
+    setMyNotifications([]);
+    setOpenNotifications(false);
     // delete from db
-    for (let notify of mynotifications){
-    axiosInstance.delete(`/notification/notifications/${notify.id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access")}`,
-      }
-    })
-      .then(console.log("deleted successfully"))
-      .catch((err) => console.log(err))
+    for (let notify of mynotifications) {
+      axiosInstance
+        .delete(`/notification/notifications/${notify.id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        })
+        .then(console.log("deleted successfully"))
+        .catch((err) => console.log(err));
+    }
+  };
+  const search = useLocation();
 
-  }
-  }
   return (
-    <div className="navbaring">
-    <CNavbar    
-      className="fixed-top"
-      expand="lg"
-      style={{backgroundColor:"#212529", color: "#ffff"}}
-    >
-      <CContainer fluid>
-        <CNavbarToggler
-          aria-controls="offcanvasNavbar2"
+    <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div className="container">
+        <a className="navbar-brand" href="/">
+          <img src={logo} style={{ width: "10vw", height: "5vh" }} alt="..." />
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
           aria-label="Toggle navigation"
-          onClick={() =>{ setVisible(!visible)}}
-        />
-        <COffcanvas
-          className="COffcanvas"
-          id="offcanvasNavbar2"
-          placement="end"
-          portal={visible}
-          visible={visible}
-          onHide={() => setVisible(false)}
+        
         >
-          <COffcanvasHeader>
-            <CCloseButton
-              className="text-reset"
-              onClick={() => setPortal(true)}
-            />
-          </COffcanvasHeader>
-          <COffcanvasBody>
-            <CNavbarNav className="pb-5">
-              <CNavbarBrand href="#">
-              <Link to= "/" className=" nav-link"> <img src={logo} alt="GRABIRLOGO" style={{width:"5vw", height: "5vh"}} /></Link>
-               
-              </CNavbarBrand>
-              <CNavItem className="">
-                <CNavLink href="#" active className="">
-                  <Link to= "/home" className=" nav-link">  <p className="nav-link"> Home</p></Link>
-                </CNavLink>
-              </CNavItem>
-              <CNavItem className="">
-                <CNavLink href="#">
-                <Link to= "/deals" className=" nav-link">  <p className="nav-link"> Deals</p></Link>
-                </CNavLink>
-              </CNavItem>
-              <CNavItem className="">
-                <CNavLink href="#">
-                <Link to= "/offers" className=" nav-link">  <p className="nav-link"> Offers</p></Link>
-                </CNavLink>
-              </CNavItem>
-           
-              
-            </CNavbarNav>
-              <CNavbarNav className="d-flex  nav-right">
-              <CNavItem className="notify-icon "  >
-                  <div onClick={() => setOpenNotifications(!openNotifications)}>
-                    {visible ? null : <Notify width={"30px"} count={openNotifications ? 0 : mynotifications.length} />}
-                  </div>
-                </CNavItem>
-              {localStorage.getItem("id") ? (
-                <>
-                 <CNavItem className="">
-                    <CNavLink href="#">
-                    <Link to= "/myprofile" className=" nav-link"> <p className="nav-link">{localStorage.getItem("username")}</p></Link>
-                    </CNavLink>
-                  </CNavItem>
-                  <CNavItem>
-                    <CNavLink onClick={() => logout()} href="#" >
-                    <Link to= "/login" className=" nav-link"> <p className="nav-link">Logout</p></Link>
-                    </CNavLink>
-                  </CNavItem>
-                </>
-              ) : (
-                <>
-                  {null}
-                
-                </>
-              )}
-            
-              </CNavbarNav>
-              {/* <CButton
-                type="submit"
-                variant="outline"
-                color="light"
-                className="me-2"
+          Menu
+          <i className="fas fa-bars ms-1"></i>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarResponsive">
+          <ul className="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+            <li className="nav-item">
+              <a
+                className={
+                  search.pathname == "/home"
+                    ? "nav-link btn btn-warning active"
+                    : "nav-link"
+                }
+                href="/home"
               >
-                Search
-              </CButton> */}
-             {/* </CForm> */}
-          </COffcanvasBody>
-        </COffcanvas>
-      </CContainer>
-    </CNavbar>
-     {openNotifications &&
+                Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={
+                  search.pathname == "/offers"
+                    ? "nav-link btn btn-warning active"
+                    : "nav-link"
+                }
+                href="/offers"
+                onclick={""}
+              >
+                Offers
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={
+                  search.pathname == "/deals"
+                    ? "nav-link btn btn-warning active"
+                    : "nav-link"
+                }
+                href="/deals"
+                onclick={""}
+              >
+                Deals
+              </a>
+            </li>
+
+            {localStorage.getItem("id") ? (
+              <>
+                <li className="nav-item">
+                  <a
+                    className={
+                      search.pathname == "/myprofile"
+                        ? "nav-link btn btn-warning active"
+                        : "nav-link"
+                    }
+                    href="/myprofile"
+                  >
+                    {" "}
+                    {localStorage.getItem("username")}
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <div className="nav-link" onClick={() => setOpenNotifications(!openNotifications)}>
+                    {visible ? null : (
+                      <Notify
+                        width={"30px"}
+                        count={openNotifications ? 0 : mynotifications.length}
+                      />
+                    )}
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#" onClick={() => logout()}>
+                    Logout
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>{null}</>
+            )}
+          </ul>
+        </div>
+      </div>
+      {openNotifications && (
         <div className="notifications border border-dark rounded  p-3">
           {mynotifications.map((n) => displayNotification(n))}
-          <button type="button" className=" btn  btn-sm darkcustombtnActive mt-3" onClick={handelRead}>Mark as read</button>
+          <button
+            type="button"
+            className=" btn  btn-sm darkcustombtnActive mt-3"
+            onClick={handelRead}
+          >
+            Mark as read
+          </button>
         </div>
-      }
-    </div>
+      )}
+    </nav>
   );
-
 }

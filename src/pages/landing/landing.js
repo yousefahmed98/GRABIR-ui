@@ -187,13 +187,13 @@ export default function Landing() {
           <br />
           {localStorage.getItem("id") ? (
             <>
-              <Link
+              <a
                 className="btn btn-primary btn-xl text-uppercase"
                 style={{ marginRight: 20 }}
-                to="/home"
+                href="/home"
               >
                 Home
-              </Link>
+              </a>
             </>
           ) : (
             <>
