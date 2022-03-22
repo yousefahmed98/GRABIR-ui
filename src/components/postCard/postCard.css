@@ -1,28 +1,92 @@
+.boxxx {
+    /* border: solid 3px hsl(0, 0%, 0%); */
+    border-radius: 25%;
+    -webkit-border-radius: 25%;
+    -moz-border-radius: 25%;
+    -ms-border-radius: 25%;
+    -o-border-radius: 25%;
+}
 .postsCards .postcard{
-    background-color: #ffff !important;
+    background-color: hsl(36, 80%, 90%) !important;
     color: #000 !important;
 }
 .postsCards .text-link{
    text-decoration: none; 
-   color: #000 !important;
+   color: rgb(10, 7, 7) !important;
    font: bold;
-   font-size: large;
+   text-transform: capitalize;
+   font-size: larger;
 }
+
 .postsCards .darkcustombtn{
     background-color: #151A1E !important;
     color: #ffff !important;
 }
+
 .postsCards .darkcustombtnActive{
     background-color: #FAAF40 !important;
     color: #151A1E !important;
     border: #FAAF40 !important;
 
 }
+
 .postsCards .offertxt{
     height: 130px !important;
 }
 .postsCards .userImage{
     /* width: 30px; */
     border-radius: 50%;
+    border: solid 5px #FAAF40;
     object-fit: cover;
+}
+
+.img-box {
+    border:solid 5px grey;
+    border-radius: 5%;
+    background-color: white;
+    -webkit-border-radius: 5%;
+    -moz-border-radius: 5%;
+    -ms-border-radius: 5%;
+    -o-border-radius: 5%;
+}
+.carddddd {
+    display: block;
+    margin: 10% 0;
+}
+
+.carddddd p{
+    text-transform: capitalize;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 100%;
+    /* border :solid 2px rgb(61, 3, 3); */
+    display: block;
+    width: 70%;
+    padding:1%;
+    margin:3% 0;
+}
+
+.tagg {
+    color: rgb(204, 15, 24);
+    /* display: block; */
+    border: 4px #151A1E;
+    border-style: dashed;
+    border-radius: 25%;
+    /* width: ; */
+    padding:2%;
+    margin:5% 0;
+    text-transform: uppercase ;
+    font-weight: bolder;
+    -webkit-border-radius: 25%;
+    -moz-border-radius: 25%;
+    -ms-border-radius: 25%;
+    -o-border-radius: 25%;
+}
+
+.titlee {
+    text-decoration:double;
+    padding: 2%;
+    text-transform: capitalize;
+    font-size: x-large;
+    font-family :Georgia, 'Times New Roman', Times, serif;
+
 }

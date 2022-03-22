@@ -35,7 +35,9 @@
 
 	height: 50px;
 
-	background-color: white;
+	background-color: rgb(255, 255, 255);
+
+    border : solid 5px black;
 
 	border-radius: 30px;
 
@@ -44,8 +46,34 @@
 	align-items: center;
 
 	padding: 20px;
-
+/* 
+    animation: pulse 5s infinite;
+    -webkit-animation: pulse 5s infinite; */
 }
+
+.boxx {
+    border: solid 2px #e2b203;
+    border-radius: 2%;
+    -webkit-border-radius: 2%;
+    -moz-border-radius: 2%;
+    -ms-border-radius: 2%;
+    -o-border-radius: 2%;
+}
+
+
+/* @keyframes pulse {
+    0% {
+      background-color: rgb(233, 217, 217);
+    }
+    100% {
+      background-color: #f1e6bc;
+    }
+  } */
+
+/* .boxx.animated_pulse:hover {
+	--animate__repeat: 1;
+ } */
+
 .input{
     width: 100%;
     border: none;
