@@ -541,22 +541,19 @@ export default function Home() {
                       Copyright &copy; GRABIR 2022
                     </div>
                     <div className="col-lg-4 my-3 my-lg-0">
-                      <a className="btn btn-dark btn-social mx-2" href="#!">
+                      <a className="btn btn-dark btn-social mx-2" href="https://twitter.com/?lang=en">
                         <i className="fab fa-twitter"></i>
                       </a>
-                      <a className="btn btn-dark btn-social mx-2" href="#!">
+                      <a className="btn btn-dark btn-social mx-2" href="https://facebook.com">
                         <i className="fab fa-facebook-f"></i>
                       </a>
-                      <a className="btn btn-dark btn-social mx-2" href="#!">
+                      <a className="btn btn-dark btn-social mx-2" href="https://linkedin.com">
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </div>
                     <div className="col-lg-4 text-lg-end">
-                      <a className="link-dark text-decoration-none me-3" href="#!">
+                      <a className="link-dark text-decoration-none me-3" href="/privacy">
                         Privacy Policy
-                      </a>
-                      <a className="link-dark text-decoration-none" href="#!">
-                        Terms of Use
                       </a>
                     </div>
                   </div>
