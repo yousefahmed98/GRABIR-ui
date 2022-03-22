@@ -260,21 +260,13 @@ export default function PostCard({ post }) {
           <br />
           { post.postpicture !== null
             ?
-          <img src={post.postpicture} className=" img-box col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
+          <img src={post.postpicture} className=" p-0 img-box col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
             alt="post" width='60%' length='180px' />
             :
             <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
-              
+          
         </div>
-            {post.postpicture !== null
-              ?
-              <img src={post.postpicture} className="col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
-                alt="post" width='60%' length='180px' />
-              :
-              <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
-
-              </div>
-            }
+          }
           </div>
           {/* post content end */}
           <div className="row align-items-center mb-4  ">
