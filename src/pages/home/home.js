@@ -46,7 +46,7 @@ export default function Home() {
     postpicture: "",
     from_region: "",
     to: "",
-    price: 0.0,
+    price: 1000,
     ownerName: localStorage.getItem("username"),
     user: localStorage.getItem("id"),
     tags: [],
@@ -146,7 +146,7 @@ export default function Home() {
       setErrors({
         ...errors,
         price:
-          e.target.value.length === 0
+          e.target.value.length === 0 || e.target.value == 0
             ? "Price is required"
             : !/^[0-9]+$/.test(e.target.value)
             ? "Enter valid price"
@@ -195,7 +195,7 @@ export default function Home() {
     e.preventDefault();
     let form_data = new FormData();
     let sendRequest = true;
-
+  
     if (newPost.tags.length === 0) {
       sendRequest = false;
       setErrors({
@@ -555,14 +555,7 @@ export default function Home() {
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </div> */}
-                  <div className="col-lg-4 text-lg-end">
-                    <a
-                      className="link-dark text-decoration-none me-3"
-                      href="/privacy"
-                    >
-                      Privacy Policy
-                    </a>
-                  </div>
+                
                 </div>
               </div>
             </footer>

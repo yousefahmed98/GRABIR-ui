@@ -5,17 +5,18 @@ import "../login/login2.css";
 import TextField from "@mui/material/TextField";
 import logo from "../landing/assets/img/logo2.svg";
 
-
-
 export default function Pass() {
   const history = useHistory();
   const [userForm, setUserForm] = useState({
     email: null,
     redirect_url: "http://localhost:3000/confirm",
   });
+  const [confirm, setConfirm] = useState({
+    msg: null,
+  });
 
   const [errors, setErrors] = useState({
-    emailErr: null
+    emailErr: null,
   });
   const validateEmail = (userOption) => {
     let checker = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
@@ -47,8 +48,12 @@ export default function Pass() {
       // SEND API REQUEST
       return axios
         .post("http://127.0.0.1:8000/base/request-reset-email/", userForm)
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          return setConfirm({ ...confirm, msg: res.data.success });
+        })
+        .catch((err) => {
+          return setConfirm({ ...confirm, msg: err.response.data.fail });
+        });
 
       // return history.push("/login");
     } else {
@@ -112,6 +117,9 @@ export default function Pass() {
                             >
                               SEND
                             </button>
+                          </div>
+                          <div className="text-center text-primary">
+                            {confirm.msg}
                           </div>
                         </form>
                       </div>

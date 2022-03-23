@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import Navbar from "../../components/navbar/navbar";
+import "./PublicProfile.css"
 export default function PublicProfile() {
     const params = useParams();   // return object for dynamic params  like /:id
     const [user, setUser] = useState({})
@@ -45,7 +46,7 @@ export default function PublicProfile() {
   return(
       <>
        <Navbar />
-    <div className="container pt-5">
+    <div className="ppprofileee container pt-5">
     <div className="row pt-5">
         <div className="col-lg-2 col-md-3 col-sm-3">
                       <img
@@ -57,7 +58,7 @@ export default function PublicProfile() {
                       />
         </div>
         <div className="col-lg-6 col-md-6 col-sm-6 pt-5">
-        <h2 className="username">{ user.username}</h2>
+        <h2 className="username text-capitalize">{ user.username}</h2>
         </div>
 
    </div>
