@@ -33,7 +33,7 @@ const getmyDealssListFun = () => {
              myOffersList.push(o)
          }
          else{
-           if(o.offer_owner === localStorage.getItem("id")){
+           if(o.offer_owner == localStorage.getItem("id")){
             myOffersList.push(o)
            }
          }
