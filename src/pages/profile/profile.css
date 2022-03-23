@@ -43,3 +43,9 @@
 .titleProfile {
     color: red !important;
 }
+.titles{
+    text-decoration:double;
+    font-size: 1rem;
+    font-family: inherit !important;
+    color: #f3a42d;
+}

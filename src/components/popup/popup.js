@@ -365,15 +365,17 @@ useEffect(() => {
           </div>
         </div>
       </div>
-      <Button
+      {/* <Button
         variant="outlined"
         data-bs-toggle="modal"
         href="#exampleModalToggle"
         role="button"
-        endIcon={<LocalOfferIcon />}
+        endIcon={<LocalOfferIcon /> }
       >
         Make Offer
-      </Button>
+      </Button> */}
+      <button type="button" className="btn px-3  btn-outline-dark" data-bs-toggle="modal"  data-bs-target= "#exampleModalToggle"> Make Offer</button>
     </div>
   );
 }
+

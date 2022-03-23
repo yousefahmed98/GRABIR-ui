@@ -36,10 +36,12 @@
 .postsCards .userImage{
     /* width: 30px; */
     border-radius: 50%;
-    border: solid 5px #FAAF40;
+    /* border: solid 5px #FAAF40; */
     object-fit: cover;
 }
-
+.rounded-pill{
+    background-color: #FAAF40 !important;
+}
 .img-box {
     border:solid 5px rgb(33,37 , 41);
     border-radius: 5%;
@@ -51,7 +53,7 @@
 }
 .carddddd {
     display: block;
-    margin: 10% 0;
+    /* margin: 10% 0; */
 }
 
 .carddddd p{
@@ -84,9 +86,13 @@
 
 .titlee {
     text-decoration:double;
-    padding: 2%;
+    /* padding: 2%; */
     text-transform: capitalize;
     font-size: x-large;
     font-family :Georgia, 'Times New Roman', Times, serif;
-
+    font-family: inherit !important;
+}
+.postdetails{
+    font-family: inherit !important;
+    font-size: 1.3rem !important;
 }

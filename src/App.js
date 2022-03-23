@@ -16,6 +16,7 @@ import PayPal from "./components/PayPal/PayPal";
 import Confirmpass from "./pages/reset-password/Confirmpass";
 import Pass from "./pages/reset-password/Pass";
 import Privacy from "./pages/privacy/Privacy";
+import PublicProfile from './pages/profile/PublicProfile';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path={"/confirm"} exact  component={Confirmpass} />
           <Route path={"/reset"} exact  component={Pass} />
           <Route path={"/myprofile"} exact component={Profile} />
+          <Route path={"/publicprofile/:id"} exact component={PublicProfile} />
           <Route path={"/privacy"} exact component={Privacy} />
           <Route path={"/"} exact component={Landing} />
 

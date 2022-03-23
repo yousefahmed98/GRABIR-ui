@@ -236,41 +236,74 @@ export default function PostCard({ post }) {
   getpostTags()
   //--------------------
   return (
-    <div className="container" >
+    <div className="container " >
     <div className="postsCards col-sm-7 col-lg-12 col-md-11 ">
-    <div className="py-4 ">
-
       {/* post section  start*/}
-      <section className="boxxx rounded shadow-lg p-5 postcard mt-5 mb-5" >
+      <section className="boxxx rounded shadow-lg p-5 postcard  mb-3" >
         {/* profile + date  */}
-        <div className="row align-items-center mb-4">
+        {/* <div className="row align-items-center ">
           <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
             <img src={post.ownerProfilePic} className="me-2 userImage"
               height="80" alt="" loading="lazy" />
             <Link to="#" className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
           </div>
           <span className='pt-2 me-2'> Published on <p className="p-1">{post.created_at}</p></span>
-        </div>
+        </div> */}
         {/* profile + date end  */}
-        <hr/>
+        {/* <hr/> */}
         {/* post content start */}
-        <div className="row align-items-center mb-4">
+        <div className="row align-items-center ">
           <div className="col-lg-6 col-md-12 carddddd">
+            
+          <div className="row align-items-center ">
+          <div className="col-lg-8 col-sm-8 text-center text-lg-start mb-lg-3 ">
+            <img src={post.ownerProfilePic} className="me-2 userImage"
+              height="80" alt="" loading="lazy" />
+            <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
+          </div>
+          <span className='pt-2 me-2 col-lg-6 col-sm-6  mb-3'> Published on {post.created_at}</span>
+        </div>
+
             <h2 className="titlee">{post.title}</h2>
             <br/>
-            <p>
+            <p className="postdetails">
               {post.description}
             </p>
             <p>From : {post.from_region}</p>
-            <p>I am in: {post.to}</p>
-            <p>Price: {post.price}$</p>
+            <p>Recive Location: {post.to}</p>
+            <p className="cl-lg-3 cl-m-12 cl-s-12">Price:</p> <span className="me-3 price p-2 rounded-pill ">
+            {" "}
+            {post.price} ${" "}
+          </span>
+            
             <div className="row">
             {
               postTags.map((tag, index) => (
-              <span   key={index} className="tagg me-1 col-lg-3 col-sm-6" >#{tag}</span>
+              <span   key={index} className="tagg me-2 col-lg-3 col-md-6 col-sm-6" >#{tag}</span>
                ))
             }
             </div>
+            <div className="col-lg-6 col-md-6 col-sm-6  mb-3">
+            {
+
+             localStorage.getItem("id") == post.user
+                  ?
+                   (   <>
+                       <button type="button" className={`btn px-3 me-2 btn-outline-dark `} onClick={(e) => { postDelete(e, post.id) }}>
+                        Delete</button>
+                        <button type="submit" className="btn px-3 me-2 btn-outline-dark"
+                        onClick={() => handleShow(post.id)} data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
+                        Update</button>
+                   </>        
+                    
+                   )
+                   :
+                   <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
+                  <Popup postID={post.id} post={post} socket={socket} currentuser={currentuser} />
+                  </div>
+             }
+             </div>
+                    
           </div>
           <br />
           { post.postpicture !== null
@@ -280,12 +313,12 @@ export default function PostCard({ post }) {
             :
             <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4">
           
-        </div>
+            </div>
           }
           </div>
           {/* post content end */}
           <div className="row align-items-center mb-4  ">
-            {
+            {/* {
 
               localStorage.getItem("id") == post.user
                 ?
@@ -294,18 +327,15 @@ export default function PostCard({ post }) {
                     {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center">
                     <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
                       show offers</button>
-                  </div> */}
+                  </div> 
 
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center">
-                      <button type="button" className={`btn px-3 me-1 btn-outline-dark`} onClick={(e) => { postDelete(e, post.id) }}>
+                      <button type="button" className={`btn px-3 me-2 btn-outline-dark`} onClick={(e) => { postDelete(e, post.id) }}>
                         Delete</button>
-                        <button type="submit" className="btn px-3 me-1 btn-outline-dark"
+                        <button type="submit" className="btn px-3 me-2 btn-outline-dark"
                         onClick={() => handleShow(post.id)} data-bs-toggle="modal" data-bs-target="#staticBackdropupdate" >
                         Update</button>
                     </div>
-                    {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-        
-                    </div> */}
                   </>
                 )
                 :
@@ -313,7 +343,7 @@ export default function PostCard({ post }) {
                   <Popup postID={post.id} post={post} socket={socket} currentuser={currentuser} />
                 </div>
 
-            }
+            } */}
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Modal heading</Modal.Title>
@@ -388,11 +418,6 @@ export default function PostCard({ post }) {
                         name="tags"
                         setValue
                       />
-
-                      {/* <div className="modal-footer">
-                        <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Update</button>
-                      </div> */}
                     </form>
 
 
@@ -406,104 +431,11 @@ export default function PostCard({ post }) {
                 </Button>
               </Modal.Footer>
             </Modal>
-
-            {/* modal */}
-            {/* <div className="modal" id="staticBackdropupdate" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-              aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                  <div className="modal-header ">
-                    <h5 className="modal-title" id="staticBackdropLabel">Update post</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                  <div className="modal-body">
-                    <form method="post" onSubmit={(e) => submitForm(e)} >
-                      <CustomInput
-                        id="title"
-                        label={"TiTle"}
-                        errors={errors.title}
-                        value={updatedPost.title}
-                        handleChange={(e) => changeData(e)}
-                        name={"title"}
-                        type="text"
-                      />
-                      <CustomInput
-                        id="details"
-                        label={"Details about your order"}
-                        errors={errors.description}
-                        value={updatedPost.description}
-                        handleChange={(e) => changeData(e)}
-                        name={"details"}
-                        type="text"
-                      />
-                      <CustomInput
-                        id="postpic"
-                        label={"Add image of your order"}
-                        errors={errors.postpicture}
-                        handleChange={(e) => changeData(e)}
-                        name="postpic"
-                        type="file"
-                      />
-                      <CustomInput
-                        id="price"
-                        label={"Add price you well pay"}
-                        errors={errors.price}
-                        value={updatedPost.price}
-                        handleChange={(e) => changeData(e)}
-                        name="price"
-                        type="text"
-                      />
-                      <CustomInput
-                        id="from"
-                        label={
-                          "Add the country from where you want your order "
-                        }
-                        errors={errors.from_region}
-                        value={updatedPost.from_region}
-                        handleChange={(e) => changeData(e)}
-                        name="from"
-                        type="text"
-                      />
-                      <CustomInput
-                        id="to_region"
-                        label={
-                          "Add the country  you want to recive your order in "
-                        }
-                        errors={errors.to}
-                        value={updatedPost.to}
-                        handleChange={(e) => changeData(e)}
-                        name="to_region"
-                        type="text"
-                      />
-                      <label>Choose relevant tags</label>
-                      <Select
-                        id="tags"
-                        closeMenuOnSelect={true}
-                        components={animatedComponents}
-                        isMulti
-                        options={tagsoptions}
-                        onChange={(e) => changeSelectedTags(e)}
-                        name="tags"
-                        setValue
-                      />
-
-                      <div className="modal-footer">
-                        <button type="button" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" className="btn btn-lg  darkcustombtn mt-3" data-bs-dismiss="modal">Update</button>
-                      </div>
-                    </form>
-                  </div>
-
-                </div>
-              </div>
-            </div> */}
             {/* modal end */}
           </div>
 
         </section>
 
-      </div>
 
     </div>
 </div>
