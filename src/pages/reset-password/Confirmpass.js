@@ -89,15 +89,15 @@ export default function Confirmpass() {
           <section className="vh-100 bg-image bgImage">
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
               <div className="container h-100">
-                <div className="row d-flex justify-content-center align-items-center ">
-                  <img src={logo} style={{ width: "40%" }} alt="..." />
+                <div className="row d-flex justify-content-center align-items-center  mt-5 mb-5 ">
+                  <img src={logo} style={{ width: "60%" }} alt="..." />
                 </div>
 
                 <div className="row d-flex justify-content-center align-items-center ">
-                  <div className="col-8 col-md-8 col-lg-5 col-xl-6 ">
+                  <div className="col-sm-8 col-md-8 col-lg-5 col-xl-6 ">
                     <div className="card" style={{ borderRadius: 15 }}>
-                      <div className="card-body p-5">
-                        <h3 className=" text-center mb-2">
+                      <div className="card-body py-5">
+                        <h3 className=" text-center mb-5">
                           Enter your new password
                         </h3>
 
@@ -143,7 +143,7 @@ export default function Confirmpass() {
                               <div>
                                 <p className="text-danger">{errors.confirmErr}</p>
                               </div>
-                          <div className="d-flex justify-content-center">
+                          <div className="d-flex justify-content-center mt-3">
                             <button
                               disabled={errors.passwordErr || errors.confirmErr}
                               type="submit"

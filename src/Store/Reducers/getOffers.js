@@ -1,5 +1,5 @@
 import { axiosInstance } from "../../network/axiosInstance";
-
+import SweetAlert from "react-bootstrap-sweetalert";
 const INITIAL_VALUE = {
   offers: [],
   deals: [],
@@ -56,8 +56,10 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
           .catch((err) => console.log(err)),
 
 
-
-          window.alert("This offer if accepted successfully!"),
+          <SweetAlert
+              title="This offer if accepted successfully!"
+            />,
+          // window.alert("This offer if accepted successfully!"),
 
 
         {

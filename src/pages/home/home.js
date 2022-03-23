@@ -14,7 +14,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import "./home.css";
 import CustomInput from "../../components/CustomInput";
-
+import { Link } from "react-router-dom";
 export default function Home() {
   //get all posts
   const posts = useSelector((state) => state.POSTS.postsList);
@@ -361,9 +361,10 @@ export default function Home() {
                           alt="ProfilePic"
                           loading="lazy"
                         />
-                        <span className=" mx-1 my-2 user">
-                          {localStorage.getItem("username")}
-                        </span>
+                        
+                          <Link to="/myprofile" className="linkProfile mx-1 my-2 user"> {localStorage.getItem("username")} </Link>
+                          
+                        
                       </div>
                       <div className="col-lg-5 col-md-6  col-sm-6 text-center  col-7 p-2">
                         <button

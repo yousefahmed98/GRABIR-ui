@@ -215,6 +215,7 @@ export default function PostCard(props) {
             : "",
       });
     } else if (e.target.name === "delivery_date") {
+      const current = new Date()
       setOfferForm({
         ...offerForm,
         delivery_date: e.target.value,
@@ -225,6 +226,8 @@ export default function PostCard(props) {
           e.target.value === null
             ? "This field is required"
             : e.target.value < offerForm.created_at
+            ? "Enter valid date! "
+            : e.target.value <  current
             ? "Enter valid date, you chose date before today! "
             : "",
       });
@@ -666,7 +669,7 @@ export default function PostCard(props) {
                     </>
                   ) : (
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-                      <Button
+                      {/* <Button
                         variant="outlined"
                         onClick={() =>
                           handleShowOffer(post.id, post.postpicture)
@@ -678,8 +681,10 @@ export default function PostCard(props) {
                         endIcon={<LocalOfferIcon />}
                       >
                         Make Offer
-                      </Button>
-                      {/* <button type="button" className="btn px-3  btn-outline-dark" data-bs-toggle="modal"  data-bs-target= "#exampleModalToggle"> Make Offer</button> */}
+                      </Button> */}
+                      <button type="submit" className="btn px-3  btn-outline-dark" data-bs-toggle="modal"  data-bs-target= "#exampleModalToggle" onClick={() =>
+                          handleShowOffer(post.id, post.postpicture)
+                        }> Make Offer</button>
 
                     </div>
                   )}
@@ -879,7 +884,7 @@ export default function PostCard(props) {
                           <div className="modal-footer">
                             <button
                               type="button"
-                              className="btn btn-outline-success"
+                              className="btn btn-outline-warning"
                               data-bs-dismiss="modal"
                             >
                               Done

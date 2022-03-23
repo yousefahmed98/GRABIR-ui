@@ -185,17 +185,17 @@ export default function Navbar() {
             {localStorage.getItem("id") ? (
               <>
                 <li className="nav-item">
-                  <a
+                  <Link
                     className={
                       search.pathname == "/myprofile"
                         ? "nav-link btn btn-warning active"
                         : "nav-link"
                     }
-                    href="/myprofile"
+                    to="/myprofile"
                   >
                     {" "}
                     {localStorage.getItem("username")}
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <div
@@ -211,9 +211,9 @@ export default function Navbar() {
                   </div>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#" onClick={() => logout()}>
+                  <Link className="nav-link" to="#" onClick={() => logout()}>
                     Logout
-                  </a>
+                  </Link>
                 </li>
               </>
             ) : (
