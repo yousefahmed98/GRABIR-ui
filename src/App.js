@@ -18,6 +18,7 @@ import Pass from "./pages/reset-password/Pass";
 import Privacy from "./pages/privacy/Privacy";
 import PublicProfile from './pages/profile/PublicProfile';
 import verifyEmail from "./pages/register/verifyEmail";
+import Partners from "./pages/Partners/Partners";
 
 
 
@@ -40,6 +41,7 @@ function App() {
           <Route path={"/privacy"} exact component={Privacy} />
           <Route path={"/"} exact component={Landing} />
           <Route path={"/verify-email"} exact component={verifyEmail} />
+          <Route path={"/partners"} exact component={Partners} />
 
 
 
