@@ -352,25 +352,25 @@ export default function Home() {
                   <section className="boxx rounded shadow-sm p-1 postcard  mt-5 ">
                     {/* profile + date  */}
 
-                    <div className="row align-items-center ">
-                      <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start ">
+                    <div className="row align-items-center m-0 p-0 ">
+                      <div className="col-lg-7 col-md-6 col-sm-6 text-center col-5  px-lg-5 text-lg-start ">
                         <img
                           src={localStorage.getItem("ProfilePic")}
-                          className="me-2 ms-5 userImage"
+                          className="mx-2 my-2 userImage"
                           height="80"
                           alt="ProfilePic"
                           loading="lazy"
                         />
-                        <span className="">
+                        <span className=" mx-1 my-2 user">
                           {localStorage.getItem("username")}
                         </span>
                       </div>
-                      <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-end  p-5 ">
+                      <div className="col-lg-5 col-md-6  col-sm-6 text-center  col-7 p-2">
                         <button
                           type="submit"
                           data-bs-toggle="modal"
                           data-bs-target="#staticBackdrop"
-                          className="btn btn-lg btn-outline-dark    ms-5  text-lg-end pe-3 m-lg-0 card__btn"
+                          className="btn btn-lg btn-outline-dark text-lg-end pe-3 m-lg-0 card__btn"
                         >
                           Add new post
                         </button>
@@ -387,7 +387,7 @@ export default function Home() {
                       >
                         <div className="modal-dialog modal-dialog-centered">
                           <div className="modal-content">
-                            <div className="modal-header ">
+                            <div className="modal-header mhead">
                               <h5
                                 className="modal-title"
                                 id="staticBackdropLabel"
@@ -396,13 +396,13 @@ export default function Home() {
                               </h5>
                               <button
                                 type="button"
-                                className="btn-close"
+                                className="btn-close bclose"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                               ></button>
                             </div>
 
-                            <div className="modal-body">
+                            <div className="modal-body mbody">
                               <form
                                 method="post"
                                 onSubmit={(e) => submitForm(e)}

@@ -5,17 +5,45 @@
 }
 .counter{
     font-family: inherit;
-    font-size: 1.5rem;
+    font-size: 80%;
     color:  #cca000;
 
 }
 .smallText{
     color:  #504f4e;
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 90%;
+
 
 }
 .price{
     color: white;
     background-color: #0b7b8a;
+}
+.ded {
+    /*margin-top: 20px;
+    border: solid 2px grey; */
+    border-radius: 7%;
+    -webkit-border-radius: 7%;
+    -moz-border-radius: 7%;
+    -ms-border-radius: 7%;
+    -o-border-radius: 7%;
+}
+.tet {
+    border-bottom: solid #cca000 2px;
+}
+.timerrr {
+    border : none;
+}
+.detailsss {
+    display: inline-block;
+    
+}
+.countt{
+    background-color: black;
+    /* margin-top: 20%; */
+    font-family: inherit;
+    font-size: 80%;
+    color:  white;
+
 }

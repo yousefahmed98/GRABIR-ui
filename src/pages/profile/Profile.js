@@ -40,7 +40,7 @@ export default function Profile() {
                 </div>
                 <div className="">
                   {" "}
-                  <div className="mt-5"><Btnpic /></div>
+                  <div className="py-5"><Btnpic /></div>
                 </div>
               </Stack>
               <hr />

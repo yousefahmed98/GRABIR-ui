@@ -563,6 +563,34 @@ export default function PostCard(props) {
                     {" "}
                     Published on <p className="p-1">{post.created_at}</p>
                   </span>
+            </div>
+            {/* profile + date end  */}
+            <hr />
+            {/* post content start */}
+            <div className="row align-items-center mb-4">
+              <div className="col-lg-6 col-md-12 carddddd">
+              <h2 className="titlee">{post.title}</h2>
+                <div>
+                  <p> {post.description}</p>
+                </div>
+                <div>
+                <p className=" colrrrr">From : </p>
+                  <span>{post.from_region}</span>
+                </div>
+                <div>
+                <p className=" colrrrr">I am in:</p>
+                  <span>{post.to}</span>
+                </div>
+                <div>
+                <p className=" colrrrr">Price: </p>
+                  <span> {post.price}$</span>
+                </div>
+                <div className="row">
+                  {postTags.map((tag, index) => (
+                    <span key={index} className="tagg me-1 col-lg-3 col-sm-6">
+                      #{tag}
+                    </span>
+                  ))}
                 </div>
                 {/* profile + date end  */}
                 <hr />

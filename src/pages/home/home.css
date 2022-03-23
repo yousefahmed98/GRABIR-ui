@@ -25,8 +25,14 @@
 } 
 .userImage{
     /* width: 30px; */
+    border :solid #FAAF40 3px;
     border-radius: 50%;
     object-fit: cover;
+}
+.user {
+    text-transform: capitalize;
+    font-weight: bold;
+
 }
 
 .box{
@@ -51,8 +57,13 @@
     -webkit-animation: pulse 5s infinite; */
 }
 
+.box:hover{
+    border : solid 5px #FAAF40;
+
+}
+
 .boxx {
-    border: solid 2px #e2b203;
+    border: dotted 1px grey;
     border-radius: 2%;
     -webkit-border-radius: 2%;
     -moz-border-radius: 2%;
@@ -81,10 +92,13 @@
 	outline: none;
 }
 .card__btn{
-    background: #e2b203 !important;
+    background: black !important;
     color: white !important;
-    border: none;
+    font-size: 70% !important;
+
 }
-/* .card__btn:hover {
-   
-  }  */
+
+.mbody {
+    background-color:#f7efe8;
+    color: black;
+}

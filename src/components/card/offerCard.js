@@ -34,28 +34,27 @@ function MyCard(props) {
         <img src={props.img} class="card__image" />
       </div>
       <div className="p-3">
-        <div className=" pt-3 mb-2">
-          <img
-            src={props.ownerProfilePic}
-            className="me-2 ps-2  card__prof_pic"
-            height="60"
-            alt="offer owner"
-            loading="lazy"
-          />
+        <div className="p-3 my-2">
+          <img src={props.ownerProfilePic} className="me-2 ps-2  card__prof_pic" height="60" alt="offer owner" loading="lazy" />
+
           <span className="card__title">{props.title}</span>
         </div>
-        <div className="ms-3">
+        <div className="p-3 my-2 bbb">
           <p className="card__description">{props.description}</p>
         </div>
-        <div className=" text-center">
-          <span className="details"> from:</span>{" "}
-          <span className="me-3"> {props.from} </span>
-          <span className="details"> to:</span>{" "}
-          <span className="me-3"> {props.to} </span>
-          <span className="details"> price:</span>{" "}
-          <span className="me-3"> {props.price} </span>
-          <span className="details"> Delivery date:</span>{" "}
-          <span className="me-3"> {props.delivery_date} </span>
+        <div className=" text-left p-4">
+          <div>
+          <span className="details"> from:</span> <span className="mx-2"> {props.from} </span>
+          </div>
+          <div>
+          <span className="details"> to:</span> <span className="mx-2"> {props.to}  </span>
+          </div>
+          <div>
+          <span className="details"> price:</span> <span className="mx2"> {props.price}  </span>
+          </div>
+          <div>          
+            <span className="details"> Delivery date:</span> <span className="mx-2"> {props.delivery_date}  </span>
+          </div>
         </div>
         <div className=" text-center">
           <button
