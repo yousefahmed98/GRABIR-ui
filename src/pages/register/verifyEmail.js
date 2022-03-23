@@ -21,9 +21,9 @@ export default function verifyEmail() {
       <a
         className=" col-lg-12 col-md-12 mb-4 mb-md-0 btn btn-primary btn-xl text-uppercase"
         style={{ marginRight: 20 }}
-        href="/home"
+        href="/login"
       >
-        Go To Home
+        Go To Login
       </a>
     </div>
   );
