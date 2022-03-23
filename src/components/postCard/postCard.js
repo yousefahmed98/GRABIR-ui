@@ -544,7 +544,30 @@ export default function PostCard(props) {
               {/* post section  start*/}
               <section className="boxxx rounded shadow-lg p-5 postcard mt-5 mb-5">
                 {/* profile + date  */}
+                {/* <div className="row align-items-center mb-4">
+                  <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
+                    <img
+                      src={post.ownerProfilePic}
+                      className="me-2 userImage"
+                      height="80"
+                      alt=""
+                      loading="lazy"
+                    />
+                   <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
+                  </div>
+                  <span className="pt-2 me-2">
+                    {" "}
+                    Published on <p className="p-1">{post.created_at}</p>
+                  </span>
+                </div> */}
+                {/* profile + date end  */}
+                {/* <hr /> */}
+                {/* post content start */}
                 <div className="row align-items-center mb-4">
+                  <div className="col-lg-6 col-md-12 carddddd">
+
+
+                  <div className="row align-items-center mb-4">
                   <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
                     <img
                       src={post.ownerProfilePic}
@@ -560,11 +583,8 @@ export default function PostCard(props) {
                     Published on <p className="p-1">{post.created_at}</p>
                   </span>
                 </div>
-                {/* profile + date end  */}
-                <hr />
-                {/* post content start */}
-                <div className="row align-items-center mb-4">
-                  <div className="col-lg-6 col-md-12 carddddd">
+
+
                     <h2 className="titlee">{post.title}</h2>
                     <div>
                       <p> {post.description}</p>

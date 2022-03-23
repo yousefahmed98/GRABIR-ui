@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import Picture from "./Picture";
 import axios from "axios";
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 function MyVerticallyCenteredModal(props) {
   const [data, setData] = useState(null);
@@ -46,8 +47,11 @@ function MyVerticallyCenteredModal(props) {
             localStorage.setItem("ProfilePic", res.data.ProfilePic);
             setErr({ ...err, imgErr: null });
 
-            window.alert("Profile Picture updated succefully");
-
+            // window.alert("Profile Picture updated succefully");
+            <SweetAlert
+            title="Profile Picture updated succefully"
+          />
+           
         
         }).catch((err)=> console.log(err))
     }

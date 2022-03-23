@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Col, Row, InputGroup } from "react-bootstrap";
 import axios from "axios";
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 export default function Formm() {
   const [validated, setValidated] = useState(false);
@@ -153,7 +154,11 @@ export default function Formm() {
             ...errors,
             all_registerErr: null,
           });
-          window.alert("Your Data Updated Successfully!")
+          // window.alert("Your Data Updated Successfully!")
+          <SweetAlert
+          title="Your Data Updated Successfully"
+        />
+        
         })
         .catch((err) => {
           console.log(err);
