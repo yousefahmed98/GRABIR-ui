@@ -555,14 +555,7 @@ export default function Home() {
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </div> */}
-                  <div className="col-lg-4 text-lg-end">
-                    <a
-                      className="link-dark text-decoration-none me-3"
-                      href="/privacy"
-                    >
-                      Privacy Policy
-                    </a>
-                  </div>
+                
                 </div>
               </div>
             </footer>

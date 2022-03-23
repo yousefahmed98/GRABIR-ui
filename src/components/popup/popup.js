@@ -401,17 +401,15 @@ export default function Popup(props) {
                 </div>
               </div>
             </div>
-            {/* <Button
-              variant="outlined"
-              // onClick={() => handleShow(post.id)}
-              data-bs-toggle="modal"
-              href="#exampleModalToggle"
-              role="button"
-              endIcon={<LocalOfferIcon />}
-            >
-              Make Offer
-            </Button> */}
-                  <button type="button" className="btn px-3  btn-outline-dark" data-bs-toggle="modal"  data-bs-target= "#exampleModalToggle"> Make Offer</button>
+            <Button
+        variant="outlined"
+        data-bs-toggle="modal"
+        href="#exampleModalToggle"
+        role="button"
+        endIcon={<LocalOfferIcon />}
+      >
+        Make Offer
+      </Button>
 
           </div>
         );
