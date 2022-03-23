@@ -333,7 +333,7 @@ export default function Home() {
           {/* body */}
           <div className="container-sm mx-auto px-10 my-5">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              <div className="lg:col-span-8 col-span-1 my-5 ">
+              <div className="lg:col-span-8 col-span-1 my-5 pe-3 ps-3">
                 {/* add post */}
                 <div className="py-5">
                   <div className="box my-5">
@@ -349,7 +349,7 @@ export default function Home() {
                   </div>
 
                   <hr />
-                  <section className="boxx rounded shadow-sm p-1 postcard  mt-5 ">
+                  <section className="boxx rounded shadow-sm p-1 postcard  mt-5 p-3 ">
                     {/* profile + date  */}
 
                     <div className="row align-items-center m-0 p-0 ">

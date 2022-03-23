@@ -401,7 +401,7 @@ export default function Popup(props) {
                 </div>
               </div>
             </div>
-            <Button
+            {/* <Button
               variant="outlined"
               // onClick={() => handleShow(post.id)}
               data-bs-toggle="modal"
@@ -410,10 +410,13 @@ export default function Popup(props) {
               endIcon={<LocalOfferIcon />}
             >
               Make Offer
-            </Button>
+            </Button> */}
+                  <button type="button" className="btn px-3  btn-outline-dark" data-bs-toggle="modal"  data-bs-target= "#exampleModalToggle"> Make Offer</button>
+
           </div>
         );
       })}
     </>
   );
 }
+

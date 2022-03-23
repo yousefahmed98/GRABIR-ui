@@ -646,7 +646,7 @@ export default function PostCard(props) {
                     </>
                   ) : (
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-                      <Button
+                      {/* <Button
                         variant="outlined"
                         onClick={() =>
                           handleShowOffer(post.id, post.postpicture)
@@ -658,7 +658,9 @@ export default function PostCard(props) {
                         endIcon={<LocalOfferIcon />}
                       >
                         Make Offer
-                      </Button>
+                      </Button> */}
+                      <button type="button" className="btn px-3  btn-outline-dark" data-bs-toggle="modal"  data-bs-target= "#exampleModalToggle"> Make Offer</button>
+
                     </div>
                   )}
                   {/* ------------------------------------------------------------------------ */}
