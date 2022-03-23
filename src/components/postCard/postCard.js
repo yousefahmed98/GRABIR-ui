@@ -511,16 +511,19 @@ export default function PostCard(props) {
   };
 
   //-----getpostTags-------
-  const postTags = [];
+  let postTags = [];
+  let testPostTags =[]
   const getpostTags = (post) => {
     // mkntsh btakhod post
     for (let tag of post.tags) {
       for (let t of tags) {
         if (t.id === tag) {
-          postTags.push(t.name);
+          testPostTags.push(t.name);
         }
       }
     }
+    postTags=[...testPostTags]
+    testPostTags =[]
   };
   // getpostTags();
   const [offerErrors, setOfferErrors] = useState({
