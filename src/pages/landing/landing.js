@@ -113,6 +113,19 @@ export default function Landing() {
         .catch(function (response) {
           console.log(response);
         });
+        ////////////////////////////////////////////////
+        axios({
+          method: "post",
+          url: "http://127.0.0.1:8000/msg/",
+          data: bodyFormData,
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (response) {
+          console.log(response);
+        });
     }
   };
 
