@@ -265,8 +265,7 @@ export default function Landing() {
               <h4 className="my-3">Web Security</h4>
               <p className="text-muted">
                 Feel Safe with us, your data is fully protected and not shared
-                with any one and payment is fully encrypted and all travellars
-                are truseted with passportid
+                with any one and payment is fully encrypted.
               </p>
             </div>
           </div>
@@ -543,6 +542,7 @@ export default function Landing() {
             id="contactForm"
             data-sb-form-api-token="API_TOKEN"
             onSubmit={(e) => submitForm(e)}
+            required
           >
             <div className="row align-items-stretch mb-5">
               <div className="col-md-6">
@@ -557,6 +557,7 @@ export default function Landing() {
                     name="subject"
                     value={userForm.subject}
                     onChange={(e) => changeData(e)}
+                    required
                   />
                   <div>
                     <p className="text-danger">{errors.subjectErr}</p>
@@ -573,6 +574,7 @@ export default function Landing() {
                     name="email"
                     value={userForm.email}
                     onChange={(e) => changeData(e)}
+                    required
                   />
                   <div>
                     <p className="text-danger">{errors.emailErr}</p>

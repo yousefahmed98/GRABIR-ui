@@ -417,7 +417,7 @@ export default function PostCard(props) {
       setErrors({
         ...errors,
         price:
-          e.target.value.length === 0
+          e.target.value.length === 0 || e.target.value == 0
             ? "Price is required"
             : !/^[0-9]+$/.test(e.target.value)
             ? "Enter valid price"
@@ -536,10 +536,10 @@ export default function PostCard(props) {
 
     <div className="container">
       {props.posts.map((post, index) => {
-        console.log("postttttt mappp: ", post);
-        getpostTags(post);
+        console.log("postttttt mappp: ", post)
         return (
           <div key={index} className="postsCards col-sm-7 col-lg-12 col-md-11 ">
+            {getpostTags(post)}
             <div className="py-4 ">
               {/* post section  start*/}
               <section className="boxxx rounded shadow-lg p-5 postcard mt-5 mb-5">
