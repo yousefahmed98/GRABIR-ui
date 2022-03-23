@@ -77,14 +77,13 @@ export default function Pass() {
                   <img src={logo} style={{ width: "40%" }} alt="..." />
                 </div>
 
-                <div className="row d-flex justify-content-center align-items-center ">
-                  <div className="col-8 col-md-8 col-lg-5 col-xl-6 ">
+                <div className="row d-flex justify-content-center align-items-center">
+                  <div className="col-8 col-md-8 col-lg-5 col-xl-6">
                     <div className="card" style={{ borderRadius: 15 }}>
                       <div className="card-body p-5">
-                        <h2 className="text-uppercase text-center mb-2">
-                          Enter your email :
-                        </h2>
-
+                        <h3 className="text-center mb-2">
+                          Enter your email
+                        </h3>
                         <form onSubmit={(e) => submitForm(e)}>
                           <div className="mb-2">
                             <TextField

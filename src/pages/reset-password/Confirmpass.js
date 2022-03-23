@@ -20,6 +20,7 @@ export default function Confirmpass() {
 
   const [errors, setErrors] = useState({
     passwordErr: null,
+    confirmErr:null,
   });
 
   const validatePassword = (userOption) => {
@@ -44,6 +45,17 @@ export default function Confirmpass() {
             ? "This field is required"
             : !isPassword
             ? "Invalid! Password Should contain atleast 8 characters --> one UpperCase, LowerCase, digit and special character"
+            : null,
+      });
+
+    } else if (e.target.name === "confirmpassword") {
+      setErrors({
+        ...errors,
+        confirmErr:
+          e.target.value.length === 0
+            ? "This field is required"
+            : e.target.value != userForm.password
+            ? "Does not match password!"
             : null,
       });
     }
@@ -85,9 +97,9 @@ export default function Confirmpass() {
                   <div className="col-8 col-md-8 col-lg-5 col-xl-6 ">
                     <div className="card" style={{ borderRadius: 15 }}>
                       <div className="card-body p-5">
-                        <h2 className="text-uppercase text-center mb-2">
-                          Enter your new password :
-                        </h2>
+                        <h3 className=" text-center mb-2">
+                          Enter your new password
+                        </h3>
 
                         <form onSubmit={(e) => submitForm(e)}>
                           <div className="mb-2">
@@ -128,12 +140,15 @@ export default function Confirmpass() {
                               required
                             />
                           </div>
-
+                              <div>
+                                <p className="text-danger">{errors.confirmErr}</p>
+                              </div>
                           <div className="d-flex justify-content-center">
                             <button
-                              disabled={errors.passwordErr}
+                              disabled={errors.passwordErr || errors.confirmErr}
                               type="submit"
                               className="btn btn-warning btn-block btn-lg gradient-custom-4 text-body"
+                              
                             >
                               SUBMIT
                             </button>
