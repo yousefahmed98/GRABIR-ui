@@ -14,9 +14,12 @@
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
 }
-
+/* .nav .nav-item {
+    background-color: transparent;
+} */
 .profile .btn-add {
     background-color: #faaf40 !important;
+    font-size: 80%;
     color: black !important;
 }
 .profile .btn-add:hover {
@@ -48,4 +51,5 @@
     font-size: 1rem;
     font-family: inherit !important;
     color: #f3a42d;
+    color: rgb(14, 12, 12) !important;
 }

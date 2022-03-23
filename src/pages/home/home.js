@@ -129,6 +129,8 @@ export default function Home() {
           e.target.files[0].name.split(".")[1] === "jpg" ||
           e.target.files[0].name.split(".")[1] === "png" ||
           e.target.files[0].name.split(".")[1] === "svg" ||
+          e.target.files[0].name.split(".")[1] === "jpeg" ||
+          e.target.files[0].name.split(".")[1] === "JEPG" ||
           e.target.files[0].name.split(".")[1] === "JPG" ||
           e.target.files[0].name.split(".")[1] === "PNG" ||
           e.target.files[0].name.split(".")[1] === "SVG"
@@ -152,8 +154,7 @@ export default function Home() {
             ? ""
             : "Enter valid price shouldn't contain spaces",
       });
-    } 
-    else if (e.target.name === "from") {
+    } else if (e.target.name === "from") {
       setNewPost({
         ...newPost,
         from_region: e.target.value,
@@ -351,25 +352,25 @@ export default function Home() {
                   <section className="boxx rounded shadow-sm p-1 postcard  mt-5 p-3 ">
                     {/* profile + date  */}
 
-                    <div className="row align-items-center ">
-                      <div className="col-lg-6 col-md-12 col-sm-12 text-center text-lg-start ">
+                    <div className="row align-items-center m-0 p-0 ">
+                      <div className="col-lg-7 col-md-6 col-sm-6 text-center col-5  px-lg-5 text-lg-start ">
                         <img
                           src={localStorage.getItem("ProfilePic")}
-                          className="me-2 ms-5 userImage"
+                          className="mx-2 my-2 userImage"
                           height="80"
                           alt="ProfilePic"
                           loading="lazy"
                         />
-                        <span className="">
+                        <span className=" mx-1 my-2 user">
                           {localStorage.getItem("username")}
                         </span>
                       </div>
-                      <div className="col-lg-6  col-md-12  col-sm-12 text-center text-lg-end  p-5 ">
+                      <div className="col-lg-5 col-md-6  col-sm-6 text-center  col-7 p-2">
                         <button
                           type="submit"
                           data-bs-toggle="modal"
                           data-bs-target="#staticBackdrop"
-                          className="btn btn-lg btn-outline-dark    ms-5  text-lg-end pe-3 m-lg-0 card__btn"
+                          className="btn btn-lg btn-outline-dark text-lg-end pe-3 m-lg-0 card__btn"
                         >
                           Add new post
                         </button>
@@ -386,7 +387,7 @@ export default function Home() {
                       >
                         <div className="modal-dialog modal-dialog-centered">
                           <div className="modal-content">
-                            <div className="modal-header ">
+                            <div className="modal-header mhead">
                               <h5
                                 className="modal-title"
                                 id="staticBackdropLabel"
@@ -395,13 +396,13 @@ export default function Home() {
                               </h5>
                               <button
                                 type="button"
-                                className="btn-close"
+                                className="btn-close bclose"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                               ></button>
                             </div>
 
-                            <div className="modal-body">
+                            <div className="modal-body mbody">
                               <form
                                 method="post"
                                 onSubmit={(e) => submitForm(e)}
@@ -524,9 +525,12 @@ export default function Home() {
                     </div>
                   </div>
                 ) : (
-                  filteredData.map((post, index) => (
-                    <PostCard key={index} post={post} />
+                  (console.log("filtereddd: ", filteredData),
+                  (
+                    // filteredData.map((post, index) => (
+                    <PostCard posts={filteredData} />
                   ))
+                  // ))
                 )}
               </div>
             </div>
@@ -534,13 +538,13 @@ export default function Home() {
           <hr />
           <div>
             {/* <!-- Footer--> */}
-              <footer className="footer py-4">
-                <div className="container">
-                  <div className="row align-items-center">
-                    <div className="col-lg-4 text-lg-start">
-                      Copyright &copy; GRABIR 2022
-                    </div>
-                    {/* <div className="col-lg-4 my-3 my-lg-0">
+            <footer className="footer py-4">
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-lg-4 text-lg-start">
+                    Copyright &copy; GRABIR 2022
+                  </div>
+                  {/* <div className="col-lg-4 my-3 my-lg-0">
                       <a className="btn btn-dark btn-social mx-2" href="https://twitter.com/?lang=en">
                         <i className="fab fa-twitter"></i>
                       </a>
@@ -551,14 +555,17 @@ export default function Home() {
                         <i className="fab fa-linkedin-in"></i>
                       </a>
                     </div> */}
-                    <div className="col-lg-4 text-lg-end">
-                      <a className="link-dark text-decoration-none me-3" href="/privacy">
-                        Privacy Policy
-                      </a>
-                    </div>
+                  <div className="col-lg-4 text-lg-end">
+                    <a
+                      className="link-dark text-decoration-none me-3"
+                      href="/privacy"
+                    >
+                      Privacy Policy
+                    </a>
                   </div>
                 </div>
-              </footer>
+              </div>
+            </footer>
           </div>
         </>
       ) : (

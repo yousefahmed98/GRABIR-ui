@@ -18,7 +18,7 @@ function MyCard(props) {
         <img src={props.img} class="card__image" />
       </div>
       <div className="p-3 ">
-        <div className=" pt-3 ">
+        <div className=" pt-3 mb-5  ">
           <img
             src={props.ownerProfilePic}
             className="me-2 ps-2  card__prof_pic"
@@ -26,34 +26,42 @@ function MyCard(props) {
             alt="offer owner"
             loading="lazy"
           />
-          <span className="card__title details">{props.title}</span>
-          <div className="smallText">created on: {props.delivery_date} </div>
+          <span className="card__title">{props.title}</span>
+          <div className="smallText p-2">created on: {props.delivery_date} </div>
         </div>
-        <p className="details mt-2 counter  ">Deal Details</p>
-        <div className="ms-3">
+        <p className="ded p-2 mt-5 countt  ">Deal Details</p>
+        <div className="p-3 tet">
           <p className="card__description">{props.description}</p>
         </div>
-        <div className=" text-center">
-          <span className="details"> from:</span>{" "}
-          <span className="me-3"> {props.from} </span>
-          <span className="details"> to:</span>{" "}
-          <span className="me-3"> {props.to} </span>
+        <div className=" text-left p-4">
+          <div className=" detailsss p-2">
+            <span className="details"> from:</span>{" "}
+            <span className="mx-2"> {props.from} </span>
+          </div>
+          <div className=" detailsss p-2">
+            <span className="details"> to:</span>{" "}
+            <span className="mx-2"> {props.to} </span>
+          </div>
+          <div className=" detailsss p-2">
           <span className="details"> price:</span>{" "}
-          <span className="me-3 price p-2 rounded-pill ">
+          <span className="mx-2 price p-2 rounded-pill ">
             {" "}
             {props.price} ${" "}
           </span>
+          </div>
+          <div className=" detailsss p-2">
           <span className="details"> Delivery date:</span>{" "}
-          <span className="me-3"> {props.delivery_date} </span>
+          <span className="mx-2"> {props.delivery_date} </span>
+          </div>
         </div>
-        <div className="text-center">
-          <p className="details mt-2 counter">Countdown Timer</p>
+        <div className="text-center p2">
+          <p className="details timerrr mt-2 counter">Countdown Timer</p>
           <DealCountDown date={props.delivery_date} />
         </div>
         <div className=" text-center">
           {props.offer.offer_owner == localStorage.getItem("id") ? (
             <button
-              className="card__btn me-5 "
+              className="card__btn "
               data-bs-toggle="modal"
               data-bs-target="#staticBackdrop"
             >
@@ -62,7 +70,7 @@ function MyCard(props) {
           ) : (
             <div>
               <button
-                className="card__btn me-5 "
+                className="card__btn "
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
               >

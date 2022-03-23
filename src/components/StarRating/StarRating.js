@@ -96,8 +96,9 @@ export default function StarRating(props) {
               />
               <button
                 type="submit"
-                className="btn btn-info bt-lg ms-2 reviewbtn"
+                className="btn btn-info bt-lg ms-2 reviewbtn "
                 onMouseEnter={() => getid()}
+                data-bs-dismiss="modal"
               >
                 Submit
               </button>

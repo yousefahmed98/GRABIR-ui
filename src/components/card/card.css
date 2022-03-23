@@ -58,12 +58,13 @@ $clr-gray700: #161d34; */
 
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(32rem, 36rem));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, rem));
   gap: 2rem;
   justify-content: center;
 }
 
 .offerCard {
+  background-color: #f7efe8 !important;
   overflow: hidden;
   box-shadow: 0 2px 20px #e1e5ee;
   border-radius:0.2rem;
@@ -83,16 +84,23 @@ $clr-gray700: #161d34; */
  .card__title{
     padding: 1rem;
     font-weight: bold;
+    text-transform: capitalize;
   } 
 
  /* .card__description{
     padding: 0 1rem;
   } */
 .card__image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
+  border: solid 2px black;
+  border-radius: 2%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  -webkit-border-radius: 2%;
+  -moz-border-radius: 2%;
+  -ms-border-radius: 2%;
+  -o-border-radius: 2%;
+}
 
 .card__btn{
     padding: 1rem;
@@ -107,14 +115,21 @@ $clr-gray700: #161d34; */
     transition: background 200ms ease-in, color 200ms ease-in;
   }
   .details{
+    border-left: solid 2px black;
+    padding-left: 5px;
+    display: inline-block;
+    color: #cca000;
     font-family: inherit;
+    text-transform: uppercase;
     font-weight: bold;
     font-size: 1rem;
 
   }
 .card__prof_pic{
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: fill;
+    border: 2px solid #cca000;
+
 }
   /* &:hover {
     transform: scale(1.02);
@@ -124,4 +139,8 @@ $clr-gray700: #161d34; */
     background: #cca000;
     color: white;
   } 
+
+.bbb{
+  border-bottom: solid #cca000 1px;
+}
 

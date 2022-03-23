@@ -7,7 +7,8 @@
     -o-border-radius: 25%;
 }
 .postsCards .postcard{
-    background-color: #f8eaa4 !important;
+    border:dotted grey 1px;
+    background-color: #f7efe8 !important;
     color: #000 !important;
 }
 .postsCards .text-link{
@@ -95,4 +96,12 @@
 .postdetails{
     font-family: inherit !important;
     font-size: 1.3rem !important;
+}
+
+.colrrrr {
+    color: #FAAF40;
+    font-size: 80%;
+    text-transform: uppercase;
+    display:inline !important;
+    width:20%;
 }
