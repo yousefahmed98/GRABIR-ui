@@ -35,6 +35,7 @@ export default function StarRating(props) {
       .catch((err) => console.log(err));
   };
   const getid = () => {
+    console.log("sssssssssssssssssssssssssssssssssss");
     axios
       .get(`http://127.0.0.1:8000/posts/posts/${props.PostID}`, {
         headers: {
@@ -44,7 +45,7 @@ export default function StarRating(props) {
         },
       })
       .then((res) => {
-        if (props.offerOwner === localStorage.getItem("id"))
+        if (props.offerOwner == localStorage.getItem("id"))
           setRating({ ...rating, user: res.data.user });
 
       });
