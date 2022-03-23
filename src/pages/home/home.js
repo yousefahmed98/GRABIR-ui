@@ -525,9 +525,12 @@ export default function Home() {
                     </div>
                   </div>
                 ) : (
-                  filteredData.map((post, index) => (
-                    <PostCard key={index} post={post} />
+                  (console.log("filtereddd: ", filteredData),
+                  (
+                    // filteredData.map((post, index) => (
+                    <PostCard posts={filteredData} />
                   ))
+                  // ))
                 )}
               </div>
             </div>

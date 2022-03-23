@@ -139,7 +139,6 @@ export default function Navbar() {
           aria-controls="navbarResponsive"
           aria-expanded="false"
           aria-label="Toggle navigation"
-        
         >
           Menu
           <i className="fas fa-bars ms-1"></i>
@@ -166,7 +165,6 @@ export default function Navbar() {
                     : "nav-link"
                 }
                 href="/offers"
-                onclick={""}
               >
                 Offers
               </a>
@@ -179,7 +177,6 @@ export default function Navbar() {
                     : "nav-link"
                 }
                 href="/deals"
-                onclick={""}
               >
                 Deals
               </a>
@@ -201,7 +198,10 @@ export default function Navbar() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <div className="nav-link" onClick={() => setOpenNotifications(!openNotifications)}>
+                  <div
+                    className="nav-link"
+                    onClick={() => setOpenNotifications(!openNotifications)}
+                  >
                     {visible ? null : (
                       <Notify
                         width={"30px"}
