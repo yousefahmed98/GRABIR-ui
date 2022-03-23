@@ -68,7 +68,6 @@ export default function PostCard(props) {
         },
       })
       .then((res) => {
-
         setOfferForm({
           ...offerForm,
           post: postId,
@@ -91,7 +90,7 @@ export default function PostCard(props) {
     from_user_name: null,
     to_user: null,
   });
- 
+
   /////////////////////////////////////////////////////////////////////////////
   const handleNotification = (type) => {
     //lmafrod acreate notification object f db
@@ -162,10 +161,10 @@ export default function PostCard(props) {
           e.target.value.length === 0 || e.target.value.length < 10
             ? "You should write details to facilitate handling"
             : e.target.value[0] === " "
-              ? "enter valid details not starting with space"
-              : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
-                ? ""
-                : "details shouldn't contain !@#$%^&*",
+            ? "enter valid details not starting with space"
+            : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
+            ? ""
+            : "details shouldn't contain !@#$%^&*",
       });
     } else if (e.target.name === "from_region") {
       setOfferForm({
@@ -178,10 +177,10 @@ export default function PostCard(props) {
           e.target.value.length === 0 || e.target.value.length < 3
             ? " This field is required and must be at least 2 characters"
             : e.target.value[0] === " "
-              ? "enter valid country name"
-              : /^[a-zA-Z\s]+$/.test(e.target.value)
-                ? ""
-                : "enter valid country name",
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name",
       });
     } else if (e.target.name === "to_region") {
       setOfferForm({
@@ -191,13 +190,13 @@ export default function PostCard(props) {
       setOfferErrors({
         ...offerErrors,
         to_regionErr:
-          e.target.value.length === 0 || e.target.value.length < 3 
+          e.target.value.length === 0 || e.target.value.length < 3
             ? " This field is required and must be at least 2 characters"
             : e.target.value[0] === " "
-              ? "enter valid country name"
-              : /^[a-zA-Z\s]+$/.test(e.target.value)
-                ? ""
-                : "enter valid country name",
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name",
       });
     } else if (e.target.name === "price") {
       setOfferForm({
@@ -210,10 +209,10 @@ export default function PostCard(props) {
           e.target.value.length === 0
             ? "Price is required"
             : !/^[0-9]+$/.test(e.target.value)
-              ? "Enter valid price"
-              : e.target.value > 0 || !/\s/.test(e.target.value)
-                ? ""
-                : ""
+            ? "Enter valid price"
+            : e.target.value > 0 || !/\s/.test(e.target.value)
+            ? ""
+            : "",
       });
     } else if (e.target.name === "delivery_date") {
       setOfferForm({
@@ -226,7 +225,7 @@ export default function PostCard(props) {
           e.target.value === null
             ? "This field is required"
             : e.target.value < offerForm.created_at
-              ? "Enter valid date, you chose date before today! "
+            ? "Enter valid date, you chose date before today! "
             : "",
       });
     }
@@ -369,10 +368,10 @@ export default function PostCard(props) {
           e.target.value.length === 0 || e.target.value.length < 10
             ? "Title is required at least 10 Character"
             : e.target.value[0] === " "
-              ? "Enter valid title"
-              : /^[a-zA-Z\s]+$/.test(e.target.value)
-                ? ""
-                : "Title should contains letters only",
+            ? "Enter valid title"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "Title should contains letters only",
       });
     } else if (e.target.name === "details") {
       setupdatedPost({
@@ -385,10 +384,10 @@ export default function PostCard(props) {
           e.target.value.length === 0 && e.target.value.length < 10
             ? "You should write details to facilitate handling"
             : e.target.value[0] === " "
-              ? "enter valid title"
-              : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
-                ? ""
-                : "details shouldn't contain !@#$%^&*",
+            ? "enter valid title"
+            : /^[a-zA-Z\s 0-9]+$/.test(e.target.value)
+            ? ""
+            : "details shouldn't contain !@#$%^&*",
       });
     } else if (e.target.name === "postpic") {
       setupdatedPost({
@@ -399,13 +398,13 @@ export default function PostCard(props) {
         ...errors,
         postpicture:
           e.target.files[0].name.split(".")[1] === "jpg" ||
-            e.target.files[0].name.split(".")[1] === "png" ||
-            e.target.files[0].name.split(".")[1] === "svg" ||
-            e.target.files[0].name.split(".")[1] === "jpeg" ||
-            e.target.files[0].name.split(".")[1] === "JEPG" ||
-            e.target.files[0].name.split(".")[1] === "JPG" ||
-            e.target.files[0].name.split(".")[1] === "PNG" ||
-            e.target.files[0].name.split(".")[1] === "SVG"
+          e.target.files[0].name.split(".")[1] === "png" ||
+          e.target.files[0].name.split(".")[1] === "svg" ||
+          e.target.files[0].name.split(".")[1] === "jpeg" ||
+          e.target.files[0].name.split(".")[1] === "JEPG" ||
+          e.target.files[0].name.split(".")[1] === "JPG" ||
+          e.target.files[0].name.split(".")[1] === "PNG" ||
+          e.target.files[0].name.split(".")[1] === "SVG"
             ? null
             : "you should upload images only",
       });
@@ -421,10 +420,10 @@ export default function PostCard(props) {
           e.target.value.length === 0
             ? "Price is required"
             : !/^[0-9]+$/.test(e.target.value)
-              ? "Enter valid price"
-              : e.target.value > 0 || !has_WhiteSpace
-                ? ""
-                : "Enter valid price shouldn't contain spaces",
+            ? "Enter valid price"
+            : e.target.value > 0 || !has_WhiteSpace
+            ? ""
+            : "Enter valid price shouldn't contain spaces",
       });
     } else if (e.target.name === "from") {
       setupdatedPost({
@@ -437,10 +436,10 @@ export default function PostCard(props) {
           e.target.value.length === 0 || e.target.value.length < 2
             ? " This field is required and must be at least 2 characters"
             : e.target.value[0] === " "
-              ? "enter valid country name"
-              : /^[a-zA-Z\s]+$/.test(e.target.value)
-                ? ""
-                : "enter valid country name",
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name",
       });
     } else if (e.target.name === "to_region") {
       setupdatedPost({
@@ -453,10 +452,10 @@ export default function PostCard(props) {
           e.target.value.length === 0 || e.target.value.length < 2
             ? " This field is required and must be at least 2 characters"
             : e.target.value[0] === " "
-              ? "enter valid country name"
-              : /^[a-zA-Z\s]+$/.test(e.target.value)
-                ? ""
-                : "enter valid country name",
+            ? "enter valid country name"
+            : /^[a-zA-Z\s]+$/.test(e.target.value)
+            ? ""
+            : "enter valid country name",
       });
     }
   };
@@ -563,34 +562,6 @@ export default function PostCard(props) {
                     {" "}
                     Published on <p className="p-1">{post.created_at}</p>
                   </span>
-            </div>
-            {/* profile + date end  */}
-            <hr />
-            {/* post content start */}
-            <div className="row align-items-center mb-4">
-              <div className="col-lg-6 col-md-12 carddddd">
-              <h2 className="titlee">{post.title}</h2>
-                <div>
-                  <p> {post.description}</p>
-                </div>
-                <div>
-                <p className=" colrrrr">From : </p>
-                  <span>{post.from_region}</span>
-                </div>
-                <div>
-                <p className=" colrrrr">I am in:</p>
-                  <span>{post.to}</span>
-                </div>
-                <div>
-                <p className=" colrrrr">Price: </p>
-                  <span> {post.price}$</span>
-                </div>
-                <div className="row">
-                  {postTags.map((tag, index) => (
-                    <span key={index} className="tagg me-1 col-lg-3 col-sm-6">
-                      #{tag}
-                    </span>
-                  ))}
                 </div>
                 {/* profile + date end  */}
                 <hr />
@@ -598,11 +569,21 @@ export default function PostCard(props) {
                 <div className="row align-items-center mb-4">
                   <div className="col-lg-6 col-md-12 carddddd">
                     <h2 className="titlee">{post.title}</h2>
-                    <br />
-                    <p>{post.description}</p>
-                    <p>From : {post.from_region}</p>
-                    <p>I am in: {post.to}</p>
-                    <p>Price: {post.price}$</p>
+                    <div>
+                      <p> {post.description}</p>
+                    </div>
+                    <div>
+                      <p className=" colrrrr">From : </p>
+                      <span>{post.from_region}</span>
+                    </div>
+                    <div>
+                      <p className=" colrrrr">I am in:</p>
+                      <span>{post.to}</span>
+                    </div>
+                    <div>
+                      <p className=" colrrrr">Price: </p>
+                      <span> {post.price}$</span>
+                    </div>
                     <div className="row">
                       {postTags.map((tag, index) => (
                         <span
@@ -614,7 +595,10 @@ export default function PostCard(props) {
                       ))}
                     </div>
                   </div>
-                  <br />
+                  {/* profile + date end  */}
+                  {/* <hr /> */}
+                  {/* post content start */}
+
                   {post.postpicture !== null ? (
                     <img
                       src={post.postpicture}
@@ -662,7 +646,6 @@ export default function PostCard(props) {
                     </>
                   ) : (
                     <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
-               
                       <Button
                         variant="outlined"
                         onClick={() =>
@@ -750,7 +733,8 @@ export default function PostCard(props) {
                                   id="usernameHelp"
                                   className="form-text text-danger"
                                 >
-                                  {offerErrors.from_regionErr || offerErrors.to_regionErr}
+                                  {offerErrors.from_regionErr ||
+                                    offerErrors.to_regionErr}
                                 </div>
                               </div>
 
@@ -767,7 +751,7 @@ export default function PostCard(props) {
                                     shrink: true,
                                   }}
                                 />
-                                
+
                                 <TextField
                                   id="outlined-read-only-input"
                                   label="Post ID"
@@ -779,14 +763,14 @@ export default function PostCard(props) {
                                     readOnly: true,
                                   }}
                                 />
-                                   <div
-                                id="usernameHelp"
-                                className="form-text text-danger"
-                              >
-                                {offerErrors.priceErr}
+                                <div
+                                  id="usernameHelp"
+                                  className="form-text text-danger"
+                                >
+                                  {offerErrors.priceErr}
+                                </div>
                               </div>
-                              </div>
-                           
+
                               <div className="mb-2 mr-5">
                                 <TextField
                                   id="outlined-number"
@@ -829,11 +813,11 @@ export default function PostCard(props) {
                                     offerErrors.priceErr ||
                                     offerErrors.delivery_dateErr ||
                                     offerErrors.priceErr ||
-
                                     offerForm.details.length === 0 ||
                                     offerForm.from_region.length === 0 ||
                                     offerForm.to_region.length === 0 ||
-                                    offerForm.price.length === 0 || offerForm.price == 0 ||
+                                    offerForm.price.length === 0 ||
+                                    offerForm.price == 0 ||
                                     offerForm.delivery_date.length === 0
                                   }
                                   onClick={() =>
