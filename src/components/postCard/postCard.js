@@ -553,10 +553,7 @@ export default function PostCard(props) {
                       alt=""
                       loading="lazy"
                     />
-                    <Link to="#" className="ps-2 text-link">
-                      {" "}
-                      <span>{post.ownerName}</span>{" "}
-                    </Link>
+                   <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
                   </div>
                   <span className="pt-2 me-2">
                     {" "}
