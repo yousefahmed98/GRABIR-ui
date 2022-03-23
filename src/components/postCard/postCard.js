@@ -33,7 +33,7 @@ export default function PostCard(props) {
   // console.log("tesssssssssttttt: ",postTest)
 
   // -----------------------------------------------------
-  console.log("propss posttt: ", props.post);
+  // console.log("propss posttt: ", props.post);
   const [offerForm, setOfferForm] = useState({
     details: "",
     from_region: "",
@@ -95,18 +95,18 @@ export default function PostCard(props) {
   const handleNotification = (type) => {
     //lmafrod acreate notification object f db
     //type hwa body
-    props.socket.emit("sendNotification", {
-      senderName: props.currentuser.username,
-      reciverId: props.post.user,
+    socket.emit("sendNotification", {
+      senderName: currentuser.username,
+      reciverId: offerForm.user,
       type,
     });
 
     setNewNotifyObj({
       ...newNotifyObj,
       body: type,
-      from_user_name: props.currentuser.username,
-      from_user: props.currentuser.id,
-      to_user: props.post.user,
+      from_user_name: currentuser.username,
+      from_user: currentuser.id,
+      to_user: offerForm.user,
     });
   };
   useEffect(() => {

@@ -57,20 +57,20 @@ function MyCard(props) {
           </div>
         </div>
         <div className=" text-center">
-          <button
-            className="card__btn me-5 "
+          <a
+            className="btn btn-primary card__btn me-5 "
             onClick={() => updateOfferStatusAccepted(props.offer)}
             href="/deals"
           >
             Accept
-          </button>
-          <button
+          </a>
+          <a
             className="card__btn ms-5 "
             onClick={() => updateOfferStatusRejected(props.offer)}
             href="/offers"
           >
             Reject
-          </button>
+          </a>
         </div>
       </div>
     </div>
