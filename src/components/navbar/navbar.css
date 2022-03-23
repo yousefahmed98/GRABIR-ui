@@ -63,3 +63,8 @@
   padding: 5px;
   font-size: 14px;
 }
+.markread{
+  background-color: #FAAF40 !important;
+  color: #151A1E !important;
+  border: #FAAF40 !important;
+}

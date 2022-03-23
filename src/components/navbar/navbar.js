@@ -104,7 +104,7 @@ export default function Navbar() {
             loading="lazy"
           />
         </span>
-        <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4">{`${nObj.from_user_name} ${nObj.body}`}</span>
+        <span className="col-lg-8 col-md-8 notification border-bottom-dark pt-4 ms-2">{`${nObj.from_user_name} ${nObj.body}`}</span>
       </div>
     );
   };
@@ -227,7 +227,7 @@ export default function Navbar() {
           {mynotifications.map((n) => displayNotification(n))}
           <button
             type="button"
-            className=" btn  btn-sm darkcustombtnActive mt-3"
+            className=" btn  btn-sm markread mt-3"
             onClick={handelRead}
           >
             Mark as read
