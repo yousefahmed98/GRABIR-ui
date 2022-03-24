@@ -9,7 +9,7 @@ import {
 } from "../../Store/Actions/updateState";
 import { useHistory } from "react-router-dom";
 import { axiosInstance } from "../../network/axiosInstance";
-
+import { Link } from "react-router-dom";
 function MyCard(props) {
   const updateOfferStatusRejected = (offer) => {
     props.dispatch(deleteOffer(offer));
@@ -57,20 +57,20 @@ function MyCard(props) {
           </div>
         </div>
         <div className=" text-center">
-          <a
+          <Link
             className="btn btn-primary card__btn me-5 "
-            onClick={() => updateOfferStatusAccepted(props.offer)}
-            href="/deals"
+            onClick={() => updateOfferStatusAccepted(props.offer,props.offer.offer_owner)}
+            to="/deals"
           >
             Accept
-          </a>
-          <a
+          </Link>
+          <Link
             className="card__btn ms-5 "
             onClick={() => updateOfferStatusRejected(props.offer)}
-            href="/offers"
+            to="/offers"
           >
             Reject
-          </a>
+          </Link>
         </div>
       </div>
     </div>
