@@ -17,7 +17,7 @@ function MyCard(props) {
   }
   return (
     <div className="offerCard row">
-      <div className="col-lg-6">
+      <div className="col-lg-6 p-3">
       <img src={props.img} class="card__image p-0 img-box col-lg-6 col-md-12 " alt="post image"  />
       </div>
       <div className="p-3 col-lg-6">

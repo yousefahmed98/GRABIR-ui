@@ -1,5 +1,6 @@
 .profile .tabsssss {
-    background-color: #fffcf8;
+    /* background-color: #fffcf8; */
+    background-color: #f5e37f70 !important;
     padding:5% !important ;
     border: solid black 1px;
 }

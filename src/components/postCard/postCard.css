@@ -7,8 +7,10 @@
     -o-border-radius: 25%;
 }
 .postsCards .postcard{
-    border:dotted grey 1px;
-    background-color: #f7efe8 !important;
+    /* border:dotted grey 1px; */
+    /* background-color: #f7efe8 !important; */
+    background-color: #f5e37f70 !important;
+    border-top: solid 5px #FAAF40;
     color: #000 !important;
 }
 .postsCards .text-link{
@@ -44,7 +46,7 @@
     background-color: #FAAF40 !important;
 }
 .img-box {
-    border:solid 5px rgb(33,37 , 41);
+    /* border:solid 5px rgb(33,37 , 41); */
     border-radius: 5%;
     background-color: transparent;
     -webkit-border-radius: 5%;
@@ -95,9 +97,12 @@
 }
 .postdetails{
     font-family: inherit !important;
-    font-size: 1.3rem !important;
+    font-size: 100% !important;
 }
-
+.published{
+    font-family: inherit !important;
+    font-size: 80% !important;
+}
 .colrrrr {
     color: #FAAF40;
     font-size: 80%;

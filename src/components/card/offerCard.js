@@ -17,11 +17,26 @@ function MyCard(props) {
     // history.push("/offers");
   };
   const updateOfferStatusAccepted = (offer, reciverid) => {
-    props.handleNotification(
-      "accepts your offer",
-      reciverid,
-      localStorage.getItem("username")
-    );
+    // props.handleNotification(
+    //   "accepts your offer",
+    //   reciverid,
+    //   localStorage.getItem("username")
+    // );
+    axiosInstance
+    .post("/notification/notifications/", {
+      body: "accepts your offer",
+      from_user_name: localStorage.getItem("username"),
+      from_user: localStorage.getItem("id"),
+      to_user: reciverid,
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((res) => {
+      console.log(" sent successfully");
+    })
+    .catch((err) => console.log(err));
     props.dispatch(updateStateAction(offer, true));
     // dispatch(deleteOffer(offer));
     // window.alert("This offer if accepted successfully!");
@@ -87,6 +102,8 @@ export default function OffersCard(props) {
   });
 
   const handleNotification = (type, reciverId, senderName) => {
+    console.log("sssssending notification")
+    console.log(reciverId,type,senderName)
     //lmafrod acreate notification object f db
     //type hwa body
     socket.emit("sendNotification", {
@@ -106,6 +123,7 @@ export default function OffersCard(props) {
   useEffect(() => {
     //post request new notification object
     if (newNotifyObj.body.length > 0) {
+      console.log(newNotifyObj.body)
       axiosInstance
         .post("/notification/notifications/", newNotifyObj, {
           headers: {

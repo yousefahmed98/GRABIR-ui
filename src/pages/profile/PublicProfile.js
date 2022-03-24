@@ -47,7 +47,7 @@ export default function PublicProfile() {
       <>
        <Navbar />
     <div className="ppprofileee container pt-5">
-    <div className="row pt-5">
+    <div className="row pt-5 coverr">
         <div className="col-lg-2 col-md-3 col-sm-3">
                       <img
                         src={user.ProfilePic}
@@ -62,7 +62,7 @@ export default function PublicProfile() {
         </div>
 
    </div>
-   <section className=" rounded shadow-lg row pt-3 mt-3 border border-warning" >
+   <section className=" rounded shadow-lg row pt-3  border border-warning px-3 " >
    <div className=" text-start">
           <span className="titles">  Full Name :</span> <span> {" "} {user.first_name}{" "}{user.last_name} </span>
    </div>

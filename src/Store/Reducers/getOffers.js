@@ -56,9 +56,9 @@ export default function getOffersReducer(state = INITIAL_VALUE, action) {
           .catch((err) => console.log(err)),
 
 
-          <SweetAlert
-              title="This offer if accepted successfully!"
-            />,
+          // <SweetAlert
+          //     title="This offer if accepted successfully!"
+          //   />,
           // window.alert("This offer if accepted successfully!"),
 
 
