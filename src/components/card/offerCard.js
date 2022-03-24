@@ -59,7 +59,7 @@ function MyCard(props) {
         <div className=" text-center">
           <Link
             className="btn btn-primary card__btn me-5 "
-            onClick={() => updateOfferStatusAccepted(props.offer,props.offer.offer_owner)}
+            onClick={() => updateOfferStatusAccepted(props.offer,props.offer_owner)}
             to="/deals"
           >
             Accept
@@ -142,6 +142,7 @@ export default function OffersCard(props) {
                       price={offer.price}
                       delivery_date={offer.delivery_date}
                       handleNotification={handleNotification}
+                      offer_owner = {offer.offer_owner}
                     />
                   </div>
                 );

@@ -28,6 +28,7 @@
     -moz-border-radius: 7%;
     -ms-border-radius: 7%;
     -o-border-radius: 7%;
+    color: #cca000 !important;
 }
 .tet {
     border-bottom: solid #cca000 2px;

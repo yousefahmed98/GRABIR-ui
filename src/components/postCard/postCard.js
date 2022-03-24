@@ -574,7 +574,7 @@ export default function PostCard(props) {
 
 
                   <div className="row align-items-center mb-4">
-                  <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
+                  <div className="col-lg-8 col-sm-8 col-md-8 text-center text-lg-start mb-lg-3 ">
                     <img
                       src={post.ownerProfilePic}
                       className="me-2 userImage"
@@ -582,7 +582,7 @@ export default function PostCard(props) {
                       alt=""
                       loading="lazy"
                     />
-                   <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link"> <span>{post.ownerName}</span> </Link>
+                   <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link "> <span>{post.ownerName}</span> </Link>
                   </div>
                   <span className="pt-2 me-2">
                     {" "}
@@ -590,10 +590,12 @@ export default function PostCard(props) {
                   </span>
                 </div>
 
-
-                    <h2 className="titlee">{post.title}</h2>
+                <div className="row">
+                  <div className="col-lg-6 col-md-6 col-sm-6" >
+                  <h2 className="titlee">{post.title}</h2>
+                  </div>
                     <div>
-                      <p> {post.description}</p>
+                      <p className="titlee"> {post.description}</p>
                     </div>
                     <div>
                       <p className=" colrrrr">From : </p>
@@ -607,6 +609,8 @@ export default function PostCard(props) {
                       <p className=" colrrrr">Price: </p>
                       <span> {post.price}$</span>
                     </div>
+                </div>
+                    
                     <div className="row">
                       {postTags.map((tag, index) => (
                         <span

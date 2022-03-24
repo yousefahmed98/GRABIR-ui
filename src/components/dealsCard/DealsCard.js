@@ -9,6 +9,9 @@ import "../card/card.css";
 import { deleteOffer } from "../../Store/Actions/updateState";
 
 function MyCard(props) {
+  const NOW_IN_MS = new Date().getTime();
+  const date = new Date(props.delivery_date);
+
   function deleteDeal() {
     props.dispatch(deleteOffer(props.offer));
   }
@@ -20,10 +23,12 @@ function MyCard(props) {
       <div className="p-3 col-lg-6">
         <div className=" pt-3 mb-5  ">
           <img src={props.ownerProfilePic} className="card__prof_pic" height="60"alt="offer owner" loading="lazy" />
-          <span className="card__title">{props.title}</span>
+          <Link to={`/PublicProfile/${props.offer_owner}`} className="linkProfile mx-1 my-2 user"> <span className="card__title">{props.title}</span></Link>
+          
+
           <div className="smallText p-2">created on: {props.delivery_date} </div>
         </div>
-        <p className="ded p-2 mt-5 countt  ">Deal Details</p>
+        <p className="ded p-2 mt-5 ">Details :</p>
         <div className="p-3 tet">
           <p className="card__description">{props.description}</p>
         </div>
@@ -53,7 +58,10 @@ function MyCard(props) {
           <DealCountDown date={props.delivery_date} />
         </div>
         <div className=" text-center">
-          {props.offer.offer_owner == localStorage.getItem("id") ? (
+          {
+            NOW_IN_MS < date
+             ?
+           ( props.offer.offer_owner == localStorage.getItem("id") ? (
             <button
               className="card__btn "
               data-bs-toggle="modal"
@@ -80,7 +88,11 @@ function MyCard(props) {
                 </button>
               </Link>
             </div>
-          )}
+          )
+           )
+          :
+           null
+        }
         </div>
         <div
           className="modal"
@@ -144,6 +156,7 @@ export default function DealsCard(props) {
                       price={offer.price}
                       delivery_date={offer.delivery_date}
                       created_at={offer.created_at}
+                      offer_owner={offer.offer_owner}
                     />
                   </div>
                 );
