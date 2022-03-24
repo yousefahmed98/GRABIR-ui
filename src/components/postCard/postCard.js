@@ -548,7 +548,7 @@ export default function PostCard(props) {
             {getpostTags(post)}
             <div className="py-4 ">
               {/* post section  start*/}
-              <section className="boxxx rounded shadow-lg p-5 postcard mt-5 mb-5">
+              <section className="boxxx rounded shadow-lg p-5 postcard mt-5 ">
                 {/* profile + date  */}
                 {/* <div className="row align-items-center mb-4">
                   <div className="col-lg-6 col-sm-6 text-center text-lg-start mb-lg-3 ">
@@ -573,7 +573,7 @@ export default function PostCard(props) {
                   <div className="col-lg-6 col-md-12 carddddd">
 
 
-                  <div className="row align-items-center mb-4">
+                  <div className="row align-items-center mb-2">
                   <div className="col-lg-8 col-sm-8 col-md-8 text-center text-lg-start mb-lg-3 ">
                     <img
                       src={post.ownerProfilePic}
@@ -584,20 +584,15 @@ export default function PostCard(props) {
                     />
                    <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link "> <span>{post.ownerName}</span> </Link>
                   </div>
-                  <span className="pt-2 me-2">
+                  <span className="pt-2 ">
                     {" "}
-                    Published on <p className="p-1">{post.created_at}</p>
+                    Published on <span className="p-1">{post.created_at}</span>
                   </span>
-                </div>
-
-                <div className="row">
-                  <div className="col-lg-6 col-md-6 col-sm-6" >
-                  <h2 className="titlee">{post.title}</h2>
                   </div>
-                    <div>
-                      <p className="titlee"> {post.description}</p>
-                    </div>
-                    <div>
+                  <div className=" row align-items-center">
+                  <p className="titlee col-lg-8 col-sm-8 col-md-8  text-lg-start">{post.title}</p>
+                  <p className="col-lg-8 col-sm-8 col-md-8  text-lg-start"> {post.description}</p>
+                   <div className="">
                       <p className=" colrrrr">From : </p>
                       <span>{post.from_region}</span>
                     </div>
@@ -609,8 +604,8 @@ export default function PostCard(props) {
                       <p className=" colrrrr">Price: </p>
                       <span> {post.price}$</span>
                     </div>
-                </div>
                     
+                    </div>
                     <div className="row">
                       {postTags.map((tag, index) => (
                         <span
@@ -621,25 +616,7 @@ export default function PostCard(props) {
                         </span>
                       ))}
                     </div>
-                  </div>
-                  {/* profile + date end  */}
-                  {/* <hr /> */}
-                  {/* post content start */}
-
-                  {post.postpicture !== null ? (
-                    <img
-                      src={post.postpicture}
-                      className=" p-0 img-box col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 mb-4"
-                      alt="post"
-                      width="60%"
-                      length="180px"
-                    />
-                  ) : (
-                    <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4"></div>
-                  )}
-                </div>
-                {/* post content end */}
-                <div className="row align-items-center mb-4  ">
+                    <div className="row align-items-center mb-4 ">
                   {localStorage.getItem("id") == post.user ? (
                     <>
                       {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center">
@@ -647,7 +624,7 @@ export default function PostCard(props) {
                       show offers</button>
                     </div> */}
 
-                      <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                      <div className="col-lg-6 col-md-6 col-sm-6 text-center">
                         <button
                           type="button"
                           className={`btn px-3 me-1 btn-outline-dark`}
@@ -692,6 +669,78 @@ export default function PostCard(props) {
 
                     </div>
                   )}
+                    </div>
+                  </div>
+                  {/* profile + date end  */}
+                  {/* <hr /> */}
+                  {/* post content start */}
+
+                  {post.postpicture !== null ? (
+                    <img
+                      src={post.postpicture}
+                      className=" p-0 img-box col-lg-6 col-md-12 img-fluid shadow-sm rounded-5 "
+                      alt="post"
+                      width="60%"
+                      length="180px"
+                    />
+                  ) : (
+                    <div className="col-lg-6 col-md-12  shadow-sm rounded-5 mb-4"></div>
+                  )}
+                </div>
+                {/* post content end */}
+                <div className="row align-items-center mb-4  ">
+                  {/* {localStorage.getItem("id") == post.user ? (
+                    <>
+                      {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                    <button type="button" className="btn px-3 me-1 darkcustombtn" onClick={() => {   history.push(`/PostDetails/${post.id}`) }}>
+                      show offers</button>
+                    </div> 
+
+                      <div className="col-lg-3 col-md-3 col-sm-3 text-center">
+                        <button
+                          type="button"
+                          className={`btn px-3 me-1 btn-outline-dark`}
+                          onClick={(e) => {
+                            postDelete(e, post.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          type="submit"
+                          className="btn px-3 me-1 btn-outline-dark"
+                          onClick={() => handleShow(post.id)}
+                          data-bs-toggle="modal"
+                          data-bs-target="#staticBackdropupdate"
+                        >
+                          Update
+                        </button>
+                      </div>
+                      {/* <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
+        
+                    </div> 
+                    </>
+                  ) : (
+                    <div className="col-lg-3 col-md-3 col-sm-3 text-center ">
+                      {/* <Button
+                        variant="outlined"
+                        onClick={() =>
+                          handleShowOffer(post.id, post.postpicture)
+                        }
+                        data-bs-toggle="modal"
+                        href="#exampleModalToggle"
+                        role="button"
+                        type="submit"
+                        endIcon={<LocalOfferIcon />}
+                      >
+                        Make Offer
+                      </Button> 
+                      <button type="submit" className="btn px-3  btn-outline-dark" data-bs-toggle="modal"  data-bs-target= "#exampleModalToggle" onClick={() =>
+                          handleShowOffer(post.id, post.postpicture)
+                        }> Make Offer</button>
+
+                    </div>
+                  )} */}
                   {/* ------------------------------------------------------------------------ */}
                   <div className="popup" key={index}>
                     <div
