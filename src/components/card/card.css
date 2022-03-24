@@ -74,6 +74,7 @@ $clr-gray700: #161d34; */
   cursor: pointer;
   transition: transform 200ms ease-in;
   font-family: inherit;
+  width: 30vw;
 }
 
 .card__body{
@@ -93,8 +94,8 @@ $clr-gray700: #161d34; */
 .card__image {
   border: solid 2px black;
   border-radius: 2%;
-  height: 100%;
-  width: 100%;
+  /* height: 100%;*/
+  width: 30vw; 
   object-fit: cover;
   -webkit-border-radius: 2%;
   -moz-border-radius: 2%;

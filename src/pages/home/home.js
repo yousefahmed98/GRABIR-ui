@@ -335,7 +335,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
               <div className="lg:col-span-8 col-span-1 my-5 pe-3 ps-3">
                 {/* add post */}
-                <div className="py-5">
+                <div className="pt-5">
                   <div className="box my-5">
                     <i className="fa fa-search" aria-hidden="true"></i>
 
