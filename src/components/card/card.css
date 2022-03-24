@@ -65,7 +65,8 @@ $clr-gray700: #161d34; */
 } */
 
 .offerCard {
-  background-color: #f7efe8 !important;
+  /* background-color: #f7efe8 !important; */
+  background-color: #f5e37f70 !important;
   overflow: hidden;
   box-shadow: 0 2px 20px #e1e5ee;
   border-radius:0.2rem;

@@ -582,16 +582,16 @@ export default function PostCard(props) {
                       alt=""
                       loading="lazy"
                     />
-                   <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link "> <span>{post.ownerName}</span> </Link>
+                   <Link to={`/PublicProfile/${post.user}`} className="ps-2 text-link "> <span className="titlee">{post.ownerName}</span> </Link>
                   </div>
-                  <span className="pt-2 ">
+                  <span className="pt-2 published">
                     {" "}
-                    Published on <span className="p-1">{post.created_at}</span>
+                    Published on <span className="p-1 published">{post.created_at}</span>
                   </span>
                   </div>
                   <div className=" row align-items-center">
                   <p className="titlee col-lg-8 col-sm-8 col-md-8  text-lg-start">{post.title}</p>
-                  <p className="col-lg-8 col-sm-8 col-md-8  text-lg-start"> {post.description}</p>
+                  <p className="postdetails col-lg-8 col-sm-8 col-md-8  text-lg-start"> {post.description}</p>
                    <div className="">
                       <p className=" colrrrr">From : </p>
                       <span>{post.from_region}</span>
