@@ -29,11 +29,11 @@ function MyCard(props) {
   };
 
   return (
-    <div className="offerCard ">
-      <div className="">
-        <img src={props.img} class="card__image" />
+    <div className="offerCard row">
+      <div className="col-lg-6">
+        <img src={props.img} className="card__image" />
       </div>
-      <div className="p-3">
+      <div className="p-3 col-lg-6">
         <div className="p-3 my-2">
           <img src={props.ownerProfilePic} className="card__prof_pic" height="60" alt="offer owner" loading="lazy" />
 

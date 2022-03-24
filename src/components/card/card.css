@@ -56,25 +56,27 @@ $clr-gray700: #161d34; */
   margin: 2rem;
 } */
 
+/* 
 .wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, rem));
   gap: 2rem;
   justify-content: center;
-}
+} */
 
 .offerCard {
   background-color: #f7efe8 !important;
   overflow: hidden;
   box-shadow: 0 2px 20px #e1e5ee;
   border-radius:0.2rem;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   justify-content: space-between;
   cursor: pointer;
-  transition: transform 200ms ease-in;
+  /* transition: transform 200ms ease-in; */
   font-family: inherit;
-  width: 30vw;
+  /* width: 30vw; */
+  width: 100%;
 }
 
 .card__body{
@@ -94,9 +96,10 @@ $clr-gray700: #161d34; */
 .card__image {
   border: solid 2px black;
   border-radius: 2%;
-  /* height: 100%;*/
-  width: 30vw; 
-  object-fit: cover;
+  height: 100%;
+  /* width: 30vw;  */
+  width: 100%;
+  object-fit: fill;
   -webkit-border-radius: 2%;
   -moz-border-radius: 2%;
   -ms-border-radius: 2%;

@@ -13,13 +13,13 @@ function MyCard(props) {
     props.dispatch(deleteOffer(props.offer));
   }
   return (
-    <div className="offerCard ">
-      <div className="">
+    <div className="offerCard row">
+      <div className="col-lg-6">
       <img src={props.img} class="card__image p-0 img-box col-lg-6 col-md-12 " alt="post image"  />
       </div>
-      <div className="p-3 ">
+      <div className="p-3 col-lg-6">
         <div className=" pt-3 mb-5  ">
-          <img src={props.ownerProfilePic} className="me-2 ps-2  card__prof_pic" height="60"alt="offer owner" loading="lazy" />
+          <img src={props.ownerProfilePic} className="card__prof_pic" height="60"alt="offer owner" loading="lazy" />
           <span className="card__title">{props.title}</span>
           <div className="smallText p-2">created on: {props.delivery_date} </div>
         </div>
@@ -44,7 +44,7 @@ function MyCard(props) {
           </span>
           </div>
           <div className=" detailsss p-2">
-          <span className="details"> Delivery date:</span>{" "}
+          <span className="details"> Delivery:</span>{" "}
           <span className="mx-2"> {props.delivery_date} </span>
           </div>
         </div>
