@@ -35,7 +35,7 @@ function MyCard(props) {
       </div>
       <div className="p-3">
         <div className="p-3 my-2">
-          <img src={props.ownerProfilePic} className="me-2 ps-2  card__prof_pic" height="60" alt="offer owner" loading="lazy" />
+          <img src={props.ownerProfilePic} className="card__prof_pic" height="60" alt="offer owner" loading="lazy" />
 
           <span className="card__title">{props.title}</span>
         </div>
