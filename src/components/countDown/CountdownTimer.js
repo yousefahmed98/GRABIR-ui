@@ -5,7 +5,10 @@ import { useCountdown } from "../../hooks/useCountdown";
 const ExpiredNotice = () => {
   return (
     <div className="expired-notice">
-      <span>Expired!!!</span>
+      <div>
+      <span className ="expiredSpan">Expired!!!</span>
+      </div>
+     
       <p>Please select a future date and time.</p>
     </div>
   );

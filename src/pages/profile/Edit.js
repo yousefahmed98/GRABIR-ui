@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal , Button } from 'react-bootstrap'
 import Formm from './Form';
+import "./profile.css";
 
 function MyVerticallyCenteredModal(props) {
     return (

@@ -20,7 +20,7 @@ export default function Profile() {
           id="controlled-tab-example"
           activeKey={key}
           onSelect={(k) => setKey(k)}
-          className="mb-3"
+          className="mt-4 "
         >
           <Tab eventKey="home" title="BASIC INFORMATION" className="tab titleProfile">
             <>

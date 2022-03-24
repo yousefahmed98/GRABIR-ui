@@ -89,8 +89,8 @@
     text-decoration:double;
     /* padding: 2%; */
     text-transform: capitalize;
-    font-size: x-large;
-    font-family :Georgia, 'Times New Roman', Times, serif;
+    font-size: 100% !important;
+    /* font-family :Georgia, 'Times New Roman', Times, serif; */
     font-family: inherit !important;
 }
 .postdetails{
