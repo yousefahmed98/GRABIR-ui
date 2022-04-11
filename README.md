@@ -7,8 +7,7 @@ This project is the UI part for [GRABIR CORE](https://github.com/yousefahmed98/G
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Features](#features)
-* [Normal User Side Demo](#normal-user-side-demo)
-* [Responsive Demo](#responsive-demo)
+* [Demo](#demo)
 * [To Do](#to-do)
 * [Who we Are?](#who-we-are)
 
@@ -159,12 +158,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - Add other ways of payment methods
 - Deployment
 
-## Normal User Side Demo
+## Demo
 
-
-## Responsive Demo
-
-https://user-images.githubusercontent.com/36454500/162812094-092be419-bccb-420b-b3ef-25c5db0ac16a.mp4
+[GRABIR UI DEMO](https://drive.google.com/drive/folders/1zOiUk6BFQPG1wN95rUaUlzwsuJx2beDq)
 
 ## Who we Are?
 - Intensive Code Camp (ICC) - Information Technology Institute (ITI) - The Egyptian Ministry of Communications and Information Technology (MCIT) Students & Teammates
