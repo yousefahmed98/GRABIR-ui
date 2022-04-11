@@ -1,12 +1,53 @@
-# Getting Started with Create React App
+# GRABIR UI - Delivery Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the UI part for [GRABIR CORE](https://github.com/yousefahmed98/GRABIR-core).
 
-## Available Scripts
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Features](#features)
+* [Normal User Side Demo](#demo)
+* [To Do](#todo)
+* [Who we Are?](#who-we-are)
 
-In the project directory, you can run:
+## General info
+### Problem
+- All of us always want to buy a something from abroad because of variety of products and the low cost but if you buy something from outside your country it will cost you a lot due to taxes and shipping payments and this process may take a lot of time and if you don’t have someone travelling outside and coming soon.
 
+### Solution
+- An application that connects people from other countries together easily and safely, Client is a person who wants to buy something from outside his country, traveller is a person travelling soon and he has no problem to fetch something with him that clients want 
+All of this and more you can find in GRABIR App.
+
+## Technologies
+- HTML5
+- CSS3
+- ECMAScript (ES6)
+- ReactJS
+- React Hooks
+- Redux
+- Redux Thunk (middleware)
+- Router
+- React-notification
+- Bootstrap – React Bootstrap
+- Styled component
+- MUI
+- Axios
+- Socket
+- Paypal
+- Fontawesome – Google fonts
+
+## Setup
+
+Required build the GRABIR backend as explained [here](https://github.com/yousefahmed98/GRABIR-core)
+
+In the project directory, Open your terminal and then type:
+### `git clone https://github.com/yousefahmed98/GRABIR-ui`
+
+cd into the new folder and type
 ### `npm install react-scripts --save`
+
+To run the project
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -30,42 +71,71 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 1- Register page with fields validations
 
-### Analyzing the Bundle Size
+![GRABIRReg](https://user-images.githubusercontent.com/36454500/162778600-ddc1d36b-5116-437c-9474-4804a860a5ca.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2- Login page with fields validations
 
-### Making a Progressive Web App
+![GRABIRLogin](https://user-images.githubusercontent.com/36454500/162778864-fdb081a3-92a0-4ec7-9ab7-b111c5bac3a2.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 2- Landing Page
+- Navbar 
+  * It contains links Services, Portfolio, About, Contactus
+    
+- Body 
+   * Welcome to our platform contains Login/Register 
+    
+   ![GRABIR1](https://user-images.githubusercontent.com/36454500/162781264-095a554f-75ef-4f5f-8587-0c492d6d1beb.png)
+ 
+   * Service & Portfolio 
+    
+   ![services](https://user-images.githubusercontent.com/36454500/162781980-9aa97d93-2f83-4633-aec3-eb5638a0d32d.png)
+   
+   * When press on ex. smart watch in portfolio
+   
+   ![port](https://user-images.githubusercontent.com/36454500/162782410-7b1d5073-5741-494e-8ae6-033e3a626e29.png)
+   
+   * About us
+   
+   ![aboutus](https://user-images.githubusercontent.com/36454500/162782591-02add067-f552-464b-b633-b47bdbe46bb8.png)
+   
+   * Contact us & Footer
+   
+   ![contactus](https://user-images.githubusercontent.com/36454500/162782750-a1675603-56e3-4278-8c97-cf59bc9930c2.png)
+   
+### 2- Home Page
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### TO DO
+- Sponsor your post
+- Chat 
+- Add other ways of payment methods
+- Deployment
 
-### `npm run build` fails to minify
+## Normal User Side Demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Who we Are?
+- Intensive Code Camp (ICC) - Information Technology Institute (ITI) - The Egyptian Ministry of Communications and Information Technology (MCIT) Students & Teammates
+- We are a Full Stack Web Development Graduates from ITI - Python Stack Track
+- We are introducing a GRABIR website with many features using ReactJS framework as a front-end, django framework as a back-end, and postgresql as a database manager
+
+### - Team members
+| Name | Email 📧| 
+| :-----: | :-: |
+| Rahma Ramadan | rahmaramadan23@gmail.com |
+| Yousef Ahmed | yousefa.mohamed12@gmail.com |
+| Shrouk Hussien | shrouq.hussein.elsayed@gmail.com |
+| Sherif Elshafaey | sherifelshaf3y@yahoo.com |
+| Nehal Mohamed | nehalhdev@outlook.com |
