@@ -7,8 +7,9 @@ This project is the UI part for [GRABIR CORE](https://github.com/yousefahmed98/G
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Features](#features)
-* [Normal User Side Demo](#demo)
-* [To Do](#todo)
+* [Normal User Side Demo](#normal-user-side-demo)
+* [Responsive Demo](#responsive-demo)
+* [To Do](#to-do)
 * [Who we Are?](#who-we-are)
 
 ## General info
@@ -17,7 +18,7 @@ This project is the UI part for [GRABIR CORE](https://github.com/yousefahmed98/G
 
 ### Solution
 - An application that connects people from other countries together easily and safely, Client is a person who wants to buy something from outside his country, traveller is a person travelling soon and he has no problem to fetch something with him that clients want 
-All of this and more you can find in GRABIR App.
+All of this and more you can find in our GRABIR application.
 
 ## Technologies
 - HTML5
@@ -87,7 +88,11 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ![GRABIRLogin](https://user-images.githubusercontent.com/36454500/162778864-fdb081a3-92a0-4ec7-9ab7-b111c5bac3a2.png)
 
-### 2- Landing Page
+### 3- Verify email
+
+![verify-email](https://user-images.githubusercontent.com/36454500/162808426-25e8180f-0297-4968-bb75-86499b7d7d52.png)
+
+### 4- Landing Page
 - Navbar 
   * It contains links Services, Portfolio, About, Contactus
     
@@ -112,12 +117,43 @@ To learn React, check out the [React documentation](https://reactjs.org/).
    
    ![contactus](https://user-images.githubusercontent.com/36454500/162782750-a1675603-56e3-4278-8c97-cf59bc9930c2.png)
    
-### 2- Home Page
+### 5- Home Page
 
+![post card](https://user-images.githubusercontent.com/36454500/162807980-fae31778-f19e-4228-8dea-d3d11d9ff9bf.png)
 
+### 6- Add Post
 
+![add post](https://user-images.githubusercontent.com/36454500/162808641-b96d53aa-52c9-412c-856c-f8fa0c6af0ad.png)
 
-### TO DO
+### 7- Make Offer
+
+![make offer](https://user-images.githubusercontent.com/36454500/162808764-58a7f0d2-fa23-40a7-b113-3e99dc760d90.png)
+
+### 8- Offers
+
+![offers](https://user-images.githubusercontent.com/36454500/162809009-97ee742c-82db-44a7-8203-b44260e9210e.png)
+
+### 9- Notification
+
+![notification](https://user-images.githubusercontent.com/36454500/162809076-78ca144e-eddb-4173-9d71-534a896bb847.png)
+
+### 10- Deals & Rating after deals
+
+![rate2](https://user-images.githubusercontent.com/36454500/162809424-c475c5a4-92f7-46ad-8a37-93c4429ae2cf.png)
+
+### 11- Profile
+
+![profile1](https://user-images.githubusercontent.com/36454500/162809589-0b5e611f-8067-4d9e-b5b0-10f8c3976d10.png)
+
+### 11- PayPal Payments
+
+![paypal](https://user-images.githubusercontent.com/36454500/162809679-43e831b3-0181-422e-bb90-0f28458101cd.png)
+
+### 12- Admin Dashboard
+
+![admin dashboard](https://user-images.githubusercontent.com/36454500/162810403-e7a964c7-f896-4765-a927-8f0405d377e0.png)
+
+## TO DO
 - Sponsor your post
 - Chat 
 - Add other ways of payment methods
@@ -126,10 +162,14 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## Normal User Side Demo
 
 
+## Responsive Demo
+
+https://user-images.githubusercontent.com/36454500/162812094-092be419-bccb-420b-b3ef-25c5db0ac16a.mp4
+
 ## Who we Are?
 - Intensive Code Camp (ICC) - Information Technology Institute (ITI) - The Egyptian Ministry of Communications and Information Technology (MCIT) Students & Teammates
 - We are a Full Stack Web Development Graduates from ITI - Python Stack Track
-- We are introducing a GRABIR website with many features using ReactJS framework as a front-end, django framework as a back-end, and postgresql as a database manager
+- We are introducing a GRABIR website with many features using ReactJS framework as a Frontend, django framework as a Backend, and PostgreSQL as a database manager
 
 ### - Team members
 | Name | Email 📧| 
